@@ -1,0 +1,20 @@
+fastapi==0.111.0
+uvicorn==0.27.1
+requests==2.31.0
+beautifulsoup4==4.12.3
+pandas==2.0.3
+pymongo==4.6.2
+APScheduler==3.10.4
+python-multipart==0.0.9
+Jinja2==3.1.4
+python-dateutil==2.9.0.post0
+pytz==2024.1
+undetected-chromedriver==3.5.4
+selenium==4.21.0
+
+# Optional dependencies for SQL Server support
+pyodbc==5.1.0
+
+# Development dependencies
+pytest==7.4.4
+pytest-asyncio==0.21.1
