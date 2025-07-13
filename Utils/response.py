@@ -345,3 +345,21 @@ def create_success_response(
         Success response dictionary
     """
     return success_response(data, message, status_code, metadata)
+
+
+def create_error_response(
+    message: str = HTTP_MESSAGES.INTERNAL_SERVER_ERROR,
+    status_code: int = HTTP_STATUS.INTERNAL_SERVER_ERROR,
+    errors: list = None
+
+) -> Dict:
+    """
+    Create error response
+
+    Args:
+        message: Error message
+
+    Returns:
+        Error response dictionary
+    """
+    return error_response(message=message, status_code=status_code, errors=errors)

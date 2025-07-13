@@ -2,19 +2,20 @@ from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import Optional
 from API.Controller.top_gainers_loosers import NSETopGainersloosersController
 from Utils.verify_token import verify_token
-# from Utils.verify_token import verify_token
 from Utils.response import create_response
 from Constant.http import HTTP_STATUS
+from Utils.monitor import update_service_health, get_service_health
 
 router = APIRouter()
 controller = NSETopGainersloosersController()
 
-@router.get("/top-gainers/scrape")
+@router.get("/top-gainers/scrape-nse")
 async def scrape_top_gainers(token: str = Depends(verify_token)):
     """
     Scrape top gainers data from NSE website
     Requires valid authentication token
     """
+    update_service_health("nse_gainers_loosers", "/top-gainers/scrape-nse")
     try:
         result = controller.scrape_top_gainers()
         return result
@@ -24,12 +25,13 @@ async def scrape_top_gainers(token: str = Depends(verify_token)):
             detail=f"Failed to scrape top gainers: {str(e)}"
         )
 
-@router.get("/top-looser/scrape")
+@router.get("/top-looser/scrape-nse")
 async def scrape_top_looser(token: str = Depends(verify_token)):
     """
     Scrape top looser data from NSE website
     Requires valid authentication token
     """
+    update_service_health("nse_gainers_loosers", "/top-looser/scrape-nse")
     try:
         result = controller.scrape_top_loosers()
         return result
@@ -51,10 +53,9 @@ async def get_top_gainers(
     - limit: Number of records to return (1-100, default: 50)
     - token: Authentication token
     """
+    update_service_health("nse_gainers_loosers", "/top-gainers")
     try:
         result = controller.get_top_gainers_from_db(limit=limit)
-        print(f"🔍 Retrieved {len(result)} top gainers from database")
-        print(f"🔍 Limit applied: {limit}, data: {result}")
         return result
     except Exception as e:
         raise HTTPException(
@@ -74,6 +75,7 @@ async def get_top_looser(
     - limit: Number of records to return (1-100, default: 50)
     - token: Authentication token
     """
+    update_service_health("nse_gainers_loosers", "/top-looser")
     try:
         result = controller.get_top_loosers_from_db(limit=limit)
         return result
@@ -83,8 +85,9 @@ async def get_top_looser(
             detail=f"Failed to retrieve top looser: {str(e)}"
         )
 
-@router.get("/gainers-looser/refresh")
+@router.get("/refresh-gainers-loosers")
 async def refresh_gainers_looser_data(token: str = Depends(verify_token)):
+    update_service_health("nse_gainers_loosers", "/refresh-gainers-loosers")
     """
     Refresh both top gainers and looser data from NSE website
     Requires valid authentication token
@@ -107,13 +110,39 @@ async def refresh_gainers_looser_data(token: str = Depends(verify_token)):
             detail=f"Failed to refresh gainers/looser data: {str(e)}"
         )
 
+@router.get("/get-loosers-gainers")
+async def get_gainers_and_loosers(
+    limit: Optional[int] = Query(50, ge=1, le=100, description="Number of records to return"),
+    token: str = Depends(verify_token)
+):
+    """
+    Get both top gainers and looser data from database
+    
+    Parameters:
+    - limit: Number of records to return (1-100, default: 50)
+    - token: Authentication token
+    """
+    update_service_health("nse_gainers_loosers", "/get-loosers-gainers")
+    try:
+        result = controller.get_top_gainers_and_loosers(limit=limit)
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve gainers/looser data: {str(e)}"
+        )
+
 @router.get("/health")
 async def health_check():
-    """
-    Health check endpoint for top gainers/looser service
-    """
+    health = get_service_health("nse_indexes")
     return create_response(
         success=True,
-        data={"status": "healthy", "service": "top_gainers_looser"},
-        message="Top gainers/looser service is running"
+        data={
+            "status": "healthy",
+            "service": "nse_indexes",
+            "last_hit_time": health["last_hit_time"],
+            "last_endpoint": health["last_endpoint"]
+        },
+        message="NSE Indexes service is running"
     )
+

@@ -187,10 +187,7 @@ class NSETopGainersloosersController:
     def get_top_gainers_from_db(self, limit: int = 50) -> Dict:
         """Get top gainers data from database"""
         try:
-            print(f"🔍 Retrieving top gainers from database with limit: {limit}")
             data = self.db_manager.get_latest_data("top_gainers", limit)
-            print(f"🔍 Retrieved {len(data)} top gainers from database")
-            print(f"🔍 Limit applied: {limit}, data: {data}")
             return create_response(
                 success=True,
                 data=data,
@@ -215,6 +212,28 @@ class NSETopGainersloosersController:
             )
         except Exception as e:
             logger.error(f"Error retrieving top loosers from database: {str(e)}")
+            return create_response(
+                success=False,
+                message=f"Error retrieving data: {str(e)}",
+                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
+            )
+
+    def get_top_gainers_and_loosers(self, limit: int = 50) -> Dict:
+        """Get both top gainers and loosers data from database"""
+        try:
+            gainers = self.get_top_gainers_from_db(limit)
+            loosers = self.get_top_loosers_from_db(limit)
+
+            return create_response(
+                success=True,
+                data={
+                    "gainers": gainers.get("data", []),
+                    "loosers": loosers.get("data", [])
+                },
+                message="Top gainers and loosers data retrieved successfully"
+            )
+        except Exception as e:
+            logger.error(f"Error retrieving gainers/loosers data: {str(e)}")
             return create_response(
                 success=False,
                 message=f"Error retrieving data: {str(e)}",

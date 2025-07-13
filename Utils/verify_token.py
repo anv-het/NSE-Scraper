@@ -8,14 +8,13 @@ def verify_token(authorization: str = Header(...)) -> str:
     Dummy token verification for development.
     Expects a token in the Authorization header like: Bearer dev-static-token-123
     """
-    if not authorization.startswith("Bearer "):
+    if not authorization.startswith(""):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authorization header format",
         )
 
-    token = authorization.split(" ")[1]
-
+    token = authorization
     if token != STATIC_DEV_TOKEN:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
