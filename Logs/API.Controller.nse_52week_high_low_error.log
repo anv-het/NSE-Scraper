@@ -1,4 +1,0 @@
-2025-07-12 21:58:14 - API.Controller.nse_52week_high_low - ERROR - Request failed with status code: 401
-2025-07-12 21:58:15 - API.Controller.nse_52week_high_low - ERROR - Error scraping 52-week high and low: 'NoneType' object has no attribute 'get'
-2025-07-13 10:22:50 - API.Controller.nse_52week_high_low - ERROR - Error saving 52-week high data to database: database is locked
-2025-07-13 10:22:55 - API.Controller.nse_52week_high_low - ERROR - Error saving 52-week low data to database: database is locked

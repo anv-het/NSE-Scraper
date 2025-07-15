@@ -19,50 +19,55 @@ from Utils.response import create_response
 
 logger = get_logger(__name__)
 
-app = FastAPI(
-    title="NSE Scraper API",
-    description="Scrape and serve NSE top gainers and loosers",
-    version="1.0.0"
-)
 
-
-# CORS middleware to allow cross-origin requests
-# Enable CORS (optional but useful if using frontend)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # You can restrict to specific domains in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Include all routers
-app.include_router(top_gainers_loosers.router, prefix='/gainers-loosers', tags=['Top Gainers and Loosers'])
-app.include_router(nse_all_indexes.router, prefix='/indexes', tags=['NSE Indexes'])
-app.include_router(nse_52week_high_low.router, prefix='/52week-high-low', tags=['52 Week High/Low'])
-
-
-# Home route
-@app.get("/")
-async def root():
-    """Root endpoint to check if the API is running."""
-    return {
-        "app": APP_NAME,
-        "version": APP_VERSION,
-        "description": APP_DESCRIPTION,
-        "message": "Welcome to NSE Scraper API"
-    }
-
-# Health check routefrom Utils.monitor import get_all_services_health
-
-@app.get("/meta/health")
-async def meta_health_check():
-    return create_response(
-        success=True,
-        data=get_all_services_health(),
-        message="Server health metadata"
+def apiserver() -> FastAPI:
+    app = FastAPI(
+        title="NSE Scraper API",
+        description="Scrape and serve NSE data (gainers, loosers, indexes)",
+        version="1.0.0",
+        docs_url="/docs",         # <== Make sure this line exists or not overridden
+        redoc_url="/redoc",       # Optional: also serves docs
     )
 
 
+    # CORS middleware to allow cross-origin requests
+    # Enable CORS (optional but useful if using frontend)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],  # You can restrict to specific domains in production
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Include all routers
+    app.include_router(top_gainers_loosers.router, prefix='/gainers-loosers', tags=['Top Gainers and Loosers'])
+    app.include_router(nse_all_indexes.router, prefix='/indexes', tags=['NSE Indexes'])
+    app.include_router(nse_52week_high_low.router, prefix='/52week-high-low', tags=['52 Week High/Low'])
+
+
+    # Home route
+    @app.get("/")
+    async def root():
+        """Root endpoint to check if the API is running."""
+        return {
+            "app": APP_NAME,
+            "version": APP_VERSION,
+            "description": APP_DESCRIPTION,
+            "message": "Welcome to NSE Scraper API"
+        }
+
+    # Health check routefrom Utils.monitor import get_all_services_health
+
+    @app.get("/meta/health")
+    async def meta_health_check():
+        return create_response(
+            success=True,
+            data=get_all_services_health(),
+            message="Server health metadata"
+        )
+
+
+    return app
 
 

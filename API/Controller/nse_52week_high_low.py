@@ -16,6 +16,10 @@ from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
 
 from Constant.http import HTTP_STATUS
+from Constant.general import (
+    HEADERS_URL_52_WEEK_HIGH,
+    HEADERS_URL_52_WEEK_LOW
+)
 from Services.get_nse_cookies import get_nse_cookies
 
 
@@ -27,8 +31,8 @@ class NSE52WeekHighLowController:
     def __init__(self):
         self.db = DatabaseManager()
         self.base_url = configure.get('NSE', 'BASE_URL')
-        self.high_headers_url = configure.get('NSE', 'HEADERS_URL_52_WEEK_HIGH')
-        self.low_headers_url = configure.get('NSE', 'HEADERS_URL_52_WEEK_LOW')
+        self.high_headers_url = HEADERS_URL_52_WEEK_HIGH
+        self.low_headers_url = HEADERS_URL_52_WEEK_LOW
         self.cookies = None
         self.high_api_url = "https://www.nseindia.com/api/live-analysis-data-52weekhighstock"
         self.low_api_url = "https://www.nseindia.com/api/live-analysis-data-52weeklowstock"

@@ -1,9 +1,0 @@
-2025-07-11 23:22:27 - __main__ - ERROR - Error getting NSE cookies: NSECookieService.get_driver() takes 0 positional arguments but 1 was given
-2025-07-11 23:22:27 - __main__ - ERROR - Error getting NSE cookies: NSECookieService.get_driver() takes 0 positional arguments but 1 was given
-2025-07-11 23:22:27 - __main__ - ERROR - Error getting NSE cookies: NSECookieService.get_driver() takes 0 positional arguments but 1 was given
-2025-07-11 23:22:27 - __main__ - ERROR - Error validating cookies: 'NSECookieService' object has no attribute 'base_url'
-2025-07-11 23:22:27 - __main__ - ERROR - Error getting NSE cookies: NSECookieService.get_driver() takes 0 positional arguments but 1 was given
-2025-07-11 23:31:39 - __main__ - ERROR - Error validating cookies: Invalid URL 'None/api/allIndices': No scheme supplied. Perhaps you meant https://None/api/allIndices?
-2025-07-11 23:31:53 - __main__ - ERROR - Error validating cookies: Invalid URL 'None/api/allIndices': No scheme supplied. Perhaps you meant https://None/api/allIndices?
-2025-07-11 23:31:53 - __main__ - ERROR - Failed to get valid cookies.
-2025-07-11 23:36:27 - __main__ - ERROR - Error loading cookies: Expecting value: line 1 column 1 (char 0)

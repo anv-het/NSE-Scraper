@@ -97,7 +97,7 @@ class DatabaseManager:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT NOT NULL,
                     scraped_at TEXT NOT NULL,
-                    index_name TEXT NOT NULL,
+                    index_name TEXT,
                     symbol TEXT,
                     series TEXT,
                     last_price REAL,
@@ -394,3 +394,99 @@ class DatabaseManager:
             except Exception as e:
                 logger.error(f"Failed to get data from {table_name}: {str(e)}")
                 raise
+    
+    
+    def save_all_data(self, all_data: List[Dict], table_name: str):
+        """Save all data at once - delete once, then insert all"""
+        if self.db_type == DB_SQLITE:
+            self._save_all_to_sqlite(all_data, table_name)
+        elif self.db_type == DB_MONGODB:
+            self._save_all_to_mongodb(all_data, table_name)
+
+
+    def _save_all_to_sqlite(self, all_data: List[Dict], table_name: str):
+        try:
+            cursor = self.db_connection.cursor()
+
+            # Step 1: Delete all old data
+            cursor.execute(f"DELETE FROM {table_name}")
+            logger.info(f"Deleted all old data from {table_name}")
+
+            # Step 2: Insert all new data
+            total_records = 0
+
+            for data in all_data:
+                records = data.get("stocks", [])
+                if not records:
+                    continue
+
+                timestamp = data.get("timestamp")
+                scraped_at = data.get("scraped_at") or datetime.now().isoformat()
+                index_name = data.get("index_name")
+
+                for record in records:
+                    cursor.execute(f'''
+                        INSERT INTO {table_name} (
+                            timestamp, scraped_at, index_name, symbol, series,
+                            last_price, change, percent_change, open_price,
+                            high, low, previous_close, total_traded_volume,
+                            total_traded_value, year_high, year_low, near_wkh,
+                            near_wkl, per_change_365d, date_365d_ago,
+                            per_change_30d, date_30d_ago, chart_today_path,
+                            chart_30d_path, chart_365d_path
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (
+                        timestamp, scraped_at, index_name,
+                        record.get("symbol"), record.get("series"),
+                        record.get("last_price"), record.get("change"), record.get("percent_change"),
+                        record.get("open_price"), record.get("high"), record.get("low"),
+                        record.get("previous_close"), record.get("total_traded_volume"),
+                        record.get("total_traded_value"), record.get("year_high"), record.get("year_low"),
+                        record.get("near_wkh"), record.get("near_wkl"), record.get("per_change_365d"),
+                        record.get("date_365d_ago"), record.get("per_change_30d"), record.get("date_30d_ago"),
+                        record.get("chart_today_path"), record.get("chart_30d_path"), record.get("chart_365d_path")
+                    ))
+                    total_records += 1
+
+            self.db_connection.commit()
+            logger.info(f"Successfully inserted {total_records} records from {len(all_data)} indices into {table_name}")
+
+        except Exception as e:
+            logger.error(f"Failed to save all data to SQLite {table_name}: {str(e)}")
+            self.db_connection.rollback()
+            raise
+
+    
+    def _save_all_to_mongodb(self, all_data: List[Dict], collection_name: str):
+        """Save all indices data to MongoDB at once"""
+        try:
+            # Step 1: Delete all old data once
+            result = self.mongo_db[collection_name].delete_many({})
+            logger.info(f"Deleted {result.deleted_count} old documents from MongoDB collection {collection_name}")
+            
+            # Step 2: Prepare all documents for insertion
+            documents = []
+            for data in all_data:
+                timestamp = data.get("timestamp")
+                scraped_at = data.get("scraped_at") or datetime.now().isoformat()
+                index_name = data.get("index_name")
+                
+                for record in data.get("stocks", []):
+                    doc = {
+                        "timestamp": timestamp,
+                        "scraped_at": scraped_at,
+                        "index_name": index_name,
+                        **record
+                    }
+                    documents.append(doc)
+            
+            # Step 3: Insert all documents at once
+            if documents:
+                result = self.mongo_db[collection_name].insert_many(documents)
+                logger.info(f"Successfully inserted {len(result.inserted_ids)} documents from {len(all_data)} indices into MongoDB collection {collection_name}")
+            else:
+                logger.warning("No documents to insert into MongoDB")
+                
+        except Exception as e:
+            logger.error(f"Failed to save all data to MongoDB collection {collection_name}: {str(e)}")
+            raise

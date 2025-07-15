@@ -1,7 +1,0 @@
-2025-07-12 13:56:00 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: Incorrect number of bindings supplied. The current statement uses 17, and there are 16 supplied.
-2025-07-12 14:00:40 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: Incorrect number of bindings supplied. The current statement uses 17, and there are 16 supplied.
-2025-07-12 14:06:52 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: Incorrect number of bindings supplied. The current statement uses 17, and there are 16 supplied.
-2025-07-12 14:12:44 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: NOT NULL constraint failed: top_gainers.scraped_at
-2025-07-13 10:22:44 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: UNIQUE constraint failed: top_gainers.timestamp, top_gainers.symbol
-2025-07-13 10:26:03 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: UNIQUE constraint failed: top_gainers.timestamp, top_gainers.symbol
-2025-07-13 10:26:51 - API.Controller.top_gainers_loosers - ERROR - Failed to save data to database: UNIQUE constraint failed: top_loosers.timestamp, top_loosers.symbol, top_loosers.market_type

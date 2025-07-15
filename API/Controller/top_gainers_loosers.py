@@ -10,7 +10,7 @@ from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Utils.response import create_response
 from Services.get_nse_cookies import get_nse_cookies
-from Constant.general import DB_COLLECTIONS, NSE_GET_COOKIES_HEADERS, REQUIRED_NSE_COOKIES
+from Constant.general import HEADERS_URL_GAINER_LOOSER
 from Utils.config_reader import ConfigReader
 from Utils.config_reader import configure
 
@@ -24,7 +24,7 @@ class NSETopGainersloosersController:
     def __init__(self):
         self.db_manager = DatabaseManager()
         self.base_url = configure.get('NSE', 'BASE_URL')
-        self.nse_headers_url = configure.get('NSE', 'HEADERS_URL_GAINER_LOOSER')
+        self.nse_headers_url = HEADERS_URL_GAINER_LOOSER
         self.cookies = None
 
     def _get_cookies(self):

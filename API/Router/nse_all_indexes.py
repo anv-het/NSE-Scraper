@@ -53,24 +53,20 @@ async def get_index_data(
             detail=f"Failed to retrieve index '{index_name}' data: {str(e)}"
         )
 
-@router.get("/scrape-all")
+
+@router.get(
+    "/scrape-all",
+    summary="Scrape all NSE indexes",
+    description="Scrapes all predefined NSE indexes and saves them to the database. Requires a valid token."
+)
 async def scrape_all_indexes(token: str = Depends(verify_token)):
     update_service_health("nse_indexes", "/scrape-all")
-    """
-    Scrape all NSE indexes defined in the list.
-    Requires valid authentication token.
-    """
-    results = {}
+
     try:
-        for index_name in ALL_INDICES_LIST:
-            result = controller.scrape_index_data(index_name)
-            if result["success"]:
-                results[index_name] = result["data"]
-            else:
-                results[index_name] = {"error": result["message"]}
+        result_data = controller.scrape_all_indices_from_list()  # returns plain dict, not wrapped
         return create_response(
             success=True,
-            data=results,
+            data=result_data,
             message="All indexes scraped successfully"
         )
     except Exception as e:
@@ -78,7 +74,9 @@ async def scrape_all_indexes(token: str = Depends(verify_token)):
             status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR,
             detail=f"Failed to scrape all indexes: {str(e)}"
         )
-    
+
+
+
 @router.get("/get-all-indexes")
 async def get_all_indexes(token: str = Depends(verify_token)):
     update_service_health("nse_indexes", "/get-all-indexes")

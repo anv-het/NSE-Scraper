@@ -58,6 +58,16 @@ NSE_GET_COOKIES_HEADERS = {
     'Upgrade-Insecure-Requests': '1'
 }
 
+# URLs for various NSE data
+
+HEADERS_URL_GAINER_LOOSER = "https://www.nseindia.com/market-data/top-gainers-loosers"
+HEADERS_URL_ALL_INDEXES = "https://www.nseindia.com/market-data/live-equity-market"
+HEADERS_URL_52_WEEK_HIGH = "https://www.nseindia.com/market-data/52-week-high-equity-market"
+HEADERS_URL_52_WEEK_LOW = "https://www.nseindia.com/market-data/52-week-low-equity-market"
+HEADERS_URL_UPPER_BAND_HITTERS = "https://www.nseindia.com/market-data/upper-band-hitters"
+HEADERS_URL_LOWER_BAND_HITTERS = "https://www.nseindia.com/market-data/lower-band-hitters"
+HEADERS_URL_BOTH_BAND_HITTERS = "https://www.nseindia.com/market-data/both-band-hitters"
+
 # NSE API paths
 NSE_API_PATHS = {
     "gainers_loosers": "/api/live-analysis-variations",

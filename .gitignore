@@ -1,6 +1,4 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-
+# Ignore all log files everywhere
 *.log
-/*.log
 *.log.*
+__pycache__/
