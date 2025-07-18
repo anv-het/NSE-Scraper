@@ -363,3 +363,18 @@ def create_error_response(
         Error response dictionary
     """
     return error_response(message=message, status_code=status_code, errors=errors)
+
+
+
+def create_success_response_n(
+    data: Any = None,
+    message: str = "Success",
+    status_code: int = 200
+) -> Dict:
+    return {
+        "success": True,
+        "status_code": status_code,
+        "message": message,
+        "timestamp": datetime.now().isoformat(),
+        "data": data
+    }

@@ -16,6 +16,7 @@ from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Utils.response import create_success_response, create_error_response
 from Utils.utilities_functions import clean_numeric_value
+from Services.get_nse_cookies import get_nse_cookies
 
 logger = get_logger(__name__)
 
@@ -30,7 +31,7 @@ class NSEPriceBandHittersController:
     def get_cookies(self) -> Optional[Dict[str, str]]:
         """Fetches NSE cookies for session management."""
         if not self.cookies:
-            self.cookies = load_nse_headers()
+            self.cookies = get_nse_cookies()
             if not self.cookies:
                 logger.error("Failed to load NSE cookies.")
                 return None
@@ -90,10 +91,10 @@ class NSEPriceBandHittersController:
             both_band_data = data.get("both", {})
             count_data = data.get("count", {})
 
-            print(f"Upper Band Hitters: =============== {upper_band_data}")
-            print(f"Lower Band Hitters: =============== {lower_band_data}")
-            print(f"Both Band Hitters: =============== {both_band_data}")
-            print(f"Count Data: =============== {count_data}")
+            # print(f"Upper Band Hitters: =============== {upper_band_data}")
+            # print(f"Lower Band Hitters: =============== {lower_band_data}")
+            # print(f"Both Band Hitters: =============== {both_band_data}")
+            # print(f"Count Data: =============== {count_data}")
 
             if not upper_band_data and not lower_band_data and not both_band_data:
                 logger.info("No price band hitters found.")
@@ -114,7 +115,4 @@ class NSEPriceBandHittersController:
             logger.error(f"Error while scraping price band hitters: {str(e)}")
             return create_error_response(f"Error while scraping price band hitters: {str(e)}")
 
-if __name__ == "__main__":
-    controller = NSEPriceBandHittersController()
-    result = controller.scrap_price_band_hitters()
-    print(result)
+

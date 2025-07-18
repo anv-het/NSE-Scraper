@@ -67,6 +67,16 @@ HEADERS_URL_52_WEEK_LOW = "https://www.nseindia.com/market-data/52-week-low-equi
 HEADERS_URL_UPPER_BAND_HITTERS = "https://www.nseindia.com/market-data/upper-band-hitters"
 HEADERS_URL_LOWER_BAND_HITTERS = "https://www.nseindia.com/market-data/lower-band-hitters"
 HEADERS_URL_BOTH_BAND_HITTERS = "https://www.nseindia.com/market-data/both-band-hitters"
+HEADERS_URL_NEW_LISTINGS = "https://www.nseindia.com/market-data/new-stock-exchange-listings-today"
+HEADERS_URL_RECENT_LISTINGS = "https://www.nseindia.com/market-data/new-stock-exchange-listings-recent"
+HEADERS_URL_FORTHCOMING_LISTINGS = "https://www.nseindia.com/market-data/new-stock-exchange-listings-forthcoming"
+HEADERS_URL_MOST_ACTIVE_EQUITIES = "https://www.nseindia.com/market-data/most-active-equities"
+HEADERS_URL_LARGE_DEALS = "https://www.nseindia.com/market-data/large-deals"
+HEADERS_URL_ADVANCE = "https://www.nseindia.com/market-data/advance"
+HEADERS_URL_DECLINE = "https://www.nseindia.com/market-data/decline"
+HEADERS_URL_UNCHANGED = "https://www.nseindia.com/market-data/unchanged"
+HEADERS_URL_MOST_ACTIVE_CONTRACTS = "https://www.nseindia.com/market-data/most-active-contracts"
+HEADERS_URL_MOST_ACTIVE_UNDERLYING = "https://www.nseindia.com/market-data/most-active-underlying"
 
 # NSE API paths
 NSE_API_PATHS = {
