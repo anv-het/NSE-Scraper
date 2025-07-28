@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from API.Router import top_gainers_loosers
+# from API.Router import top_gainers_loosers
 import threading
 # from Services.cron_jobs_top_gainer_looser import job as run_gainers_loosers_cron
 
@@ -10,11 +10,11 @@ from Constant.general import APP_NAME, APP_VERSION, APP_DESCRIPTION
 from Utils.monitor import get_all_services_health
 
 # Import routers
-from API.Router import (
-    top_gainers_loosers,
-    nse_all_indexes,
-    nse_52week_high_low,
-)
+# from API.Router import (
+#     top_gainers_loosers,
+#     nse_all_indexes,
+#     nse_52week_high_low,
+# )
 from Utils.response import create_response
 
 logger = get_logger(__name__)
@@ -41,9 +41,9 @@ def apiserver() -> FastAPI:
     )
 
     # Include all routers
-    app.include_router(top_gainers_loosers.router, prefix='/gainers-loosers', tags=['Top Gainers and Loosers'])
-    app.include_router(nse_all_indexes.router, prefix='/indexes', tags=['NSE Indexes'])
-    app.include_router(nse_52week_high_low.router, prefix='/52week-high-low', tags=['52 Week High/Low'])
+    # app.include_router(top_gainers_loosers.router, prefix='/gainers-loosers', tags=['Top Gainers and Loosers'])
+    # app.include_router(nse_all_indexes.router, prefix='/indexes', tags=['NSE Indexes'])
+    # app.include_router(nse_52week_high_low.router, prefix='/52week-high-low', tags=['52 Week High/Low'])
 
 
     # Home route

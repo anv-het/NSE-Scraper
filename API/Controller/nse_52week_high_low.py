@@ -207,55 +207,7 @@ class NSE52WeekHighLowController:
             logger.error(f"Error saving 52-week {week_type} data to database: {str(e)}")
             return 0
     
-    def get_52_week_high_from_db(self, limit: int = 50) -> Dict[str, Any]:
-        """Get 52-week high stocks from the database."""
-        try:
-            data = self.db.get_data("nse_52_week_high", limit=limit)
-            if data:
-                return create_success_response(data, "52-week high data retrieved successfully")
-            else:
-                return create_error_response("No 52-week high data found in the database")
-        except Exception as e:
-            logger.error(f"Error retrieving 52-week high data from database: {str(e)}")
-            return create_error_response(
-                success=False,
-                message=str(e),
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
 
-    def get_52_week_low_from_db(self, limit: int = 50) -> Dict[str, Any]:
-        """Get 52-week low stocks from the database."""
-        try:
-            data = self.db.get_data("nse_52_week_low", limit=limit)
-            if data:
-                return create_success_response(data, "52-week low data retrieved successfully")
-            else:
-                return create_error_response("No 52-week low data found in the database")
-        except Exception as e:
-            logger.error(f"Error retrieving 52-week low data from database: {str(e)}")
-            return create_error_response(
-                success=False,
-                message=str(e),
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
-
-    def get_52_week_high_low_data_from_db(self, week_type: str, limit: int = 50) -> Dict[str, Any]:
-        """Get 52-week high or low data based on week_type."""
-        try:
-            if week_type == "high":
-                return self.get_52_week_high_from_db(limit)
-            elif week_type == "low":
-                return self.get_52_week_low_from_db(limit)
-            else:
-                return create_error_response("Invalid week type specified", status_code=HTTP_STATUS.BAD_REQUEST)
-        except Exception as e:
-            logger.error(f"Error retrieving 52-week {week_type} data: {str(e)}")
-            return create_error_response(
-                success=False,
-                message=str(e),
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
-        
     def refresh_52week_data(self):
         """Refresh 52-week high and low data by scraping and saving to the database."""
         try:

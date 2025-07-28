@@ -109,14 +109,14 @@ class NSELargeDealsController:
                 "An error occurred while scraping large deals data."
             )
         
-# if __name__ == "__main__":
-#     controller = NSELargeDealsController()
-#     result = controller.scrap_large_deals()
+if __name__ == "__main__":
+    controller = NSELargeDealsController()
+    result = controller.scrap_large_deals()
     
-#     # Print raw result for debugging
-#     print("Result:", result)
+    # Print raw result for debugging
+    print("Result:", result)
     
-#     if result.get("success"):
-#         print("✅ Large Deals data scraped successfully!")
-#     else:
-#         print("❌ Failed to scrape Large Deals data.")
+    if result.get("success"):
+        print("✅ Large Deals data scraped successfully!")
+    else:
+        print("❌ Failed to scrape Large Deals data.")

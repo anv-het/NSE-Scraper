@@ -91,10 +91,6 @@ class NSEPriceBandHittersController:
             both_band_data = data.get("both", {})
             count_data = data.get("count", {})
 
-            # print(f"Upper Band Hitters: =============== {upper_band_data}")
-            # print(f"Lower Band Hitters: =============== {lower_band_data}")
-            # print(f"Both Band Hitters: =============== {both_band_data}")
-            # print(f"Count Data: =============== {count_data}")
 
             if not upper_band_data and not lower_band_data and not both_band_data:
                 logger.info("No price band hitters found.")

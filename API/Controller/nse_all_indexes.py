@@ -215,39 +215,6 @@ class NSEAllIndexesController:
         except Exception as e:
             logger.error(f"Failed to save data for {data.get('index_name')}: {str(e)}")
 
-    def get_index_data_from_db(self, index_name: str, limit: int = 50) -> Dict:
-        """Fetch data for a specific index from all_indexes table"""
-        try:
-            data = self.db_manager.get_latest_data_filtered("all_indexes", "index_name", index_name, limit)
-            return create_response(
-                success=True,
-                data=data,
-                message=f"{index_name} data retrieved successfully"
-            )
-        except Exception as e:
-            logger.error(f"Error retrieving {index_name} data: {str(e)}")
-            return create_response(
-                success=False,
-                message=f"Error retrieving data: {str(e)}",
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
-
-    def get_all_indexes_from_db(self, limit: int = 50) -> Dict:
-        """Fetch recent entries from all indexes"""
-        try:
-            data = self.db_manager.get_latest_data("all_indexes", limit)
-            return create_response(
-                success=True,
-                data=data,
-                message="All indexes data retrieved successfully"
-            )
-        except Exception as e:
-            logger.error(f"Error retrieving all indexes: {str(e)}")
-            return create_response(
-                success=False,
-                message=f"Error retrieving data: {str(e)}",
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
 
     def _save_all_to_database(self, all_data: List[Dict]):
         """Save all indices data at once"""

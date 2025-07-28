@@ -60,7 +60,7 @@ NSE_GET_COOKIES_HEADERS = {
 
 # URLs for various NSE data
 
-HEADERS_URL_GAINER_LOOSER = "https://www.nseindia.com/market-data/top-gainers-loosers"
+HEADERS_URL_GAINER_LOOSER = "https://www.nseindia.com/market-data/top-gainers-losers"
 HEADERS_URL_ALL_INDEXES = "https://www.nseindia.com/market-data/live-equity-market"
 HEADERS_URL_52_WEEK_HIGH = "https://www.nseindia.com/market-data/52-week-high-equity-market"
 HEADERS_URL_52_WEEK_LOW = "https://www.nseindia.com/market-data/52-week-low-equity-market"
@@ -77,6 +77,7 @@ HEADERS_URL_DECLINE = "https://www.nseindia.com/market-data/decline"
 HEADERS_URL_UNCHANGED = "https://www.nseindia.com/market-data/unchanged"
 HEADERS_URL_MOST_ACTIVE_CONTRACTS = "https://www.nseindia.com/market-data/most-active-contracts"
 HEADERS_URL_MOST_ACTIVE_UNDERLYING = "https://www.nseindia.com/market-data/most-active-underlying"
+HEADERS_URL_EVENT_DATA = "https://www.nseindia.com/get-quotes/equity?symbol={symbol}"
 
 # NSE API paths
 NSE_API_PATHS = {
