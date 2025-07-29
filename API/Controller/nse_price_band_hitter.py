@@ -14,7 +14,7 @@ from Constant.general import (
 
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
-from Utils.response import create_success_response, create_error_response
+from Utils.response import create_success_response, create_error_response, create_success_response_n
 from Utils.utilities_functions import clean_numeric_value
 from Services.get_nse_cookies import get_nse_cookies
 
@@ -97,7 +97,7 @@ class NSEPriceBandHittersController:
                 return create_success_response("No price band hitters found.", data={})
 
             # ✅ Return proper success response
-            return create_success_response(
+            return create_success_response_n(
                 message="Fetched price band hitters successfully.",
                 data={
                     "upper": upper_band_data,
@@ -111,4 +111,14 @@ class NSEPriceBandHittersController:
             logger.error(f"Error while scraping price band hitters: {str(e)}")
             return create_error_response(f"Error while scraping price band hitters: {str(e)}")
 
+
+if __name__ == "__main__":
+    controller = NSEPriceBandHittersController()
+    result = controller.scrap_price_band_hitters()
+    if result:
+        print(result)
+    else:
+        print("Failed to fetch price band hitters data.")
+
+        
 

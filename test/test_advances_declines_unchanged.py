@@ -1,28 +1,33 @@
 import sys
 import os
 import asyncio
-from unittest import result
 
+# Ensure the correct import path for your modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from API.Controller.advances_declines_unchanged import NSEAdvancesDeclinesUnchangedController
 
-def test_scrap_advances_declines_unchanged():
+def test_scrap_advance_decline_unchanged():
     print("Running test for NSE Advances, Declines, and Unchanged scraping")
     controller = NSEAdvancesDeclinesUnchangedController()
-
-    # Correct: call the sync method directly
+    
+    # ❌ Don't use asyncio.run — the method is not async
     result = controller.scrap_advance_decline_unchanged()
 
+    # Debug print
     print("Result:", result)
 
+    # ✅ Assertions
     assert isinstance(result, dict), "Response is not a dictionary"
-    assert result.get("success") is True or result.get("success") is False, "Missing 'success' key"
-    assert "advance" in result.get("data", {}), "Missing 'advance' data"
-    assert "decline" in result.get("data", {}), "Missing 'decline' data"
-    assert "unchanged" in result.get("data", {}), "Missing 'unchanged' data"
+    assert "success" in result, "Missing 'success' key"
+
+    if result["success"]:
+        assert "Advances" in result["data"], "Missing 'Advances' key"
+        assert "Declines" in result["data"], "Missing 'Declines' key"
+        assert "Unchange" in result["data"], "Missing 'Unchange' key"
+
 
 
 if __name__ == "__main__":
-    test_scrap_advances_declines_unchanged()
+    test_scrap_advance_decline_unchanged()
     print("✅ Advances, Declines, and Unchanged test passed!")

@@ -80,7 +80,7 @@ NSE_API_PATHS = {
 
 
 # NSE index names (commonly used)
-FILTERED_INDICES = [
+ALL_INDICES_LIST = [
     "NIFTY 50",
     "NIFTY 100",
     "NIFTY NEXT 50",

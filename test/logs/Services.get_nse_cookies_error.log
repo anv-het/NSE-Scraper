@@ -1,0 +1,1 @@
+2025-07-29 12:26:01 - Services.get_nse_cookies - ERROR - Error validating cookies: HTTPSConnectionPool(host='www.nseindia.com', port=443): Max retries exceeded with url: /api/allIndices (Caused by SSLError(SSLError(1, '[SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028)')))

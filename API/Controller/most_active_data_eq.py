@@ -11,7 +11,7 @@ import requests
 
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
-from Utils.response import create_success_response, create_error_response
+from Utils.response import create_success_response, create_success_response_n, create_error_response
 from Utils.utilities_functions import clean_numeric_value
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
@@ -81,109 +81,163 @@ class NSEMostActiveEquitiesController:
             return None
         
 
-    def scrape_most_active_equities(self) -> Dict[str, Any]:
+    # def scrape_most_active_equities(self) -> Dict[str, Any]:
+    #     try:
+    #         logger.info("Scraping most active equities data")
+    #         data_value = self.make_request(self.most_active_api_url_by_value)
+    #         data_volume = self.make_request(self.most_active_api_url_by_volume)
+
+    #         if not data_value and not data_volume:
+    #             return create_error_response("Failed to fetch most active equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    #         return create_success_response({
+    #             "by_value": data_value,
+    #             "by_volume": data_volume
+    #         }, "Most active equities fetched successfully")
+
+    #     except Exception as e:
+    #         logger.error(f"Error scraping most active equities: {str(e)}")
+    #         return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    # def scrape_most_active_sme_equities(self) -> Dict[str, Any]:
+    #     try:
+    #         logger.info("Scraping most active SME equities data")
+    #         data_value = self.make_request(self.most_active_sme_api_url_by_value)
+    #         data_volume = self.make_request(self.most_active_sme_api_url_by_volume)
+
+    #         if not data_value and not data_volume:
+    #             return create_error_response("Failed to fetch most active SME equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    #         return create_success_response({
+    #             "by_value": data_value,
+    #             "by_volume": data_volume
+    #         }, "Most active SME equities fetched successfully")
+
+    #     except Exception as e:
+    #         logger.error(f"Error scraping most active SME equities: {str(e)}")
+    #         return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    # def scrape_most_active_etf_equities(self) -> Dict[str, Any]:
+    #     try:
+    #         logger.info("Scraping most active ETF equities data")
+    #         data_value = self.make_request(self.most_active_etf_api_url_by_value)
+    #         data_volume = self.make_request(self.most_active_etf_api_url_by_volume)
+
+    #         if not data_value and not data_volume:
+    #             return create_error_response("Failed to fetch most active ETF equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    #         return create_success_response({
+    #             "by_value": data_value,
+    #             "by_volume": data_volume
+    #         }, "Most active ETF equities fetched successfully")
+
+    #     except Exception as e:
+    #         logger.error(f"Error scraping most active ETF equities: {str(e)}")
+    #         return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    # def scrape_most_active_variations(self, variation_type: str) -> Dict[str, Any]:
+    #     try:
+    #         if variation_type == "lower":
+    #             url = self.most_active_variations_api_url_by_lower
+    #         elif variation_type == "greater":
+    #             url = self.most_active_variations_api_url_by_greater
+    #         else:
+    #             return create_error_response("Invalid variation type", HTTP_STATUS.BAD_REQUEST)
+
+    #         logger.info(f"Scraping most active variations ({variation_type}) data")
+    #         data = self.make_request(url)
+
+    #         if not data:
+    #             return create_error_response(f"Failed to fetch most active variations ({variation_type}) data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    #         return create_success_response(data, f"Most active variations ({variation_type}) fetched successfully")
+
+    #     except Exception as e:
+    #         logger.error(f"Error scraping most active variations ({variation_type}): {str(e)}")
+    #         return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+        
+    # def scrape_most_active_volume_gainers(self) -> Dict[str, Any]:
+    #     try:
+    #         logger.info("Scraping most active volume gainers data")
+    #         data = self.make_request(self.most_active_volume_gainers_api_url)
+
+    #         if not data:
+    #             return create_error_response("Failed to fetch most active volume gainers data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    #         return create_success_response(data, "Most active volume gainers fetched successfully")
+
+    #     except Exception as e:
+    #         logger.error(f"Error scraping most active volume gainers: {str(e)}")
+    #         return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+
+    async def scrape_most_active_equities(self) -> Dict[str, Any]:
+        "scrapes the most active equities data from NSE"
+
         try:
             logger.info("Scraping most active equities data")
-            data_value = self.make_request(self.most_active_api_url_by_value)
-            data_volume = self.make_request(self.most_active_api_url_by_volume)
+            
+            urls = [
+                self.most_active_api_url_by_value,
+                self.most_active_api_url_by_volume,
+                self.most_active_sme_api_url_by_value,
+                self.most_active_sme_api_url_by_volume,
+                self.most_active_etf_api_url_by_value,
+                self.most_active_etf_api_url_by_volume,
+                self.most_active_variations_api_url_by_lower,
+                self.most_active_variations_api_url_by_greater,
+                self.most_active_volume_gainers_api_url
+            ]
 
+            results = await asyncio.gather(*[asyncio.to_thread(self.make_request, url) for url in urls])
+            # Unpack results
+            data_value = results[0]
+            data_volume = results[1]
+            data_sme_value = results[2]
+            data_sme_volume = results[3]
+            data_etf_value = results[4]
+            data_etf_volume = results[5]
+            data_variations_lower = results[6]
+            data_variations_greater = results[7]
+            data_volume_gainers = results[8]
+            
             if not data_value and not data_volume:
                 return create_error_response("Failed to fetch most active equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
-
-            return create_success_response({
+            
+            return create_success_response_n({
                 "by_value": data_value,
-                "by_volume": data_volume
+                "by_volume": data_volume,
+                "sme_by_value": data_sme_value,
+                "sme_by_volume": data_sme_volume,
+                "etf_by_value": data_etf_value,
+                "etf_by_volume": data_etf_volume,
+                "variations_lower": data_variations_lower,
+                "variations_greater": data_variations_greater,
+                "volume_gainers": data_volume_gainers
             }, "Most active equities fetched successfully")
-
+        
         except Exception as e:
             logger.error(f"Error scraping most active equities: {str(e)}")
             return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
 
-    def scrape_most_active_sme_equities(self) -> Dict[str, Any]:
-        try:
-            logger.info("Scraping most active SME equities data")
-            data_value = self.make_request(self.most_active_sme_api_url_by_value)
-            data_volume = self.make_request(self.most_active_sme_api_url_by_volume)
 
-            if not data_value and not data_volume:
-                return create_error_response("Failed to fetch most active SME equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
 
-            return create_success_response({
-                "by_value": data_value,
-                "by_volume": data_volume
-            }, "Most active SME equities fetched successfully")
+if __name__ == "__main__":
+    controller = NSEMostActiveEquitiesController()
+    # most_active_eq = controller.scrape_most_active_equities()
+    # print("Most Active Equities:", most_active_eq)
 
-        except Exception as e:
-            logger.error(f"Error scraping most active SME equities: {str(e)}")
-            return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
+    # most_active_sme = controller.scrape_most_active_sme_equities()
+    # print("Most Active SME Equities:", most_active_sme)
 
-    def scrape_most_active_etf_equities(self) -> Dict[str, Any]:
-        try:
-            logger.info("Scraping most active ETF equities data")
-            data_value = self.make_request(self.most_active_etf_api_url_by_value)
-            data_volume = self.make_request(self.most_active_etf_api_url_by_volume)
+    # most_active_etf = controller.scrape_most_active_etf_equities()
+    # print("Most Active ETF Equities:", most_active_etf)
 
-            if not data_value and not data_volume:
-                return create_error_response("Failed to fetch most active ETF equities data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
+    # most_active_variations_lower = controller.scrape_most_active_variations("lower")
+    # print("Most Active Variations (Lower):", most_active_variations_lower)
 
-            return create_success_response({
-                "by_value": data_value,
-                "by_volume": data_volume
-            }, "Most active ETF equities fetched successfully")
+    # most_active_variations_greater = controller.scrape_most_active_variations("greater")
+    # print("Most Active Variations (Greater):", most_active_variations_greater)
 
-        except Exception as e:
-            logger.error(f"Error scraping most active ETF equities: {str(e)}")
-            return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
-
-    def scrape_most_active_variations(self, variation_type: str) -> Dict[str, Any]:
-        try:
-            if variation_type == "lower":
-                url = self.most_active_variations_api_url_by_lower
-            elif variation_type == "greater":
-                url = self.most_active_variations_api_url_by_greater
-            else:
-                return create_error_response("Invalid variation type", HTTP_STATUS.BAD_REQUEST)
-
-            logger.info(f"Scraping most active variations ({variation_type}) data")
-            data = self.make_request(url)
-
-            if not data:
-                return create_error_response(f"Failed to fetch most active variations ({variation_type}) data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
-
-            return create_success_response(data, f"Most active variations ({variation_type}) fetched successfully")
-
-        except Exception as e:
-            logger.error(f"Error scraping most active variations ({variation_type}): {str(e)}")
-            return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
-        
-    def scrape_most_active_volume_gainers(self) -> Dict[str, Any]:
-        try:
-            logger.info("Scraping most active volume gainers data")
-            data = self.make_request(self.most_active_volume_gainers_api_url)
-
-            if not data:
-                return create_error_response("Failed to fetch most active volume gainers data", HTTP_STATUS.INTERNAL_SERVER_ERROR)
-
-            return create_success_response(data, "Most active volume gainers fetched successfully")
-
-        except Exception as e:
-            logger.error(f"Error scraping most active volume gainers: {str(e)}")
-            return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
-        
-
-# if __name__ == "__main__":
-#     controller = NSEMostActiveEquitiesController()
-#     most_active_eq = controller.scrape_most_active_equities()
-#     print("Most Active Equities:", most_active_eq)
-
-#     most_active_sme = controller.scrape_most_active_sme_equities()
-#     print("Most Active SME Equities:", most_active_sme)
-
-#     most_active_etf = controller.scrape_most_active_etf_equities()
-#     print("Most Active ETF Equities:", most_active_etf)
-
-#     most_active_variations_lower = controller.scrape_most_active_variations("lower")
-#     print("Most Active Variations (Lower):", most_active_variations_lower)
-
-#     most_active_variations_greater = controller.scrape_most_active_variations("greater")
-#     print("Most Active Variations (Greater):", most_active_variations_greater)
+    most_active_volume_gainers = controller.scrape_most_active_equities()
+    print("Most Active Volume Gainers:", most_active_volume_gainers)
+    

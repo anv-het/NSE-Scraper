@@ -189,8 +189,8 @@ class NSEAllIndexesController:
                     "total_traded_value": stock.get("totalTradedValue"),
                     "year_high": stock.get("yearHigh"),
                     "year_low": stock.get("yearLow"),
-                    "near_wkh": stock.get("nearWKH"),  # Fix key name
-                    "near_wkl": stock.get("nearWKL"),  # Fix key name
+                    "near_wkh": stock.get("nearWKH"),  
+                    "near_wkl": stock.get("nearWKL"),  
                     "per_change_365d": stock.get("perChange365d"),
                     "date_365d_ago": stock.get("date365dAgo"),
                     "per_change_30d": stock.get("perChange30d"),
@@ -200,27 +200,17 @@ class NSEAllIndexesController:
                     "chart_365d_path": stock.get("chart365dPath")
                 })
 
-
+            print(f"Processed index data for {index_name}: {processed['index_info']}")
+            print(f"Total stocks processed: {len(processed['stocks'])}")
+            print(f"Sample stock data: {processed['stocks'][:300]}")  # Show first 3 stocks for debugging
             return processed
 
         except Exception as e:
             logger.error(f"Error processing index {index_name}: {str(e)}")
             return None
 
-    def _save_to_database(self, data: Dict):
-        """Save to shared all_indexes table"""
-        try:
-            self.db_manager.save_data(data, "all_indexes")
-            logger.info("Data saved to database table: all_indexes")
-        except Exception as e:
-            logger.error(f"Failed to save data for {data.get('index_name')}: {str(e)}")
 
-
-    def _save_all_to_database(self, all_data: List[Dict]):
-        """Save all indices data at once"""
-        try:
-            self.db_manager.save_all_data(all_data, "all_indexes")
-            logger.info("All data saved to database table: all_indexes")
-        except Exception as e:
-            logger.error(f"Failed to save all data: {str(e)}")
-            raise
+if __name__ == '__main__':
+    nse_all_indexes_controller = NSEAllIndexesController()
+    nse_all_indexes_controller.scrape_all_indices_from_list()
+    # Example usage:

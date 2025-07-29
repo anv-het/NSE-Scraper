@@ -10,7 +10,7 @@ def test_scrap_price_band_hitters():
     result = controller.scrap_price_band_hitters()
 
     # Print raw result for debugging
-    # print("Result:", result)
+    print("Result:", result)
 
     assert isinstance(result, dict), "Response is not a dictionary"
     assert result.get("success") is True or result.get("success") is False, "Missing 'success' key"

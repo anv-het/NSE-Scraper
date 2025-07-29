@@ -76,7 +76,7 @@ class NSETopGainersloosersController:
                 processed_data = self._process_gainers_loosers_data(data, "gainers")
                 
                 # Save to database
-                self._save_to_database(processed_data, "top_gainers")
+                # self._save_to_database(processed_data, "top_gainers")
                 
                 logger.info(f"Successfully scraped {len(processed_data.get('data', []))} top gainers")
                 return create_response(
@@ -169,6 +169,9 @@ class NSETopGainersloosersController:
                             "ca_purpose": stock.get("ca_purpose")
                         }
                         processed_data["data"].append(processed_stock)
+
+            print(f"Processed {len(processed_data['data'])} records for {data_type}")
+            print(f"Sample data: {processed_data}")  # Show first 3 records for debugging
             
             return processed_data
             
@@ -183,4 +186,14 @@ class NSETopGainersloosersController:
             logger.info(f"Data saved to database table: {table_name}")
         except Exception as e:
             logger.error(f"Failed to save data to database: {str(e)}")
+
+if __name__ == "__main__":
+    controller = NSETopGainersloosersController()
+
+    print("Scraping top gainers...")
+    gainers_result = controller.scrape_top_gainers()
+    print(gainers_result)
+    print("Scraping top loosers...")
+    loosers_result = controller.scrape_top_loosers()
+    print(loosers_result)
 
