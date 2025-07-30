@@ -263,4 +263,38 @@ MAX_PRICE = 999999.99
 MIN_VOLUME = 0
 MAX_VOLUME = 999999999999
 
+# Cron job timing configurations (in minutes)
+# NOTE: Set to 1 minute for testing - change to production values after testing
+CRON_INTERVALS = {
+    "GAINERS_LOSERS": 1,        # Every 1 minute (testing) - Production: 5
+    "INDICES": 1,               # Every 1 minute (testing) - Production: 10
+    "MOST_ACTIVE": 1,           # Every 1 minute (testing) - Production: 5
+    "PRICE_BAND": 1,            # Every 1 minute (testing) - Production: 15
+    "52_WEEK_DATA": 1,          # Every 1 minute (testing) - Production: 30
+    "LARGE_DEALS": 1,           # Every 1 minute (testing) - Production: 60
+    "ADVANCES_DECLINES": 1,     # Every 1 minute (testing) - Production: 10
+    "NEW_LISTINGS": 1,          # Every 1 minute (testing) - Production: 120
+    "CONTRACTS": 1,             # Every 1 minute (testing) - Production: 15
+    "UNDERLYING": 1,            # Every 1 minute (testing) - Production: 15
+    "STOCK_EVENTS": 1,          # Every 1 minute (testing) - Production: 60
+    "COOKIE_REFRESH": 5,        # Every 5 minutes
+    "DATA_CLEANUP": 10          # Every 10 minutes (testing) - Production: 1440
+}
+
+# Data retention periods (in days)
+# NOTE: Using shorter retention for testing - adjust for production
+DATA_RETENTION_DAYS = {
+    "GAINERS_LOSERS": 7,        # Keep 7 days (testing) - Production: 30
+    "INDICES": 7,               # Keep 7 days (testing) - Production: 30
+    "MOST_ACTIVE": 3,           # Keep 3 days (testing) - Production: 7
+    "PRICE_BAND": 3,            # Keep 3 days (testing) - Production: 7
+    "52_WEEK_DATA": 14,         # Keep 14 days (testing) - Production: 90
+    "LARGE_DEALS": 30,          # Keep 30 days (testing) - Production: 365
+    "ADVANCES_DECLINES": 3,     # Keep 3 days (testing) - Production: 7
+    "NEW_LISTINGS": 30,         # Keep 30 days (testing) - Production: 365
+    "CONTRACTS": 3,             # Keep 3 days (testing) - Production: 7
+    "UNDERLYING": 3,            # Keep 3 days (testing) - Production: 7
+    "STOCK_EVENTS": 30          # Keep 30 days (testing) - Production: 365
+}
+
 

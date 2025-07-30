@@ -14,7 +14,8 @@ from Utils.cookie_headers import load_nse_headers
 
 from Constant.http import HTTP_STATUS
 from Constant.general import (
-    HEADERS_URL_EVENT_DATA
+    HEADERS_URL_EVENT_DATA,
+    DATA_RETENTION_DAYS
 )
 from Services.get_nse_cookies import get_nse_cookies
 
@@ -66,7 +67,28 @@ class StockwiseEventDataController:
         except Exception as e:
             logger.error(f"Error making request to {url}: {str(e)}")
             return None
-        
+
+    def _save_to_database(self, data: Dict[str, Any], symbol: str) -> bool:
+        """Save stockwise event data to MongoDB using enhanced save system."""
+        try:
+            if not data:
+                logger.warning(f"No event data to save to database for symbol {symbol}")
+                return False
+                
+            # Use the enhanced save system with data formatting and cleanup
+            save_result = self.db.save_data_with_cleanup(
+                data, 
+                "stock_events", 
+                DATA_RETENTION_DAYS['STOCK_EVENTS'],
+                symbol=symbol
+            )
+            
+            logger.info(f"Data save result: {'SUCCESS' if save_result else 'FAILED'}")
+            return save_result
+                
+        except Exception as e:
+            logger.error(f"Error saving stockwise event data for {symbol} to database: {str(e)}")
+            return False
 
     def get_event_data(self, symbol: str) -> Optional[Dict]:
         """Fetches stockwise event data for a given symbol."""
@@ -75,13 +97,56 @@ class StockwiseEventDataController:
             logger.info(f"Fetching event data for {symbol} from {url}")
             response_data = self._make_request(url)
             if not response_data:
-                logger.error("Failed to fetch event data.")
-                return None
+                logger.error(f"Failed to fetch event data for {symbol}")
+                return create_error_response(f"Failed to fetch event data for {symbol}")
 
+            # Save to MongoDB with enhanced system
+            save_result = self._save_to_database(response_data, symbol)
+            if not save_result:
+                logger.warning(f"Failed to save event data for {symbol} to MongoDB, but returning API data")
 
-            return create_success_response(response_data, message="Event data fetched successfully")
+            return create_success_response(response_data, message=f"Event data fetched successfully for {symbol}")
         except Exception as e:
             logger.error(f"Error fetching event data for {symbol}: {str(e)}")
+            return create_error_response(str(e))
+
+    def scrape_bulk_event_data(self, symbols_list: List[str] = None) -> Dict[str, Any]:
+        """Scrape event data for multiple symbols - used by cron jobs."""
+        try:
+            # Default symbols if none provided
+            if not symbols_list:
+                symbols_list = ["RELIANCE", "TCS", "INFY", "HDFCBANK", "ICICIBANK", 
+                               "KOTAKBANK", "LT", "ITC", "SBIN", "BHARTIARTL"]
+            
+            logger.info(f"Scraping event data for {len(symbols_list)} symbols")
+            
+            all_event_data = []
+            successful_count = 0
+            
+            for symbol in symbols_list:
+                try:
+                    result = self.get_event_data(symbol)
+                    if result and result.get('success'):
+                        all_event_data.append(result['data'])
+                        successful_count += 1
+                except Exception as e:
+                    logger.error(f"Error fetching event data for {symbol}: {str(e)}")
+                    continue
+            
+            if successful_count > 0:
+                logger.info(f"Successfully scraped event data for {successful_count}/{len(symbols_list)} symbols")
+                return create_success_response({
+                    'data': all_event_data,
+                    'total_symbols': len(symbols_list),
+                    'successful_symbols': successful_count,
+                    'scraped_at': datetime.now().isoformat()
+                }, message=f"Event data scraped for {successful_count} symbols")
+            else:
+                logger.error("Failed to scrape event data for any symbols")
+                return create_error_response("Failed to scrape event data for any symbols")
+                
+        except Exception as e:
+            logger.error(f"Error in bulk event data scraping: {str(e)}")
             return create_error_response(str(e))
     
 # if __name__ == "__main__":

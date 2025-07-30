@@ -71,3 +71,45 @@ def apiserver() -> FastAPI:
     return app
 
 
+def create_application() -> FastAPI:
+    """Create and configure FastAPI application for main.py integration"""
+    app = FastAPI(
+        title="NSE Scraper API",
+        description="Scrape and serve NSE data (gainers, loosers, indexes)",
+        version="1.0.0",
+        docs_url="/docs",
+        redoc_url="/redoc",
+    )
+
+    # Configure CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Home route
+    @app.get("/")
+    async def root():
+        """Root endpoint to check if the API is running."""
+        return {
+            "app": APP_NAME,
+            "version": APP_VERSION,
+            "description": APP_DESCRIPTION,
+            "message": "Welcome to NSE Scraper API with Automated Data Collection"
+        }
+
+    # Health check route
+    @app.get("/meta/health")
+    async def meta_health_check():
+        return create_response(
+            success=True,
+            data=get_all_services_health(),
+            message="Server health metadata"
+        )
+
+    return app
+
+

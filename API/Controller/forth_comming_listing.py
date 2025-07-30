@@ -14,6 +14,7 @@ from Utils.response import create_success_response, create_error_response
 from Utils.utilities_functions import clean_numeric_value
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
+from Utils.data_formatter import NSEDataFormatter
 
 from Constant.http import HTTP_STATUS
 from Constant.general import (
@@ -78,7 +79,6 @@ class NSEForthcomingListingsController:
             return None
         
     async def scrap_forthcoming_listings(self) -> Dict[str, Any]:
-        """Scrapes forthcoming stock listings data from the NSE API."""
         try:
             url = self.forthcoming_listings_api_url
             logger.info(f"Fetching data from {url}")
@@ -93,13 +93,20 @@ class NSEForthcomingListingsController:
                 logger.info("No forthcoming listings found.")
                 return create_success_response("No forthcoming listings found.", data)
 
-            return create_success_response("Forthcoming listings fetched successfully.", data)
+            formatted_data = NSEDataFormatter.format_forthcoming_listings(data)
+
+            # print("Formatted Data:", formatted_data)  # Debugging output
+            # ✅ Save to Mongo
+            self.db.save_data(formatted_data, "nse_forthcoming_listings")
+
+            return create_success_response("Forthcoming listings fetched successfully.", formatted_data)
 
         except Exception as e:
             logger.error(f"Error while scraping forthcoming listings: {str(e)}")
             return create_error_response(f"Error while scraping forthcoming listings: {str(e)}")
+
     
-# if __name__ == "__main__":
-#     controller = NSEForthcomingListingsController()
-#     result = asyncio.run(controller.scrap_forthcoming_listings())
-#     print(result)
+if __name__ == "__main__":
+    controller = NSEForthcomingListingsController()
+    result = asyncio.run(controller.scrap_forthcoming_listings())
+    # print(result)

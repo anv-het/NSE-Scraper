@@ -1,0 +1,813 @@
+ALl the scraped data we save in to collection and stokes wise documents not like object.
+
+* bellow those all is examples we have to save data like this in to mongo *
+
+1. All indexes data store in ot mongo .
+
+
+{
+	"_id": "68888dcd62f4d0660fd40afa"
+	"timestamp": "2025-07-29T14:31:01.251Z"
+	"index_name": "NIFTY 50",
+	"priority": 1,
+	"full_name": "NIFTY 50",
+	"decline_stocks": 12,
+	"advance_stocks": 38,
+	"unchanged_stocks": 0,
+	"last_update_time": "29-Jul-2025 14:30:48",
+	"last_price": 24821.3,
+	"previous_close": 24680.9,
+	"open": 24609.65,
+	"day_high": 24826.3,
+	"day_low": 24598.6,
+	"change": 140.39999999999782,
+	"percent_change": 0.57,
+	"year_high": 26277.35,
+	"year_low": 21743.65,
+	"total_traded_volume": 215160910,
+	"total_traded_value": 193396167474.69,
+	"near_52w_high_percent": 5.541083861196047,
+	"near_52w_low_percent": -14.15424733197967,
+	"1y_percent_change": -0.62,
+	"30d_percent_change": -3.73,
+	"chart_today_url": "https://nsearchives.nseindia.com/today/NIFTY-50.svg",
+	"chart_30d_url": "https://nsearchives.nseindia.com/30d/NIFTY-50.svg",
+	"chart_365d_url": "https://nsearchives.nseindia.com/365d/NIFTY-50.svg"
+},
+{
+	"_id": "68888dcd62f4d0550fd40afa"
+	"timestamp": "2025-07-29T14:31:01.251Z"
+	"index_name": "NIFTY 50",
+	"priority": 0,
+	"symbol": "JIOFIN",
+	"series": "EQ",
+	"last_price": 319.45,
+	"change": 12.1,
+	"percent_change": 3.94,
+	"open_price": 306.3,
+	"high": 320.5,
+	"low": 306.3,
+	"previous_close": 307.35,
+	"total_traded_volume": 20627683,
+	"total_traded_value": 6514841121.89,
+	"year_high": 363,
+	"year_low": 198.65,
+	"near_wkh": 11.997245179063363,
+	"near_wkl": -60.810470677070214,
+	"per_change_365d": -7.4,
+	"date_365d_ago": "26-Jul-2024",
+	"per_change_30d": -4.98,
+	"date_30d_ago": "27-Jun-2025",
+	"chart_today_path": "https://nsearchives.nseindia.com/today/JIOFINEQN.svg",
+	"chart_30d_path": "https://nsearchives.nseindia.com/30d/JIOFIN-EQ.svg",
+	"chart_365d_path": "https://nsearchives.nseindia.com/365d/JIOFIN-EQ.svg"
+}
+ ...... all the nifty 50 indexes data.
+ 
+{
+	"_id": "68888dcd62f4d0550fd40afa"
+	"timestamp": "2025-07-29T14:31:01.251Z"
+	"index_name": "NIFTY NEXT 50",
+	"priority": 0,
+	"symbol": "JIOFIN",
+	"series": "EQ",
+	"last_price": 319.45,
+	"change": 12.1,
+	"percent_change": 3.94,
+	"open_price": 306.3,
+	"high": 320.5,
+	"low": 306.3,
+	"previous_close": 307.35,
+	"total_traded_volume": 20627683,
+	"total_traded_value": 6514841121.89,
+	"year_high": 363,
+	"year_low": 198.65,
+	"near_wkh": 11.997245179063363,
+	"near_wkl": -60.810470677070214,
+	"per_change_365d": -7.4,
+	"date_365d_ago": "26-Jul-2024",
+	"per_change_30d": -4.98,
+	"date_30d_ago": "27-Jun-2025",
+	"chart_today_path": "https://nsearchives.nseindia.com/today/JIOFINEQN.svg",
+	"chart_30d_path": "https://nsearchives.nseindia.com/30d/JIOFIN-EQ.svg",
+	"chart_365d_path": "https://nsearchives.nseindia.com/365d/JIOFIN-EQ.svg"
+}
+all the stokes for the nifty next 50 .....
+
+
+like this types of the all the indexes data.
+
+| Field                 | Type     | Description                             |
+| --------------------- | -------- | --------------------------------------- |
+| `_id`                 | ObjectId | Unique identifier (auto-generated)      |
+| `timestamp`           | Date     | Timestamp of the record                 |
+| `index_name`          | String   | Name of the index (e.g., NIFTY NEXT 50) |
+| `priority`            | Number   | Priority flag                           |
+| `symbol`              | String   | Stock symbol (e.g., JIOFIN)             |
+| `series`              | String   | Series type (e.g., EQ)                  |
+| `last_price`          | Number   | Last traded price                       |
+| `change`              | Number   | Absolute change in price                |
+| `percent_change`      | Number   | Percentage change in price              |
+| `open_price`          | Number   | Opening price of the day                |
+| `high`                | Number   | Day’s high price                        |
+| `low`                 | Number   | Day’s low price                         |
+| `previous_close`      | Number   | Previous day's closing price            |
+| `total_traded_volume` | Number   | Total volume traded                     |
+| `total_traded_value`  | Number   | Total value of trades                   |
+| `year_high`           | Number   | 52-week high                            |
+| `year_low`            | Number   | 52-week low                             |
+| `near_wkh`            | Number   | Distance from 52-week high (%)          |
+| `near_wkl`            | Number   | Distance from 52-week low (%)           |
+| `per_change_365d`     | Number   | % change in last 365 days               |
+| `date_365d_ago`       | String   | Date 365 days ago                       |
+| `per_change_30d`      | Number   | % change in last 30 days                |
+| `date_30d_ago`        | String   | Date 30 days ago                        |
+| `chart_today_path`    | String   | URL to today’s chart                    |
+| `chart_30d_path`      | String   | URL to 30-day chart                     |
+| `chart_365d_path`     | String   | URL to 365-day chart                    |
+------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+2.  The advances and declinses data store.
+
+{
+"_id" : "bnfsdbgdfgdjksdgksj",
+"types" : "advances",
+"identifier": "WAAREEENEREQN",
+"symbol": "WAAREEENER",
+"series": "EQ",
+"marketType": "N",
+"pchange": 1.92,
+"change": 59.6,
+"basePrice": 0,
+"previousClose": 3111.8,
+"lastPrice": 3171.4,
+"totalTradedVolume": 90.3965,
+"issuedCap": 287283199,
+"totalTradedValue": 2915.0520941,
+"totalMarketCap": 91108.99373086
+},
+{
+"_id" : "bnfsdgujhfgbgjksdgksj",
+"types" : "decline",
+"data_types" : 
+"identifier": "PARADEEPEQN",
+"symbol": "PARADEEP",
+"series": "EQ",
+"marketType": "N",
+"pchange": 8.08,
+"change": 16.09,
+"basePrice": 0,
+"previousClose": 199.18,
+"lastPrice": 215.27,
+"totalTradedVolume": 889.47142,
+"issuedCap": 815356001,
+"totalTradedValue": 1966.087626768,
+"totalMarketCap": 17552.168633527002
+} .......
+
+
+like this we can save documwnt atokes wise.
+
+-----------------------------------------------------------------------------------
+| Field               | Type   | Description                                      |
+| ------------------- | ------ | ------------------------------------------------ |
+| `_id`               | Doc.Id | Unique document ID (MongoDB autogenerated )      |
+| `types`             | String | Market status type (e.g., "advances", "decline") |
+| `identifier`        | String | Full identifier (symbol + series)                |
+| `symbol`            | String | Stock symbol                                     |
+| `series`            | String | Trading series (usually "EQ")                    |
+| `marketType`        | String | Market type (e.g., "N" for NSE)                  |
+| `pchange`           | Number | Percentage change in price                       |
+| `change`            | Number | Absolute price change                            |
+| `basePrice`         | Number | Base price (often 0 in this case)                |
+| `previousClose`     | Number | Previous day’s close price                       |
+| `lastPrice`         | Number | Last traded price                                |
+| `totalTradedVolume` | Number | Volume traded (in thousands or units)            |
+| `issuedCap`         | Number | Issued capital (number of shares)                |
+| `totalTradedValue`  | Number | Total traded value                               |
+| `totalMarketCap`    | Number | Market capitalization                            |
+-----------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+3. forthcoming listings 
+
+{
+"_id" : "bnfsdbgjksdgksj",
+"symbol": "FISCHER",
+"series": "EQ",
+"companyName": "Fischer Medical Ventures Limited",
+"isin": "INE771F01025",
+"effectiveDate": "10-JUL-25",
+"specialPreOpen": "N",
+"remark": null,
+"shdAttachment": "https://nsearchives.nseindia.com/content/equities/SHP_FISCHER.pdf",
+"financialResults": null,
+"open": 839.9,
+"dayHigh": 839.9,
+"dayLow": 770.1,
+"previousClose": 814.75,
+"totalTradedVolume": 9387,
+"totalTradedValue": 7546678.65,
+"lastPrice": 779,
+"change": -35.75,
+"pChange": -4.387849033445843,
+"chartTodayPath": "https://nsearchives.nseindia.com/today/FISCHEREQN.svg"
+}
+
+
+
+
+
+----------------------------------------------------------------------------------------
+| Field               | Type          | Description                                    |
+| ------------------- | ------------- | ---------------------------------------------- |
+| `_id`               | String / Docu. Id | Unique document ID (MongoDB autogenerated )|
+| `symbol`            | String        | Ticker symbol (e.g., "FISCHER")                |
+| `series`            | String        | Series type (e.g., "EQ")                       |
+| `companyName`       | String        | Full name of the company                       |
+| `isin`              | String        | ISIN code (International Securities ID Number) |
+| `effectiveDate`     | String        | Effective date in `DD-MMM-YY` format           |
+| `specialPreOpen`    | String        | Indicates special pre-open session ("Y"/"N")   |
+| `remark`            | String / Null | Any remarks or notes                           |
+| `shdAttachment`     | String        | URL to shareholder document                    |
+| `financialResults`  | Null / String | Link or data about financial results (if any)  |
+| `open`              | Number        | Opening price                                  |
+| `dayHigh`           | Number        | Day’s high price                               |
+| `dayLow`            | Number        | Day’s low price                                |
+| `previousClose`     | Number        | Previous closing price                         |
+| `totalTradedVolume` | Number        | Number of shares traded                        |
+| `totalTradedValue`  | Number        | Total traded value in currency                 |
+| `lastPrice`         | Number        | Last traded price                              |
+| `change`            | Number        | Absolute change in price                       |
+| `pChange`           | Number        | Percentage change in price                     |
+| `chartTodayPath`    | String        | URL to chart for today’s movement              |
+----------------------------------------------------------------------------------------
+
+
+
+===================================================================================================================================================================================================
+
+4. Large Deal data 
+
+
+save data document formate like :
+
+
+
+{
+"_id" : "bnfsdbgjksdgksj",
+"types" : "BULK_DEALS",
+"date": "28-Jul-2025",
+"symbol": "AVG",
+"name": "AVG Logistics Limited",
+"client_name": "M A INTERNATIONAL",
+"buy_sell": "SELL",
+"quantity": 87572.0,
+"watp": 252.68,
+"remarks": "-",
+"timestamp": "2025-07-29T15:51:37.957292"
+},
+{
+"_id" : "bnfsdbgjksdgksjsa",
+"types" : "BULK_DEALS",
+"date": "28-Jul-2025",
+"symbol": "BIRDYS",
+"name": "Grill Splendour Ser Ltd",
+"client_name": "PARAS DOSHI",
+"buy_sell": "BUY",
+"quantity": 32400.0,
+"watp": 124.3,
+"remarks": "-",
+"timestamp": "2025-07-29T15:51:37.957292"
+},
+{
+"_id" : "bnfsdbgjksdgkssj",
+"types" : "SHORT_DEALS",
+"date": "28-Jul-2025",
+"symbol": "BIRDYS",
+"name": "Grill Splendour Ser Ltd",
+"client_name": "PRREETI JAIIN NAINUTIA",
+"buy_sell": "SELL",
+"quantity": 55200.0,
+"watp": 124.3,
+"remarks": "-",
+"timestamp": "2025-07-29T15:51:37.957292"
+},
+{
+"_id" : "bnfsdbgjdgksj",
+"types" : "BLOCK_DEALS",
+"date": "28-Jul-2025",
+"symbol": "CARTRADE",
+"name": "Cartrade Tech Limited",
+"client_name": "GRAVITON RESEARCH CAPITAL LLP",
+"buy_sell": "BUY",
+"quantity": 278773.0,
+"watp": 2014.29,
+"remarks": "-",
+"timestamp": "2025-07-29T15:51:37.957292"
+}
+
+
+--------------------------------------------------------------------------------------------------
+| Field         | Type              | Description                                                 |
+| ------------- | ----------------- | ----------------------------------------------------------- |
+| `_id`         | String / Docu. Id | Unique document ID (MongoDB autogenerated or custom string) |
+| `types`       | String            | Deal type (e.g., `"BULK_DEALS"`)                            |
+| `date`        | String            | Trade date (format: `"DD-MMM-YYYY"`)                        |
+| `symbol`      | String            | Stock ticker symbol                                         |
+| `name`        | String            | Full company name                                           |
+| `client_name` | String            | Name of the buyer or seller                                 |
+| `buy_sell`    | String            | "BUY" or "SELL"                                             |
+| `quantity`    | Number            | Number of shares traded                                     |
+| `watp`        | Number            | Weighted average traded price                               |
+| `remarks`     | String            | Any additional remarks (often "-")                          |
+| `timestamp`   | Date              | Timestamp of data record (ISO format preferred)             |
+---------------------------------------------------------------------------------------------------
+
+
+
+===================================================================================================================================================================================================
+
+5. most active contracts
+
+
+
+data formate we save documents stokes wise like :
+
+{
+"_id" : "bndbgjdgksj",
+"types_of_data" : "most_active_contract",
+"sort_by" : "value",
+"timestamp": "2025-07-29T15:51:37.957292",
+"identifier": "FUTIDXNIFTY31-07-2025XX0.00",
+"instrumentType": "FUTIDX",
+"instrument": "Index Futures",
+"underlying": "NIFTY",
+"expiryDate": "31-Jul-2025",
+"optionType": "-",
+"strikePrice": 0,
+"lastPrice": 24843.4,
+"numberOfContractsTraded": 84506,
+"totalTurnover": 1568552.62611,
+"premiumTurnover": 1568552.62611,
+"openInterest": 153343,
+"underlyingValue": 24828.75,
+"pChange": 0.5390486519736789
+},
+{
+"_id" : "bnfsdbjdgksj",
+"types_of_data" : "most_active_futures",
+"sort_by" : "volume",
+"timestamp": "2025-07-29T15:51:37.957292",
+"identifier": "FUTIDXNIFTY28-08-2025XX0.00",
+"instrumentType": "FUTIDX",
+"instrument": "Index Futures",
+"underlying": "NIFTY",
+"expiryDate": "28-Aug-2025",
+"optionType": "-",
+"strikePrice": 0,
+"lastPrice": 24951.6,
+"numberOfContractsTraded": 63915,
+"totalTurnover": 1191281.0058,
+"premiumTurnover": 1191281.0058,
+"openInterest": 146425,
+"underlyingValue": 24828.75,
+"pChange": 0.5788455336988069
+},
+
+............. like all the this 
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+| Field                     | Type              | Description                                                            |
+| ------------------------- | ----------------- | ---------------------------------------------------------------------- |
+| `_id`                     | String / Docs  Id | Unique document ID (can be MongoDB auto or custom)                     |
+| `types_of_data`           | String            | Type of data (e.g., `"most_active_contract"`, `"most_active_futures"`) |
+| `sort_by`                 | String            | Sorting basis (e.g., `"value"`, `"volume"`)                            |
+| `timestamp`               | Date              | Record timestamp (ISO format)                                          |
+| `identifier`              | String            | Unique derivative identifier (symbol + expiry etc.)                    |
+| `instrumentType`          | String            | Instrument type (e.g., `"FUTIDX"`)                                     |
+| `instrument`              | String            | Instrument name (e.g., `"Index Futures"`)                              |
+| `underlying`              | String            | Underlying asset (e.g., `"NIFTY"`)                                     |
+| `expiryDate`              | String            | Expiry date (`DD-MMM-YYYY` format)                                     |
+| `optionType`              | String            | Option type (e.g., `"CE"`, `"PE"`, or `"-"` for futures)               |
+| `strikePrice`             | Number            | Strike price (0 for futures)                                           |
+| `lastPrice`               | Number            | Last traded price                                                      |
+| `numberOfContractsTraded` | Number            | Number of contracts traded                                             |
+| `totalTurnover`           | Number            | Total turnover value                                                   |
+| `premiumTurnover`         | Number            | Premium turnover (same as totalTurnover for futures)                   |
+| `openInterest`            | Number            | Open interest                                                          |
+| `underlyingValue`         | Number            | Current value of the underlying asset                                  |
+| `pChange`                 | Number            | Percentage change in price                                             |
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+===================================================================================================================================================================================================
+
+6. most active equities
+
+data formate we save documents stokes wise like :
+
+
+{
+"_id" : "bnfsdbjdgksj",
+"types_of_data" : "eq", -> for the eq qe can get balnl or may any null if here sme so we can get like sme_by_value,  sme_by_volume, etf_by_value, etf_by_volume ...... 
+"sort_by" : "by_value", -> by value or volume 
+"timestamp": "2025-07-29T15:51:37.957292",
+"symbol": "SILVERBEES",
+"identifier": "SILVERBEESEQN",
+"lastPrice": 109.48,
+"pChange": 0.39,
+"totalTradedVolume": 9985342,
+"totalTradedValue": 10917.9729428,
+"nav": 109.0322,
+"open": 109.48,
+"dayHigh": 109.63,
+"dayLow": 108.71,
+"closePrice": 0,
+"previousClose": 109.05
+}, ..................
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+| Field               | Type              | Description                                                           |
+| ------------------- | ----------------- | --------------------------------------------------------------------- |
+| `_id`               | String / docs  Id | Unique document ID (MongoDB auto or custom)                           |
+| `types_of_data`     | String / Null     | Data type like `"eq"`, `"sme_by_value"`, `"etf_by_volume"`, or `null` |
+| `sort_by`           | String            | Sorting criteria (`"by_value"` or `"by_volume"`)                      |
+| `timestamp`         | Date              | Timestamp of data record (ISO format preferred)                       |
+| `symbol`            | String            | Stock/ETF/SME symbol                                                  |
+| `identifier`        | String            | Unique identifier (usually symbol + series code)                      |
+| `lastPrice`         | Number            | Last traded price                                                     |
+| `pChange`           | Number            | Percent change from previous close                                    |
+| `totalTradedVolume` | Number            | Total volume traded                                                   |
+| `totalTradedValue`  | Number            | Total value traded (in ₹ crore / lakh / etc., depends on source)      |
+| `nav`               | Number            | Net Asset Value (used in ETFs, may be null for EQ/SME)                |
+| `open`              | Number            | Opening price                                                         |
+| `dayHigh`           | Number            | Highest price of the day                                              |
+| `dayLow`            | Number            | Lowest price of the day                                               |
+| `closePrice`        | Number            | Closing price (0 or null if not yet available)                        |
+| `previousClose`     | Number            | Previous trading day’s close                                          |
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+===================================================================================================================================================================================================
+
+7. Most active underlying data
+
+we can save doc in to collection like :
+
+
+{
+"_id" : "bsdbjdgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"symbol": "NIFTY",
+"futVolume": 151816,
+"optVolume": 62489157,
+"totVolume": 62640973,
+"futTurnover": 2823454.5654225,
+"optTurnover": 116437314349062,
+"totTurnover": 5577016.1560425,
+"preTurnover": 2753561.59062,
+"latestOI": 6848544,
+"underlying": 24828.75
+},
+{
+"_id" : "bnfsjdgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"symbol": "BANKNIFTY",
+"futVolume": 49822,
+"optVolume": 9492022,
+"totVolume": 9541844,
+"futTurnover": 980749.92211,
+"optTurnover": 18798619966807.8,
+"totTurnover": 1518968.2051879999,
+"preTurnover": 538218.2830780001,
+"latestOI": 1692519,
+"underlying": 56230.15
+}, ................
+
+
+
+------------------------------------------------------------------------------------------------
+| Field         | Type              | Description                                               |
+| ------------- | ----------------- | --------------------------------------------------------- |
+| `_id`         | String / Docs  Id | Unique document ID                                        |
+| `timestamp`   | Date              | Record timestamp in ISO 8601 format                       |
+| `symbol`      | String            | Symbol of the underlying (e.g., `"NIFTY"`, `"BANKNIFTY"`) |
+| `futVolume`   | Number            | Futures volume traded                                     |
+| `optVolume`   | Number            | Options volume traded                                     |
+| `totVolume`   | Number            | Total volume (futures + options)                          |
+| `futTurnover` | Number            | Turnover from futures contracts                           |
+| `optTurnover` | Number            | Turnover from options contracts                           |
+| `totTurnover` | Number            | Total turnover (futures + options)                        |
+| `preTurnover` | Number            | Previous session's total turnover (for comparison)        |
+| `latestOI`    | Number            | Latest open interest                                      |
+| `underlying`  | Number            | Current value of the underlying index or asset            |
+-------------------------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+8. new listing stoks data 
+
+
+we can save this data in to our collection in doc like :
+
+
+
+{
+"_id" : "bnfsjdsdfgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "new_listing",
+"symbol": "666SIDBI28",
+"name": "Small Industries Development Bank of India",
+"series": "N0",
+"isin": "INE556F08KZ3",
+"listing_date": "29-Jul-2025",
+"instrument": "Equity"
+},
+{
+"_id" : "bnfsjdfggksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "special_preopen_listing",
+"symbol": "666NBRD28",
+"name": "National Bank for Agriculture and Rural Development",
+"series": "N0",
+"isin": "INE261F08EP4",
+"listing_date": "29-Jul-2025",
+"instrument": "Equity"
+},
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "recent_listing",
+"symbol": "74342PHF30",
+"name": "PNB Housing Finance Limited",
+"series": "N0",
+"isin": "INE572E07233",
+"listing_date": "28-Jul-2025",
+  "instrument": "Equity"
+},...........
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+| Field          | Type              | Description                                                                        |
+| -------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| `_id`          | String / Doc   Id | Unique MongoDB document ID                                                         |
+| `timestamp`    | Date              | Record insertion timestamp (ISO 8601 format)                                       |
+| `types`        | String            | Type of listing event (`new_listing`, `special_preopen_listing`, `recent_listing`) |
+| `symbol`       | String            | Ticker symbol                                                                      |
+| `name`         | String            | Full name of the issuing company or institution                                    |
+| `series`       | String            | NSE/BSE series code (e.g., `"N0"`)                                                 |
+| `isin`         | String            | ISIN (International Securities Identification Number)                              |
+| `listing_date` | String            | Listing date (`DD-MMM-YYYY` format as string)                                      |
+| `instrument`   | String            | Instrument type (usually `"Equity"`, could be bonds, NCDs, etc.)                   |
+---------------------------------------------------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+
+9.  52 wekk high low data 
+
+
+we can save this data in to our collection in doc like :
+
+
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "high",
+"symbol": "ABLBL",
+"series": "EQ",
+"companyName": "Aditya Birla Lifestyle Brands Limited",
+"new52WHL": 138.95,
+"prev52WHL": 140.7,
+"prevHLDate": "28-Jul-2025",
+"ltp": 143.65,
+"prevClose": 141.53,
+"change": 2.12,
+"pChange": 1.4979156362608634
+},
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "low",
+"symbol": "AFCONS",
+"series": "EQ",
+"companyName": "Afcons Infrastructure Limited",
+"new52WHL": 390.0,
+"prev52WHL": 397.8,
+"prevHLDate": "28-Jul-2025",
+"ltp": 397.4,
+"prevClose": 400.1,
+"change": -2.7,
+"pChange": -0.6748312921769558
+},
+
+--------------------------------------------------------------------------------------------------------------
+| Field         | Type              | Description                                                           |
+| ------------- | ----------------- | --------------------------------------------------------------------- |
+| `_id`         | String / ObjectId | Unique document ID                                                    |
+| `timestamp`   | Date              | Record insertion timestamp (ISO 8601 format)                          |
+| `types`       | String            | Type of record: `"high"` or `"low"`                                   |
+| `symbol`      | String            | Stock symbol                                                          |
+| `series`      | String            | Series code (e.g., `"EQ"` for equity)                                 |
+| `companyName` | String            | Full name of the company                                              |
+| `new52WHL`    | Number            | New 52-week high/low price                                            |
+| `prev52WHL`   | Number            | Previous 52-week high/low price                                       |
+| `prevHLDate`  | String            | Date of the previous 52-week high/low (e.g., `"28-Jul-2025"`)         |
+| `ltp`         | Number            | Last traded price (LTP)                                               |
+| `prevClose`   | Number            | Previous closing price                                                |
+| `change`      | Number            | Price change from previous close                                      |
+| `pChange`     | Number            | Percentage change from previous close (`change` / `prevClose` \* 100) |
+--------------------------------------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+
+10. price band hitters
+
+we can save prince band hitter stoks wise doc like : 
+
+
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "lower",
+"secter" : "SecLwr20",
+"symbol": "JAYNECOIND",
+"series": "EQ",
+"ltp": "49.42",
+"change": "8.23",
+"pChange": "  19.98",
+"priceBand": "20",
+"highPrice": 49.42,
+"lowPrice": 41.93,
+"yearHigh": 55.5,
+"yearLow": 28,
+"totalTradedVol": 1664.83151,
+"turnover": 781.971360247
+},
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "upper",
+"symbol": "HIRECT",
+"secter" : "SecGtr20",
+"series": "EQ",
+"ltp": "1712.2",
+"change": "285.3",
+"pChange": "  19.99",
+"priceBand": "20",
+"highPrice": 1712.2,
+"lowPrice": 1422.8,
+"yearHigh": 1712.2,
+"yearLow": 720.75,
+"totalTradedVol": 11.21124,
+"turnover": 180.8933574
+},
+{
+"_id" : "bnfsjw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "both",
+"secter" : "AllSec",
+"symbol": "SENCO",
+"series": "EQ",
+"ltp": "321.7",
+"change": "-16.9",
+"pChange": "  -4.99",
+"priceBand": "5",
+"highPrice": 334.8,
+"lowPrice": 321.7,
+"yearHigh": 772,
+"yearLow": 227.4,
+"totalTradedVol": 8.01372,
+"turnover": 26.021350212
+},
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+| Field            | Type              | Description                                                        |
+| ---------------- | ----------------- | ------------------------------------------------------------------ |
+| `_id`            | String / ObjectId | Unique document ID (auto-generated or custom)                      |
+| `timestamp`      | Date              | Timestamp of data insertion (ISO 8601 format)                      |
+| `types`          | String            | Type of price band event (`"upper"`, `"lower"`, `"both"`)          |
+| `secter`         | String            | Sector or market category (`"SecLwr20"`, `"SecGtr20"`, `"AllSec"`) |
+| `symbol`         | String            | Stock symbol                                                       |
+| `series`         | String            | Series code (e.g., `"EQ"` for equity)                              |
+| `ltp`            | Number            | Last traded price                                                  |
+| `change`         | Number            | Absolute price change from the previous close                      |
+| `pChange`        | Number            | Percentage change from the previous close                          |
+| `priceBand`      | String            | Price band percentage limit (e.g., `"20"`)                         |
+| `highPrice`      | Number            | Highest price for the day or during the price band event           |
+| `lowPrice`       | Number            | Lowest price for the day or during the price band event            |
+| `yearHigh`       | Number            | Yearly highest price                                               |
+| `yearLow`        | Number            | Yearly lowest price                                                |
+| `totalTradedVol` | Number            | Total traded volume for the stock                                  |
+| `turnover`       | Number            | Total turnover (value of shares traded)                            |
+-------------------------------------------------------------------------------------------------------------
+
+===================================================================================================================================================================================================
+
+11. Top gainer looser 
+
+we can save Top gainer looser stoks wise doc like : 
+
+{
+"_id" : "bnfss1jw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "gainers",
+"secter" : "NIFTY",
+"symbol": "BOSCHLTD",
+"series": "EQ",
+"open_price": 37700,
+"high_price": 40120,
+"low_price": 37615,
+"ltp": 40090,
+"prev_price": 38235,
+"net_price": 6.27,
+"trade_quantity": 89125,
+"turnover": 34934.664925,
+"market_type": "N",
+"ca_ex_dt": "29-Jul-2025",
+"ca_purpose": "Dividend - Rs 512 Per Share",
+"perChange": 4.85
+},
+{
+"_id" : "bnfss134jw12dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "loosers",
+"secter" : "BANKNIFTY",
+"symbol": "VBL",
+"series": "EQ",
+"open_price": 486.1,
+"high_price": 514.8,
+"low_price": 478.05,
+"ltp": 513.9,
+"prev_price": 486.75,
+"net_price": 5.58,
+"trade_quantity": 24363407,
+"turnover": 121648.9274917,
+"market_type": "N",
+"ca_ex_dt": "07-May-2025",
+"ca_purpose": "Interim Dividend - Re 0.50 Per Share",
+"perChange": 5.58
+},
+{
+"_id" : "bnfss4jw512dgksj",
+"timestamp": "2025-07-29T15:51:37.957292",
+"types" : "loosers",
+"secter" : "NIFTYNEXT50",
+"symbol": "TORNTPHARM",
+"series": "EQ",
+"open_price": 3660.2,
+"high_price": 3784.8,
+"low_price": 3660.2,
+"ltp": 3779.2,
+"prev_price": 3622.9,
+"net_price": 4.31,
+"trade_quantity": 1677573,
+"turnover": 62750.624608800004,
+"market_type": "N",
+"ca_ex_dt": "20-Jun-2025",
+"ca_purpose": "Dividend - Rs 6 Per Share",
+"perChange": 4.31
+},
+
+
+
+
+---------------------------------------------------------------------------------------------
+| **Field**        | **Type** | **Description**                                             |
+| ---------------- | -------- | ----------------------------------------------------------- |
+| `_id`            | ObjectId | Unique identifier for each record. Automatically generated. |
+| `timestamp`      | Date     | Timestamp of when the record was created.                   |
+| `types`          | String   | Type of stock: 'gainers' or 'loosers'.                      |
+| `secter`         | String   | The sector the stock belongs to.                            |
+| `symbol`         | String   | The stock symbol (e.g., BOSCHLTD, VBL, etc.).               |
+| `series`         | String   | The series for the stock (e.g., EQ).                        |
+| `open_price`     | Number   | The price at which the stock opened on that day.            |
+| `high_price`     | Number   | The highest price of the stock on that day.                 |
+| `low_price`      | Number   | The lowest price of the stock on that day.                  |
+| `ltp`            | Number   | Last traded price of the stock.                             |
+| `prev_price`     | Number   | Previous day’s price for the stock.                         |
+| `net_price`      | Number   | Net change in price (current price - previous price).       |
+| `trade_quantity` | Number   | The total number of shares traded.                          |
+| `turnover`       | Number   | The total turnover in terms of monetary value.              |
+| `market_type`    | String   | Type of market (N = Normal, B = Block).                     |
+| `ca_ex_dt`       | String   | Corporate action ex-date (when the dividend is declared).   |
+| `ca_purpose`     | String   | Purpose of the corporate action (e.g., dividend).           |
+| `perChange`      | Number   | Percentage change in price from the previous day.           |
+---------------------------------------------------------------------------------------------
+

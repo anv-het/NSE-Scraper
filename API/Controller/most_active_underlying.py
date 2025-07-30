@@ -4,9 +4,11 @@ Handles scraping and data management for NSE most active underlying data
 """
 
 import asyncio
+from datetime import datetime
 from typing import Optional, Dict, Any
 import requests
 
+from Utils.data_formatter import NSEDataFormatter
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Utils.response import create_success_response_n, create_error_response
@@ -65,7 +67,6 @@ class NSEMostActiveUnderlyingController:
         except Exception as e:
             logger.error(f"Error making request to {url}: {str(e)}")
             return None
-        
 
     async def scrap_most_active_underlying(self) -> Dict[str, Any]:
         """Scrapes the most active underlying data from NSE."""
@@ -73,6 +74,13 @@ class NSEMostActiveUnderlyingController:
             data_underlying = self._make_request(self.most_active_underlying_api_url)
             if not data_underlying:
                 return create_error_response("Failed to fetch most active underlying data.")
+
+            # format the data
+            formatted_data = NSEDataFormatter.format_most_active_underlying(data_underlying)
+            
+            # Save to MongoDB
+            self.db.save_data(formatted_data, "nse_most_active_underlying")
+
 
             return create_success_response_n("Most active underlying data fetched successfully.", data_underlying)
 

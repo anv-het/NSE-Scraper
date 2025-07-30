@@ -3,6 +3,7 @@ NSE Price Band Hitters Controller
 Handles scraping and data management for stocks hitting price bands
 """
 import requests
+from datetime import datetime
 from typing import Optional, Dict, Any
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
@@ -71,6 +72,34 @@ class NSEPriceBandHittersController:
             logger.error(f"Request failed: {str(e)}")
             return None
 
+    def _save_to_database(self, data: Dict[str, Any]) -> bool:
+        """Save price band hitters data to MongoDB."""
+        try:
+            if not data:
+                logger.warning("No data to save to database")
+                return False
+                
+            # Add metadata
+            save_data = {
+                **data,
+                "timestamp": datetime.now(),
+                "data_type": "price_band_hitters"
+            }
+            
+            # Save to MongoDB
+            result = self.db.save_to_collection("price_band_hitters", save_data)
+            
+            if result:
+                logger.info("Price band hitters data saved to MongoDB successfully")
+                return True
+            else:
+                logger.error("Failed to save price band hitters data to MongoDB")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error saving price band hitters data to database: {str(e)}")
+            return False
+
     def scrap_price_band_hitters(self) -> Dict[str, Any]:
         """Scrapes price band hitters data from the NSE API."""
         try:
@@ -96,7 +125,18 @@ class NSEPriceBandHittersController:
                 logger.info("No price band hitters found.")
                 return create_success_response("No price band hitters found.", data={})
 
-            # ✅ Return proper success response
+            # Save to MongoDB
+            save_result = self._save_to_database({
+                "upper": upper_band_data,
+                "lower": lower_band_data,
+                "both": both_band_data,
+                "count": count_data
+            })
+            
+            if not save_result:
+                logger.warning("Failed to save price band hitters data to MongoDB, but returning API data")
+
+            # Return proper success response
             return create_success_response_n(
                 message="Fetched price band hitters successfully.",
                 data={
@@ -112,13 +152,13 @@ class NSEPriceBandHittersController:
             return create_error_response(f"Error while scraping price band hitters: {str(e)}")
 
 
-if __name__ == "__main__":
-    controller = NSEPriceBandHittersController()
-    result = controller.scrap_price_band_hitters()
-    if result:
-        print(result)
-    else:
-        print("Failed to fetch price band hitters data.")
+# if __name__ == "__main__":
+#     controller = NSEPriceBandHittersController()
+#     result = controller.scrap_price_band_hitters()
+#     if result:
+#         print(result)
+#     else:
+#         print("Failed to fetch price band hitters data.")
 
         
 

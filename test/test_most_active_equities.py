@@ -14,7 +14,7 @@ def test_scrape_most_active_equities():
     result = asyncio.run(controller.scrape_most_active_equities())
 
     # Debug print
-    print("Result:", result)
+    # print("Result:", result)
 
     # ✅ Optional assertions
     assert isinstance(result, dict), "Result is not a dictionary"

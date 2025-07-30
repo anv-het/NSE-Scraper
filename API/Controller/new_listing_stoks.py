@@ -26,7 +26,7 @@ from Services.get_nse_cookies import get_nse_cookies
 logger = get_logger(__name__)
 
 
-class NSEPriceBandHittersController:
+class NSENewListingsController:
     def __init__(self):
         self.db = DatabaseManager()
         self.base_url = configure.get('NSE', 'BASE_URL')
@@ -78,7 +78,36 @@ class NSEPriceBandHittersController:
         except requests.RequestException as e:
             logger.error(f"Request error: {str(e)}")
             return None
-        
+
+    def _save_to_database(self, data: List[Dict[str, Any]], data_type: str, collection_name: str) -> bool:
+        """Save listings data to MongoDB."""
+        try:
+            if not data:
+                logger.warning(f"No {data_type} data to save to database")
+                return False
+                
+            # Add metadata
+            save_data = {
+                "data": data,
+                "timestamp": datetime.now(),
+                "data_type": data_type,
+                "count": len(data)
+            }
+            
+            # Save to MongoDB
+            result = self.db.save_to_collection(collection_name, save_data)
+            
+            if result:
+                logger.info(f"{data_type.title()} data saved to MongoDB successfully ({len(data)} listings)")
+                return True
+            else:
+                logger.error(f"Failed to save {data_type} data to MongoDB")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error saving {data_type} data to database: {str(e)}")
+            return False
+
     def scrap_new_listings(self) -> Dict[str, Any]:
         """Scrapes new stock listings data from the NSE API."""
         try:
@@ -92,9 +121,14 @@ class NSEPriceBandHittersController:
             data = response_data.get("data", [])
             if not data:
                 logger.info("No new listings found.")
-                return create_success_response("No new listings found.", data={})
+                return create_success_response({}, "No new listings found.")
 
-            return create_success_response("New listings fetched successfully.", data=data)
+            # Save to MongoDB
+            save_result = self._save_to_database(data, "new_listings", "new_listings")
+            if not save_result:
+                logger.warning("Failed to save new listings data to MongoDB, but returning API data")
+
+            return create_success_response(data, "New listings fetched successfully.")
 
         except Exception as e:
             logger.error(f"Error while scraping new listings: {str(e)}")
@@ -111,12 +145,17 @@ class NSEPriceBandHittersController:
                 return create_error_response("Failed to fetch special pre-open listings data.")
 
             data = response_data.get("data", [])
-            print(f"Special Pre-Open Listings Data: {data}")
+            # print(f"Special Pre-Open Listings Data: {data}")
             if not data:
                 logger.info("No special pre-open listings found.")
-                return create_success_response("No special pre-open listings found.", data={})
+                return create_success_response({}, "No special pre-open listings found.")
 
-            return create_success_response("Special pre-open listings fetched successfully.", data=data)
+            # Save to MongoDB
+            save_result = self._save_to_database(data, "special_preopen_listings", "special_preopen_listings")
+            if not save_result:
+                logger.warning("Failed to save special preopen listings data to MongoDB, but returning API data")
+
+            return create_success_response(data, "Special pre-open listings fetched successfully.")
 
         except Exception as e:
             logger.error(f"Error while scraping special pre-open listings: {str(e)}")
@@ -135,7 +174,12 @@ class NSEPriceBandHittersController:
             data = response_data.get("data", [])
             if not data:
                 logger.info("No recent listings found.")
-                return create_success_response("No recent listings found.", data={})
+                return create_success_response({}, "No recent listings found.")
+
+            # Save to MongoDB
+            save_result = self._save_to_database(data, "recent_listings", "recent_listings")
+            if not save_result:
+                logger.warning("Failed to save recent listings data to MongoDB, but returning API data")
 
             return create_success_response("Recent listings fetched successfully.", data)
 
@@ -145,12 +189,12 @@ class NSEPriceBandHittersController:
 
 
 # if __name__ == "__main__":
-#     controller = NSEPriceBandHittersController()
+#     controller = NSENewListingsController()
 #     new_listings_result = controller.scrap_new_listings()
-#     print(new_listings_result)
+#     # print(new_listings_result)
 
 #     special_preopen_result = controller.scrap_special_preopen_listings()
-#     print(special_preopen_result)
+#     # print(special_preopen_result)
 
 #     recent_listings_result = controller.scrap_recent_listings()
-#     print(recent_listings_result)
+#     # print(recent_listings_result)

@@ -3,12 +3,14 @@ import sqlite3
 import datetime
 import requests
 import json
+import asyncio
+from typing import Dict, Any, List, Optional
 
 from datetime import datetime
 from typing import Dict, List, Optional
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
-from Utils.response import create_response
+from Utils.response import create_response, create_success_response_n
 from Services.get_nse_cookies import get_nse_cookies
 from Constant.general import HEADERS_URL_GAINER_LOOSER
 from Utils.config_reader import ConfigReader
@@ -26,6 +28,8 @@ class NSETopGainersloosersController:
         self.base_url = configure.get('NSE', 'BASE_URL')
         self.nse_headers_url = HEADERS_URL_GAINER_LOOSER
         self.cookies = None
+        self.gainers_api_url = "https://www.nseindia.com/api/live-analysis-variations?index=gainers"
+        self.loosers_api_url = "https://www.nseindia.com/api/live-analysis-variations?index=loosers"
 
     def _get_cookies(self):
         """Get NSE cookies for authenticated requests"""
@@ -65,7 +69,7 @@ class NSETopGainersloosersController:
             return None
     
     def scrape_top_gainers(self) -> Dict:
-        """Scrape top gainers data from NSE"""
+        """Scrape top gainers data from NSE and save to MongoDB"""
         try:
             url = f"{self.base_url}/api/live-analysis-variations?index=gainers"
             logger.info(f"Scraping top gainers from: {url}")
@@ -75,14 +79,15 @@ class NSETopGainersloosersController:
                 # Process and clean the data
                 processed_data = self._process_gainers_loosers_data(data, "gainers")
                 
-                # Save to database
-                # self._save_to_database(processed_data, "top_gainers")
+                # Save to database with formatted data
+                save_result = self.db_manager.save_data_with_cleanup(data, "gainers", cleanup_days=7)
+                logger.info(f"Data save result: {'SUCCESS' if save_result else 'FAILED'}")
                 
                 logger.info(f"Successfully scraped {len(processed_data.get('data', []))} top gainers")
                 return create_response(
                     success=True,
                     data=processed_data,
-                    message="Top gainers data retrieved successfully"
+                    message="Top gainers data retrieved and saved successfully"
                 )
             else:
                 return create_response(
@@ -100,7 +105,7 @@ class NSETopGainersloosersController:
             )
 
     def scrape_top_loosers(self) -> Dict:
-        """Scrape top loosers data from NSE"""
+        """Scrape top loosers data from NSE and save to MongoDB"""
         try:
             url = f"{self.base_url}/api/live-analysis-variations?index=loosers"
             logger.info(f"Scraping top loosers from: {url}")
@@ -110,14 +115,15 @@ class NSETopGainersloosersController:
                 # Process and clean the data
                 processed_data = self._process_gainers_loosers_data(data, "loosers")
                 
-                # Save to database
-                self._save_to_database(processed_data, "top_loosers")
+                # Save to database with formatted data
+                save_result = self.db_manager.save_data_with_cleanup(data, "losers", cleanup_days=7)
+                logger.info(f"Data save result: {'SUCCESS' if save_result else 'FAILED'}")
                 
                 logger.info(f"Successfully scraped {len(processed_data.get('data', []))} top loosers")
                 return create_response(
                     success=True,
                     data=processed_data,
-                    message="Top loosers data retrieved successfully"
+                    message="Top loosers data retrieved and saved successfully"
                 )
             else:
                 return create_response(
@@ -133,7 +139,44 @@ class NSETopGainersloosersController:
                 message=f"Error scraping top loosers: {str(e)}",
                 status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
             )
-    
+
+    async def top_gainer_loosers(self) -> Dict:
+        """Fetches top gainers and loosers data from NSE"""
+        try:
+            urls = [
+                self.gainers_api_url,
+                self.loosers_api_url
+            ]
+
+            results = await asyncio.gather(*[asyncio.to_thread(self._make_request, url) for url in urls])
+
+            data_gainer_loosers = {
+                "gainers": results[0],
+                "loosers": results[1]
+            }
+            print=(f"Data Gainers: {data_gainer_loosers}")
+            if not data_gainer_loosers["gainers"] and not data_gainer_loosers["loosers"]:
+                logger.info("No top gainers or loosers found.")
+                return create_response(
+                    success=True,
+                    data={},
+                    message="No top gainers or loosers found."
+                )
+
+            return create_success_response_n(
+                data=data_gainer_loosers,
+                message="Top gainers and loosers data fetched successfully."
+            )
+        
+        except Exception as e:
+            logger.error(f"Error while scraping top gainers and loosers: {str(e)}")
+            return create_response(
+                success=False,
+                message=f"Error while scraping top gainers and loosers: {str(e)}",
+                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
+            )
+            
+
     def _process_gainers_loosers_data(self, raw_data: Dict, data_type: str) -> Dict:
         """Process and clean gainers/loosers data"""
         try:
@@ -170,8 +213,8 @@ class NSETopGainersloosersController:
                         }
                         processed_data["data"].append(processed_stock)
 
-            print(f"Processed {len(processed_data['data'])} records for {data_type}")
-            print(f"Sample data: {processed_data}")  # Show first 3 records for debugging
+            # print(f"Processed {len(processed_data['data'])} records for {data_type}")
+            # print(f"Sample data: {processed_data}")  # Show first 3 records for debugging
             
             return processed_data
             
@@ -180,20 +223,21 @@ class NSETopGainersloosersController:
             return {"timestamp": datetime.now().isoformat(), "data_type": data_type, "data": []}
 
     def _save_to_database(self, data: Dict, table_name: str):
-        """Save processed data to database"""
+        """Save processed data to database (deprecated - use db_manager save methods instead)"""
         try:
-            self.db_manager.save_data(data, table_name)
-            logger.info(f"Data saved to database table: {table_name}")
+            # This method is deprecated, use db_manager.save_data_with_cleanup instead
+            logger.warning("_save_to_database method is deprecated, use db_manager save methods")
         except Exception as e:
             logger.error(f"Failed to save data to database: {str(e)}")
 
 if __name__ == "__main__":
     controller = NSETopGainersloosersController()
 
-    print("Scraping top gainers...")
-    gainers_result = controller.scrape_top_gainers()
-    print(gainers_result)
-    print("Scraping top loosers...")
-    loosers_result = controller.scrape_top_loosers()
-    print(loosers_result)
-
+    # print("Scraping top gainers...")
+    # gainers_result = controller.scrape_top_gainers()
+    # print(gainers_result)
+    # print("Scraping top loosers...")
+    # loosers_result = controller.scrape_top_loosers()
+    # print(loosers_result)
+    gainer_looser = controller.top_gainer_loosers()
+    # print(gainer_looser)

@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 
 import urllib
 from Utils.logger import get_logger
@@ -10,7 +10,8 @@ from Services.get_nse_cookies import get_nse_cookies
 
 from Constant.general import (
     ALL_INDICES_LIST,
-    HEADERS_URL_ALL_INDEXES
+    HEADERS_URL_ALL_INDEXES,
+    DATA_RETENTION_DAYS
 )
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
@@ -200,14 +201,56 @@ class NSEAllIndexesController:
                     "chart_365d_path": stock.get("chart365dPath")
                 })
 
-            print(f"Processed index data for {index_name}: {processed['index_info']}")
-            print(f"Total stocks processed: {len(processed['stocks'])}")
-            print(f"Sample stock data: {processed['stocks'][:300]}")  # Show first 3 stocks for debugging
+            # print(f"Processed index data for {index_name}: {processed['index_info']}")
+            # print(f"Total stocks processed: {len(processed['stocks'])}")
+            # print(f"Sample stock data: {processed['stocks'][:300]}")  # Show first 3 stocks for debugging
             return processed
 
         except Exception as e:
             logger.error(f"Error processing index {index_name}: {str(e)}")
             return None
+
+    def _save_to_database(self, data: Dict[str, Any], index_name: str = None) -> bool:
+        """Save index data to MongoDB using enhanced save system."""
+        try:
+            if not data:
+                logger.warning("No index data to save to database")
+                return False
+                
+            # Use the enhanced save system with data formatting and cleanup
+            save_result = self.db_manager.save_data_with_cleanup(
+                data, 
+                "indices", 
+                DATA_RETENTION_DAYS['INDICES'],
+                index_name=index_name or data.get('index_name', 'unknown')
+            )
+            
+            logger.info(f"Data save result: {'SUCCESS' if save_result else 'FAILED'}")
+            return save_result
+                
+        except Exception as e:
+            logger.error(f"Error saving index data to database: {str(e)}")
+            return False
+
+    def _save_all_to_database(self, all_data: List[Dict[str, Any]]) -> bool:
+        """Save multiple index data records to MongoDB using enhanced system."""
+        try:
+            if not all_data:
+                logger.warning("No index data to save to database")
+                return False
+                
+            saved_count = 0
+            for data in all_data:
+                index_name = data.get('index_name', 'unknown')
+                if self._save_to_database(data, index_name):
+                    saved_count += 1
+            
+            logger.info(f"Saved {saved_count}/{len(all_data)} index records to MongoDB")
+            return saved_count > 0
+                
+        except Exception as e:
+            logger.error(f"Error saving multiple index data to database: {str(e)}")
+            return False
 
 
 if __name__ == '__main__':

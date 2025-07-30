@@ -11,9 +11,9 @@ import requests
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Utils.response import create_success_response_n, create_error_response
-from Utils.utilities_functions import clean_numeric_value
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
+from Utils.data_formatter import NSEDataFormatter
 
 from Constant.http import HTTP_STATUS
 from Constant.general import HEADERS_URL_ADVANCE, HEADERS_URL_DECLINE, HEADERS_URL_UNCHANGED
@@ -84,10 +84,26 @@ class NSEAdvancesDeclinesUnchangedController:
             if not advance_data or not decline_data or not unchanged_data:
                 return create_error_response(HTTP_STATUS.INTERNAL_SERVER_ERROR, "Failed to fetch data")
 
-            formatted_data = self.format_nse_data(advance_data, decline_data, unchanged_data)
+            # print("Raw Advance Data:", advance_data)
+            # print("Raw Decline Data:", decline_data)
+            # print("Raw Unchanged Data:", unchanged_data)
+
+            # Prepare raw summary for formatting
+            raw_summary = {
+                "advance": advance_data.get("advance", {}).get("data", []),
+                "decline": decline_data.get("decline", {}).get("data", []),
+                "unchanged": unchanged_data.get("Unchange", {}).get("data", []),
+                "timestamp": datetime.now().isoformat()
+            }
+
+            # Format using external formatter
+            # print("Raw Summary:", raw_summary)
+            formatted_data = NSEDataFormatter.format_adv_decl_unch_data(raw_summary)
 
             # Optional: Save to MongoDB
-            # self.db.save_data(formatted_data, "nse_adv_decl_unch")
+            self.db.save_data(formatted_data, "nse_advances_declines")
+                
+            # print("Formatted Data:", formatted_data)
 
             return create_success_response_n(
                 data=formatted_data,
@@ -98,55 +114,9 @@ class NSEAdvancesDeclinesUnchangedController:
             logger.error(f"Error during scraping: {str(e)}")
             return create_error_response(HTTP_STATUS.INTERNAL_SERVER_ERROR, str(e))
 
-    def format_nse_data(
-        self,
-        advance_data: Dict[str, Any],
-        decline_data: Dict[str, Any],
-        unchanged_data: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Format raw NSE advance, decline, and unchanged data into unified MongoDB-ready structure."""
-        try:
-            timestamp = advance_data.get("timestamp") or datetime.now().isoformat()
 
-            # Optional: Extract individual counts from unchanged_data
-            total_count = advance_data.get("advance", {}).get("count", {})
-
-            def extract_data(data: Dict[str, Any], key: str) -> Dict[str, Any]:
-                items = data.get(key, {}).get("data", [])
-                return {
-                    "data": [
-                        {
-                            "identifier": item.get("identifier"),
-                            "symbol": item.get("symbol"),
-                            "series": item.get("series"),
-                            "marketType": item.get("marketType"),
-                            "pchange": item.get("pchange"),
-                            "change": item.get("change"),
-                            "basePrice": item.get("basePrice"),
-                            "previousClose": item.get("previousClose"),
-                            "lastPrice": item.get("lastPrice"),
-                            "totalTradedVolume": item.get("totalTradedVolume"),
-                            "issuedCap": item.get("issuedCap"),
-                            "totalTradedValue": item.get("totalTradedValue"),
-                            "totalMarketCap": item.get("totalMarketCap")
-                        }
-                        for item in items
-                    ]
-                }
-
-            return {
-                "count": total_count,
-                "Advances": extract_data(advance_data, "advance"),
-                "Declines": extract_data(decline_data, "decline"),
-                "Unchange": extract_data(unchanged_data, "Unchange")
-            }
-
-        except Exception as e:
-            logger.error(f"Error formatting NSE data: {str(e)}")
-            return {}
-
-        
+# Uncomment this for direct testing
 if __name__ == "__main__":
     controller = NSEAdvancesDeclinesUnchangedController()
     result = asyncio.run(controller.scrap_advance_decline_unchanged())
-    print(result)
+    # print(result)

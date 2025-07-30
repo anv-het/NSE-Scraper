@@ -3,22 +3,22 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from API.Controller.new_listing_stoks import NSEPriceBandHittersController
+from API.Controller.new_listing_stoks import NSENewListingsController
 
 def test_scrap_new_listings():
     print("Running test for NSE New Listings scraping")
-    controller = NSEPriceBandHittersController()
+    controller = NSENewListingsController()
     result = controller.scrap_new_listings()
 
 def test_scrap_special_preopen_listings():
     print("Running test for NSE Special Pre-Open Listings scraping")
-    controller = NSEPriceBandHittersController()
+    controller = NSENewListingsController()
     result = controller.scrap_special_preopen_listings()
 
 
 def test_scrap_recent_listings():
     print("Running test for NSE Recent Listings scraping")
-    controller = NSEPriceBandHittersController()
+    controller = NSENewListingsController()
     result = controller.scrap_recent_listings()
 
     # Print raw result for debugging

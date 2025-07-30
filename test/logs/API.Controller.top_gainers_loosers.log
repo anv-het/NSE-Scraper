@@ -93,3 +93,33 @@
 2025-07-29 13:05:36 - API.Controller.top_gainers_loosers - INFO - Scraping top loosers from: https://www.nseindia.com/api/live-analysis-variations?index=loosers
 2025-07-29 13:05:36 - API.Controller.top_gainers_loosers - INFO - Data saved to database table: top_loosers
 2025-07-29 13:05:36 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top loosers
+2025-07-29 17:55:20 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 17:55:20 - API.Controller.top_gainers_loosers - INFO - Scraping top gainers from: https://www.nseindia.com/api/live-analysis-variations?index=gainers
+2025-07-29 17:55:21 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
+2025-07-29 17:55:21 - API.Controller.top_gainers_loosers - INFO - Scraping top loosers from: https://www.nseindia.com/api/live-analysis-variations?index=loosers
+2025-07-29 17:55:21 - API.Controller.top_gainers_loosers - INFO - Data saved to database table: top_loosers
+2025-07-29 17:55:21 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 105 top loosers
+2025-07-29 17:58:21 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 17:58:21 - API.Controller.top_gainers_loosers - INFO - Scraping top gainers from: https://www.nseindia.com/api/live-analysis-variations?index=gainers
+2025-07-29 17:58:21 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
+2025-07-29 18:07:27 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:07:27 - API.Controller.top_gainers_loosers - INFO - Scraping top gainers from: https://www.nseindia.com/api/live-analysis-variations?index=gainers
+2025-07-29 18:07:28 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
+2025-07-29 18:08:34 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:08:34 - API.Controller.top_gainers_loosers - INFO - Scraping top gainers from: https://www.nseindia.com/api/live-analysis-variations?index=gainers
+2025-07-29 18:08:34 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
+2025-07-29 18:11:53 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:12:21 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:13:48 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:15:41 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:17:39 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:18:28 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:18:57 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:22:07 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 18:22:07 - API.Controller.top_gainers_loosers - ERROR - Error while scraping top gainers and loosers: create_success_response_n() got an unexpected keyword argument 'success'
+2025-07-29 18:23:00 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 19:24:34 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-29 19:24:35 - API.Controller.top_gainers_loosers - INFO - Scraping top gainers from: https://www.nseindia.com/api/live-analysis-variations?index=gainers
+2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
+2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Scraping top loosers from: https://www.nseindia.com/api/live-analysis-variations?index=loosers
+2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 105 top loosers
