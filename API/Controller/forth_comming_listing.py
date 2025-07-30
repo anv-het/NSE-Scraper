@@ -95,8 +95,6 @@ class NSEForthcomingListingsController:
 
             formatted_data = NSEDataFormatter.format_forthcoming_listings(data)
 
-            # print("Formatted Data:", formatted_data)  # Debugging output
-            # ✅ Save to Mongo
             self.db.save_data(formatted_data, "nse_forthcoming_listings")
 
             return create_success_response("Forthcoming listings fetched successfully.", formatted_data)
@@ -106,7 +104,3 @@ class NSEForthcomingListingsController:
             return create_error_response(f"Error while scraping forthcoming listings: {str(e)}")
 
     
-if __name__ == "__main__":
-    controller = NSEForthcomingListingsController()
-    result = asyncio.run(controller.scrap_forthcoming_listings())
-    # print(result)

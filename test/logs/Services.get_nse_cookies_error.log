@@ -69,3 +69,7 @@
 2025-07-30 19:13:11 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies
 2025-07-30 19:13:11 - Services.get_nse_cookies - ERROR - Error in get_nse_cookies: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\aaa\\appdata\\roaming\\undetected_chromedriver\\undetected\\chromedriver-win32\\chromedriver.exe' -> 'C:\\Users\\aaa\\appdata\\roaming\\undetected_chromedriver\\undetected_chromedriver.exe'
 2025-07-30 19:13:11 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Error in get_nse_cookies: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected\\chromedriver-win32\\chromedriver.exe' -> 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected_chromedriver.exe'
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Error in get_nse_cookies: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected\\chromedriver-win32\\chromedriver.exe' -> 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected_chromedriver.exe'
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies

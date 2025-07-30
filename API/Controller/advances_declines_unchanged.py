@@ -84,10 +84,6 @@ class NSEAdvancesDeclinesUnchangedController:
             if not advance_data or not decline_data or not unchanged_data:
                 return create_error_response(HTTP_STATUS.INTERNAL_SERVER_ERROR, "Failed to fetch data")
 
-            # print("Raw Advance Data:", advance_data)
-            # print("Raw Decline Data:", decline_data)
-            # print("Raw Unchanged Data:", unchanged_data)
-
             # Prepare raw summary for formatting
             raw_summary = {
                 "advance": advance_data.get("advance", {}).get("data", []),
@@ -97,13 +93,10 @@ class NSEAdvancesDeclinesUnchangedController:
             }
 
             # Format using external formatter
-            # print("Raw Summary:", raw_summary)
             formatted_data = NSEDataFormatter.format_adv_decl_unch_data(raw_summary)
 
             # Optional: Save to MongoDB
             self.db.save_data(formatted_data, "nse_advances_declines")
-                
-            # print("Formatted Data:", formatted_data)
 
             return create_success_response_n(
                 data=formatted_data,
@@ -115,8 +108,3 @@ class NSEAdvancesDeclinesUnchangedController:
             return create_error_response(HTTP_STATUS.INTERNAL_SERVER_ERROR, str(e))
 
 
-# Uncomment this for direct testing
-if __name__ == "__main__":
-    controller = NSEAdvancesDeclinesUnchangedController()
-    result = asyncio.run(controller.scrap_advance_decline_unchanged())
-    # print(result)

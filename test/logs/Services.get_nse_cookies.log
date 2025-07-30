@@ -1338,3 +1338,196 @@
 2025-07-30 20:03:25 - Services.get_nse_cookies - INFO - Loaded cookies from file
 2025-07-30 20:03:25 - Services.get_nse_cookies - INFO - Cookies validation successful
 2025-07-30 20:03:25 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 21:35:09 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 21:36:22 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:00:29 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:01:42 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-30 22:05:12 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Error in get_nse_cookies: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected\\chromedriver-win32\\chromedriver.exe' -> 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected_chromedriver.exe'
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Error in get_nse_cookies: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected\\chromedriver-win32\\chromedriver.exe' -> 'C:\\Users\\hetgl\\appdata\\roaming\\undetected_chromedriver\\undetected_chromedriver.exe'
+2025-07-30 22:05:16 - Services.get_nse_cookies - ERROR - Unable to obtain valid cookies
+2025-07-30 22:05:33 - Services.get_nse_cookies - INFO - All required cookies collected
+2025-07-30 22:05:33 - Services.get_nse_cookies - INFO - Cookies saved to nse_cookies.json
+2025-07-30 22:05:33 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:43:07 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:43:07 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:43:07 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:47:11 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:47:11 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:47:12 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:51:33 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:52:52 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:52:52 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:52:52 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:54:38 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:54:38 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:54:38 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:54:59 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:54:59 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:54:59 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 22:59:21 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 22:59:21 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 22:59:21 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:01:45 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:01:45 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:01:45 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:03:18 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:03:18 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:03:19 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-30 23:06:15 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-30 23:06:32 - Services.get_nse_cookies - INFO - All required cookies collected
+2025-07-30 23:06:32 - Services.get_nse_cookies - INFO - Cookies saved to nse_cookies.json
+2025-07-30 23:06:32 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:08:51 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:08:51 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:08:51 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:17:21 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:17:21 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:17:21 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:22:22 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:22:22 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:22:24 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:23:32 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:23:32 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:23:32 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:26:07 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:26:07 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:26:07 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:27:34 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:27:34 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:27:34 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:34:10 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:34:10 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:34:10 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:41:23 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:41:23 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:41:23 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:43:38 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:43:38 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:43:38 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:46:52 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:46:52 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:46:53 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:49:26 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:49:26 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:49:27 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:51:28 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:51:28 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:51:28 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:53:46 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:53:46 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:53:46 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-30 23:57:52 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-30 23:57:52 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-30 23:57:53 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-31 00:07:51 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 00:08:10 - Services.get_nse_cookies - INFO - All required cookies collected
+2025-07-31 00:08:10 - Services.get_nse_cookies - INFO - Cookies saved to nse_cookies.json
+2025-07-31 00:08:11 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:14:59 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:14:59 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:14:59 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:14:59 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:15:00 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:22:17 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:22:17 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:22:17 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:22:18 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:22:18 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:24:02 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:24:02 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:24:02 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:24:03 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:24:03 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:28:26 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:28:26 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:28:26 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:28:40 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:28:40 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:28:40 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:29:51 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:29:51 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:29:51 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:33:32 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:33:32 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:33:32 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:34:48 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:34:48 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:34:48 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:46:20 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:46:20 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:46:21 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:49:25 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:49:25 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:49:26 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:52:34 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:52:34 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:52:34 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:54:21 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:54:21 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:54:21 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:55:16 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:55:16 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:55:17 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 00:56:28 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 00:56:28 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 00:56:29 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Stored cookies expired
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Fetching fresh cookies
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Refreshing cookies...
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies...
+2025-07-31 01:12:01 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 01:12:20 - Services.get_nse_cookies - INFO - All required cookies collected
+2025-07-31 01:12:20 - Services.get_nse_cookies - INFO - Cookies saved to nse_cookies.json
+2025-07-31 01:12:20 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:16:38 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:16:38 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:16:39 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:18:38 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:18:38 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:18:40 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:21:29 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:21:29 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:21:30 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:22:07 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:22:07 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:22:07 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:39:09 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:39:09 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:39:10 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:39:21 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:39:21 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:39:22 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:39:37 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:39:37 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:39:38 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 01:39:59 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 01:40:00 - Services.get_nse_cookies - INFO - Loaded cookies from file
+2025-07-31 01:40:00 - Services.get_nse_cookies - INFO - Cookies validation successful

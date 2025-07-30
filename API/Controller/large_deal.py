@@ -94,7 +94,4 @@ class NSELargeDealsController:
 
 
         
-if __name__ == "__main__":
-    controller = NSELargeDealsController()
-    result = controller.scrap_large_deals()
-    # print(result)        
+     

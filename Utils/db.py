@@ -113,7 +113,7 @@ class DatabaseManager:
                     ('band_type', 1),
                     ('symbol', 1),
                 ],
-                'nse_stock_events': [
+                'nse_stockwise_event': [
                     ('timestamp', DESCENDING),
                     ('symbol', 1),
                     ('event_type', 1),
@@ -123,6 +123,16 @@ class DatabaseManager:
                     ('data_type', 1),
                     ('category', 1),
                     ('symbol', 1),
+                ],
+                'nse_special_preopen_listings': [
+                    ('timestamp', DESCENDING),
+                    ('symbol', 1),
+                    ('listing_type', 1),
+                ],
+                'nse_recent_listings': [
+                    ('timestamp', DESCENDING),
+                    ('symbol', 1),
+                    ('listing_type', 1),
                 ]
             }
             
@@ -181,6 +191,44 @@ class DatabaseManager:
             return False
         except Exception as e:
             logger.error(f"Error saving data to {collection_name}: {str(e)}")
+            return False
+        
+
+    def save_stockwise_event_data(self, data: List[Dict[str, Any]]) -> bool:
+        """
+        Save data to 'nse_stockwise_event' collection.
+        Delete only old data for the symbols in the incoming data.
+        """
+        if self.mongo_db is None:
+            logger.error("MongoDB connection is not initialized.")
+            return False
+
+        if not data or not isinstance(data, list):
+            logger.warning("No valid data provided for stockwise event save.")
+            return False
+        
+        try:
+            collection = self.mongo_db['nse_stockwise_event']
+
+            # Extract all symbols from the data
+            symbols = set()
+            for item in data:
+                symbol = item.get('symbol')
+                if symbol:
+                    symbols.add(symbol)
+
+            if symbols:
+                # Delete old data for these symbols only
+                delete_result = collection.delete_many({'symbol': {'$in': list(symbols)}})
+                logger.info(f"Deleted {delete_result.deleted_count} old records for symbols {symbols} in nse_stockwise_event.")
+
+            # Insert new data
+            result = collection.insert_many(data)
+            logger.info(f"Inserted {len(result.inserted_ids)} new documents into nse_stockwise_event.")
+            return True
+        
+        except Exception as e:
+            logger.error(f"Error saving stockwise event data: {str(e)}")
             return False
 
 

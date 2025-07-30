@@ -122,7 +122,3 @@ class NSEMostActiveContractsController:
             return create_error_response("Error occurred while scraping most active contracts.")
 
 
-# if __name__ == "__main__":
-#     controller = NSEMostActiveContractsController()
-#     result = asyncio.run(controller.scrap_most_active_contracts())
-#     print(result)

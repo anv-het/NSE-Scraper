@@ -88,7 +88,4 @@ class NSEMostActiveUnderlyingController:
             logger.error(f"Error while scraping most active underlying: {str(e)}")
             return create_error_response(f"Error while scraping most active underlying: {str(e)}")
         
-# if __name__ == "__main__":
-#     controller = NSEMostActiveUnderlyingController()
-#     result = asyncio.run(controller.scrap_most_active_underlying())
-#     print(result)
+

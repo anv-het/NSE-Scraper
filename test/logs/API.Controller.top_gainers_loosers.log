@@ -123,3 +123,9 @@
 2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 127 top gainers
 2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Scraping top loosers from: https://www.nseindia.com/api/live-analysis-variations?index=loosers
 2025-07-29 19:24:50 - API.Controller.top_gainers_loosers - INFO - Successfully scraped 105 top loosers
+2025-07-31 00:14:59 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-31 00:15:00 - API.Controller.top_gainers_loosers - ERROR - Error fetching top gainers and loosers: 'NSETopGainersloosersController' object has no attribute 'format_top_gainers_loosers'
+2025-07-31 00:22:17 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-31 00:22:18 - API.Controller.top_gainers_loosers - INFO - Data saved to MongoDB successfully
+2025-07-31 00:24:02 - API.Controller.top_gainers_loosers - INFO - Logger 'API.Controller.top_gainers_loosers' initialized successfully
+2025-07-31 00:24:03 - API.Controller.top_gainers_loosers - INFO - Data saved to MongoDB successfully

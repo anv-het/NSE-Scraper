@@ -1,2 +1,4 @@
 2025-07-12 00:54:13 - Utils.db - ERROR - Failed to get data from SQLite: datatype mismatch
 2025-07-12 00:54:13 - Utils.db - ERROR - Failed to get data from top_gainers: datatype mismatch
+2025-07-30 21:35:15 - Utils.db - ERROR - Failed to connect to MongoDB: No servers found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 688a42b5ab80aeabeb235249, topology_type: Unknown, servers: [<ServerDescription ('192.168.102.120', 27017) server_type: Unknown, rtt: None>]>
+2025-07-30 21:36:27 - Utils.db - ERROR - Failed to connect to MongoDB: No servers found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 688a42fef08edbe034606641, topology_type: Unknown, servers: [<ServerDescription ('192.168.102.120', 27017) server_type: Unknown, rtt: None>]>

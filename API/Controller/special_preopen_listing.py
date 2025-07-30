@@ -1,6 +1,6 @@
 """
-NSE New LISTINGS Controller
-Handles scraping and data management for new stock listings
+# special_preopen_listing.py
+Handles scraping and data management for special pre-open stock listings
 """
 
 import asyncio
@@ -27,14 +27,13 @@ from Services.get_nse_cookies import get_nse_cookies
 logger = get_logger(__name__)
 
 
-class NSENewListingsController:
+class NSESpecialPreopenListingsController:
     def __init__(self):
         self.db = DatabaseManager()
         self.base_url = configure.get('NSE', 'BASE_URL')
         self.new_listing_headers_url = HEADERS_URL_NEW_LISTINGS
         self.cookies = None
-        self.new_listing_api_url = "https://www.nseindia.com/api/new-listing-today-ipo?index=NewListing"
-
+        self.special_preopen_api_url = "https://www.nseindia.com/api/special-preopen-listing"
 
     def get_cookies(self) -> Optional[Dict[str, str]]:
         """Fetches NSE cookies for session management."""
@@ -79,29 +78,24 @@ class NSENewListingsController:
             logger.error(f"Request error: {str(e)}")
             return None
 
-    async def scrap_new_listing(self) -> Dict[str, Any]:
-        """Scrapes both new listings and special pre-open listings."""
+    async def scrap_special_preopen_listings(self) -> Dict[str, Any]:
+        """Scrapes special pre-open listings."""
         try:
-
-            logger.info("Starting scraping for new listings and special pre-open listings")
-
-            # Scrape new listings
-            new_listing_data = self._make_request(self.new_listing_api_url)
-            if not new_listing_data:
-                logger.error("No data found for new listings")
-                return create_error_response("No data found for new listings")
+            preopen_data = self._make_request(self.special_preopen_api_url)
 
             # format data
-            formatted_data = NSEDataFormatter.format_new_listings_data(new_listing_data)
+            formatted_data = NSEDataFormatter.format_special_preopen_data(preopen_data)
 
             # Save to MongoDB
-            self.db.save_data(formatted_data, "nse_new_listings")
-            
-            return create_success_response(formatted_data, "New listings and special pre-open listings fetched successfully.")
+            self.db.save_data(formatted_data, "nse_special_preopen_listings")
+
+            return create_success_response(formatted_data, "Special pre-open listings fetched successfully.")
         
         except Exception as e:
-            logger.error(f"Error while scraping new listings and special pre-open listings: {str(e)}")
-            return create_error_response(f"Error while scraping new listings and special pre-open listings: {str(e)}")
-        
+            logger.error(f"Error while scraping special pre-open listings: {str(e)}")
+            return create_error_response(f"Error while scraping special pre-open listings: {str(e)}")
+
+
+
 
 

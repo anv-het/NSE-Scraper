@@ -19,7 +19,7 @@ def test_get_price_band_hitter_full():
     result = controller.scrap_price_band_hitters()
 
     # Print the result for debugging
-    print("Result:", result)
+    # print("Result:", result)
 
 if __name__ == "__main__":
     test_get_price_band_hitter_full()

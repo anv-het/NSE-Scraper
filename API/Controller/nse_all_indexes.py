@@ -3,9 +3,10 @@ from datetime import datetime
 from typing import Dict, List, Optional, Any
 
 import urllib
+from Utils.data_formatter import NSEDataFormatter
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
-from Utils.response import create_response
+from Utils.response import create_error_response, create_response, create_success_response_n
 from Services.get_nse_cookies import get_nse_cookies
 
 from Constant.general import (
@@ -77,9 +78,8 @@ class NSEAllIndexesController:
                 raw_data = self._make_request(url)
 
                 if raw_data:
-                    processed = self._process_generic_index_data(raw_data, index_name)
-                    if processed:
-                        all_processed_data.append(processed)
+                    if raw_data.get("data"):
+                        all_processed_data.append(raw_data["data"])
                         logger.info(f"Successfully scraped {index_name}")
                     else:
                         logger.warning(f"No processed data for {index_name}")
@@ -88,172 +88,21 @@ class NSEAllIndexesController:
                     logger.warning(f"Failed to fetch data for index: {index_name}")
                     failed_indices.append(index_name)
 
-            # Save all data at once
-            if all_processed_data:
-                self._save_all_to_database(all_processed_data)
-                logger.info(f"Saved {len(all_processed_data)} indices to database")
-            else:
-                logger.warning("No index data scraped")
+            # format the data 
+            formatted_data = NSEDataFormatter.format_all_indices(all_processed_data)
 
-            return {
-                "total_scraped": len(all_processed_data),
-                "failed_indices": failed_indices,
-                "records": all_processed_data
-            }
+            # Save to MongoDB
+            if formatted_data:
+                if self.db_manager.save_data(formatted_data, 'nse_all_indexes'):
+                    logger.info("Data saved to MongoDB successfully")
+                else:
+                    logger.error("Failed to save data to MongoDB")
+
+            return create_success_response_n(formatted_data, HTTP_STATUS.OK)
 
         except Exception as e:
             logger.error(f"Error scraping all indices: {str(e)}")
-            raise  # Let the router handle this with a clean error response
-
-    def scrape_index_data(self, index_name: str) -> Dict:
-        """Scrape a single index and store in one table: all_indexes"""
-        try:
-            formatted_name = index_name.replace(" ", "%20")
-            url = f"{self.base_url}/api/equity-stockIndices?index={formatted_name}"
-            logger.info(f"Scraping data for index: {index_name} from URL: {url}")
-
-            raw_data = self._make_request(url)
-            if raw_data:
-                processed = self._process_generic_index_data(raw_data, index_name)
-                self._save_to_database(processed)
-                return create_response(
-                    success=True,
-                    data=processed,
-                    message=f"Index data for '{index_name}' retrieved successfully"
-                )
-            else:
-                return create_response(
-                    success=False,
-                    message=f"Failed to retrieve data for index '{index_name}'",
-                    status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-                )
-
-        except Exception as e:
-            logger.error(f"Error scraping index '{index_name}': {str(e)}")
-            return create_response(
-                success=False,
-                message=f"Error scraping index '{index_name}': {str(e)}",
-                status_code=HTTP_STATUS.INTERNAL_SERVER_ERROR
-            )
-
-    def _process_generic_index_data(self, raw_data: Dict, index_name: str) -> Optional[Dict]:
-        """Process data for saving to all_indexes"""
-        try:
-            # Get the main index data (usually first in the list, priority = 1)
-            main_index_data = raw_data.get("data", [])[0] if raw_data.get("data") else {}
-
-            processed = {
-                "timestamp": datetime.now().isoformat(),
-                "index_name": index_name,
-                "index_info": {
-                    "priority": main_index_data.get("priority", 1),
-                    "full_name": raw_data.get("name", index_name),
-                    "decline_stocks": int(raw_data.get("advance", {}).get("declines", 0)),
-                    "advance_stocks": int(raw_data.get("advance", {}).get("advances", 0)),
-                    "unchanged_stocks": int(raw_data.get("advance", {}).get("unchanged", 0)),
-                    "last_update_time": main_index_data.get("lastUpdateTime"),
-                    "last_price": main_index_data.get("lastPrice"),
-                    "previous_close": main_index_data.get("previousClose"),
-                    "open": main_index_data.get("open"),
-                    "day_high": main_index_data.get("dayHigh"),
-                    "day_low": main_index_data.get("dayLow"),
-                    "change": main_index_data.get("change"),
-                    "percent_change": main_index_data.get("pChange"),
-                    "year_high": main_index_data.get("yearHigh"),
-                    "year_low": main_index_data.get("yearLow"),
-                    "total_traded_volume": main_index_data.get("totalTradedVolume"),
-                    "total_traded_value": main_index_data.get("totalTradedValue"),
-                    "near_52w_high_percent": main_index_data.get("nearWKH"),
-                    "near_52w_low_percent": main_index_data.get("nearWKL"),
-                    "1y_percent_change": main_index_data.get("perChange365d"),
-                    "30d_percent_change": main_index_data.get("perChange30d"),
-                    "chart_today_url": main_index_data.get("chartTodayPath"),
-                    "chart_30d_url": main_index_data.get("chart30dPath"),
-                    "chart_365d_url": main_index_data.get("chart365dPath")
-                },
-                "stocks": []
-            }
-
-            # Add stock-level data (including index itself and other components)
-            for stock in raw_data.get("data", []):
-                processed["stocks"].append({
-                    "symbol": stock.get("symbol"),
-                    "series": stock.get("series"),
-                    "last_price": stock.get("lastPrice"),
-                    "change": stock.get("change"),
-                    "percent_change": stock.get("pChange"),
-                    "open_price": stock.get("open"),  # Fix key name
-                    "high": stock.get("dayHigh"),
-                    "low": stock.get("dayLow"),
-                    "previous_close": stock.get("previousClose"),
-                    "total_traded_volume": stock.get("totalTradedVolume"),
-                    "total_traded_value": stock.get("totalTradedValue"),
-                    "year_high": stock.get("yearHigh"),
-                    "year_low": stock.get("yearLow"),
-                    "near_wkh": stock.get("nearWKH"),  
-                    "near_wkl": stock.get("nearWKL"),  
-                    "per_change_365d": stock.get("perChange365d"),
-                    "date_365d_ago": stock.get("date365dAgo"),
-                    "per_change_30d": stock.get("perChange30d"),
-                    "date_30d_ago": stock.get("date30dAgo"),
-                    "chart_today_path": stock.get("chartTodayPath"),
-                    "chart_30d_path": stock.get("chart30dPath"),
-                    "chart_365d_path": stock.get("chart365dPath")
-                })
-
-            # print(f"Processed index data for {index_name}: {processed['index_info']}")
-            # print(f"Total stocks processed: {len(processed['stocks'])}")
-            # print(f"Sample stock data: {processed['stocks'][:300]}")  # Show first 3 stocks for debugging
-            return processed
-
-        except Exception as e:
-            logger.error(f"Error processing index {index_name}: {str(e)}")
-            return None
-
-    def _save_to_database(self, data: Dict[str, Any], index_name: str = None) -> bool:
-        """Save index data to MongoDB using enhanced save system."""
-        try:
-            if not data:
-                logger.warning("No index data to save to database")
-                return False
-                
-            # Use the enhanced save system with data formatting and cleanup
-            save_result = self.db_manager.save_data_with_cleanup(
-                data, 
-                "indices", 
-                DATA_RETENTION_DAYS['INDICES'],
-                index_name=index_name or data.get('index_name', 'unknown')
-            )
-            
-            logger.info(f"Data save result: {'SUCCESS' if save_result else 'FAILED'}")
-            return save_result
-                
-        except Exception as e:
-            logger.error(f"Error saving index data to database: {str(e)}")
-            return False
-
-    def _save_all_to_database(self, all_data: List[Dict[str, Any]]) -> bool:
-        """Save multiple index data records to MongoDB using enhanced system."""
-        try:
-            if not all_data:
-                logger.warning("No index data to save to database")
-                return False
-                
-            saved_count = 0
-            for data in all_data:
-                index_name = data.get('index_name', 'unknown')
-                if self._save_to_database(data, index_name):
-                    saved_count += 1
-            
-            logger.info(f"Saved {saved_count}/{len(all_data)} index records to MongoDB")
-            return saved_count > 0
-                
-        except Exception as e:
-            logger.error(f"Error saving multiple index data to database: {str(e)}")
-            return False
+            return create_error_response(str(e), HTTP_STATUS.INTERNAL_SERVER_ERROR)
 
 
-if __name__ == '__main__':
-    nse_all_indexes_controller = NSEAllIndexesController()
-    nse_all_indexes_controller.scrape_all_indices_from_list()
-    # Example usage:
+

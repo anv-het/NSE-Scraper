@@ -17,6 +17,7 @@ from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Utils.response import create_success_response, create_error_response, create_success_response_n
 from Utils.utilities_functions import clean_numeric_value
+from Utils.data_formatter import NSEDataFormatter
 from Services.get_nse_cookies import get_nse_cookies
 
 logger = get_logger(__name__)
@@ -72,33 +73,6 @@ class NSEPriceBandHittersController:
             logger.error(f"Request failed: {str(e)}")
             return None
 
-    def _save_to_database(self, data: Dict[str, Any]) -> bool:
-        """Save price band hitters data to MongoDB."""
-        try:
-            if not data:
-                logger.warning("No data to save to database")
-                return False
-                
-            # Add metadata
-            save_data = {
-                **data,
-                "timestamp": datetime.now(),
-                "data_type": "price_band_hitters"
-            }
-            
-            # Save to MongoDB
-            result = self.db.save_to_collection("price_band_hitters", save_data)
-            
-            if result:
-                logger.info("Price band hitters data saved to MongoDB successfully")
-                return True
-            else:
-                logger.error("Failed to save price band hitters data to MongoDB")
-                return False
-                
-        except Exception as e:
-            logger.error(f"Error saving price band hitters data to database: {str(e)}")
-            return False
 
     def scrap_price_band_hitters(self) -> Dict[str, Any]:
         """Scrapes price band hitters data from the NSE API."""
@@ -125,40 +99,35 @@ class NSEPriceBandHittersController:
                 logger.info("No price band hitters found.")
                 return create_success_response("No price band hitters found.", data={})
 
-            # Save to MongoDB
-            save_result = self._save_to_database({
+            data={
                 "upper": upper_band_data,
                 "lower": lower_band_data,
                 "both": both_band_data,
                 "count": count_data
-            })
+            }
+
+
+            # Format the data
+            formatted_data = NSEDataFormatter.format_price_band_hitters(data)
+            if not formatted_data:
+                logger.error("No valid data to save after formatting.")
+                return create_error_response("No valid data to save after formatting.")
             
-            if not save_result:
-                logger.warning("Failed to save price band hitters data to MongoDB, but returning API data")
-
-            # Return proper success response
-            return create_success_response_n(
-                message="Fetched price band hitters successfully.",
-                data={
-                    "upper": upper_band_data,
-                    "lower": lower_band_data,
-                    "both": both_band_data,
-                    "count": count_data
-                }
-            )
-
+            # Save to MongoDB
+            if self.db.save_data(formatted_data, 'nse_price_band_hitters'):
+                logger.info("Data saved to MongoDB successfully")
+            else:
+                logger.error("Failed to save data to MongoDB")
+                return create_error_response("Failed to save data to MongoDB.")
+            
+            return create_success_response_n(formatted_data, "Price band hitters data fetched successfully.")
+        
         except Exception as e:
-            logger.error(f"Error while scraping price band hitters: {str(e)}")
-            return create_error_response(f"Error while scraping price band hitters: {str(e)}")
+            logger.error(f"Error scraping price band hitters: {str(e)}")
+            return create_error_response(str(e), "Failed to scrape price band hitters data.")
 
 
-# if __name__ == "__main__":
-#     controller = NSEPriceBandHittersController()
-#     result = controller.scrap_price_band_hitters()
-#     if result:
-#         print(result)
-#     else:
-#         print("Failed to fetch price band hitters data.")
+
 
         
 

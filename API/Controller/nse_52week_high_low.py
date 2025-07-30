@@ -107,9 +107,6 @@ class NSE52WeekHighLowController:
                 "52-week-low": low_data.get("data", [])
             }
 
-            # Optional: Print out the data for debugging
-            # print("Data:", data)
-
             # Format the data before saving (ensure data is in expected format)
             formatted_data = NSEDataFormatter.format_52_week_high_low(data)
 
@@ -124,7 +121,4 @@ class NSE52WeekHighLowController:
 
 
 
-if __name__ == "__main__":
-    controller = NSE52WeekHighLowController()
-    asyncio.run(controller.scrape_52_week_high_low())
-    print("52-week high and low data refreshed successfully.")
+
