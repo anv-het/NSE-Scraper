@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import random
 from datetime import datetime
 from typing import Dict, Optional
 
@@ -8,16 +9,13 @@ import requests
 import undetected_chromedriver as uc
 from Utils.logger import get_logger
 from Utils.config_reader import configure
-from Constant.general import NSE_GET_COOKIES_HEADERS, REQUIRED_NSE_COOKIES
+from Constant.general import NSE_GET_COOKIES_HEADERS, REQUIRED_NSE_COOKIES, NSE_COOKIE_ROTATION_URLS
 
-# Prevent destructor re-quit errors on Windows
 uc.Chrome.__del__ = lambda self: None
-
 logger = get_logger(__name__)
 
 class NSECookieService:
     def __init__(self):
-        self.cookies_url = configure.get('NSE', 'NSE_GET_COOKIES_URL')
         self.base_url = configure.get('NSE', 'BASE_URL')
         self.cookies_file = configure.get('NSE', 'COOKIES_FILE')
         self.session = requests.Session()
@@ -35,9 +33,12 @@ class NSECookieService:
 
     def get_nse_cookies(self) -> Optional[Dict[str, str]]:
         try:
-            logger.info("Getting fresh NSE cookies...")
+            # ✅ Pick random URL
+            target_url = random.choice(NSE_COOKIE_ROTATION_URLS)
+            logger.info(f"Getting fresh NSE cookies using: {target_url}")
+            
             driver = self.get_driver()
-            driver.get(self.cookies_url)
+            driver.get(target_url)
             time.sleep(10)  # Allow cookies to be set
             cookies = driver.get_cookies()
             driver.quit()

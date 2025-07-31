@@ -1627,3 +1627,23 @@
 2025-07-31 10:43:48 - Services.get_nse_cookies - INFO - Loaded cookies from file
 2025-07-31 10:43:48 - Services.get_nse_cookies - INFO - Cookies validation successful
 2025-07-31 10:43:48 - Services.get_nse_cookies - INFO - Cookies validation successful
+2025-07-31 12:00:35 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:00:35 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/all-reports#cr_equity_archives
+2025-07-31 12:00:35 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 12:00:59 - Services.get_nse_cookies - INFO - All required cookies collected
+2025-07-31 12:00:59 - Services.get_nse_cookies - INFO - Cookies saved to nse_cookies.json
+2025-07-31 12:01:45 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:01:45 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/all-reports#cr_equity_archives
+2025-07-31 12:01:45 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 12:01:53 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:01:53 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/market-data/52-week-high-equity-market
+2025-07-31 12:01:53 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 12:01:56 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:01:56 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/market-data/top-gainers-losers
+2025-07-31 12:01:56 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 12:01:59 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:01:59 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/market-data/52-week-high-equity-market
+2025-07-31 12:01:59 - Services.get_nse_cookies - INFO - Launching undetected Chrome...
+2025-07-31 12:02:11 - Services.get_nse_cookies - INFO - Logger 'Services.get_nse_cookies' initialized successfully
+2025-07-31 12:02:11 - Services.get_nse_cookies - INFO - Getting fresh NSE cookies using: https://www.nseindia.com/market-data/top-gainers-losers
+2025-07-31 12:02:11 - Services.get_nse_cookies - INFO - Launching undetected Chrome...

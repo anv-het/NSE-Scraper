@@ -18,6 +18,8 @@ from Utils.logger import get_logger
 from Utils.db import DatabaseManager
 from Services.get_nse_cookies import get_nse_cookies
 from Constant.general import CRON_INTERVALS
+from Utils.utilities_functions import is_market_open
+
 
 # Import controllers
 from API.Controller.advances_declines_unchanged import NSEAdvancesDeclinesUnchangedController
@@ -85,56 +87,69 @@ class CronJobManager:
         Run all cron jobs based on the defined intervals
         """
         try:
-            schedule.every(CRON_INTERVALS['ADVANCES_DECLINES_UNCHANGED']).minutes.do(
-                self.run_advances_declines_unchanged
-            )
-            schedule.every(CRON_INTERVALS['FORTHCOMING_LISTINGS']).minutes.do(
-                self.run_forthcoming_listings
-            )
-            schedule.every(CRON_INTERVALS['LARGE_DEALS']).minutes.do(
-                self.run_large_deals
-            )
-            schedule.every(CRON_INTERVALS['MOST_ACTIVE_CONTRACTS']).minutes.do(
-                self.run_most_active_contracts
-            )
-            schedule.every(CRON_INTERVALS['MOST_ACTIVE_EQUITIES']).minutes.do(
-                self.run_most_active_equities
-            )
-            schedule.every(CRON_INTERVALS['MOST_ACTIVE_UNDERLYING']).minutes.do(
-                self.run_most_active_underlying
-            )
-            schedule.every(CRON_INTERVALS['NEW_LISTINGS']).minutes.do(
-                self.run_new_listings
-            )
-            schedule.every(CRON_INTERVALS['NSE_52_WEEK_HIGH_LOW']).minutes.do(
-                self.run_nse_52_week_high_low
-            )
-            schedule.every(CRON_INTERVALS['NSE_ALL_INDEXES']).minutes.do(
-                self.run_nse_all_indexes
-            )
-            schedule.every(CRON_INTERVALS['PRICE_BAND_HITTERS']).minutes.do(
-                self.run_price_band_hitters
-            )
-            schedule.every(CRON_INTERVALS['RECENT_LISTINGS']).minutes.do(
-                self.run_recent_listings
-            )
-            schedule.every(CRON_INTERVALS['SPECIAL_PREOPEN_LISTINGS']).minutes.do(
-                self.run_special_preopen_listings
-            )
-            schedule.every(CRON_INTERVALS['TOP_GAINERS_LOOSERS']).minutes.do(
-                self.run_top_gainers_loosers
-            )
-
-            # Refresh cookies periodically
-            schedule.every(CRON_INTERVALS['COOKIE_REFRESH']).minutes.do(self.refresh_cookies)
-
+            # Check if the market is open before scheduling jobs
+            if not is_market_open():
+                logger.info("Market is closed. Cron jobs will not run.")
+                return
+            # Schedule cron jobs based on intervals
+                
+                schedule.every(CRON_INTERVALS['ADVANCES_DECLINES_UNCHANGED']).minutes.do(
+                    self.run_advances_declines_unchanged
+                )
+                schedule.every(CRON_INTERVALS['FORTHCOMING_LISTINGS']).minutes.do(
+                    self.run_forthcoming_listings
+                )
+                schedule.every(CRON_INTERVALS['LARGE_DEALS']).minutes.do(
+                    self.run_large_deals
+                )
+                schedule.every(CRON_INTERVALS['MOST_ACTIVE_CONTRACTS']).minutes.do(
+                    self.run_most_active_contracts
+                )
+                schedule.every(CRON_INTERVALS['MOST_ACTIVE_EQUITIES']).minutes.do(
+                    self.run_most_active_equities
+                )
+                schedule.every(CRON_INTERVALS['MOST_ACTIVE_UNDERLYING']).minutes.do(
+                    self.run_most_active_underlying
+                )
+                schedule.every(CRON_INTERVALS['NEW_LISTINGS']).minutes.do(
+                    self.run_new_listings
+                )
+                schedule.every(CRON_INTERVALS['NSE_52_WEEK_HIGH_LOW']).minutes.do(
+                    self.run_nse_52_week_high_low
+                )
+                schedule.every(CRON_INTERVALS['NSE_ALL_INDEXES']).minutes.do(
+                    self.run_nse_all_indexes
+                )
+                schedule.every(CRON_INTERVALS['PRICE_BAND_HITTERS']).minutes.do(
+                    self.run_price_band_hitters
+                )
+                schedule.every(CRON_INTERVALS['RECENT_LISTINGS']).minutes.do(
+                    self.run_recent_listings
+                )
+                schedule.every(CRON_INTERVALS['SPECIAL_PREOPEN_LISTINGS']).minutes.do(
+                    self.run_special_preopen_listings
+                )
+                schedule.every(CRON_INTERVALS['TOP_GAINERS_LOOSERS']).minutes.do(
+                    self.run_top_gainers_loosers
+                )
+                schedule.every(CRON_INTERVALS['COOKIE_REFRESH']).minutes.do(
+                    self.refresh_cookies
+                )
+            
+            else:
+                logger.info("Market is closed. Cron jobs will not run.")
+            
         except Exception as e:
             logger.error(f"Error in run_cron_jobs: {e}")
             raise
+        
+        # Start the scheduler
         while True:
             schedule.run_pending()
             time.sleep(1)
     
+
+
     def refresh_cookies(self):
         """
         Refresh NSE cookies
@@ -145,6 +160,8 @@ class CronJobManager:
         except Exception as e:
             logger.error(f"Error refreshing NSE cookies: {e}")
             raise
+
+
     
     def run_advances_declines_unchanged(self):
         """
@@ -301,5 +318,6 @@ class CronJobManager:
         except Exception as e:
             logger.error(f"Error in run_top_gainers_loosers: {e}")
             raise
+
 
 

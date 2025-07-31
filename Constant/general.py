@@ -27,13 +27,21 @@ SLOW_REFRESH_INTERVAL = 15
 # NSE API endpoints
 NSE_BASE_URL = "https://www.nseindia.com"
 
+# NSE cookie rotation URLs
+NSE_COOKIE_ROTATION_URLS = [
+    "https://www.nseindia.com/all-reports#cr_equity_archives",
+    "https://www.nseindia.com/market-data/top-gainers-losers",
+    "https://www.nseindia.com/market-data/52-week-high-equity-market",
+    "https://www.nseindia.com/option-chain"
+]
+
+
 # Default headers for NSE requests
 NSE_GET_COOKIES_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
     'Accept': 'application/json, text/plain, */*',
     'Accept-Language': 'en-US,en;q=0.9',
     'Accept-Encoding': 'gzip, deflate, br',
-    "Referer": "https://www.nseindia.com/all-reports#cr_equity_archives",
     'Connection': 'keep-alive',
     'Upgrade-Insecure-Requests': '1'
 }
@@ -267,20 +275,20 @@ MAX_VOLUME = 999999999999
 # NOTE: Set to 1 minute for testing - change to production values after testing
 
 CRON_INTERVALS = {
-    "ADVANCES_DECLINES_UNCHANGED": 1,  # 1 minute for testing, DEFAULT: 5
-    "FORTHCOMING_LISTINGS": 1,         # 1 minute for testing, DEFAULT: 5
-    "LARGE_DEALS": 1,                  # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_CONTRACTS": 1,        # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_EQUITIES": 1,         # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_UNDERLYING": 1,       # 1 minute for testing, DEFAULT: 5
-    "NEW_LISTINGS": 1,                 # 1 minute for testing, DEFAULT: 5
-    "NSE_52_WEEK_HIGH_LOW": 1,         # 1 minute for testing, DEFAULT: 5
-    "NSE_ALL_INDEXES": 1,              # 1 minute for testing, DEFAULT: 5
-    "PRICE_BAND_HITTERS": 1,           # 1 minute for testing, DEFAULT: 5
-    "RECENT_LISTINGS": 1,              # 1 minute for testing, DEFAULT: 5
-    "SPECIAL_PREOPEN_LISTINGS": 1,     # 1 minute for testing, DEFAULT: 5
-    "TOP_GAINERS_LOOSERS": 1,          # 1 minute for testing, DEFAULT: 5
-    "COOKIE_REFRESH": 1,              # This we can hit randomly to refresh cookies, between 1 to 5 minutes
+    "ADVANCES_DECLINES_UNCHANGED": 5,  # 1 minute for testing, DEFAULT: 5
+    "FORTHCOMING_LISTINGS": 5,         # 1 minute for testing, DEFAULT: 5
+    "LARGE_DEALS": 5,                  # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_CONTRACTS": 5,        # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_EQUITIES": 5,         # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_UNDERLYING": 5,       # 1 minute for testing, DEFAULT: 5
+    "NEW_LISTINGS": 5,                 # 1 minute for testing, DEFAULT: 5
+    "NSE_52_WEEK_HIGH_LOW": 5,         # 1 minute for testing, DEFAULT: 5
+    "NSE_ALL_INDEXES": 5,              # 1 minute for testing, DEFAULT: 5
+    "PRICE_BAND_HITTERS": 5,           # 1 minute for testing, DEFAULT: 5
+    "RECENT_LISTINGS": 5,              # 1 minute for testing, DEFAULT: 5
+    "SPECIAL_PREOPEN_LISTINGS": 5,     # 1 minute for testing, DEFAULT: 5
+    "TOP_GAINERS_LOOSERS": 5,          # 1 minute for testing, DEFAULT: 5
+    "COOKIE_REFRESH": 4,               # 1 minute for testing, DEFAULT: 60
 }
 
 
