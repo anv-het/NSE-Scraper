@@ -35,7 +35,6 @@ def drop_collections():
         'nse_52_week_high_low',
         'nse_52_week_high_low_data',
         'indices_data',
-        #we have to delete old collection anme also 
         'advances_declines',
         'gainers_losers',
         'large_deals',
@@ -48,15 +47,22 @@ def drop_collections():
         'week_52_data',
         'price_band_hitters',
         'stock_events',
-        'most_active_securities'
-        ]
+        'most_active_securities',
+        'nse_special_preopen_listings',
+        'nse_stockwise_event',
+        'nse_recent_listings',
+        'nse_all_indexes',
+
+    ]
 
     for coll_name in collections_to_drop:
         if coll_name in db.list_collection_names():
             db[coll_name].drop()
-            print(f"Dropped collection: {coll_name}")
+            print(f"Collection '{coll_name}' dropped.")
         else:
-            print(f"Collection not found: {coll_name}")
+            print(f"Collection '{coll_name}' does not exist, skipping.")
+           
 
 if __name__ == '__main__':
     drop_collections()
+

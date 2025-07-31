@@ -8,7 +8,7 @@ from API.Controller.stockwise_event_data import StockwiseEventDataController
 
 def test_scrape_stockwise_event_data():
     controller = StockwiseEventDataController()
-    print("Running test for stockwise event data scraping")
+    # print("Running test for stockwise event data scraping")
 
     # Example symbol to test
     symbol = "ITC"
@@ -16,8 +16,8 @@ def test_scrape_stockwise_event_data():
     # Call the method to scrape stockwise event data
     result = controller.scrape_stockwise_event_data(symbol)
 
-    # Print the result for debugging
-    # print("Result:", result)
+    # # print the result for debugging
+    # # print("Result:", result)
 if __name__ == "__main__":
     test_scrape_stockwise_event_data()
-    print("✅ Stockwise event data scraping test passed!")
+    # print("✅ Stockwise event data scraping test passed!")

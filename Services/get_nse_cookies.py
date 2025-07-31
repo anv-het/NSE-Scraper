@@ -127,5 +127,5 @@ def refresh_nse_cookies() -> Optional[Dict[str, str]]:
 if __name__ == "__main__":
     logger.info("Running NSECookieService tests")
     cookies = get_nse_cookies()
-    # print("Final cookies:", cookies)
-    print("Validation result:", cookie_service.validate_cookies(cookies or {}))
+    # # print("Final cookies:", cookies)
+    # print("Validation result:", cookie_service.validate_cookies(cookies or {}))

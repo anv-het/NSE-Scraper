@@ -74,7 +74,7 @@ class NSEPriceBandHittersController:
             return None
 
 
-    def scrap_price_band_hitters(self) -> Dict[str, Any]:
+    async def scrap_price_band_hitters(self) -> Dict[str, Any]:
         """Scrapes price band hitters data from the NSE API."""
         try:
             url = self.band_hitter_api_url

@@ -16,9 +16,8 @@ from Utils.cookie_headers import load_nse_headers
 
 from Constant.http import HTTP_STATUS
 from Constant.general import (
-    HEADERS_URL_EVENT_DATA,
-    DATA_RETENTION_DAYS
-)
+    HEADERS_URL_EVENT_DATA
+    )
 from Services.get_nse_cookies import get_nse_cookies
 
 
@@ -69,8 +68,12 @@ class StockwiseEventDataController:
         except Exception as e:
             logger.error(f"Error making request to {url}: {str(e)}")
             return None
+    
+    #for the current implementation, we are ussing static symbol as a TCS
 
-    def scrape_stockwise_event_data(self, symbol: str) -> Optional[Dict[str, Any]]:
+    symbol = "TCS"
+
+    async def scrape_stockwise_event_data(self, symbol: str) -> Optional[Dict[str, Any]]:
         """Scrapes stockwise event data from the NSE API."""
         try:
             url = self.event_data_api_url.format(symbol=symbol)

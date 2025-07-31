@@ -142,7 +142,7 @@ class NSELogger:
                     
                     if (current_time - file_time).days > days:
                         os.remove(file_path)
-                        print(f"Removed old log file: {filename}")
+                        # print(f"Removed old log file: {filename}")
                         
         except Exception as e:
             print(f"Error cleaning up old logs: {str(e)}")

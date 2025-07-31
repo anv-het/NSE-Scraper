@@ -148,7 +148,7 @@ class NSEDataFormatter:
             formatted.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted)} forthcoming listings records")
-        # print("Formatted forthcoming listings data:", formatted[:3])  # Debug print
+        # # print("Formatted forthcoming listings data:", formatted[:3])  # Debug # print
         return formatted
 
 
@@ -191,8 +191,6 @@ class NSEDataFormatter:
                 data_items = payload.get("data", [])
                 if not isinstance(data_items, list) or not data_items:
                     continue
-
-                print(f"🔍 Processing {data_type} | sort_by={sort_by} | Records={len(data_items)}")
 
                 for record in data_items:
                     formatted_record = {
@@ -337,7 +335,7 @@ class NSEDataFormatter:
                 formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} 52-week high/low records")
-        # print("Formatted 52-week high/low data:", formatted_data[:3])  # Debug print
+        # # print("Formatted 52-week high/low data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
@@ -374,7 +372,7 @@ class NSEDataFormatter:
             formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} new listings records")
-        # print("Formatted new listings data:", formatted_data[:3])  # Debug print
+        # # print("Formatted new listings data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
@@ -397,7 +395,7 @@ class NSEDataFormatter:
             }
             formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} recent listings records")
-        # print("Formatted recent listings data:", formatted_data[:3])  # Debug print
+        # # print("Formatted recent listings data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
@@ -444,7 +442,7 @@ class NSEDataFormatter:
             formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} special pre-open listings records")
-        # print("Formatted special pre-open listings data:", formatted_data[:3])  # Debug
+        # # print("Formatted special pre-open listings data:", formatted_data[:3])  # Debug
         return formatted_data
     
 
@@ -498,7 +496,7 @@ class NSEDataFormatter:
                 formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} all indices records")
-        # print("Formatted all indices data:", formatted_data[:3])  # Debug print
+        # # print("Formatted all indices data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
 
@@ -536,7 +534,7 @@ class NSEDataFormatter:
                     }
                     formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} price band hitters records")
-        # print("Formatted price band hitters data:", formatted_data)  # Debug print
+        # # print("Formatted price band hitters data:", formatted_data)  # Debug # print
         return formatted_data
 
     @staticmethod
@@ -579,7 +577,7 @@ class NSEDataFormatter:
                     formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} all indices records from list")
-        # print("Formatted all indices data from list:", formatted_data)  # Debug
+        # # print("Formatted all indices data from list:", formatted_data)  # Debug
         return formatted_data
 
     @staticmethod
@@ -679,7 +677,7 @@ class NSEDataFormatter:
                 "timestamp": current_time
             })
         logger.info(f"Formatted {len(formatted_data)} stockwise market event records")
-        # print("Formatted stockwise market event data:", formatted_data[:3])  # Debug
+        # # print("Formatted stockwise market event data:", formatted_data[:3])  # Debug
         return formatted_data
 
 

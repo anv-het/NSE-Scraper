@@ -13,16 +13,16 @@ from API.Controller.nse_price_band_hitter import NSEPriceBandHittersController
 def test_get_price_band_hitter_full():
     # Create an instance of the controller
     controller = NSEPriceBandHittersController()
-    print("Running test for NSE Price Band Hitter Full data scraping")
+    # print("Running test for NSE Price Band Hitter Full data scraping")
 
     # Call the method to get the price band hitter full data
     result = controller.scrap_price_band_hitters()
 
-    # Print the result for debugging
-    # print("Result:", result)
+    # # print the result for debugging
+    # # print("Result:", result)
 
 if __name__ == "__main__":
     test_get_price_band_hitter_full()
-    print("✅ NSE Price Band Hitter Full data scraping test passed!")
+    # print("✅ NSE Price Band Hitter Full data scraping test passed!")
 
 

@@ -71,7 +71,7 @@ class NSELargeDealsController:
             logger.error(f"Error making request to {url}: {str(e)}")
             return None
 
-    def scrap_large_deals(self) -> Dict[str, Any]:
+    async def scrap_large_deals(self) -> Dict[str, Any]:
         try:
             data = self._make_request(self.large_deals_api_url)
             if not data:

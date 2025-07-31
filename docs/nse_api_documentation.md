@@ -366,9 +366,9 @@ response = requests.get(url, headers=headers, cookies=cookies)
 
 if response.status_code == 200:
     data = response.json()
-    print(f"Found {len(data['NIFTY']['data'])} gainers")
+    # print(f"Found {len(data['NIFTY']['data'])} gainers")
 else:
-    print(f"Error: {response.status_code}")
+    # print(f"Error: {response.status_code}")
 ```
 
 ### JavaScript Fetch Example

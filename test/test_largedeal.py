@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from API.Controller.large_deal import NSELargeDealsController
 
 def test_scrape_large_deals():
-    print("🔍 Running test for NSE Large Deals scraping")
+    # print("🔍 Running test for NSE Large Deals scraping")
     
     controller = NSELargeDealsController()
     result = controller.scrap_large_deals()
@@ -29,7 +29,7 @@ def test_scrape_large_deals():
             for key in expected_keys:
                 assert key in record, f"❌ Missing key: {key} in data record"
 
-    print("✅ Large Deals test passed!")
+    # print("✅ Large Deals test passed!")
 
 if __name__ == "__main__":
     test_scrape_large_deals()

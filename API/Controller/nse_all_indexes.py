@@ -11,8 +11,7 @@ from Services.get_nse_cookies import get_nse_cookies
 
 from Constant.general import (
     ALL_INDICES_LIST,
-    HEADERS_URL_ALL_INDEXES,
-    DATA_RETENTION_DAYS
+    HEADERS_URL_ALL_INDEXES
 )
 from Utils.config_reader import configure
 from Utils.cookie_headers import load_nse_headers
@@ -65,7 +64,7 @@ class NSEAllIndexesController:
             logger.error(f"Request failed: {str(e)}")
             return None
 
-    def scrape_all_indices_from_list(self) -> Dict:
+    async def scrape_all_indices_from_list(self) -> Dict:
         """Scrape all NSE indices and return structured data"""
         try:
             all_processed_data = []

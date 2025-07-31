@@ -1255,3 +1255,113 @@
 2025-07-31 01:40:00 - Utils.db - INFO - Connected to MongoDB: mongodb://localhost:27017, Database: WEB_SCRAPING
 2025-07-31 01:40:01 - Utils.db - INFO - Deleted 1 old records for symbols {'ITC'} in nse_stockwise_event.
 2025-07-31 01:40:01 - Utils.db - INFO - Inserted 1 new documents into nse_stockwise_event.
+2025-07-31 10:37:08 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:37:08 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:37:08 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:37:08 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:37:27 - Utils.db - INFO - Cleaning old data from nse_advances_declines collection 2687 records to delete old data.
+2025-07-31 10:37:27 - Utils.db - INFO - Inserted 2687 documents into nse_advances_declines.
+2025-07-31 10:37:49 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:37:50 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:37:50 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:37:50 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:37:50 - Utils.db - INFO - Cleaning old data from nse_week_52_data collection 81 records to delete old data.
+2025-07-31 10:37:50 - Utils.db - INFO - Inserted 81 documents into nse_week_52_data.
+2025-07-31 10:37:58 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:37:58 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:37:58 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:37:58 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:38:06 - Utils.db - INFO - Cleaning old data from nse_all_indexes collection 584 records to delete old data.
+2025-07-31 10:38:06 - Utils.db - INFO - Inserted 584 documents into nse_all_indexes.
+2025-07-31 10:38:16 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:38:16 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:38:16 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:38:16 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:38:26 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:38:26 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:38:26 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:38:26 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:38:26 - Utils.db - INFO - Cleaning old data from nse_large_deals collection 229 records to delete old data.
+2025-07-31 10:38:26 - Utils.db - INFO - Inserted 229 documents into nse_large_deals.
+2025-07-31 10:38:34 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:38:35 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:38:35 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:38:35 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:38:39 - Utils.db - INFO - Cleaning old data from nse_most_active_contracts collection 348 records to delete old data.
+2025-07-31 10:38:39 - Utils.db - INFO - Inserted 348 documents into nse_most_active_contracts.
+2025-07-31 10:38:50 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:38:51 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:38:51 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:38:51 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:38:51 - Utils.db - INFO - Cleaning old data from nse_most_active_equities collection 185 records to delete old data.
+2025-07-31 10:38:51 - Utils.db - INFO - Inserted 185 documents into nse_most_active_equities.
+2025-07-31 10:38:59 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:38:59 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:38:59 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:38:59 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:39:00 - Utils.db - INFO - Cleaning old data from nse_most_active_underlying collection 229 records to delete old data.
+2025-07-31 10:39:00 - Utils.db - INFO - Inserted 229 documents into nse_most_active_underlying.
+2025-07-31 10:39:08 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:39:08 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:39:08 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:39:08 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:39:09 - Utils.db - INFO - Cleaning old data from nse_new_listings collection 1 records to delete old data.
+2025-07-31 10:39:09 - Utils.db - INFO - Inserted 1 documents into nse_new_listings.
+2025-07-31 10:39:17 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:39:18 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:39:18 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:39:18 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:39:52 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:39:53 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:39:53 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:39:53 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:41:04 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:41:05 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:41:05 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:41:05 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:41:25 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:41:25 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:41:26 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:41:26 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:42:31 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:42:32 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:42:32 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:42:32 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:42:32 - Utils.db - INFO - Cleaning old data from nse_gainers_losers collection 227 records to delete old data.
+2025-07-31 10:42:32 - Utils.db - INFO - Inserted 227 documents into nse_gainers_losers.
+2025-07-31 10:42:39 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:42:40 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:42:40 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:42:40 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:42:40 - Utils.db - INFO - Cleaning old data from nse_gainers_losers collection 227 records to delete old data.
+2025-07-31 10:42:40 - Utils.db - INFO - Inserted 227 documents into nse_gainers_losers.
+2025-07-31 10:42:55 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:42:55 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:42:55 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:42:55 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:42:56 - Utils.db - INFO - Cleaning old data from nse_price_band_hitters collection 180 records to delete old data.
+2025-07-31 10:42:56 - Utils.db - INFO - Inserted 180 documents into nse_price_band_hitters.
+2025-07-31 10:43:06 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:43:07 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:43:07 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:43:07 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:43:07 - Utils.db - INFO - Cleaning old data from nse_recent_listings collection 50 records to delete old data.
+2025-07-31 10:43:07 - Utils.db - INFO - Inserted 50 documents into nse_recent_listings.
+2025-07-31 10:43:19 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:43:19 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:43:19 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:43:19 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:43:20 - Utils.db - INFO - Cleaning old data from nse_special_preopen_listings collection 1 records to delete old data.
+2025-07-31 10:43:20 - Utils.db - INFO - Inserted 1 documents into nse_special_preopen_listings.
+2025-07-31 10:43:32 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:43:32 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:43:32 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:43:32 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:43:34 - Utils.db - INFO - Deleted 0 old records for symbols {'ITC'} in nse_stockwise_event.
+2025-07-31 10:43:34 - Utils.db - INFO - Inserted 1 new documents into nse_stockwise_event.
+2025-07-31 10:43:47 - Utils.db - INFO - Logger 'Utils.db' initialized successfully
+2025-07-31 10:43:48 - Utils.db - INFO - Connecting to MongoDB without authentication
+2025-07-31 10:43:48 - Utils.db - INFO - MongoDB indexes created successfully
+2025-07-31 10:43:48 - Utils.db - INFO - Connected to MongoDB: mongodb://sa:963852@192.168.102.120:27017/, Database: WEB_SCRAPING
+2025-07-31 10:43:48 - Utils.db - INFO - Cleaning old data from nse_gainers_losers collection 227 records to delete old data.
+2025-07-31 10:43:48 - Utils.db - INFO - Inserted 227 documents into nse_gainers_losers.

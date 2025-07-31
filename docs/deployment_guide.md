@@ -246,13 +246,13 @@ import sys
 try:
     response = requests.get('http://localhost:8000/health')
     if response.status_code == 200:
-        print("✅ Application healthy")
+        # print("✅ Application healthy")
         sys.exit(0)
     else:
-        print("❌ Application unhealthy")
+        # print("❌ Application unhealthy")
         sys.exit(1)
 except Exception as e:
-    print(f"❌ Health check failed: {e}")
+    # print(f"❌ Health check failed: {e}")
     sys.exit(1)
 ```
 
@@ -324,7 +324,7 @@ python --version
 pip list
 
 # Check configuration
-python -c "from Utils.config_reader import configure; print('Config loaded')"
+python -c "from Utils.config_reader import configure; # print('Config loaded')"
 ```
 
 #### 4. High Memory Usage

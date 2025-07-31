@@ -77,7 +77,7 @@ class NSEForthcomingListingsController:
         except requests.RequestException as e:
             logger.error(f"Request error: {str(e)}")
             return None
-        
+
     async def scrap_forthcoming_listings(self) -> Dict[str, Any]:
         try:
             url = self.forthcoming_listings_api_url

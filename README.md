@@ -404,7 +404,7 @@ curl -H "User-Agent: Mozilla/5.0" https://www.nseindia.com/api/allIndices
 **Application Won't Start**
 ```bash
 # Check configuration
-python -c "from Utils.config_reader import configure; print('Config OK')"
+python -c "from Utils.config_reader import configure; # print('Config OK')"
 
 # Verify dependencies
 pip check

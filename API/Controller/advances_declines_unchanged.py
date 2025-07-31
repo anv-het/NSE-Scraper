@@ -74,7 +74,7 @@ class NSEAdvancesDeclinesUnchangedController:
             logger.error(f"Request failed: {str(e)}")
             return None
 
-    def scrap_advance_decline_unchanged(self) -> Dict[str, Any]:
+    async def scrap_advance_decline_unchanged(self) -> Dict[str, Any]:
         """Scrapes and formats advance, decline, and unchanged data from NSE."""
         try:
             advance_data = self.make_request(self.advance_api_url)
