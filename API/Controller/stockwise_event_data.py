@@ -71,11 +71,12 @@ class StockwiseEventDataController:
     
     #for the current implementation, we are ussing static symbol as a TCS
 
-    symbol = "TCS"
+    # symbol = "TCS"
 
     async def scrape_stockwise_event_data(self, symbol: str) -> Optional[Dict[str, Any]]:
         """Scrapes stockwise event data from the NSE API."""
         try:
+            symbol = symbol.upper()
             url = self.event_data_api_url.format(symbol=symbol)
             data = self._make_request(url)
 
@@ -99,7 +100,7 @@ class StockwiseEventDataController:
                 return None
 
             logger.info(f"Data for {symbol} saved successfully.")
-            return create_success_response_n(formated_data, "Stockwise event data fetched successfully.")
+            return formated_data
 
         except Exception as e:
             logger.error(f"Error scraping stockwise event data for {symbol}: {str(e)}")
