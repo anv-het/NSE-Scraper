@@ -3,6 +3,7 @@ NSE Data Formatter Utility
 Formats raw NSE API responses into MongoDB-ready documents according to schema
 """
 
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional, Any
 
@@ -130,7 +131,12 @@ class NSEDataFormatter:
             logger.info(f"Fetched {len(db_data)} masterdata records from DB in {(db_fetch_end - db_fetch_start).total_seconds():.2f}s")
 
             # Step 4: Index DB data for fast lookup
-            masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+            masterdata_map = defaultdict(list)
+            for doc in db_data:
+                name = doc.get("Name", "").upper()
+                if name:
+                    masterdata_map[name].append(doc)
+
             masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
             # Step 5: Merge and format data
@@ -138,11 +144,37 @@ class NSEDataFormatter:
                 symbol = item.get("symbol", "").strip().upper()
                 identifier = item.get("identifier", "").strip().upper()
 
-                masterdata_info = (
-                    masterdata_map.get(symbol)
-                    or masterdata_identifier_map.get(identifier)
-                    or {}
-                )
+                matched_docs = masterdata_map.get(symbol, [])
+                masterdata_info = {}
+
+                # Inline selection logic
+                if matched_docs:
+                    # Prefer NSECM + EQ
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then any NSECM
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then BSECM + A
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then any BSECM
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM":
+                                        masterdata_info = doc
+                                        break
+                else:
+                    # Fallback: match by identifier if symbol not found
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                 formatted = {
                     "identifier": item.get("identifier"),
@@ -154,11 +186,9 @@ class NSEDataFormatter:
                     "base_price": item.get("basePrice"),
                     "previous_close": item.get("previousClose"),
                     "last_price": item.get("lastPrice"),
-                    # we have to clean the float values via using the upper define function like _safe_float
                     "total_traded_volume": NSEDataFormatter._safe_float(item.get("totalTradedVolume")),
                     "total_traded_value": NSEDataFormatter._safe_float(item.get("totalTradedValue")),
                     "issued_cap": NSEDataFormatter._safe_float(item.get("issuedCap")),
-                    "total_traded_value": NSEDataFormatter._safe_float(item.get("totalTradedValue")),
                     "total_market_cap": NSEDataFormatter._safe_float(item.get("totalMarketCap")),
 
                     # New fields from masterdata
@@ -180,6 +210,7 @@ class NSEDataFormatter:
             logger.error(f"Error formatting advance/decline/unchanged data: {str(e)}")
             return []
 
+    
     @staticmethod
     def format_forthcoming_listings(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
