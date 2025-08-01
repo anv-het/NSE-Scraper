@@ -26,14 +26,25 @@ class NSEDataFormatter:
 
     @staticmethod
     def parse_timestamp(timestamp_str: str) -> datetime:
-        try:
-            if not timestamp_str:
-                dt = datetime.utcnow()
-            else:
-                dt = datetime.fromisoformat(timestamp_str)
-            return dt.astimezone(NSEDataFormatter.IST)
-        except Exception:
-            return datetime.utcnow().astimezone(NSEDataFormatter.IST)
+        # Always return current Indian time, ignore input
+        return datetime.now()
+   
+    @staticmethod
+    def get_current_indian_time(timestamp_str: str) -> datetime:
+        # Get current local time without tz info
+        now = datetime.now()
+
+        # Try to detect if local time is IST by checking offset from UTC
+        local_utc_offset = (now - datetime.utcnow()).total_seconds() / 3600  # in hours
+
+        if abs(local_utc_offset - 5.5) < 0.1:  # Close enough to IST offset +5:30
+            # Assume system time is IST, return naive local time or make it aware as IST
+            # Return aware datetime with IST timezone
+            return now.replace(tzinfo=NSEDataFormatter.IST)
+        else:
+            # System time is not IST, so get UTC and convert to IST explicitly
+            utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)
+            return utc_now.astimezone(NSEDataFormatter.IST)
 
     @staticmethod
     def _safe_float(value: Any) -> Optional[float]:

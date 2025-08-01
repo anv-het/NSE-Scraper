@@ -40,42 +40,7 @@ from API.Controller.top_gainers_loosers import NSETopGainersloosersController
 logger = get_logger(__name__)
 
 
-"""
-this class manages the cron jobs for scraping NSE data and saving it to MongoDB.
 
-we have to run cron job evry someof the time that time w can set into generate.py
-
-like :
-CRON_INTERVALS = {
-    "ADVANCES_DECLINES_UNCHANGED": 1,  # 1 minute for testing, DEFAULT: 5
-    "FORTHCOMING_LISTINGS": 1,         # 1 minute for testing, DEFAULT: 5
-    "LARGE_DEALS": 1,                  # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_CONTRACTS": 1,        # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_EQUITIES": 1,         # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_UNDERLYING": 1,       # 1 minute for testing, DEFAULT: 5
-    "NEW_LISTINGS": 1,                 # 1 minute for testing, DEFAULT: 5
-    "NSE_52_WEEK_HIGH_LOW": 1,         # 1 minute for testing, DEFAULT: 5
-    "NSE_ALL_INDEXES": 1,              # 1 minute for testing, DEFAULT: 5
-    "PRICE_BAND_HITTERS": 1,           # 1 minute for testing, DEFAULT: 5
-    "RECENT_LISTINGS": 1,              # 1 minute for testing, DEFAULT: 5
-    "SPECIAL_PREOPEN_LISTINGS": 1,     # 1 minute for testing, DEFAULT: 5
-    "TOP_GAINERS_LOOSERS": 1,          # 1 minute for testing, DEFAULT: 5
-    "COOKIES_REFRESH": 1,              # This we can hit randomly to refresh cookies, between 1 to 5 minutes
-}
-
-
-so we have to run cron job evry someof the time that time w can set into generate.py
-
-the cron start when the out main.py server run so from that TIME we can start cron job.
-
-we have to run cron job evry someof the time that time w can set into generate.py
-
-we call the cron job function in main.py like this:
-
-we can call the evry controller function in the cron job function.
-
-we allready drfine the datavbase oprations into the db.py file
-"""
 
 class CronJobManager:
     """
@@ -153,9 +118,9 @@ class CronJobManager:
         """
         try:
             get_nse_cookies()
-            logger.info("Cron-jobs:NSE cookies refreshed successfully.")
+            logger.info("Cron-jobs:NSE cookies refreshed successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error refreshing NSE cookies: {e}")
+            logger.error(f"Cron-jobs:Error refreshing NSE cookies: {e} at " + datetime.now().isoformat())
             raise
 
     def run_advances_declines_unchanged(self):
@@ -165,9 +130,9 @@ class CronJobManager:
         try:
             controller = NSEAdvancesDeclinesUnchangedController()
             asyncio.run(controller.scrap_advance_decline_unchanged())
-            logger.info("Cron-jobs:Cron Job-NSE Advances Declines Unchanged data saved successfully.")
+            logger.info("Cron-jobs:Cron Job-NSE Advances Declines Unchanged data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron Job-Error in run_advances_declines_unchanged: {e}")
+            logger.error(f"Cron Job-Error in run_advances_declines_unchanged: {e} at " + datetime.now().isoformat())
             raise
     
     def run_forthcoming_listings(self):
@@ -177,9 +142,9 @@ class CronJobManager:
         try:
             controller = NSEForthcomingListingsController()
             asyncio.run(controller.scrap_forthcoming_listings())
-            logger.info("Cron-jobs:NSE Forthcoming Listings data saved successfully.")
+            logger.info("Cron-jobs:NSE Forthcoming Listings data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_forthcoming_listings: {e}")
+            logger.error(f"Cron-jobs:Error in run_forthcoming_listings: {e} at " + datetime.now().isoformat())
             raise
     
     def run_large_deals(self):
@@ -189,9 +154,9 @@ class CronJobManager:
         try:
             controller = NSELargeDealsController()
             asyncio.run(controller.scrap_large_deals())
-            logger.info("Cron-jobs:NSE Large Deals data saved successfully.")
+            logger.info("Cron-jobs:NSE Large Deals data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_large_deals: {e}")
+            logger.error(f"Cron-jobs:Error in run_large_deals: {e} at " + datetime.now().isoformat())
             raise
     
     def run_most_active_contracts(self):
@@ -201,9 +166,9 @@ class CronJobManager:
         try:
             controller = NSEMostActiveContractsController()
             asyncio.run(controller.scrap_most_active_contracts())
-            logger.info("Cron-jobs:NSE Most Active Contracts data saved successfully.")
+            logger.info("Cron-jobs:NSE Most Active Contracts data saved successfully.   at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_most_active_contracts: {e}")
+            logger.error(f"Cron-jobs:Error in run_most_active_contracts: {e} at " + datetime.now().isoformat())
             raise
     
     def run_most_active_equities(self):
@@ -213,9 +178,9 @@ class CronJobManager:
         try:
             controller = NSEMostActiveEquitiesController()
             asyncio.run(controller.scrape_most_active_equities())
-            logger.info("Cron-jobs:NSE Most Active Equities data saved successfully.")
+            logger.info("Cron-jobs:NSE Most Active Equities data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_most_active_equities: {e}")
+            logger.error(f"Cron-jobs:Error in run_most_active_equities: {e} at " + datetime.now().isoformat())
             raise
     
     def run_most_active_underlying(self):
@@ -225,9 +190,9 @@ class CronJobManager:
         try:
             controller = NSEMostActiveUnderlyingController()
             asyncio.run(controller.scrap_most_active_underlying())
-            logger.info("Cron-jobs:NSE Most Active Underlying data saved successfully.")
+            logger.info("Cron-jobs:NSE Most Active Underlying data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_most_active_underlying: {e}")
+            logger.error(f"Cron-jobs:Error in run_most_active_underlying: {e} at " + datetime.now().isoformat())
             raise
     
     def run_new_listings(self):
@@ -237,9 +202,9 @@ class CronJobManager:
         try:
             controller = NSENewListingsController()
             asyncio.run(controller.scrap_new_listing())
-            logger.info("Cron-jobs:NSE New Listings data saved successfully.")
+            logger.info("Cron-jobs:NSE New Listings data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_new_listings: {e}")
+            logger.error(f"Cron-jobs:Error in run_new_listings: {e} at " + datetime.now().isoformat())
             raise
     
     def run_nse_52_week_high_low(self):
@@ -249,9 +214,9 @@ class CronJobManager:
         try:
             controller = NSE52WeekHighLowController()
             asyncio.run(controller.scrape_52_week_high_low())
-            logger.info("Cron-jobs:NSE 52 Week High Low data saved successfully.")
+            logger.info("Cron-jobs:NSE 52 Week High Low data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_nse_52_week_high_low: {e}")
+            logger.error(f"Cron-jobs:Error in run_nse_52_week_high_low: {e} at " + datetime.now().isoformat())
             raise
 
     def run_nse_all_indexes(self):
@@ -261,9 +226,9 @@ class CronJobManager:
         try:
             controller = NSEAllIndexesController()
             asyncio.run(controller.scrape_all_indices_from_list())
-            logger.info("Cron-jobs:NSE All Indexes data saved successfully.")
+            logger.info("Cron-jobs:NSE All Indexes data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_nse_all_indexes: {e}")
+            logger.error(f"Cron-jobs:Error in run_nse_all_indexes: {e} at " + datetime.now().isoformat())
             raise
 
     def run_price_band_hitters(self):
@@ -273,9 +238,9 @@ class CronJobManager:
         try:
             controller = NSEPriceBandHittersController()
             asyncio.run(controller.scrap_price_band_hitters())
-            logger.info("Cron-jobs:NSE Price Band Hitters data saved successfully.")
+            logger.info("Cron-jobs:NSE Price Band Hitters data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_price_band_hitters: {e}")
+            logger.error(f"Cron-jobs:Error in run_price_band_hitters: {e} at " + datetime.now().isoformat())
             raise
 
     def run_recent_listings(self):
@@ -285,9 +250,9 @@ class CronJobManager:
         try:
             controller = NSERecentListingsController()
             asyncio.run(controller.scrap_recent_listings())
-            logger.info("Cron-jobs:NSE Recent Listings data saved successfully.")
+            logger.info("Cron-jobs:NSE Recent Listings data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_recent_listings: {e}")
+            logger.error(f"Cron-jobs:Error in run_recent_listings: {e} at " + datetime.now().isoformat())
             raise
     
     def run_special_preopen_listings(self):
@@ -297,9 +262,9 @@ class CronJobManager:
         try:
             controller = NSESpecialPreopenListingsController()
             asyncio.run(controller.scrap_special_preopen_listings())
-            logger.info("Cron-jobs:NSE Special Preopen Listings data saved successfully.")
+            logger.info("Cron-jobs:NSE Special Preopen Listings data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_special_preopen_listings: {e}")
+            logger.error(f"Cron-jobs:Error in run_special_preopen_listings: {e} at " + datetime.now().isoformat())
             raise
     
     def run_top_gainers_loosers(self):
@@ -309,9 +274,9 @@ class CronJobManager:
         try:
             controller = NSETopGainersloosersController()
             asyncio.run(controller.top_gainer_loosers())
-            logger.info("Cron-jobs:Top Gainers and Losers data saved successfully.")
+            logger.info("Cron-jobs:Top Gainers and Losers data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
-            logger.error(f"Cron-jobs:Error in run_top_gainers_loosers: {e}")
+            logger.error(f"Cron-jobs:Error in run_top_gainers_loosers: {e} at " + datetime.now().isoformat())
             raise
 
 
