@@ -1,11 +1,3 @@
-# import uvicorn
-# from Loader.server import *
-# from Utils.config_reader import configure
-
-# if __name__ == '__main__':
-#     uvicorn.run(apiserver, host=configure.get("SERVER","HOST"), port=configure.getint("SERVER","PORT"))
-
-
 import threading
 import uvicorn
 from Loader.server import apiserver
