@@ -221,11 +221,51 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for item in data:
-            symbol = item.get("symbol", "").upper()
-            masterdata_info = masterdata_map.get(symbol, {})
+            symbol = item.get("symbol", "").strip().upper()
+            identifier = item.get("identifier", "").strip().upper()
+
+            matched_docs = masterdata_map.get(symbol, [])
+            masterdata_info = {}
+
+            # Inline selection logic
+            if matched_docs:
+                # Prefer NSECM + EQ
+                for doc in matched_docs:
+                    if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                        masterdata_info = doc
+                        break
+                else:
+                    # Then any NSECM
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then BSECM + A
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any BSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM":
+                                    masterdata_info = doc
+                                    break
+            else:
+                # Fallback: match by identifier if symbol not found
+                masterdata_info = masterdata_identifier_map.get(identifier, {})
 
             formatted_record = {
                 "symbol": symbol,
@@ -260,13 +300,53 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for deal_type in ["BULK_DEALS", "SHORT_DEALS", "BLOCK_DEALS"]:
             deal_data = raw_data.get(f"{deal_type}_DATA", [])
             for item in deal_data:
-                symbol = item.get("symbol", "").upper()
-                masterdata_info = masterdata_map.get(symbol, {})
+                symbol = item.get("symbol", "").strip().upper()
+                identifier = item.get("identifier", "").strip().upper()
+
+                matched_docs = masterdata_map.get(symbol, [])
+                masterdata_info = {}
+
+                # Inline selection logic
+                if matched_docs:
+                    # Prefer NSECM + EQ
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then any NSECM
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then BSECM + A
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then any BSECM
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM":
+                                        masterdata_info = doc
+                                        break
+                else:
+                    # Fallback: match by identifier if symbol not found
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                 formatted.append({
                     "types": deal_type,
@@ -356,7 +436,15 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for data_type, content in raw_data.items():
             # Skip if no data or wrong structure
@@ -381,8 +469,40 @@ class NSEDataFormatter:
             sort_by = "by_value" if "value" in data_type else "by_volume"
 
             for record in records:
-                symbol = record.get("symbol", "").upper()
-                masterdata_info = masterdata_map.get(symbol, {})
+                symbol = record.get("symbol", "").strip().upper()
+                identifier = record.get("identifier", "").strip().upper()
+
+                matched_docs = masterdata_map.get(symbol, [])
+                masterdata_info = {}
+
+                # Inline selection logic
+                if matched_docs:
+                    # Prefer NSECM + EQ
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then any NSECM
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then BSECM + A
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then any BSECM
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM":
+                                        masterdata_info = doc
+                                        break
+                else:
+                    # Fallback: match by identifier if symbol not found
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                 formatted_record = {
                     "types_of_data": data_type,  # full key like 'sme_by_value'
@@ -428,11 +548,51 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for item in raw_data.get("data", []):
-            symbol = item.get("symbol", "").upper()
-            masterdata_info = masterdata_map.get(symbol, {})
+            symbol = item.get("symbol", "").strip().upper()
+            identifier = item.get("identifier", "").strip().upper()
+
+            matched_docs = masterdata_map.get(symbol, [])
+            masterdata_info = {}
+
+            # Inline selection logic
+            if matched_docs:
+                # Prefer NSECM + EQ
+                for doc in matched_docs:
+                    if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                        masterdata_info = doc
+                        break
+                else:
+                    # Then any NSECM
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then BSECM + A
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any BSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM":
+                                    masterdata_info = doc
+                                    break
+            else:
+                # Fallback: match by identifier if symbol not found
+                masterdata_info = masterdata_identifier_map.get(identifier, {})
 
             formatted_record = {
                 "symbol": symbol,
@@ -468,12 +628,52 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for key, records in raw_data.items():
             for record in records:
-                symbol = record.get("symbol", "").upper()
-                masterdata_info = masterdata_map.get(symbol, {})
+                symbol = record.get("symbol", "").strip().upper()
+                identifier = record.get("identifier", "").strip().upper()
+
+                matched_docs = masterdata_map.get(symbol, [])
+                masterdata_info = {}
+
+                # Inline selection logic
+                if matched_docs:
+                    # Prefer NSECM + EQ
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then any NSECM
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then BSECM + A
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then any BSECM
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM":
+                                        masterdata_info = doc
+                                        break
+                else:
+                    # Fallback: match by identifier if symbol not found
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                 formatted_record = {
                     "timestamp": current_time,
@@ -509,11 +709,51 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for item in raw_data.get("data", []):
-            symbol = item.get("symbol", "").upper()
-            masterdata_info = masterdata_map.get(symbol, {})
+            symbol = item.get("symbol", "").strip().upper()
+            identifier = item.get("identifier", "").strip().upper()
+
+            matched_docs = masterdata_map.get(symbol, [])
+            masterdata_info = {}
+
+            # Inline selection logic
+            if matched_docs:
+                # Prefer NSECM + EQ
+                for doc in matched_docs:
+                    if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                        masterdata_info = doc
+                        break
+                else:
+                    # Then any NSECM
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then BSECM + A
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any BSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM":
+                                    masterdata_info = doc
+                                    break
+            else:
+                # Fallback: match by identifier if symbol not found
+                masterdata_info = masterdata_identifier_map.get(identifier, {})
 
             formatted_record = {
                 "symbol": symbol,
@@ -558,11 +798,51 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for item in raw_data.get("data", []):
-            symbol = item.get("symbol", "").upper()
-            masterdata_info = masterdata_map.get(symbol, {})
+            symbol = item.get("symbol", "").strip().upper()
+            identifier = item.get("identifier", "").strip().upper()
+
+            matched_docs = masterdata_map.get(symbol, [])
+            masterdata_info = {}
+
+            # Inline selection logic
+            if matched_docs:
+                # Prefer NSECM + EQ
+                for doc in matched_docs:
+                    if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                        masterdata_info = doc
+                        break
+                else:
+                    # Then any NSECM
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then BSECM + A
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any BSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM":
+                                    masterdata_info = doc
+                                    break
+            else:
+                # Fallback: match by identifier if symbol not found
+                masterdata_info = masterdata_identifier_map.get(identifier, {})
 
             formatted_record = {
                 "symbol": symbol,
@@ -593,11 +873,51 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for item in raw_data.get("data", []):
-            symbol = item.get("symbol", "").upper()
-            masterdata_info = masterdata_map.get(symbol, {})
+            symbol = item.get("symbol", "").strip().upper()
+            identifier = item.get("identifier", "").strip().upper()
+
+            matched_docs = masterdata_map.get(symbol, [])
+            masterdata_info = {}
+
+            # Inline selection logic
+            if matched_docs:
+                # Prefer NSECM + EQ
+                for doc in matched_docs:
+                    if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                        masterdata_info = doc
+                        break
+                else:
+                    # Then any NSECM
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then BSECM + A
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any BSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM":
+                                    masterdata_info = doc
+                                    break
+            else:
+                # Fallback: match by identifier if symbol not found
+                masterdata_info = masterdata_identifier_map.get(identifier, {})
 
             preopen_book = item.get("preopenBook", {})
             preopen_entries = preopen_book.get("preopen", [])
@@ -653,7 +973,15 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment (for individual symbols within indices)
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for index_data in raw_data:
             if not isinstance(index_data, list) or not index_data:
@@ -664,8 +992,40 @@ class NSEDataFormatter:
             index_identifier = index_metadata.get("identifier", "Unknown Identifier")
 
             for item in index_data:
-                symbol = item.get("symbol", "").upper()
-                masterdata_info = masterdata_map.get(symbol, {})
+                symbol = item.get("symbol", "").strip().upper()
+                identifier = item.get("identifier", "").strip().upper()
+
+                matched_docs = masterdata_map.get(symbol, [])
+                masterdata_info = {}
+
+                # Inline selection logic
+                if matched_docs:
+                    # Prefer NSECM + EQ
+                    for doc in matched_docs:
+                        if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                            masterdata_info = doc
+                            break
+                    else:
+                        # Then any NSECM
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then BSECM + A
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then any BSECM
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM":
+                                        masterdata_info = doc
+                                        break
+                else:
+                    # Fallback: match by identifier if symbol not found
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                 formatted_record = {
                     "index_name": index_name,
@@ -717,7 +1077,15 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for direction, categories in raw_data.items():
             for category, items in categories.items():
@@ -725,8 +1093,40 @@ class NSEDataFormatter:
                     continue
 
                 for item in items["data"]:
-                    symbol = item.get("symbol", "").upper()
-                    masterdata_info = masterdata_map.get(symbol, {})
+                    symbol = item.get("symbol", "").strip().upper()
+                    identifier = item.get("identifier", "").strip().upper()
+
+                    matched_docs = masterdata_map.get(symbol, [])
+                    masterdata_info = {}
+
+                    # Inline selection logic
+                    if matched_docs:
+                        # Prefer NSECM + EQ
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any NSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "NSECM":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then BSECM + A
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                        masterdata_info = doc
+                                        break
+                                else:
+                                    # Then any BSECM
+                                    for doc in matched_docs:
+                                        if doc.get("ExchangeSegment") == "BSECM":
+                                            masterdata_info = doc
+                                            break
+                    else:
+                        # Fallback: match by identifier if symbol not found
+                        masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                     formatted_record = {
                         "direction": direction,
@@ -766,7 +1166,15 @@ class NSEDataFormatter:
 
         # Fetch masterdata for enrichment
         db_data = get_all_nsecm_bsecm_data()
-        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+        
+        # Index DB data for fast lookup
+        masterdata_map = defaultdict(list)
+        for doc in db_data:
+            name = doc.get("Name", "").upper()
+            if name:
+                masterdata_map[name].append(doc)
+
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for category, content in raw_data.items():
             if not isinstance(content, dict):
@@ -777,8 +1185,40 @@ class NSEDataFormatter:
 
             for index_name, records in indices_data.items():
                 for record in records:
-                    symbol = record.get("symbol", "").upper()
-                    masterdata_info = masterdata_map.get(symbol, {})
+                    symbol = record.get("symbol", "").strip().upper()
+                    identifier = record.get("identifier", "").strip().upper()
+
+                    matched_docs = masterdata_map.get(symbol, [])
+                    masterdata_info = {}
+
+                    # Inline selection logic
+                    if matched_docs:
+                        # Prefer NSECM + EQ
+                        for doc in matched_docs:
+                            if doc.get("ExchangeSegment") == "NSECM" and doc.get("Series") == "EQ":
+                                masterdata_info = doc
+                                break
+                        else:
+                            # Then any NSECM
+                            for doc in matched_docs:
+                                if doc.get("ExchangeSegment") == "NSECM":
+                                    masterdata_info = doc
+                                    break
+                            else:
+                                # Then BSECM + A
+                                for doc in matched_docs:
+                                    if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
+                                        masterdata_info = doc
+                                        break
+                                else:
+                                    # Then any BSECM
+                                    for doc in matched_docs:
+                                        if doc.get("ExchangeSegment") == "BSECM":
+                                            masterdata_info = doc
+                                            break
+                    else:
+                        # Fallback: match by identifier if symbol not found
+                        masterdata_info = masterdata_identifier_map.get(identifier, {})
 
                     formatted_record = {
                         "category": category,
