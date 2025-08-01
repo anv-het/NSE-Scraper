@@ -232,16 +232,20 @@ REQUIRED_NSE_COOKIES = [
 
 # Database collection/table names
 DB_COLLECTIONS = {
-    "GAINERS_LOOSERS": "gainers_loosers",
-    "INDICES": "indices",
-    "MOST_ACTIVE": "most_active",
-    "52_WEEK_HIGH_LOW": "52week_high_low",
-    "DERIVATIVES": "derivatives",
-    "BULK_DEALS": "bulk_deals",
-    "PRICE_BAND": "price_band",
-    "ADVANCE_DECLINE": "advance_decline",
-    "OI_SPURTS": "oi_spurts",
-    "NEW_LISTINGS": "new_listings"
+    "NSE_ADVANCES_DECLINES": "nse_advances_declines",
+    "NSE_LARGE_DEALS": "nse_large_deals",
+    "NSE_FORTHCOMING_LISTINGS": "nse_forthcoming_listings",
+    "NSE_MOST_ACTIVE_CONTRACTS": "nse_most_active_contracts",
+    "NSE_MOST_ACTIVE_EQUITIES": "nse_most_active_equities",
+    "NSE_MOST_ACTIVE_UNDERLYING": "nse_most_active_underlying",
+    "NSE_NEW_LISTINGS": "nse_new_listings",
+    "NSE_WEEK_52_DATA": "nse_week_52_data",
+    "NSE_INDICES_DATA": "nse_indices_data",
+    "NSE_PRICE_BAND_HITTERS": "nse_price_band_hitters",
+    "NSE_STOCKWISE_EVENT": "nse_stockwise_event",
+    "NSE_GAINERS_LOSERS": "nse_gainers_losers",
+    "NSE_SPECIAL_PREOPEN_LISTINGS": "nse_special_preopen_listings",
+    "NSE_RECENT_LISTINGS": "nse_recent_listings",
 }
 
 # File paths

@@ -1,21 +1,24 @@
 import sys
 import os
-import asyncio
+import asyncio  # Import asyncio
 
+# Ensure the correct import path for your modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from API.Controller.top_gainers_loosers import NSETopGainersloosersController
 
 def test_top_gainers_loosers():
+    """
+    Test the scraping of Top Gainers and Loosers data from NSE.
+    """
     controller = NSETopGainersloosersController()
-    # print("Running test for top gainers and loosers data scraping")
-
-    # Call the method to get top gainers and loosers data
+    
+    # Use asyncio.run to await the async method
     result = asyncio.run(controller.top_gainer_loosers())
 
-    # # print the result for debugging
-    # # print("Result:", result)
+    # print("test_top_gainers_loosers:", result)
 
 if __name__ == "__main__":
     test_top_gainers_loosers()
-    # print("✅ Top gainers and loosers data scraping test passed!")
+    print("Test completed successfully.")
 

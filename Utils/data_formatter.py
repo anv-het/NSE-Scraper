@@ -5,10 +5,13 @@ Formats raw NSE API responses into MongoDB-ready documents according to schema
 
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional, Any
+
+from yaml import safe_load
+from Utils.general_master import get_masterdata_info, get_all_nsecm_bsecm_data
 from Utils.logger import get_logger
-from Utils.utilities_functions import clean_numeric_value
 
 logger = get_logger(__name__)
+
 
 class NSEDataFormatter:
     """Utility class for formatting NSE API responses into schema-compliant MongoDB documents"""
@@ -22,30 +25,38 @@ class NSEDataFormatter:
         return f"{identifier}-{datetime.now().timestamp()}"
 
     @staticmethod
-    def parse_timestamp(timestamp_str: Optional[str] = None) -> str:
-        """
-        Returns ISO timestamp in IST from input string or current time.
-        """
+    def parse_timestamp(timestamp_str: str) -> datetime:
         try:
-            if timestamp_str is None:
-                dt = datetime.utcnow().replace(tzinfo=timezone.utc)
+            if not timestamp_str:
+                dt = datetime.utcnow()
             else:
-                if timestamp_str.endswith('Z'):
-                    timestamp_str = timestamp_str[:-1]
                 dt = datetime.fromisoformat(timestamp_str)
-                if dt.tzinfo is None:
-                    dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(NSEDataFormatter.IST)
         except Exception:
-            dt = datetime.utcnow().replace(tzinfo=timezone.utc)
-
-        dt_ist = dt.astimezone(NSEDataFormatter.IST)
-        return dt_ist.isoformat()
+            return datetime.utcnow().astimezone(NSEDataFormatter.IST)
 
     @staticmethod
     def _safe_float(value: Any) -> Optional[float]:
-        """Safely convert value to float"""
+        """Safely convert value to float, removing commas and handling strings like '1,000.5'"""
         try:
+            if isinstance(value, str):
+                # Remove commas (e.g., '1,000.5' -> '1000.5')
+                value = value.replace(',', '')
             return float(value)
+        except (ValueError, TypeError):
+            return None
+
+    @staticmethod
+    def _safe_float_rounded(value: Any, decimals: int = 2) -> Optional[float]:
+        """
+        Convert value to float safely, remove commas, and round to specified decimals.
+        Returns None if conversion fails.
+        """
+        try:
+            if isinstance(value, str):
+                value = value.replace(',', '')  # remove commas if any
+            float_val = float(value)
+            return round(float_val, decimals)
         except (ValueError, TypeError):
             return None
 
@@ -86,14 +97,43 @@ class NSEDataFormatter:
         try:
             formatted_data = []
 
-            # Extract timestamp string from summary or use current UTC time
+            # Step 1: Get timestamp
             timestamp_str = summary.get("timestamp", datetime.utcnow().isoformat())
-            # Parse it uniformly using class method
-            current_time_ist = NSEDataFormatter.parse_timestamp(None)
+            current_time_ist = NSEDataFormatter.parse_timestamp(timestamp_str)
 
-            # Helper function to format one entry
-            def format_item(item: Dict[str, Any]) -> Dict[str, Any]:
-                return {
+            # Step 2: Scrape data and log time
+            scrape_start = datetime.now()
+            scraped_data = []
+            for category_name in ["advance", "decline", "unchanged"]:
+                items = summary.get(category_name, [])
+                for item in items:
+                    item["category"] = category_name
+                    scraped_data.append(item)
+            scrape_end = datetime.now()
+            logger.info(f"Scraped {len(scraped_data)} records in {(scrape_end - scrape_start).total_seconds():.2f}s")
+
+            # Step 3: Get DB data and log time
+            db_fetch_start = datetime.now()
+            db_data = get_all_nsecm_bsecm_data()
+            db_fetch_end = datetime.now()
+            logger.info(f"Fetched {len(db_data)} masterdata records from DB in {(db_fetch_end - db_fetch_start).total_seconds():.2f}s")
+
+            # Step 4: Index DB data for fast lookup
+            masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+            masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
+
+            # Step 5: Merge and format data
+            for item in scraped_data:
+                symbol = item.get("symbol", "").strip().upper()
+                identifier = item.get("identifier", "").strip().upper()
+
+                masterdata_info = (
+                    masterdata_map.get(symbol)
+                    or masterdata_identifier_map.get(identifier)
+                    or {}
+                )
+
+                formatted = {
                     "identifier": item.get("identifier"),
                     "symbol": item.get("symbol"),
                     "series": item.get("series"),
@@ -103,21 +143,26 @@ class NSEDataFormatter:
                     "base_price": item.get("basePrice"),
                     "previous_close": item.get("previousClose"),
                     "last_price": item.get("lastPrice"),
-                    "total_traded_volume": item.get("totalTradedVolume"),
-                    "issued_cap": item.get("issuedCap"),
-                    "total_traded_value": item.get("totalTradedValue"),
-                    "total_market_cap": item.get("totalMarketCap")
+                    # we have to clean the float values via using the upper define function like _safe_float
+                    "total_traded_volume": NSEDataFormatter._safe_float(item.get("totalTradedVolume")),
+                    "total_traded_value": NSEDataFormatter._safe_float(item.get("totalTradedValue")),
+                    "issued_cap": NSEDataFormatter._safe_float(item.get("issuedCap")),
+                    "total_traded_value": NSEDataFormatter._safe_float(item.get("totalTradedValue")),
+                    "total_market_cap": NSEDataFormatter._safe_float(item.get("totalMarketCap")),
+
+                    # New fields from masterdata
+                    "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                    "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                    "MasterdataSeries": masterdata_info.get("Series"),
+
+                    # Additional useful fields
+                    "category": item.get("category"),
+                    "timestamp": current_time_ist.isoformat()
                 }
 
-            # Loop over all three categories
-            for category in ["advance", "decline", "unchanged"]:
-                for item in summary.get(category, []):
-                    formatted_entry = format_item(item)
-                    formatted_entry["category"] = category
-                    formatted_entry["timestamp"] = current_time_ist
-                    formatted_data.append(formatted_entry)
+                formatted_data.append(formatted)
 
-            logger.info(f"Formatted {len(formatted_data)} advance/decline/unchanged records")
+            logger.info(f"Formatted {len(formatted_data)} records for output")
             return formatted_data
 
         except Exception as e:
@@ -127,61 +172,93 @@ class NSEDataFormatter:
     @staticmethod
     def format_forthcoming_listings(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        Formats raw forthcoming listing data from NSE into MongoDB-ready format.
+        Formats raw forthcoming listing data from NSE into MongoDB-ready format with masterdata enrichment.
         """
         formatted = []
         current_time_ist = NSEDataFormatter.parse_timestamp(None)
 
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+
         for item in data:
+            symbol = item.get("symbol", "").upper()
+            masterdata_info = masterdata_map.get(symbol, {})
+
             formatted_record = {
-                "symbol": item.get("symbol"),
+                "symbol": symbol,
                 "series": item.get("series"),
                 "companyName": item.get("companyName"),
                 "isin": item.get("isin"),
-                "effectiveDate": item.get("effectiveDate"),
+                "effectiveDate": NSEDataFormatter._safe_date(item.get("effectiveDate", "")),
                 "specialPreOpen": item.get("specialPreOpen", "N"),
                 "remark": item.get("remark"),
                 "shdAttachment": item.get("shdAttachment"),
                 "financialResults": item.get("financialResults"),
+
+                # Masterdata enrichment
+                "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                "MasterdataSeries": masterdata_info.get("Series"),
+
                 "timestamp": current_time_ist
             }
             formatted.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted)} forthcoming listings records")
-        # # print("Formatted forthcoming listings data:", formatted[:3])  # Debug # print
         return formatted
-
 
     @staticmethod
     def format_large_deals(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Formats large deals data from NSE with numeric cleaning and masterdata enrichment.
+        """
         formatted = []
         current_time = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for deal_type in ["BULK_DEALS", "SHORT_DEALS", "BLOCK_DEALS"]:
             deal_data = raw_data.get(f"{deal_type}_DATA", [])
             for item in deal_data:
+                symbol = item.get("symbol", "").upper()
+                masterdata_info = masterdata_map.get(symbol, {})
+
                 formatted.append({
                     "types": deal_type,
-                    "date": item.get("date"),
-                    "symbol": item.get("symbol"),
+                    "date": NSEDataFormatter._safe_date(item.get("date", "")),
+                    "symbol": symbol,
                     "name": item.get("name"),
                     "client_name": item.get("clientName"),
                     "buy_sell": item.get("buySell"),
-                    "quantity": clean_numeric_value(item.get("qty")) or 0.0,
-                    "watp": clean_numeric_value(item.get("watp")) or 0.0,
+                    "quantity": NSEDataFormatter._safe_float(item.get("qty")) or 0.0,
+                    "watp": NSEDataFormatter._safe_float(item.get("watp")) or 0.0,
                     "remarks": item.get("remarks"),
+
+                    # Masterdata enrichment
+                    "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                    "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                    "MasterdataSeries": masterdata_info.get("Series"),
+
                     "timestamp": current_time
                 })
 
         logger.info(f"Formatted {len(formatted)} large deal records")
         return formatted
 
-    
     @staticmethod
     def format_most_active_contracts(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
-        from datetime import datetime
+        """
+        Formats most active contracts, handling nested structures, numeric cleaning and masterdata enrichment.
+        """
         formatted_data = []
         timestamp = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment keyed by identifier
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
 
         for data_type, sort_dict in raw_data.items():
             if not isinstance(sort_dict, dict):
@@ -193,24 +270,32 @@ class NSEDataFormatter:
                     continue
 
                 for record in data_items:
+                    identifier = record.get("identifier", "").strip().upper()
+                    masterdata_info = masterdata_identifier_map.get(identifier, {})
+
                     formatted_record = {
                         "types_of_data": data_type,
                         "sort_by": sort_by,
                         "timestamp": timestamp,
-                        "identifier": record.get("identifier"),
+                        "identifier": identifier,
                         "instrumentType": record.get("instrumentType"),
                         "instrument": record.get("instrument"),
                         "underlying": record.get("underlying"),
                         "expiryDate": record.get("expiryDate"),
                         "optionType": record.get("optionType", "-"),
-                        "strikePrice": record.get("strikePrice", 0),
-                        "lastPrice": record.get("lastPrice"),
-                        "numberOfContractsTraded": record.get("numberOfContractsTraded"),
-                        "totalTurnover": record.get("totalTurnover"),
-                        "premiumTurnover": record.get("premiumTurnover"),
-                        "openInterest": record.get("openInterest"),
-                        "underlyingValue": record.get("underlyingValue"),
-                        "pChange": record.get("pChange")
+                        "strikePrice": NSEDataFormatter._safe_float(record.get("strikePrice", 0)),
+                        "lastPrice": NSEDataFormatter._safe_float(record.get("lastPrice")),
+                        "numberOfContractsTraded": NSEDataFormatter._safe_int(record.get("numberOfContractsTraded")),
+                        "totalTurnover": NSEDataFormatter._safe_float(record.get("totalTurnover")),
+                        "premiumTurnover": NSEDataFormatter._safe_float(record.get("premiumTurnover")),
+                        "openInterest": NSEDataFormatter._safe_int(record.get("openInterest")),
+                        "underlyingValue": NSEDataFormatter._safe_float(record.get("underlyingValue")),
+                        "pChange": NSEDataFormatter._safe_float(record.get("pChange")),
+
+                        # Masterdata enrichment
+                        "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                        "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                        "MasterdataSeries": masterdata_info.get("Series")
                     }
                     formatted_data.append(formatted_record)
 
@@ -220,13 +305,16 @@ class NSEDataFormatter:
     @staticmethod
     def format_most_active_equities(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats the most active equities data from raw API responses.
+        Formats the most active equities data from raw API responses with masterdata enrichment.
 
         Handles EQ, SME, ETF, and variation categories with both 'by_value' and 'by_volume' keys.
         """
-        from datetime import datetime
         formatted_data = []
         timestamp = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for data_type, content in raw_data.items():
             # Skip if no data or wrong structure
@@ -251,28 +339,36 @@ class NSEDataFormatter:
             sort_by = "by_value" if "value" in data_type else "by_volume"
 
             for record in records:
+                symbol = record.get("symbol", "").upper()
+                masterdata_info = masterdata_map.get(symbol, {})
+
                 formatted_record = {
                     "types_of_data": data_type,  # full key like 'sme_by_value'
                     "sort_by": sort_by,
                     "timestamp": timestamp,
-                    "symbol": record.get("symbol"),
+                    "symbol": symbol,
                     "identifier": record.get("identifier"),
-                    "lastPrice": record.get("lastPrice"),
-                    "pChange": record.get("pChange"),
-                    "totalTradedVolume": record.get("totalTradedVolume") or record.get("quantityTraded"),
-                    "totalTradedValue": record.get("totalTradedValue"),
-                    "nav": record.get("nav", None),
+                    "lastPrice": NSEDataFormatter._safe_float(record.get("lastPrice")),
+                    "pChange": NSEDataFormatter._safe_float(record.get("pChange")),
+                    "totalTradedVolume": NSEDataFormatter._safe_int(record.get("totalTradedVolume") or record.get("quantityTraded")),
+                    "totalTradedValue": NSEDataFormatter._safe_float(record.get("totalTradedValue")),
+                    "nav": NSEDataFormatter._safe_float(record.get("nav")),
                     "exDate": record.get("exDate"),
                     "purpose": record.get("purpose"),
                     "isin": record.get("isin"),
-                    "yearHigh": record.get("yearHigh"),
-                    "yearLow": record.get("yearLow"),
-                    "change": record.get("change"),
-                    "open": record.get("open"),
-                    "dayHigh": record.get("dayHigh"),
-                    "dayLow": record.get("dayLow"),
-                    "closePrice": record.get("closePrice", 0),
-                    "previousClose": record.get("previousClose", 0)
+                    "yearHigh": NSEDataFormatter._safe_float(record.get("yearHigh")),
+                    "yearLow": NSEDataFormatter._safe_float(record.get("yearLow")),
+                    "change": NSEDataFormatter._safe_float(record.get("change")),
+                    "open": NSEDataFormatter._safe_float(record.get("open")),
+                    "dayHigh": NSEDataFormatter._safe_float(record.get("dayHigh")),
+                    "dayLow": NSEDataFormatter._safe_float(record.get("dayLow")),
+                    "closePrice": NSEDataFormatter._safe_float(record.get("closePrice")),
+                    "previousClose": NSEDataFormatter._safe_float(record.get("previousClose")),
+
+                    # Masterdata enrichment
+                    "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                    "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                    "MasterdataSeries": masterdata_info.get("Series")
                 }
                 formatted_data.append(formatted_record)
 
@@ -282,15 +378,22 @@ class NSEDataFormatter:
     @staticmethod
     def format_most_active_underlying(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw data into a list of MongoDB-ready documents.
+        Formats raw data into a list of MongoDB-ready documents with masterdata enrichment.
         """
         
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
 
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+
         for item in raw_data.get("data", []):
+            symbol = item.get("symbol", "").upper()
+            masterdata_info = masterdata_map.get(symbol, {})
+
             formatted_record = {
-                "symbol": item.get("symbol"),
+                "symbol": symbol,
                 "futVolume": NSEDataFormatter._safe_int(item.get("futVolume")),
                 "optVolume": NSEDataFormatter._safe_int(item.get("optVolume")),
                 "totVolume": NSEDataFormatter._safe_int(item.get("totVolume")),
@@ -300,6 +403,12 @@ class NSEDataFormatter:
                 "preTurnover": NSEDataFormatter._safe_float(item.get("preTurnover")),
                 "latestOI": NSEDataFormatter._safe_int(item.get("latestOI")),
                 "underlying": NSEDataFormatter._safe_float(item.get("underlying")),
+
+                # Masterdata enrichment
+                "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                "MasterdataSeries": masterdata_info.get("Series"),
+
                 "timestamp": current_time
             }
             formatted_data.append(formatted_record)
@@ -310,49 +419,66 @@ class NSEDataFormatter:
     @staticmethod
     def format_52_week_high_low(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw 52-week high/low data into a list of MongoDB-ready documents.
+        Formats raw 52-week high/low data into a list of MongoDB-ready documents with masterdata enrichment.
         """
         formatted_data = []
-
         current_time = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for key, records in raw_data.items():
             for record in records:
+                symbol = record.get("symbol", "").upper()
+                masterdata_info = masterdata_map.get(symbol, {})
+
                 formatted_record = {
                     "timestamp": current_time,
                     "types": key,
-                    "symbol": record.get("symbol"),
+                    "symbol": symbol,
                     "series": record.get("series"),
                     "companyName": record.get("companyName"),
-                    "new52WHL": record.get("new52WHL"),
-                    "prev52WHL": record.get("prev52WHL"),
+                    "new52WHL": NSEDataFormatter._safe_float(record.get("new52WHL")),
+                    "prev52WHL": NSEDataFormatter._safe_float(record.get("prev52WHL")),
                     "prevHLDate": record.get("prevHLDate"),
-                    "ltp": record.get("ltp"),
-                    "prevClose": record.get("prevClose"),
-                    "change": record.get("change"),
-                    "pChange": record.get("pChange")
+                    "ltp": NSEDataFormatter._safe_float(record.get("ltp")),
+                    "prevClose": NSEDataFormatter._safe_float(record.get("prevClose")),
+                    "change": NSEDataFormatter._safe_float(record.get("change")),
+                    "pChange": NSEDataFormatter._safe_float(record.get("pChange")),
+
+                    # Masterdata enrichment
+                    "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                    "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                    "MasterdataSeries": masterdata_info.get("Series")
                 }
                 formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} 52-week high/low records")
-        # # print("Formatted 52-week high/low data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
     def format_new_listings_data(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw new listings data into MongoDB-ready documents.
+        Formats raw new listings data into MongoDB-ready documents with masterdata enrichment.
         """
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
 
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+
         for item in raw_data.get("data", []):
+            symbol = item.get("symbol", "").upper()
+            masterdata_info = masterdata_map.get(symbol, {})
+
             formatted_record = {
-                "symbol": item.get("symbol"),
+                "symbol": symbol,
                 "series": item.get("series"),
                 "companyName": item.get("companyName"),
                 "isin": item.get("isin"),
-                "effectiveDate": item.get("effectiveDate"),
+                "effectiveDate": NSEDataFormatter._safe_date(item.get("effectiveDate", "")),
                 "specialPreOpen": item.get("specialPreOpen", "N"),
                 "remark": item.get("remark"),
                 "shdAttachment": item.get("shdAttachment"),
@@ -367,58 +493,82 @@ class NSEDataFormatter:
                 "change": NSEDataFormatter._safe_float(item.get("change")),
                 "pChange": NSEDataFormatter._safe_float(item.get("pChange")),
                 "chartTodayPath": item.get("chartTodayPath"),
+
+                # Masterdata enrichment
+                "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                "MasterdataSeries": masterdata_info.get("Series"),
+
                 "timestamp": current_time
             }
             formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} new listings records")
-        # # print("Formatted new listings data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
     def format_recent_data(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw recent listings data into MongoDB-ready documents.
+        Formats raw recent listings data into MongoDB-ready documents with masterdata enrichment.
         """
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
 
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+
         for item in raw_data.get("data", []):
+            symbol = item.get("symbol", "").upper()
+            masterdata_info = masterdata_map.get(symbol, {})
+
             formatted_record = {
-                "symbol": item.get("symbol"),
+                "symbol": symbol,
                 "name": item.get("name"),
                 "series": item.get("series"),
                 "isin": item.get("isin"),
-                "listing_date": item.get("listing_date"),
+                "listing_date": NSEDataFormatter._safe_date(item.get("listing_date", "")),
                 "instrument": item.get("instrument"),
+
+                # Masterdata enrichment
+                "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                "MasterdataSeries": masterdata_info.get("Series"),
+
                 "timestamp": current_time
             }
             formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} recent listings records")
-        # # print("Formatted recent listings data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
     @staticmethod
     def format_special_preopen_data(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw special pre-open listings data into MongoDB-ready documents.
+        Formats raw special pre-open listings data into MongoDB-ready documents with masterdata enrichment.
         """
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
 
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
+
         for item in raw_data.get("data", []):
+            symbol = item.get("symbol", "").upper()
+            masterdata_info = masterdata_map.get(symbol, {})
+
             preopen_book = item.get("preopenBook", {})
             preopen_entries = preopen_book.get("preopen", [])
             preopen_data = [
                 {
-                    "price": entry.get("price"),
-                    "buyQty": entry.get("buyQty"),
-                    "sellQty": entry.get("sellQty")
+                    "price": NSEDataFormatter._safe_float(entry.get("price")),
+                    "buyQty": NSEDataFormatter._safe_int(entry.get("buyQty")),
+                    "sellQty": NSEDataFormatter._safe_int(entry.get("sellQty"))
                 } for entry in preopen_entries
             ]
 
             formatted_record = {
-                "symbol": item.get("symbol"),
+                "symbol": symbol,
                 "series": item.get("series"),
                 "isin": item.get("isin"),
                 "iep": NSEDataFormatter._safe_float(item.get("iep")),
@@ -437,23 +587,31 @@ class NSEDataFormatter:
                 "status": item.get("status"),
                 "chartTodayPath": item.get("chartTodayPath"),
                 "preopenBook": preopen_data,
+
+                # Masterdata enrichment
+                "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                "MasterdataSeries": masterdata_info.get("Series"),
+
                 "timestamp": current_time
             }
             formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} special pre-open listings records")
-        # # print("Formatted special pre-open listings data:", formatted_data[:3])  # Debug
         return formatted_data
     
-
     @staticmethod
     def format_all_indices(raw_data: List[List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
         """
-        Formats raw all indices data into MongoDB-ready documents.
+        Formats raw all indices data into MongoDB-ready documents with optional masterdata enrichment.
         Each index is a list of dicts, with the index metadata being the item with priority=1.
         """
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment (for individual symbols within indices)
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for index_data in raw_data:
             if not isinstance(index_data, list) or not index_data:
@@ -464,11 +622,14 @@ class NSEDataFormatter:
             index_identifier = index_metadata.get("identifier", "Unknown Identifier")
 
             for item in index_data:
+                symbol = item.get("symbol", "").upper()
+                masterdata_info = masterdata_map.get(symbol, {})
+
                 formatted_record = {
                     "index_name": index_name,
                     "index_identifier": index_identifier,
                     "priority": item.get("priority", 0),
-                    "symbol": item.get("symbol"),
+                    "symbol": symbol,
                     "identifier": item.get("identifier"),
                     "series": item.get("series", ""),
                     "open": NSEDataFormatter._safe_float(item.get("open")),
@@ -488,26 +649,33 @@ class NSEDataFormatter:
                     "date365dAgo": item.get("date365dAgo"),
                     "chart365dPath": item.get("chart365dPath"),
                     "date30dAgo": item.get("date30dAgo"),
-                    "perChange30d": item.get("perChange30d"),
+                    "perChange30d": NSEDataFormatter._safe_float(item.get("perChange30d")),
                     "chart30dPath": item.get("chart30dPath"),
                     "chartTodayPath": item.get("chartTodayPath"),
+
+                    # Masterdata enrichment (optional for indices)
+                    "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                    "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                    "MasterdataSeries": masterdata_info.get("Series"),
+
                     "timestamp": current_time
                 }
                 formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} all indices records")
-        # # print("Formatted all indices data:", formatted_data[:3])  # Debug # print
         return formatted_data
 
-
-
     @staticmethod
-    def format_price_band_hitters(raw_data: Dict[str, Any]) -> Dict[str, Any]:
+    def format_price_band_hitters(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw price band hitters data into MongoDB-ready documents.
+        Formats raw price band hitters data into MongoDB-ready documents with masterdata enrichment.
         """
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for direction, categories in raw_data.items():
             for category, items in categories.items():
@@ -515,10 +683,13 @@ class NSEDataFormatter:
                     continue
 
                 for item in items["data"]:
+                    symbol = item.get("symbol", "").upper()
+                    masterdata_info = masterdata_map.get(symbol, {})
+
                     formatted_record = {
                         "direction": direction,
                         "category": category,
-                        "symbol": item.get("symbol"),
+                        "symbol": symbol,
                         "series": item.get("series"),
                         "ltp": NSEDataFormatter._safe_float(item.get("ltp")),
                         "change": NSEDataFormatter._safe_float(item.get("change")),
@@ -530,21 +701,30 @@ class NSEDataFormatter:
                         "yearLow": NSEDataFormatter._safe_float(item.get("yearLow")),
                         "totalTradedVol": NSEDataFormatter._safe_float(item.get("totalTradedVol")),
                         "turnover": NSEDataFormatter._safe_float(item.get("turnover")),
+
+                        # Masterdata enrichment
+                        "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                        "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                        "MasterdataSeries": masterdata_info.get("Series"),
+
                         "timestamp": current_time
                     }
                     formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} price band hitters records")
-        # # print("Formatted price band hitters data:", formatted_data)  # Debug # print
         return formatted_data
 
     @staticmethod
-    def format_all_indices_from_list(raw_data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def format_all_indices_from_list(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats raw all indices data from a list of dictionaries into MongoDB-ready documents.
+        Formats raw all indices data from a dictionary of categories into MongoDB-ready documents with masterdata enrichment.
         """
 
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
+
+        # Fetch masterdata for enrichment
+        db_data = get_all_nsecm_bsecm_data()
+        masterdata_map = {doc.get("Name", "").upper(): doc for doc in db_data}
 
         for category, content in raw_data.items():
             if not isinstance(content, dict):
@@ -555,10 +735,13 @@ class NSEDataFormatter:
 
             for index_name, records in indices_data.items():
                 for record in records:
+                    symbol = record.get("symbol", "").upper()
+                    masterdata_info = masterdata_map.get(symbol, {})
+
                     formatted_record = {
                         "category": category,
                         "index_name": index_name,
-                        "symbol": record.get("symbol"),
+                        "symbol": symbol,
                         "series": record.get("series"),
                         "open_price": NSEDataFormatter._safe_float(record.get("open_price")),
                         "high_price": NSEDataFormatter._safe_float(record.get("high_price")),
@@ -572,12 +755,17 @@ class NSEDataFormatter:
                         "ca_ex_dt": record.get("ca_ex_dt"),
                         "ca_purpose": record.get("ca_purpose"),
                         "perChange": NSEDataFormatter._safe_float(record.get("perChange")),
+
+                        # Masterdata enrichment (optional for indices)
+                        "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
+                        "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
+                        "MasterdataSeries": masterdata_info.get("Series"),
+
                         "timestamp": current_time
                     }
                     formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} all indices records from list")
-        # # print("Formatted all indices data from list:", formatted_data)  # Debug
         return formatted_data
 
     @staticmethod
@@ -677,7 +865,6 @@ class NSEDataFormatter:
                 "timestamp": current_time
             })
         logger.info(f"Formatted {len(formatted_data)} stockwise market event records")
-        # # print("Formatted stockwise market event data:", formatted_data[:3])  # Debug
         return formatted_data
 
 

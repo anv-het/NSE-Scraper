@@ -5,9 +5,28 @@ from pymongo import MongoClient, DESCENDING
 from pymongo.errors import ConnectionFailure, OperationFailure
 from Utils.logger import get_logger
 from Utils.config_reader import configure
-from Utils.data_formatter import NSEDataFormatter
 
 logger = get_logger(__name__)
+
+# Global MongoDB connection for GETMASTERDATA
+mongo_db1 = None
+
+def initialize_masterdata_connection():
+    """Initialize global MongoDB connection for GETMASTERDATA"""
+    global mongo_db1
+    try:
+        # Use DATABASE section instead of MONGODB
+        mongo_uri = configure.get('DATABASE', 'MONGO_URI')
+        db_name = configure.get('DATABASE', 'DB_NAME1')
+        client = MongoClient(mongo_uri)
+        mongo_db1 = client[db_name]
+        logger.info(f"Global GETMASTERDATA MongoDB connection initialized: {db_name}")
+    except Exception as e:
+        logger.error(f"Failed to initialize global GETMASTERDATA MongoDB connection: {str(e)}")
+        raise
+
+# Initialize the connection when module is loaded
+initialize_masterdata_connection()
 
 class DatabaseManager:
     """MongoDB-only Database Manager for NSE Data Storage"""
@@ -16,7 +35,11 @@ class DatabaseManager:
         self.mongo_client = None
         self.mongo_db = None
         self.database_name = None
+        # Additional MongoDB connection for GETMASTERDATA
+        self.mongo_client1 = None
+        self.mongo_db1 = None
         self._initialize_mongodb()
+        self._initialize_masterdata_mongodb()
     
     @property
     def client(self):
@@ -59,6 +82,27 @@ class DatabaseManager:
             raise
         except Exception as e:
             logger.error(f"Error initializing MongoDB: {str(e)}")
+            raise
+    
+    def _initialize_masterdata_mongodb(self):
+        """Initialize MongoDB connection for GETMASTERDATA database"""
+        try:
+            # Use DATABASE section instead of MONGODB
+            mongo_uri = configure.get('DATABASE', 'MONGO_URI')
+            db_name = configure.get('DATABASE', 'DB_NAME1')
+            
+            self.mongo_client1 = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
+            # Test the connection
+            self.mongo_client1.admin.command('ping')
+            self.mongo_db1 = self.mongo_client1[db_name]
+            
+            logger.info(f"Connected to GETMASTERDATA MongoDB: {mongo_uri}, Database: {db_name}")
+            
+        except ConnectionFailure as e:
+            logger.error(f"Failed to connect to GETMASTERDATA MongoDB: {str(e)}")
+            raise
+        except Exception as e:
+            logger.error(f"Error initializing GETMASTERDATA MongoDB: {str(e)}")
             raise
     
     def _create_mongodb_indexes(self):
@@ -232,8 +276,6 @@ class DatabaseManager:
             return False
 
 
-
-        
 
 
 
