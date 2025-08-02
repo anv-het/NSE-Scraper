@@ -1528,7 +1528,7 @@ class NSEDataFormatter:
                     continue
             
             logger.info(f"Successfully formatted {len(formatted_data)} IPO records")
-            print("from format_investorgain_ipo_data:", formatted_data)
+            # print("from format_investorgain_ipo_data:", formatted_data)
             return formatted_data
             
         except Exception as e:

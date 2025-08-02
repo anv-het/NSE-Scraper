@@ -275,6 +275,105 @@ class DatabaseManager:
             logger.error(f"Error saving stockwise event data: {str(e)}")
             return False
 
+    def upsert_record(self, collection_name: str, filter_criteria: Dict[str, Any], update_data: Dict[str, Any]):
+        """
+        Upserts a single record in the specified MongoDB collection.
+        Updates the record if it exists, inserts if it doesn't.
+        
+        Args:
+            collection_name (str): Name of the MongoDB collection
+            filter_criteria (dict): Criteria to find the existing record
+            update_data (dict): Data to update/insert
+            
+        Returns:
+            pymongo.results.UpdateResult: Result of the upsert operation
+        """
+        if self.mongo_db is None:
+            logger.error("MongoDB connection is not initialized.")
+            return None
+
+        try:
+            collection = self.mongo_db[collection_name]
+            
+            # Add timestamp for tracking
+            update_data['updated_at'] = datetime.now(timezone.utc)
+            if 'created_at' not in update_data:
+                update_data['created_at'] = datetime.now(timezone.utc)
+            
+            # Perform upsert operation
+            result = collection.replace_one(
+                filter_criteria, 
+                update_data, 
+                upsert=True
+            )
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error upserting record in {collection_name}: {str(e)}")
+            return None
+
+    def save_investorgain_ipo_data(self, data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Saves InvestorGain IPO data to MongoDB using upsert operations.
+        Updates existing records based on ipo_id rather than delete-replace.
+        
+        Args:
+            data (list): List of IPO data dictionaries
+            
+        Returns:
+            dict: Result summary with counts
+        """
+        collection_name = "investorgain_ipo_data_v1"
+        
+        if self.mongo_db is None:
+            logger.error("MongoDB connection is not initialized.")
+            return {"success": False, "message": "MongoDB connection not initialized"}
+
+        if not data or not isinstance(data, list):
+            logger.warning("No valid data provided for InvestorGain IPO save.")
+            return {"success": False, "message": "No valid data provided"}
+        
+        try:
+            updated_count = 0
+            inserted_count = 0
+            
+            # Process each record individually for update-based saving
+            for record in data:
+                ipo_id = record.get('ipo_id')
+                if not ipo_id:
+                    logger.warning("Record missing ipo_id, skipping")
+                    continue
+                
+                # Use upsert operation
+                result = self.upsert_record(
+                    collection_name=collection_name,
+                    filter_criteria={"ipo_id": ipo_id},
+                    update_data=record
+                )
+                
+                if result:
+                    if result.upserted_id:
+                        inserted_count += 1
+                    elif result.modified_count > 0:
+                        updated_count += 1
+            
+            logger.info(f"InvestorGain IPO data operation completed: {inserted_count} inserted, {updated_count} updated")
+            
+            return {
+                "success": True,
+                "inserted_count": inserted_count,
+                "updated_count": updated_count,
+                "total_processed": len(data)
+            }
+            
+        except Exception as e:
+            logger.error(f"Error saving InvestorGain IPO data: {str(e)}")
+            return {
+                "success": False,
+                "message": f"Database error: {str(e)}"
+            }
+
 
 
 

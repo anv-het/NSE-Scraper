@@ -292,6 +292,7 @@ CRON_INTERVALS = {
     "RECENT_LISTINGS": 5,              # 1 minute for testing, DEFAULT: 5
     "SPECIAL_PREOPEN_LISTINGS": 5,     # 1 minute for testing, DEFAULT: 5
     "TOP_GAINERS_LOOSERS": 5,          # 1 minute for testing, DEFAULT: 5
+    "INVESTORGAIN_IPO_DATA": 60,       # 60 minutes for IPO data (less frequent than market data)
     "COOKIE_REFRESH": 4,               # 1 minute for testing, DEFAULT: 60
 }
 

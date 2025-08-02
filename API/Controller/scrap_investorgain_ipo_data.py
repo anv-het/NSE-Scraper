@@ -1,238 +1,168 @@
 #!/usr/bin/env python3
 """
-New Merged IPO Data Scraper - Complete Integration
-=================================================
-This consolidated script merges functionality from all IPO scraping modules:
-01_get_ipo_name.py, 02_get_ipo_details.py, 03_get_ipo_important_dates.py,
-04_get_ipo_lots.py, 05_get_ipo_gmp.py, 07_get_ipo_strengths.py,
-09_get_ipo_objective.py, 10_get_live_subscription_summary.py,
-12_get_company_financials.py, 13_get_ipo_peer_comparison.py,
-14_get_contact_management_details.py, 15_get_last_updated.py
+NSE InvestorGain IPO Data Controller
+==================================
+Comprehensive IPO data scraper following NSE Controller patterns.
+Scrapes all IPO data from InvestorGain with proper logging and database storage.
 
 Features:
-- Single comprehensive scraper for all IPO data
-- Combines API and web scraping approaches  
-- Automatic logo downloading to downloads/ipo/logos/
-- Rate limiting and robust error handling
-- Consolidated JSON output with complete IPO information
+- NSE Controller pattern implementation
+- Complete IPO data extraction (16 modules)
+- MongoDB storage with update-based operations
+- Proper logging and error handling
+- JSON file output
+- Automatic logo downloading
 """
 
-from Utils.logger import get_logger
-import requests
-from bs4 import BeautifulSoup
 import json
-import time
-import re
 import os
 import random
+import re
+import json
+import os
+import re
+import time
+import zlib
+import brotli
 from datetime import datetime
 from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Dict, List, Optional, Any
+
+import requests
+from bs4 import BeautifulSoup
 from tenacity import retry, wait_random_exponential, stop_after_attempt
-import zlib
-import brotli
+
+from Utils.logger import get_logger
+from Utils.db import DatabaseManager
+from Utils.data_formatter import NSEDataFormatter
+from Utils.config_reader import ConfigReader
+from Utils.ipo_utils import (
+    # Constants
+    COMMON_HEADERS, IPO_LIST_API, IPO_GMP_API, IPO_SUBSCRIPTION_API, 
+    BASE_URL, LOGO_DOWNLOAD_DIR, OUTPUT_DIR,
+    # Utility functions
+    clean_text, convert_to_float, convert_to_int, clean_html_entities,
+    format_ipo_status, parse_date_status, ensure_directory_exists,
+    make_robust_request, fetch_ipo_list_from_api, fetch_gmp_data_for_ipo,
+    fetch_subscription_data_for_ipo
+)
 
 logger = get_logger(__name__)
 
-# ===== CONFIGURATION =====
-# Common headers for all requests
-COMMON_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1"
-}
 
-# API and URL configurations
-IPO_LIST_API = "https://webnodejs.investorgain.com/cloud/ipo/list-read"
-IPO_GMP_API = "https://webnodejs.investorgain.com/cloud/ipo/gmp-read"
-IPO_SUBSCRIPTION_API = "https://webnodejs.investorgain.com/cloud/ipo/subscription-read"
-BASE_URL = "https://www.investorgain.com"
-
-# Directory configurations
-LOGO_DOWNLOAD_DIR = "downloads/ipo/logos"
-OUTPUT_DIR = "output"
-
-# ===== UTILITY FUNCTIONS =====
-def clean_text(text):
+class NSEInvestorGainIPOController:
     """
-    Standard text cleaning function used across all modules.
-    Removes extra spaces, newlines, and non-breaking spaces.
+    Controller for scraping InvestorGain IPO data following NSE patterns.
+    Handles comprehensive IPO data collection and database operations.
     """
-    if text:
-        text = str(text).replace('\xa0', ' ').replace('\n', ' ').strip()
-        text = re.sub(r'\s+', ' ', text)
-    return text
-
-def convert_to_float(value):
-    """
-    Converts a cleaned string to a float, handling Indian currency symbols.
-    Returns None if conversion fails.
-    """
-    try:
-        if value is None or not str(value).strip():
-            return None
-        # Remove common symbols and clean
-        cleaned = str(value).replace('₹', '').replace(',', '').replace('%', '').replace('x', '').strip()
-        return float(cleaned) if cleaned else None
-    except (ValueError, TypeError):
-        return None
-
-def convert_to_int(value):
-    """
-    Converts a cleaned string to an integer via float first.
-    Returns None if conversion fails.
-    """
-    try:
-        float_val = convert_to_float(value)
-        return int(float_val) if float_val is not None else None
-    except (ValueError, TypeError):
-        return None
-
-def clean_html_entities(text):
-    """
-    Cleans HTML entities from text, specifically handles &#8377; (₹ symbol).
-    """
-    if not text:
-        return text
     
-    # Replace common HTML entities
-    cleaned_text = str(text).replace('&#8377;', '').strip()
-    
-    return cleaned_text
-
-def format_ipo_status(status_code):
-    """
-    Converts IPO status code to human-readable format.
-    U = Upcoming, C = Closed, CT = Closed Today
-    """
-    status_mapping = {
-        'U': 'Upcoming',
-        'C': 'Closed', 
-        'CT': 'Closed Today'
-    }
-    
-    return status_mapping.get(status_code, status_code)
-
-def parse_date_status(date_string):
-    """
-    Parses date string and determines if it's past, present, or future.
-    Returns tuple: (parsed_date, status, original_string)
-    """
-    if not date_string or date_string == 'N/A':
-        return None, 'Unknown', date_string
-    
-    # Remove ordinal suffixes (st, nd, rd, th) before parsing
-    cleaned_date_string = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_string, flags=re.IGNORECASE)
-
-    date_formats_to_try = [
-        '%d %b %Y', '%d %B %Y', '%d/%m/%Y', '%d-%m-%Y',
-        '%B %d, %Y', '%b %d, %Y'
-    ]
-    
-    current_date = datetime.now()
-    
-    for fmt in date_formats_to_try:
+    def __init__(self):
+        self.db = DatabaseManager()
+        self.config = ConfigReader()
+        self.investorgain_ipo_api_url = IPO_LIST_API
+        self.collection_name = "investorgain_ipo_data_v1"
+        self.output_filename = "investorgain_ipo_data_v1.json"
+        
+    def scrape_investorgain_ipo_data(self) -> Dict[str, Any]:
+        """
+        Main scraping method called by cron jobs.
+        Scrapes all IPO data and saves to database and file.
+        """
         try:
-            parsed_date = datetime.strptime(cleaned_date_string, fmt)
-            if parsed_date.date() < current_date.date():
-                status = 'Past'
-            elif parsed_date.date() == current_date.date():
-                status = 'Today'
-            else:
-                status = 'Future'
-            return parsed_date, status, date_string
-        except ValueError:
-            continue
-    
-    return None, 'Unknown', date_string
-
-def ensure_directory_exists(directory_path):
-    """
-    Creates directory if it doesn't exist.
-    """
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-
-
-@retry(wait=wait_random_exponential(multiplier=0.5, min=1, max=4), 
-       stop=stop_after_attempt(3), reraise=True)
-def make_robust_request(url, custom_headers=None):
-    """
-    Makes a robust HTTP request with retry logic and error handling.
-    """
-    request_headers = COMMON_HEADERS.copy()
-    if custom_headers:
-        request_headers.update(custom_headers)
-
-    # Random delay to avoid overwhelming the server
-    time.sleep(random.uniform(0.5, 1.5))
-
-    try:
-        response = requests.get(url, headers=request_headers, timeout=15)
-        response.raise_for_status()
-        return response
-    except requests.exceptions.RequestException as e:
-        raise
-
-# ===== API FUNCTIONS =====
-def fetch_ipo_list_from_api():
-    """
-    Fetches the complete list of IPOs from the InvestorGain API.
-    Returns list of IPO entries with basic information.
-    """
-    
-    try:
-        response = make_robust_request(IPO_LIST_API)
-        data = response.json()
-        
-        if data.get("msg") == 1 and "ipoList" in data:
-            ipo_list = data["ipoList"]
-            return ipo_list
-        else:
-            return []
+            logger.info(f"Starting InvestorGain IPO data scraping")
             
-    except Exception as e:
-        return []
-
-def fetch_gmp_data_for_ipo(ipo_id):
-    """
-    Fetches Grey Market Premium data for a specific IPO.
-    """
-    try:
-        response = make_robust_request(f"{IPO_GMP_API}?id={ipo_id}")
-        
-        # Handle compressed content if needed
-        content_encoding = response.headers.get('Content-Encoding')
-        if content_encoding in ['gzip', 'br', 'deflate'] and not response.text:
-            # Manual decompression if response.json() fails
-            if content_encoding == 'gzip':
-                decoded_content = zlib.decompress(response.content, 16 + zlib.MAX_WBITS).decode('utf-8')
-            elif content_encoding == 'br':
-                decoded_content = brotli.decompress(response.content).decode('utf-8')
-            elif content_encoding == 'deflate':
-                decoded_content = zlib.decompress(response.content, -zlib.MAX_WBITS).decode('utf-8')
+            # Fetch all IPO data
+            ipo_data = scrape_all_ipo_data_comprehensive()
             
-            data = json.loads(decoded_content)
-        else:
-            data = response.json()
-        
-        return data
-    except Exception as e:
-        return None
+            if not ipo_data:
+                logger.warning("No IPO data retrieved")
+                return {
+                    "success": False,
+                    "message": "No IPO data retrieved",
+                    "data_count": 0
+                }
+            
+            # Format data using NSEDataFormatter
+            formatted_data = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
+            
+            # Save to database with update logic
+            save_result = self.save_investorgain_ipo_data(formatted_data)
+            
+            # Save to JSON file
+            json_result = self.save_to_json_file(formatted_data)
+            
+            logger.info(f"Successfully processed {len(formatted_data)} IPO records")
+            
+            return {
+                "success": True,
+                "message": f"Successfully scraped {len(formatted_data)} IPO records",
+                "data_count": len(formatted_data),
+                "database_result": save_result,
+                "json_file_result": json_result
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in scrape_investorgain_ipo_data: {str(e)}")
+            return {
+                "success": False,
+                "message": f"Error scraping IPO data: {str(e)}",
+                "data_count": 0
+            }
+    
+    def save_investorgain_ipo_data(self, formatted_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Saves IPO data to MongoDB using update-based operations.
+        Updates existing records based on ipo_id rather than delete-replace.
+        """
+        try:
+            if not formatted_data:
+                return {"success": False, "message": "No data to save"}
+            
+            # Use the database manager's IPO-specific save method
+            result = self.db.save_investorgain_ipo_data(formatted_data)
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error saving to database: {str(e)}")
+            return {
+                "success": False,
+                "message": f"Database error: {str(e)}"
+            }
+    
+    def save_to_json_file(self, formatted_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Saves formatted IPO data to JSON file.
+        """
+        try:
+            # Ensure output directory exists
+            ensure_directory_exists(OUTPUT_DIR)
+            
+            filepath = os.path.join(OUTPUT_DIR, self.output_filename)
+            
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(formatted_data, f, ensure_ascii=False, indent=2, default=str)
+            
+            logger.info(f"Successfully saved {len(formatted_data)} records to {filepath}")
+            
+            return {
+                "success": True,
+                "filepath": filepath,
+                "record_count": len(formatted_data)
+            }
+            
+        except Exception as e:
+            logger.error(f"Error saving to JSON file: {str(e)}")
+            return {
+                "success": False,
+                "message": f"File save error: {str(e)}"
+            }
 
-def fetch_subscription_data_for_ipo(ipo_id):
-    """
-    Fetches live subscription data for a specific IPO.
-    """
-    try:
-        response = make_robust_request(f"{IPO_SUBSCRIPTION_API}?id={ipo_id}")
-        data = response.json()
-        return data
-    except Exception as e:
-        return None
+
+# ===== IPO DATA EXTRACTION MODULES =====
+# All utility functions, constants, and API functions are imported from Utils/ipo_utils.py
+# This preserves all the existing scraping logic while following NSE patterns
 
 # ===== MODULE 01: COMPANY NAMES AND LOGOS =====
 def extract_company_name_and_logo(soup, base_url):
@@ -1935,20 +1865,27 @@ def save_comprehensive_data(data, filename="comprehensive_ipo_data_new.json"):
 # ===== MAIN EXECUTION =====
 if __name__ == "__main__":
     try:
+        # Initialize controller
+        controller = NSEInvestorGainIPOController()
         
-        # Execute comprehensive scraping (logos downloaded by default)
-        comprehensive_data = scrape_all_ipo_data_comprehensive()
+        # Execute IPO data scraping using controller method
+        result = controller.scrape_investorgain_ipo_data()
         
-        if comprehensive_data:
-            # Save comprehensive data
-            output_file = save_comprehensive_data(comprehensive_data)
-            
+        if result["success"]:
+            logger.info(f"✅ {result['message']}")
+            logger.info(f"📊 Data count: {result['data_count']}")
+            if result.get("database_result"):
+                db_result = result["database_result"]
+                logger.info(f"🗄️ Database: {db_result.get('inserted_count', 0)} inserted, {db_result.get('updated_count', 0)} updated")
+            if result.get("json_file_result"):
+                json_result = result["json_file_result"]
+                logger.info(f"📁 JSON file: {json_result.get('filepath', 'N/A')}")
         else:
-            logger.warning(" No data was scraped successfully.")
+            logger.error(f"❌ {result['message']}")
 
     except KeyboardInterrupt:
-        logger.warning("\n Scraping interrupted by user")
+        logger.warning("\n🛑 Scraping interrupted by user")
     except Exception as e:
-        logger.critical(f" Critical error: {e}")
+        logger.critical(f"💥 Critical error: {e}")
         import traceback
         traceback.print_exc()

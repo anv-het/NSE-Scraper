@@ -35,6 +35,7 @@ from API.Controller.nse_price_band_hitter import NSEPriceBandHittersController
 from API.Controller.recent_listing import NSERecentListingsController
 from API.Controller.special_preopen_listing import NSESpecialPreopenListingsController
 from API.Controller.top_gainers_loosers import NSETopGainersloosersController
+from API.Controller.scrap_investorgain_ipo_data import NSEInvestorGainIPOController
 
 
 logger = get_logger(__name__)
@@ -94,6 +95,9 @@ class CronJobManager:
                 )
                 schedule.every(CRON_INTERVALS['TOP_GAINERS_LOOSERS']).minutes.do(
                     self.run_top_gainers_loosers
+                )
+                schedule.every(CRON_INTERVALS['INVESTORGAIN_IPO_DATA']).minutes.do(
+                    self.run_investorgain_ipo_data
                 )
                 schedule.every(CRON_INTERVALS['COOKIE_REFRESH']).minutes.do(
                     self.refresh_cookies
@@ -277,6 +281,23 @@ class CronJobManager:
             logger.info("Cron-jobs:Top Gainers and Losers data saved successfully. at " + datetime.now().isoformat())
         except Exception as e:
             logger.error(f"Cron-jobs:Error in run_top_gainers_loosers: {e} at " + datetime.now().isoformat())
+            raise
+
+    def run_investorgain_ipo_data(self):
+        """
+        Run the InvestorGain IPO Data scraping job
+        """
+        try:
+            controller = NSEInvestorGainIPOController()
+            result = controller.scrape_investorgain_ipo_data()
+            
+            if result["success"]:
+                logger.info(f"Cron-jobs:InvestorGain IPO data saved successfully. {result['message']} at {datetime.now().isoformat()}")
+            else:
+                logger.error(f"Cron-jobs:InvestorGain IPO data scraping failed: {result['message']} at {datetime.now().isoformat()}")
+                
+        except Exception as e:
+            logger.error(f"Cron-jobs:Error in run_investorgain_ipo_data: {e} at {datetime.now().isoformat()}")
             raise
 
 
