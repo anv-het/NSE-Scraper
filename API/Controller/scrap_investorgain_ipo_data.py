@@ -17,6 +17,7 @@ Features:
 - Consolidated JSON output with complete IPO information
 """
 
+from Utils.logger import get_logger
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -30,6 +31,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 import zlib
 import brotli
+
+logger = get_logger(__name__)
 
 # ===== CONFIGURATION =====
 # Common headers for all requests
@@ -152,7 +155,7 @@ def ensure_directory_exists(directory_path):
     """
     if not os.path.exists(directory_path):
         os.makedirs(directory_path)
-        print(f" Created directory: {directory_path}")
+
 
 @retry(wait=wait_random_exponential(multiplier=0.5, min=1, max=4), 
        stop=stop_after_attempt(3), reraise=True)
@@ -172,7 +175,6 @@ def make_robust_request(url, custom_headers=None):
         response.raise_for_status()
         return response
     except requests.exceptions.RequestException as e:
-        print(f" Request failed for {url}: {e}")
         raise
 
 # ===== API FUNCTIONS =====
@@ -181,7 +183,6 @@ def fetch_ipo_list_from_api():
     Fetches the complete list of IPOs from the InvestorGain API.
     Returns list of IPO entries with basic information.
     """
-    print(f" Fetching IPO list from API: {IPO_LIST_API}")
     
     try:
         response = make_robust_request(IPO_LIST_API)
@@ -189,14 +190,11 @@ def fetch_ipo_list_from_api():
         
         if data.get("msg") == 1 and "ipoList" in data:
             ipo_list = data["ipoList"]
-            print(f" Successfully fetched {len(ipo_list)} IPOs from API")
             return ipo_list
         else:
-            print(f" API response not as expected: {data}")
             return []
             
     except Exception as e:
-        print(f" Error fetching IPO list from API: {e}")
         return []
 
 def fetch_gmp_data_for_ipo(ipo_id):
@@ -223,7 +221,6 @@ def fetch_gmp_data_for_ipo(ipo_id):
         
         return data
     except Exception as e:
-        print(f" Error fetching GMP data for IPO {ipo_id}: {e}")
         return None
 
 def fetch_subscription_data_for_ipo(ipo_id):
@@ -235,7 +232,6 @@ def fetch_subscription_data_for_ipo(ipo_id):
         data = response.json()
         return data
     except Exception as e:
-        print(f" Error fetching subscription data for IPO {ipo_id}: {e}")
         return None
 
 # ===== MODULE 01: COMPANY NAMES AND LOGOS =====
@@ -314,7 +310,6 @@ def download_company_logo(logo_url, company_name, ipo_id):
         
         # Skip if file already exists
         if os.path.exists(filepath):
-            print(f"     Logo already exists: {filename}")
             return filepath
         
         # Download the logo
@@ -324,11 +319,10 @@ def download_company_logo(logo_url, company_name, ipo_id):
         with open(filepath, 'wb') as f:
             f.write(response.content)
         
-        print(f"     Logo downloaded: {filename}")
         return filepath
         
     except Exception as e:
-        print(f"     Error downloading logo for {company_name}: {e}")
+        logger.error(f"     Error downloading logo: {e}")
         return None
 
 # ===== MODULE 02: IPO DETAILS EXTRACTION =====
@@ -907,9 +901,8 @@ def extract_ipo_objectives(soup):
                                     })
                 break
     except Exception as e:
-        # Log the error but don't add error to objectives list
-        print(f"    Warning: Error extracting objectives: {e}")
-    
+        # Log the error but don't add error to objectives list   
+        logger.error(f"Error extracting IPO objectives: {e}") 
     return objectives
 
 # ===== MODULE 10: IPO SUBSCRIPTION DATA =====
@@ -1231,8 +1224,8 @@ def extract_financial_data(soup):
             financial_data.append(entry)
     
     except Exception as e:
-        print(f"    Warning: Error extracting financial data: {e}")
-    
+        logger.warning(f"Error extracting financial data: {e}")
+
     return financial_data
 
 # ===== MODULE 13: IPO PEER COMPARISON DATA =====
@@ -1298,8 +1291,8 @@ def extract_peer_comparison(soup):
                 peer_comparison_data.append(row_data)
 
     except Exception as e:
-        print(f"    Warning: Error extracting peer comparison: {e}")
-    
+        logger.warning(f"Error extracting peer comparison: {e}")
+
     return peer_comparison_data
 
 # ===== MODULE 14: CONTACT MANAGEMENT DETAILS =====
@@ -1375,7 +1368,7 @@ def extract_company_address(card):
                 result["email"] = value
 
     except Exception as e:
-        print(f"    Warning: Error extracting company address: {e}")
+        logger.warning(f"Error extracting company address: {e}")
 
     return result
 
@@ -1407,7 +1400,7 @@ def extract_ipo_lead_manager(card):
         return []
         
     except Exception as e:
-        print(f"    Warning: Error extracting lead manager: {e}")
+        logger.warning(f"Error extracting lead manager: {e}")
         return []
 
 def extract_contact_management_details(soup):
@@ -1439,7 +1432,7 @@ def extract_contact_management_details(soup):
                 data["ipo_lead_manager"] = extract_ipo_lead_manager(card)
 
     except Exception as e:
-        print(f"    Warning: Error extracting contact management details: {e}")
+        logger.warning(f"Error extracting contact management details: {e}")
 
     return data
 
@@ -1478,7 +1471,7 @@ def extract_last_updated(soup):
         return "N/A"
         
     except Exception as e:
-        print(f"    Warning: Error extracting last updated: {e}")
+        logger.warning(f"Error extracting last updated: {e}")
         return "N/A"
 
 # ===== MODULE 16: Company Sector Information =====
@@ -1508,7 +1501,6 @@ def extract_company_sector_info(soup):
             matching_keys = [key for key in expected_keys if key in table_text]
             
             if len(matching_keys) >= 2:  # At least 2 matching keys
-                print(f"    Found table with {len(matching_keys)} matching keys: {matching_keys}")
                 
                 for row in rows:
                     cells = row.find_all(['td', 'th'])
@@ -1532,15 +1524,13 @@ def extract_company_sector_info(soup):
                                 
                                 if value and value != "N/A":
                                     sector_info[key] = value
-                                    print(f"    Extracted {key}: {value}")
-                
+
                 # If we found data in this table, we're done
                 if any(v != "N/A" for v in sector_info.values()):
                     break
         
         # Fallback heuristic for 4-column tables
         if all(v == "N/A" for v in sector_info.values()):
-            print("    Trying fallback heuristic for 4-column tables...")
             
             for table in tables:
                 rows = table.find_all('tr')
@@ -1566,12 +1556,10 @@ def extract_company_sector_info(soup):
                         for key, value in zip(keys, values):
                             if key in expected_keys and value and value != "N/A":
                                 sector_info[key] = value
-                                print(f"    Fallback extracted {key}: {value}")
         
         return sector_info
         
     except Exception as e:
-        print(f"    Warning: Error extracting company sector info: {e}")
         return sector_info
 
 # ===== MODULE 17: IPO Table Details =====
@@ -1580,7 +1568,6 @@ def extract_ipo_table_details(soup):
     Extract detailed IPO issue information from the main table on an IPO detail page.
     Based on scrap_ipo_table_details.py logic.
     """
-    print("    Extracting IPO table details...")
     
     # Define patterns for mapping scraped labels to desired output keys
     detail_field_patterns_map = {
@@ -1610,7 +1597,6 @@ def extract_ipo_table_details(soup):
         main_details_table = soup.find('table', class_='table table-bordered table-striped table-hover w-auto')
         
         if main_details_table:
-            print("    ✓ Found main IPO details table.")
             
             for row in main_details_table.find_all('tr'):
                 cells = row.find_all(['td', 'th'])
@@ -1625,7 +1611,6 @@ def extract_ipo_table_details(soup):
                     if 'data-title' in value_element.attrs and \
                        any(re.search(pattern, label_text) for pattern in [r'Issue Opening Date', r'Issue Closing Date']):
                         value = clean_text(value_element['data-title'])
-                        print(f"    Found data-title for date: {value}")
                     else:
                         # 2. Check for any link within the value element
                         found_link_element = value_element.find('a', href=True)
@@ -1648,10 +1633,9 @@ def extract_ipo_table_details(soup):
                     for output_key, pattern in detail_field_patterns_map.items():
                         if pattern.search(label_text):
                             issue_details_data[output_key] = value
-                            print(f"    Mapped '{label_text}' to '{output_key}': {value}")
                             break  # Move to the next row once a match is found for this row
         else:
-            print("    ✗ Main IPO details table not found for extraction.")
+            logger.warning("No main IPO details table found on the page.")
 
         # Ensure all expected keys are present, even if N/A
         for key in detail_field_patterns_map.keys():
@@ -1661,7 +1645,6 @@ def extract_ipo_table_details(soup):
         return issue_details_data
         
     except Exception as e:
-        print(f"    Warning: Error extracting IPO table details: {e}")
         # Return default values for all expected keys
         return {key: 'N/A' for key in detail_field_patterns_map.keys()}
 
@@ -1678,7 +1661,6 @@ def scrape_single_ipo_comprehensive(ipo_entry):
     ipo_category = ipo_entry.get('ipo_category')
     
     if not url_rewrite_folder_name or not ipo_id:
-        print(f"     Skipping {company_short_name} - missing URL data")
         return None
 
     # Initialize comprehensive data with API information
@@ -1699,7 +1681,6 @@ def scrape_single_ipo_comprehensive(ipo_entry):
     detail_url = f"{BASE_URL}/ipo/{url_rewrite_folder_name}/{ipo_id}/"
     comprehensive_data['detail_url'] = detail_url
     
-    print(f" Processing: {company_short_name} (ID: {ipo_id})")
     
     try:
         # Fetch and parse detail page
@@ -1862,11 +1843,9 @@ def scrape_single_ipo_comprehensive(ipo_entry):
         #  MODULE 14: extract_contact_management_details(soup)
         #  MODULE 15: extract_last_updated(soup)
         
-        print(f"Successfully processed: {name_logo_data.get('scraped_company_name', company_short_name)}")
         return comprehensive_data
         
     except Exception as e:
-        print(f"Error processing IPO {company_short_name}: {e}")
         # Return basic data even on error
         comprehensive_data['scraping_error'] = str(e)
         return comprehensive_data
@@ -1876,16 +1855,10 @@ def scrape_all_ipo_data_comprehensive(max_workers=5):
     Main function to scrape comprehensive data for all IPOs.
     Logos are automatically downloaded by default.
     """
-    print("=" * 80)
-    print(" NEW MERGED IPO DATA SCRAPER - COMPREHENSIVE MODE")
-    print(" Scraping ALL IPO data from InvestorGain.com")
-    print(" Logos will be automatically downloaded to: " + LOGO_DOWNLOAD_DIR)
-    print("=" * 80)
     
     # Fetch IPO list from API
     ipo_list = fetch_ipo_list_from_api()
     if not ipo_list:
-        print(" No IPOs fetched from API. Exiting.")
         return []
 
     
@@ -1909,10 +1882,10 @@ def scrape_all_ipo_data_comprehensive(max_workers=5):
                 
                 # Progress update
                 if i % 5 == 0:
-                    print(f" Progress: {i}/{len(ipo_list)} IPOs processed ({i/len(ipo_list)*100:.1f}%)")
-                    
+                    logger.info(f" Progress: {i}/{len(ipo_list)} IPOs processed ({i/len(ipo_list)*100:.1f}%)")
+
             except Exception as e:
-                print(f" Failed to process IPO {ipo_entry.get('company_short_name', 'Unknown')}: {e}")
+                logger.error(f" Failed to process IPO {ipo_entry.get('company_short_name', 'Unknown')}: {e}")
                 # Add error record
                 error_data = {
                     'ipo_id': ipo_entry.get('id'),
@@ -1938,37 +1911,30 @@ def save_comprehensive_data(data, filename="comprehensive_ipo_data_new.json"):
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2, default=str)
         
-        print(f" Comprehensive data saved to: {filepath}")
-        print(f" Total records: {len(data)}")
         
         # Show statistics
         successful_records = len([record for record in data if 'processing_error' not in record and 'scraping_error' not in record])
-        print(f" Successfully processed: {successful_records}/{len(data)} IPOs")
         
         if successful_records > 0:
             # Show sample data structure
-            print("\\n Sample data structure (first IPO):")
             sample = data[0]
             for key, value in list(sample.items())[:10]:  # Show first 10 fields
                 if isinstance(value, str) and len(value) > 100:
-                    print(f"  {key}: {value[:100]}...")
+                    logger.info(f"  {key}: {value[:100]}...")
                 else:
-                    print(f"  {key}: {value}")
+                    logger.info(f"  {key}: {value}")
             if len(sample) > 10:
-                print(f"  ... and {len(sample) - 10} more fields")
-        
+                logger.info(f"  ... and {len(sample) - 10} more fields")
+
         return filepath
         
     except Exception as e:
-        print(f" Error saving data: {e}")
+        logger.error(f" Error saving data: {e}")
         return None
 
 # ===== MAIN EXECUTION =====
 if __name__ == "__main__":
     try:
-        print(" Starting comprehensive IPO data scraping...")
-        print(" Company logos will be downloaded automatically")
-        print("Existing logos will be skipped to avoid re-downloading")
         
         # Execute comprehensive scraping (logos downloaded by default)
         comprehensive_data = scrape_all_ipo_data_comprehensive()
@@ -1977,18 +1943,12 @@ if __name__ == "__main__":
             # Save comprehensive data
             output_file = save_comprehensive_data(comprehensive_data)
             
-            print("\n" + "=" * 80)
-            print(" COMPREHENSIVE IPO SCRAPING COMPLETED!")
-            print(f" Data saved to: {output_file}")
-            print(f" Total IPOs processed: {len(comprehensive_data)}")
-            print(f" Logos saved to: {LOGO_DOWNLOAD_DIR}")
-            print("=" * 80)
         else:
-            print(" No data was scraped successfully.")
-            
+            logger.warning(" No data was scraped successfully.")
+
     except KeyboardInterrupt:
-        print("\n Scraping interrupted by user")
+        logger.warning("\n Scraping interrupted by user")
     except Exception as e:
-        print(f" Critical error: {e}")
+        logger.critical(f" Critical error: {e}")
         import traceback
         traceback.print_exc()

@@ -24,6 +24,9 @@ logs/
 # Ignore configuration files
 config.ini
 
+# all the downloads directories
+downloads/
+downloads/*
 
-/Downloads/
+
 /myenv/

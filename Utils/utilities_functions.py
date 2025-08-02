@@ -318,6 +318,7 @@ def is_market_open() -> bool:
         market_close = now.replace(hour=15, minute=30, second=0, microsecond=0)
         
         return market_open <= now <= market_close
+        # return True  # For testing purposes, assume market is always open
     except Exception:
         return False
 

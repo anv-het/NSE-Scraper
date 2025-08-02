@@ -680,7 +680,7 @@ class NSEDataFormatter:
                     "types": key,
                     "symbol": symbol,
                     "series": record.get("series"),
-                    "companyName": record.get("companyName"),
+                    "companyName": record.get("comapnyName"),
                     "new52WHL": NSEDataFormatter._safe_float(record.get("new52WHL")),
                     "prev52WHL": NSEDataFormatter._safe_float(record.get("prev52WHL")),
                     "prevHLDate": record.get("prevHLDate"),
@@ -1348,5 +1348,192 @@ class NSEDataFormatter:
             })
         logger.info(f"Formatted {len(formatted_data)} stockwise market event records")
         return formatted_data
+
+    @staticmethod
+    def format_investorgain_ipo_data(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Format InvestorGain IPO data into MongoDB-ready documents
+        
+        Args:
+            data: List of raw IPO data dictionaries from InvestorGain API
+            
+        Returns:
+            List[Dict[str, Any]]: Formatted IPO data documents
+        """
+        try:
+            formatted_data = []
+            
+            # Get current IST timestamp
+            current_time_ist = NSEDataFormatter.parse_timestamp(None)
+            
+            logger.info(f"Starting to format {len(data)} IPO records")
+            
+            for ipo_item in data:
+                try:
+                    # Format the IPO data according to the required output structure
+                    formatted_ipo = {
+                        # Basic IPO Information
+                        "ipo_id": ipo_item.get("ipo_id"),
+                        "api_company_name": ipo_item.get("api_company_name"),
+                        "api_ipo_category": ipo_item.get("api_ipo_category"),
+                        "api_issue_size": ipo_item.get("api_issue_size"),
+                        "api_issue_open_date": ipo_item.get("api_issue_open_date"),
+                        "api_issue_end_date": ipo_item.get("api_issue_end_date"),
+                        "api_listing_at": ipo_item.get("api_listing_at"),
+                        "api_ipo_status": ipo_item.get("api_ipo_status"),
+                        "api_ipo_status_formatted": ipo_item.get("api_ipo_status_formatted"),
+                        
+                        # Scraping Information
+                        "scraping_date": ipo_item.get("scraping_date"),
+                        "detail_url": ipo_item.get("detail_url"),
+                        "scraped_company_name": ipo_item.get("scraped_company_name"),
+                        "company_logo_url": ipo_item.get("company_logo_url"),
+                        "local_logo_path": ipo_item.get("local_logo_path"),
+                        "company_full_name_scraped": ipo_item.get("company_full_name_scraped"),
+                        "about_company_text": ipo_item.get("about_company_text"),
+                        
+                        # IPO Details
+                        "ipo_issue_price": ipo_item.get("ipo_issue_price"),
+                        "drhp_url": ipo_item.get("drhp_url"),
+                        "rhp_url": ipo_item.get("rhp_url"),
+                        "anchor_list_url": ipo_item.get("anchor_list_url"),
+                        "retail_quota": ipo_item.get("retail_quota"),
+                        "ipo_issue_type": ipo_item.get("ipo_issue_type"),
+                        "ipo_issue_size_scraped": ipo_item.get("ipo_issue_size_scraped"),
+                        "fresh_issue": ipo_item.get("fresh_issue"),
+                        "face_value": ipo_item.get("face_value"),
+                        "promoter_holding_pre_ipo": ipo_item.get("promoter_holding_pre_ipo"),
+                        "promoter_holding_post_ipo": ipo_item.get("promoter_holding_post_ipo"),
+                        
+                        # Date Information
+                        "ipo_issue_opening_date": ipo_item.get("ipo_issue_opening_date"),
+                        "ipo_issue_closing_date": ipo_item.get("ipo_issue_closing_date"),
+                        "min_order_quantity_scraped": ipo_item.get("min_order_quantity_scraped"),
+                        "shares_per_lot_scraped": ipo_item.get("shares_per_lot_scraped"),
+                        "ipo_summary_text": ipo_item.get("ipo_summary_text"),
+                        
+                        # Date Status and Parsing
+                        "ipo_issue_opening_date_status": ipo_item.get("ipo_issue_opening_date_status"),
+                        "ipo_issue_opening_date_parsed": ipo_item.get("ipo_issue_opening_date_parsed"),
+                        "ipo_issue_closing_date_status": ipo_item.get("ipo_issue_closing_date_status"),
+                        "ipo_issue_closing_date_parsed": ipo_item.get("ipo_issue_closing_date_parsed"),
+                        "ipo_open_date": ipo_item.get("ipo_open_date"),
+                        "ipo_close_date": ipo_item.get("ipo_close_date"),
+                        
+                        # Timeline Information
+                        "basis_of_allotment": ipo_item.get("basis_of_allotment"),
+                        "initiation_of_refunds": ipo_item.get("initiation_of_refunds"),
+                        "credit_of_shares_to_demat": ipo_item.get("credit_of_shares_to_demat"),
+                        "listing_date": ipo_item.get("listing_date"),
+                        
+                        # Additional Date Status Fields
+                        "ipo_open_date_status": ipo_item.get("ipo_open_date_status"),
+                        "ipo_open_date_parsed": ipo_item.get("ipo_open_date_parsed"),
+                        "ipo_close_date_status": ipo_item.get("ipo_close_date_status"),
+                        "ipo_close_date_parsed": ipo_item.get("ipo_close_date_parsed"),
+                        "listing_date_status": ipo_item.get("listing_date_status"),
+                        "listing_date_parsed": ipo_item.get("listing_date_parsed"),
+                        "basis_of_allotment_status": ipo_item.get("basis_of_allotment_status"),
+                        "basis_of_allotment_parsed": ipo_item.get("basis_of_allotment_parsed"),
+                        "initiation_of_refunds_status": ipo_item.get("initiation_of_refunds_status"),
+                        "initiation_of_refunds_parsed": ipo_item.get("initiation_of_refunds_parsed"),
+                        "credit_of_shares_to_demat_status": ipo_item.get("credit_of_shares_to_demat_status"),
+                        "credit_of_shares_to_demat_parsed": ipo_item.get("credit_of_shares_to_demat_parsed"),
+                        
+                        # Lot Information
+                        "lot_issue_price": ipo_item.get("lot_issue_price"),
+                        "lot_market_lot": ipo_item.get("lot_market_lot"),
+                        "lot_individual_investor": ipo_item.get("lot_individual_investor"),
+                        "lot_min_hni_lots": ipo_item.get("lot_min_hni_lots"),
+                        "lot_min_small_hni_lots_2_10_lakh": ipo_item.get("lot_min_small_hni_lots_2_10_lakh"),
+                        "lot_min_big_hni_lots_10_plus_lakh": ipo_item.get("lot_min_big_hni_lots_10_plus_lakh"),
+                        
+                        # GMP (Grey Market Premium) Data - Mapped from input fields
+                        "Seq": ipo_item.get("Seq"),
+                        "id_gmp_data": ipo_item.get("id (GMP Data)"),  # Mapped from "id (GMP Data)"
+                        "ipo_id_gmp_data": ipo_item.get("ipo_id (GMP Data)"),  # Mapped from "ipo_id (GMP Data)"
+                        "gmp_date": ipo_item.get("gmp_date"),
+                        "current_gmp": ipo_item.get("gmp"),  # Mapped from "gmp" to "current_gmp"
+                        "gmp_comments": ipo_item.get("gmp_comments"),
+                        "gmp_compare_desc": ipo_item.get("gmp_compare_desc"),
+                        "subject_to_sauda": ipo_item.get("subject_to_sauda"),
+                        "gmp_city": ipo_item.get("gmp_city"),
+                        "gmp_variation": ipo_item.get("gmp_variation"),
+                        "max_ipo_price": ipo_item.get("max_ipo_price"),
+                        "estimated_listing_price": ipo_item.get("estimated_listing_price"),
+                        "gmp_percent_calc": ipo_item.get("gmp_percent_calc"),
+                        "gmp_desc_other": ipo_item.get("gmp_desc_other"),
+                        "up_down_status": ipo_item.get("up_down_status"),
+                        "gmp_active_record_flag": ipo_item.get("gmp_active_record_flag"),
+                        "sub2 Sauda Rate": ipo_item.get("sub2 Sauda Rate"),
+                        "est_profit": ipo_item.get("est_profit"),
+                        "create_date": ipo_item.get("create_date"),
+                        "create_date_gmp": ipo_item.get("create_date_gmp"),
+                        "last_updated_gmp": ipo_item.get("last_updated_gmp"),
+                        "last_updated": ipo_item.get("last_updated"),
+                        
+                        # Table Data Fields - Mapped from input fields
+                        "ipo_issue_opening_date_table": ipo_item.get("IPO Issue Opening Date"),
+                        "ipo_issue_closing_date_table": ipo_item.get("IPO Issue Closing Date"),
+                        "ipo_issue_price_table": ipo_item.get("IPO Issue Price"),
+                        "drhp_link_table": ipo_item.get("DRHP Link"),
+                        "rhp_link_table": ipo_item.get("RHP Link"),
+                        "listing_at_table": ipo_item.get("Listing At"),
+                        "retail_quota_table": ipo_item.get("Retail Quota"),
+                        "ipo_issue_type_table": ipo_item.get("IPO Issue Type"),
+                        "ipo_issue_size_table": ipo_item.get("IPO Issue Size (Cr)"),
+                        "fresh_issue_table": ipo_item.get("Fresh Issue (Cr)"),
+                        "face_value_table": ipo_item.get("Face Value"),
+                        "promoter_holding_pre_ipo_table": ipo_item.get("Promoter Holding Pre IPO (%)"),
+                        "promoter_holding_post_ipo_table": ipo_item.get("Promoter Holding Post IPO (%)"),
+                        "anchor_list_link_table": ipo_item.get("Anchor List Link"),
+                        "min_order_quantity_table": ipo_item.get("Min Order Quantity (Table)"),
+                        "lot_size_table": ipo_item.get("Lot Size (Table)"),
+                        "allotment_status_table": ipo_item.get("Allotment Status"),
+                        
+                        # Metadata
+                        "last_updated_timestamp": ipo_item.get("last_updated_timestamp"),
+                        "metaTitle": ipo_item.get("metaTitle"),
+                        "pageTitle": ipo_item.get("pageTitle"),
+                        "metaDesc": ipo_item.get("metaDesc"),
+                        "cacheKey": ipo_item.get("cacheKey"),
+                        "currentTime": ipo_item.get("currentTime"),
+                        "scraped_at": ipo_item.get("scraped_at"),
+                        
+                        # Array Fields - Direct mapping
+                        "ipo_share_allocation": ipo_item.get("IPO Share Allocation", []),
+                        "ipo_daywise_subscription_table": ipo_item.get("IPO Daywise Subscription (Table)", []),
+                        "ipo_shares_bid_amount_table": ipo_item.get("IPO Shares Bid Amount (Table)", []),
+                        "ipo_bidding_history_json": ipo_item.get("IPO Bidding History (JSON)", []),
+                        "gmp_trend_history_table": ipo_item.get("GMP Trend History (Table)", []),
+                        "strengths": ipo_item.get("strengths", []),
+                        "objectives": ipo_item.get("objectives", []),
+                        "company_financial_information_restated_consolidated": ipo_item.get("Company Financial Information (Restated Consolidated)", []),
+                        "peer_comparison": ipo_item.get("peer_comparison", []),
+                        
+                        # Object Fields - Direct mapping
+                        "company_address": ipo_item.get("company_address", {}),
+                        "ipo_registrar": ipo_item.get("ipo_registrar", {}),
+                        "ipo_lead_manager": ipo_item.get("ipo_lead_manager", []),
+                        "company_sector_info": ipo_item.get("company_sector_info", {}),
+                        
+                        # System timestamp for tracking
+                        "timestamp": current_time_ist.isoformat()
+                    }
+                    
+                    formatted_data.append(formatted_ipo)
+                    
+                except Exception as item_error:
+                    logger.error(f"Error formatting individual IPO record {ipo_item.get('ipo_id', 'unknown')}: {str(item_error)}")
+                    continue
+            
+            logger.info(f"Successfully formatted {len(formatted_data)} IPO records")
+            print("from format_investorgain_ipo_data:", formatted_data)
+            return formatted_data
+            
+        except Exception as e:
+            logger.error(f"Error formatting InvestorGain IPO data: {str(e)}")
+            return []
+        
 
 
