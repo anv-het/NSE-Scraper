@@ -1,0 +1,6 @@
+git commit -m "Add debugging script for masterdata matching and enhance test cases
+
+- Introduced \`debug_masterdata_matching.py\` to investigate specific masterdata matching issues for NIFTY 25000 Call options.
+- Updated \`nse_cookies.json\` with new cookie values for testing.
+- Enhanced \`test_most_active_contracts.py\` to include detailed output for masterdata integration results.
+- Created \`test_real_nse_masterdata.py\` to validate masterdata integration with real NSE data."

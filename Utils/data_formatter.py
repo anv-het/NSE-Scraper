@@ -490,7 +490,6 @@ class NSEDataFormatter:
                     formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} most active contracts records")
-        print(f"Formatted most active contracts records: {formatted_data[:3]}")
         return formatted_data
 
     @staticmethod
@@ -674,7 +673,6 @@ class NSEDataFormatter:
             }
             formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} most active underlying records")
-        print(f"Formatted ", formatted_data[:3])
         # Return the formatted data
         return formatted_data
 
@@ -1427,7 +1425,7 @@ class NSEDataFormatter:
             current_time_ist = NSEDataFormatter.parse_timestamp(None)
             
             logger.info(f"Starting to format {len(data)} IPO records")
-            
+
             for ipo_item in data:
                 try:
                     # Format the IPO data according to the required output structure
@@ -1559,7 +1557,11 @@ class NSEDataFormatter:
                         "cacheKey": ipo_item.get("cacheKey"),
                         "currentTime": ipo_item.get("currentTime"),
                         "scrapedAt": ipo_item.get("scraped_at"),
-                        
+
+                        #company full name
+                        "companyFullName": ipo_item.get("company_full_name"),
+                        "companyFullNameNew": ipo_item.get("company_full_name_new"),
+
                         # Array Fields - Direct mapping
                         "ipoShareAllocation": ipo_item.get("IPO Share Allocation", []),
                         "ipoDaywiseSubscriptionTable": ipo_item.get("IPO Daywise Subscription (Table)", []),
@@ -1588,7 +1590,7 @@ class NSEDataFormatter:
                     continue
             
             logger.info(f"Successfully formatted {len(formatted_data)} IPO records")
-            # print("from format_investorgain_ipo_data:", formatted_data)
+            print("from format_investorgain_ipo_data:", formatted_data[:1])
             return formatted_data
             
         except Exception as e:

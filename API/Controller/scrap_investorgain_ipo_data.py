@@ -260,6 +260,7 @@ def download_company_logo(logo_url, company_name, ipo_id):
         
         # Skip if file already exists
         if os.path.exists(filepath):
+            logger.info(f"Logo already exists: {filepath}")
             return filepath
         
         # Download the logo
@@ -1246,10 +1247,38 @@ def extract_peer_comparison(soup):
     return peer_comparison_data
 
 # ===== MODULE 14: CONTACT MANAGEMENT DETAILS =====
+def standardize_company_name(name):
+    """
+    Standardizes the company name:
+    - 'Ltd.' -> 'Limited'
+    - 'Pvt.' / 'Pvt' / 'PVR' -> 'Private'
+    - '&' -> 'and'
+    - Proper title casing
+    """
+    if not name:
+        return ""
+
+    # Replace abbreviations and symbols
+    replacements = {
+        r'\bPvt\.?\b': 'Private',
+        r'\bPVR\.?\b': 'Private',
+        r'\bLtd\.?\b': 'Limited',
+        r'&': 'and'
+    }
+
+    for pattern, repl in replacements.items():
+        name = re.sub(pattern, repl, name, flags=re.IGNORECASE)
+
+    # Remove trailing punctuation and extra spaces
+    name = re.sub(r'\s*\.\s*$', '', name)
+    name = re.sub(r'\s+', ' ', name).strip()
+
+    # Title case the full name
+    return name.title()
+
 def extract_company_address(card):
     """
     Extracts company address details from a card element.
-    Based on 14_get_contact_management_details.py logic.
     """
     result = {
         "name": "",
@@ -1356,7 +1385,7 @@ def extract_ipo_lead_manager(card):
 def extract_contact_management_details(soup):
     """
     Extracts contact and management details from the IPO detail page.
-    Based on 14_get_contact_management_details.py logic.
+    Adds 'company_full_name' and 'company_full_name_new' fields.
     """
     data = {
         "company_address": {},
@@ -1366,12 +1395,12 @@ def extract_contact_management_details(soup):
 
     try:
         cards = soup.find_all("div", class_="card")
-        
+
         for card in cards:
             h3 = card.find("h3")
             if not h3:
                 continue
-                
+
             heading = clean_text(h3.get_text(strip=True))
 
             if "Company Address" in heading:
@@ -1380,6 +1409,12 @@ def extract_contact_management_details(soup):
                 data["ipo_registrar"] = extract_ipo_registrar(card)
             elif "Lead Manager" in heading:
                 data["ipo_lead_manager"] = extract_ipo_lead_manager(card)
+
+        # Add company_full_name and formatted version
+        company_name = data["company_address"].get("name")
+        if company_name:
+            data["company_full_name"] = company_name
+            data["company_full_name_new"] = standardize_company_name(company_name)
 
     except Exception as e:
         logger.warning(f"Error extracting contact management details: {e}")
@@ -1444,72 +1479,46 @@ def extract_company_sector_info(soup):
         tables = soup.find_all('table')
         
         for table in tables:
-            rows = table.find_all('tr')
+            thead = table.find('thead')
+            tbody = table.find('tbody')
             
-            # Check if this table contains our expected keys
-            table_text = table.get_text()
-            matching_keys = [key for key in expected_keys if key in table_text]
+            if not thead or not tbody:
+                continue
             
-            if len(matching_keys) >= 2:  # At least 2 matching keys
-                
-                for row in rows:
-                    cells = row.find_all(['td', 'th'])
+            header_cells = thead.find_all(['th', 'td'])
+            headers_text = [clean_text(cell.get_text()) for cell in header_cells]
+            
+            # Check if at least one expected key is present in headers
+            if not any(key in headers_text for key in expected_keys):
+                continue
+            
+            # Extract first data row in tbody
+            data_row = tbody.find('tr')
+            if not data_row:
+                continue
+            
+            data_cells = data_row.find_all('td')
+            if len(data_cells) != len(headers_text):
+                continue
+            
+            for header, cell in zip(headers_text, data_cells):
+                if header in expected_keys:
+                    link = cell.find('a')
+                    value = link.get('href') if link and link.has_attr('href') else clean_text(cell.get_text())
                     
-                    if len(cells) >= 2:
-                        # Extract key-value pairs from adjacent cells
-                        for i in range(0, len(cells) - 1, 2):
-                            key_cell = cells[i]
-                            value_cell = cells[i + 1]
-                            
-                            key = clean_text(key_cell.get_text()).strip()
-                            
-                            # Check if this is one of our expected keys
-                            if key in expected_keys:
-                                # Extract value - check for links first
-                                link = value_cell.find('a')
-                                if link and link.get('href'):
-                                    value = link.get('href')
-                                else:
-                                    value = clean_text(value_cell.get_text()).strip()
-                                
-                                if value and value != "N/A":
-                                    sector_info[key] = value
-
-                # If we found data in this table, we're done
-                if any(v != "N/A" for v in sector_info.values()):
-                    break
+                    if value and value != "N/A":
+                        sector_info[header] = value
+            
+            # If we found any real data (not just "N/A"), we can stop searching further
+            if any(value != "N/A" for value in sector_info.values()):
+                break
         
-        # Fallback heuristic for 4-column tables
-        if all(v == "N/A" for v in sector_info.values()):
-            
-            for table in tables:
-                rows = table.find_all('tr')
-                
-                for row in rows:
-                    cells = row.find_all(['td', 'th'])
-                    
-                    if len(cells) == 4:
-                        # Try to map to our expected structure
-                        keys = [clean_text(cell.get_text()).strip() for cell in cells[::2]]  # Even indices
-                        values = []
-                        
-                        for i in [1, 3]:  # Odd indices
-                            if i < len(cells):
-                                cell = cells[i]
-                                link = cell.find('a')
-                                if link and link.get('href'):
-                                    values.append(link.get('href'))
-                                else:
-                                    values.append(clean_text(cell.get_text()).strip())
-                        
-                        # Map to our expected keys if possible
-                        for key, value in zip(keys, values):
-                            if key in expected_keys and value and value != "N/A":
-                                sector_info[key] = value
+        # Optional: fallback heuristics can be kept here if needed
         
         return sector_info
         
     except Exception as e:
+        # You may want to log the exception here for debugging
         return sector_info
 
 # ===== MODULE 17: IPO Table Details =====
