@@ -34,18 +34,18 @@ from bs4 import BeautifulSoup
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 
 from Utils.logger import get_logger
-from Utils.db import DatabaseManager
-from Utils.data_formatter import NSEDataFormatter
+# from Utils.db import DatabaseManager
+from Utils.data_formatter import NSEDataFormatter  # Commented out as no longer needed
 from Utils.config_reader import ConfigReader
 from Utils.ipo_utils import (
     # Constants
     COMMON_HEADERS, IPO_LIST_API, IPO_GMP_API, IPO_SUBSCRIPTION_API, 
-    BASE_URL, LOGO_DOWNLOAD_DIR, OUTPUT_DIR,
+    BASE_URL, LOGO_DOWNLOAD_DIR, OUTPUT_DIR, IPO_LIST_API_V2,
     # Utility functions
     clean_text, convert_to_float, convert_to_int, clean_html_entities,
     format_ipo_status, parse_date_status, ensure_directory_exists,
     make_robust_request, fetch_ipo_list_from_api, fetch_gmp_data_for_ipo,
-    fetch_subscription_data_for_ipo
+    fetch_subscription_data_for_ipo, fetch_ipo_list_v2,
 )
 
 logger = get_logger(__name__)
@@ -58,29 +58,45 @@ class NSEInvestorGainIPOController:
     """
     
     def __init__(self):
-        self.db = DatabaseManager()
+        # self.db = DatabaseManager()  # Commented out as per user request
         self.config = ConfigReader()
-        self.investorgain_ipo_api_url = IPO_LIST_API
+        self.investorgain_ipo_api_url = IPO_LIST_API_V2
         self.collection_name = "investorgain_ipo_data_v1"
         self.output_filename = "investorgain_ipo_data_v1.json"
         
-    def scrape_investorgain_ipo_data(self) -> Dict[str, Any]:
+    def scrape_investorgain_ipo_data(self, month=None, year=None, fin_year=None) -> Dict[str, Any]:
         """
         Main scraping method called by cron jobs.
+        Now enhanced to support month/year parameters for targeted scraping.
         Scrapes all IPO data and saves to database and file.
+        
+        Args:
+            month: Month for API call (1-12), defaults to current month
+            year: Year for API call, defaults to current year
+            fin_year: Financial year string (e.g., "2025-26"), defaults to current financial year
         """
         try:
-            logger.info(f"Starting InvestorGain IPO data scraping")
+            # Set default values if not provided
+            if month is None or year is None or fin_year is None:
+                now = datetime.now()
+                month = month or now.month
+                year = year or now.year
+                fin_year = fin_year or f"{year}-{str(year+1)[-2:]}"
             
-            # Fetch all IPO data
-            ipo_data = scrape_all_ipo_data_comprehensive()
+            logger.info(f"Starting InvestorGain IPO data scraping for {month}/{year} (FY: {fin_year})")
+            
+            # Fetch all IPO data using enhanced API
+            ipo_data = scrape_all_ipo_data_comprehensive(month=month, year=year, fin_year=fin_year)
             
             if not ipo_data:
                 logger.warning("No IPO data retrieved")
                 return {
                     "success": False,
                     "message": "No IPO data retrieved",
-                    "data_count": 0
+                    "data_count": 0,
+                    "month": month,
+                    "year": year,
+                    "fin_year": fin_year
                 }
             
             # Format data using NSEDataFormatter
@@ -92,12 +108,15 @@ class NSEInvestorGainIPOController:
             # Save to JSON file
             json_result = self.save_to_json_file(formatted_data)
             
-            logger.info(f"Successfully processed {len(formatted_data)} IPO records")
+            logger.info(f"Successfully processed {len(formatted_data)} IPO records for {month}/{year}")
             
             return {
                 "success": True,
-                "message": f"Successfully scraped {len(formatted_data)} IPO records",
+                "message": f"Successfully scraped {len(formatted_data)} IPO records for {month}/{year}",
                 "data_count": len(formatted_data),
+                "month": month,
+                "year": year,
+                "fin_year": fin_year,
                 "database_result": save_result,
                 "json_file_result": json_result
             }
@@ -107,7 +126,10 @@ class NSEInvestorGainIPOController:
             return {
                 "success": False,
                 "message": f"Error scraping IPO data: {str(e)}",
-                "data_count": 0
+                "data_count": 0,
+                "month": month,
+                "year": year,
+                "fin_year": fin_year
             }
     
     def save_investorgain_ipo_data(self, formatted_data: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -119,23 +141,16 @@ class NSEInvestorGainIPOController:
             if not formatted_data:
                 return {"success": False, "message": "No data to save"}
             
-            # Save to MongoDB (existing functionality)
+            # Save to MongoDB (existing functionality) - Commented out as per user request
             # mongo_result = self.db.save_investorgain_ipo_data(formatted_data)
             
-            # Save to SQL Server (new functionality)
-            sql_result = self.db.save_investorgain_ipo_data_to_sql(formatted_data)
+            # Save to SQL Server (new functionality) - Commented out as per user request
+            # sql_result = self.db.save_investorgain_ipo_data_to_sql(formatted_data)
             
-            # Combine results
-            # combined_result = {
-            #     # "success": mongo_result.get("success", False) and sql_result.get("success", False),
-            #     # "mongo_result": mongo_result,
-            #     "sql_result": sql_result,
-            #     "total_processed": len(formatted_data)
-            # }
-
+            # Combine results - All database operations commented out as per user request
             combined_result = {
-                "success": sql_result.get("success", False),
-                "sql_result": sql_result,
+                "success": True,  # Set to True since we're not doing database operations
+                "message": "Database operations commented out as requested",
                 "total_processed": len(formatted_data)
             }
 
@@ -1611,37 +1626,67 @@ def extract_ipo_table_details(soup):
 def scrape_single_ipo_comprehensive(ipo_entry):
     """
     Scrapes complete data for a single IPO using all modules.
+    Now enhanced to use the new API data structure.
     Automatically downloads logos by default.
     Returns comprehensive IPO data dictionary.
     """
-    ipo_id = ipo_entry.get('id')
-    company_short_name = ipo_entry.get('company_short_name')
-    url_rewrite_folder_name = ipo_entry.get('urlrewrite_folder_name')
-    ipo_category = ipo_entry.get('ipo_category')
+    ipo_id = ipo_entry.get('ipoId')  # Updated to use new API field
+    company_short_name = ipo_entry.get('apiCompanyName')  # Updated to use new API field
+    url_rewrite_folder_name = ipo_entry.get('urlrewrite_folder_name')  # This might need to be extracted from apiUrl
+    ipo_category = ipo_entry.get('apiIpoCategory')  # Updated to use new API field
     
-    if not url_rewrite_folder_name or not ipo_id:
+    if not ipo_id:
         return None
 
-    # Initialize comprehensive data with API information
+    # Extract urlrewrite_folder_name from apiUrl if not directly available
+    if not url_rewrite_folder_name:
+        api_url = ipo_entry.get('apiUrl', '')
+        if api_url:
+            # Extract folder name from URL like: https://www.investorgain.com/gmp/vikram-solar-ipo/1377/
+            match = re.search(r'/gmp/([^/]+)/\d+/?$', api_url)
+            if match:
+                url_rewrite_folder_name = match.group(1)
+            else:
+                # Fallback: try to construct from company name
+                url_rewrite_folder_name = re.sub(r'[^a-zA-Z0-9\s-]', '', company_short_name).lower().replace(' ', '-')
+
+    # Initialize comprehensive data with enhanced API information
     comprehensive_data = {
-        'ipo_id': ipo_id,
-        'api_company_name': company_short_name,
-        'api_ipo_category': ipo_category,
-        'api_issue_size': clean_html_entities(ipo_entry.get('issue_size', 'N/A')),
-        'api_issue_open_date': ipo_entry.get('issue_open_dt', 'N/A'),
-        'api_issue_end_date': ipo_entry.get('issue_end_dt', 'N/A'),
-        'api_listing_at': ipo_entry.get('ipo_listing_at', 'N/A'),
-        'api_ipo_status': ipo_entry.get('ipo_status', 'N/A'),
-        'api_ipo_status_formatted': format_ipo_status(ipo_entry.get('ipo_status', 'N/A')),
-        'scraping_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        'ipoId': ipo_id,
+        'apiCompanyName': company_short_name,
+        'apiExchange': ipo_entry.get('apiExchange'),
+        'apiIpoStatusFormatted': ipo_entry.get('apiIpoStatusFormatted'),
+        'apiListedPrice': ipo_entry.get('apiListedPrice'),
+        'apiListingGain': ipo_entry.get('apiListingGain'),
+        'apiGmpValue': ipo_entry.get('apiGmpValue'),
+        'apiGmpPercent': ipo_entry.get('apiGmpPercent'),
+        'apiFireRating': ipo_entry.get('apiFireRating'),
+        'apiFireRatingCount': ipo_entry.get('apiFireRatingCount'),
+        'apiSubscription': ipo_entry.get('apiSubscription'),
+        'apiPrice': ipo_entry.get('apiPrice'),
+        'apiEstimatedListingPrice': ipo_entry.get('apiEstimatedListingPrice'),
+        'apiEstimatedListingPercent': ipo_entry.get('apiEstimatedListingPercent'),
+        'apiIssueSize': ipo_entry.get('apiIssueSize'),
+        'apiLot': ipo_entry.get('apiLot'),
+        'apiPe': ipo_entry.get('apiPe'),
+        'apiIssueOpenDate': ipo_entry.get('apiIssueOpenDate'),
+        'apiIssueCloseDate': ipo_entry.get('apiIssueCloseDate'),
+        'apiBoaDate': ipo_entry.get('apiBoaDate'),
+        'apiListingAt': ipo_entry.get('apiListingAt'),
+        'apiUrl': ipo_entry.get('apiUrl'),
+        'apiIpoCategory': ipo_category,
+        'scrapingDate': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
     
-    # Construct detail page URL
-    detail_url = f"{BASE_URL}/ipo/{url_rewrite_folder_name}/{ipo_id}/"
-    comprehensive_data['detail_url'] = detail_url
-    
+    # Construct detail page URL for additional scraping
+    if url_rewrite_folder_name:
+        detail_url = f"{BASE_URL}/ipo/{url_rewrite_folder_name}/{ipo_id}/"
+        comprehensive_data['detailUrl'] = detail_url
+    else:
+        comprehensive_data['detailUrl'] = ipo_entry.get('apiUrl', 'N/A')
     
     try:
+        # Always proceed with detailed scraping to get complete data structure
         # Fetch and parse detail page
         response = make_robust_request(detail_url)
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -1656,7 +1701,7 @@ def scrape_single_ipo_comprehensive(ipo_entry):
             name_logo_data.get('scraped_company_name', company_short_name),
             ipo_id
         )
-        comprehensive_data['local_logo_path'] = local_logo_path if local_logo_path else 'N/A'
+        comprehensive_data['localLogoPath'] = local_logo_path if local_logo_path else 'N/A'
         
         # MODULE 02: Extract IPO details, about company, and summary
         company_about_data = extract_company_about(soup)
@@ -1797,10 +1842,8 @@ def scrape_single_ipo_comprehensive(ipo_entry):
         #  MODULE 16: extract_company_sector_info(soup) - COMPLETED
         #  MODULE 17: extract_ipo_table_details(soup) - COMPLETED
         
-        # 🎉 COMPREHENSIVE IPO SCRAPER IS NOW COMPLETE! 🎉
-        #  MODULE 13: extract_peer_comparison(soup)
-        #  MODULE 14: extract_contact_management_details(soup)
-        #  MODULE 15: extract_last_updated(soup)
+        # 🎉 COMPREHENSIVE IPO SCRAPER IS NOW COMPLETE WITH ENHANCED API INTEGRATION! 🎉
+        # Now always runs all modules to get complete data structure
         
         return comprehensive_data
         
@@ -1809,18 +1852,25 @@ def scrape_single_ipo_comprehensive(ipo_entry):
         comprehensive_data['scraping_error'] = str(e)
         return comprehensive_data
 
-def scrape_all_ipo_data_comprehensive(max_workers=5):
+def scrape_all_ipo_data_comprehensive(max_workers=5, month=None, year=None, fin_year=None):
     """
     Main function to scrape comprehensive data for all IPOs.
+    Now enhanced to use the new API with month/year parameters.
     Logos are automatically downloaded by default.
+    
+    Args:
+        max_workers: Number of concurrent workers for processing
+        month: Month for API call (1-12), defaults to current month
+        year: Year for API call, defaults to current year
+        fin_year: Financial year string (e.g., "2025-26"), defaults to current financial year
     """
     
-    # Fetch IPO list from API
-    ipo_list = fetch_ipo_list_from_api()
+    # Fetch IPO List from enhanced API with month/year parameters
+    ipo_list = fetch_ipo_list_v2(month, year, fin_year)
     if not ipo_list:
+        logger.error("No IPO data found in the enhanced API response.")
         return []
 
-    
     all_comprehensive_data = []
     
     # Process IPOs with controlled concurrency
@@ -1844,13 +1894,13 @@ def scrape_all_ipo_data_comprehensive(max_workers=5):
                     logger.info(f" Progress: {i}/{len(ipo_list)} IPOs processed ({i/len(ipo_list)*100:.1f}%)")
 
             except Exception as e:
-                logger.error(f" Failed to process IPO {ipo_entry.get('company_short_name', 'Unknown')}: {e}")
+                logger.error(f" Failed to process IPO {ipo_entry.get('apiCompanyName', 'Unknown')}: {e}")
                 # Add error record
                 error_data = {
-                    'ipo_id': ipo_entry.get('id'),
-                    'api_company_name': ipo_entry.get('company_short_name', 'N/A'),
+                    'ipoId': ipo_entry.get('ipoId'),
+                    'apiCompanyName': ipo_entry.get('apiCompanyName', 'N/A'),
                     'processing_error': str(e),
-                    'scraping_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    'scrapingDate': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 }
                 all_comprehensive_data.append(error_data)
 
@@ -1897,12 +1947,19 @@ if __name__ == "__main__":
         # Initialize controller
         controller = NSEInvestorGainIPOController()
         
-        # Execute IPO data scraping using controller method
+        # Example 1: Scrape current month/year (default)
+        logger.info("=== Example 1: Scraping current month/year ===")
         result = controller.scrape_investorgain_ipo_data()
+        
+        # Example 2: Scrape specific month/year
+        logger.info("=== Example 2: Scraping specific month/year ===")
+        # Uncomment the line below to scrape a specific month/year
+        # result = controller.scrape_investorgain_ipo_data(month=8, year=2025, fin_year="2025-26")
         
         if result["success"]:
             logger.info(f"✅ {result['message']}")
             logger.info(f"📊 Data count: {result['data_count']}")
+            logger.info(f"📅 Period: {result.get('month')}/{result.get('year')} (FY: {result.get('fin_year')})")
             if result.get("database_result"):
                 db_result = result["database_result"]
                 logger.info(f"🗄️ Database: {db_result.get('inserted_count', 0)} inserted, {db_result.get('updated_count', 0)} updated")

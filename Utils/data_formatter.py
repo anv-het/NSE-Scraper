@@ -1430,16 +1430,30 @@ class NSEDataFormatter:
                 try:
                     # Format the IPO data according to the required output structure
                     formatted_ipo = {
-                        # Basic IPO Information
-                        "ipoId": ipo_item.get("ipo_id"),
-                        "apiCompanyName": ipo_item.get("api_company_name"),
-                        "apiIpoCategory": ipo_item.get("api_ipo_category"),
-                        "apiIssueSize": ipo_item.get("api_issue_size"),
-                        "apiIssueOpenDate": ipo_item.get("api_issue_open_date"),
-                        "apiIssueEndDate": ipo_item.get("api_issue_end_date"),
-                        "apiListingAt": ipo_item.get("api_listing_at"),
-                        "apiIpoStatus": ipo_item.get("api_ipo_status"),
-                        "apiIpoStatusFormatted": ipo_item.get("api_ipo_status_formatted"),
+                        # Basic IPO Information From API
+                        'ipoId': ipo_item.get("ipoId"),
+                        'apiCompanyName': ipo_item.get('apiCompanyName'),
+                        'apiIpoStatus': ipo_item.get('apiIpoStatus'),
+                        'apiIpoStatusFormatted': ipo_item.get('apiIpoStatusFormatted'),
+                        'apiListedPrice': ipo_item.get('apiListedPrice'),
+                        'apiListingGain': ipo_item.get('apiListingGain'),
+                        'apiGmpValue': ipo_item.get('apiGmpValue'),
+                        'apiGmpPercent': ipo_item.get('apiGmpPercent'),
+                        'apiFireRating': ipo_item.get('apiFireRating'),
+                        'apiFireRatingCount': ipo_item.get('apiFireRatingCount'),
+                        'apiSubscription': ipo_item.get('apiSubscription'),
+                        'apiPrice': ipo_item.get('apiPrice'),
+                        'apiEstimatedListingPrice': ipo_item.get('apiEstimatedListingPrice'),
+                        'apiEstimatedListingPercent': ipo_item.get('apiEstimatedListingPercent'),
+                        'apiIssueSize': ipo_item.get('apiIssueSize'),
+                        'apiLot': ipo_item.get('apiLot'),
+                        'apiPe': ipo_item.get('apiPe'),
+                        'apiIssueOpenDate': ipo_item.get('apiIssueOpenDate'),
+                        'apiIssueCloseDate': ipo_item.get('apiIssueCloseDate'),
+                        'apiBoaDate': ipo_item.get('apiBoaDate'),
+                        'apiListingAt': ipo_item.get('apiListingAt'),
+                        'apiUrl': ipo_item.get('apiUrl'),
+                        'apiIpoCategory': ipo_item.get('apiIpoCategory'),
                         
                         # Scraping Information
                         "scrapingDate": ipo_item.get("scraping_date"),
@@ -1590,7 +1604,6 @@ class NSEDataFormatter:
                     continue
             
             logger.info(f"Successfully formatted {len(formatted_data)} IPO records")
-            print("from format_investorgain_ipo_data:", formatted_data[:1])
             return formatted_data
             
         except Exception as e:

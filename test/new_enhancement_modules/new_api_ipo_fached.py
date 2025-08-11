@@ -155,6 +155,8 @@ def fetch_and_save():
 
     print(f"Saved {len(result)} records to '{filename}'")
 
+    # Return the result for further processing
+    return result
 
 if __name__ == "__main__":
     fetch_and_save()

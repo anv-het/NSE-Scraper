@@ -37,8 +37,10 @@ COMMON_PARAMS = {
     "delay_range": (0.5, 1.5)
 }
 
+# Updated API endpoints
 IPO_LIST_API = "https://webnodejs.investorgain.com/cloud/ipo/list-read"
-IPO_GMP_API = "https://webnodejs.investorgain.com/cloud/ipo/gmp-read"
+IPO_LIST_API_V2 = "https://webnodejs.investorgain.com/cloud/report/data-read/331/1/{month}/{year}/{fin_year}/0/all"
+IPO_GMP_API = "https://webnodejs.investorgain.com/cloud/ipo/ipo-gmp-read"
 IPO_SUBSCRIPTION_API = "https://webnodejs.investorgain.com/cloud/ipo/subscription-read"
 BASE_URL = "https://www.investorgain.com"
 
@@ -258,6 +260,48 @@ def fetch_ipo_list_from_api() -> List[Dict[str, Any]]:
         logger.error(f"Error fetching IPO list from API: {e}")
         return []
 
+# ===== NEW API FETCH UTILITIES =====
+
+def get_api_url():
+    now = datetime.now()
+    month, year = now.month, now.year
+    fin_year = f"{year}-{str(year+1)[-2:]}"
+    return f"https://webnodejs.investorgain.com/cloud/report/data-read/331/1/{month}/{year}/{fin_year}/0/all"
+
+def fetch_ipo_list_v2(month: int = None, year: int = None, fin_year: str = None) -> List[Dict[str, Any]]:
+    """
+    Fetches IPO list from the new enhanced API endpoint.
+    If no parameters provided, uses current date.
+    Returns list of IPO entries with comprehensive information.
+    """
+    if month is None or year is None or fin_year is None:
+        now = datetime.now()
+        month = month or now.month
+        year = year or now.year
+        fin_year = fin_year or f"{year}-{str(year+1)[-2:]}"
+    
+    api_url = IPO_LIST_API_V2.format(month=month, year=year, fin_year=fin_year)
+    logger.info(f"Fetching IPO list from enhanced API: {api_url}")
+    
+    try:
+        response = make_robust_request(api_url)
+        data = response.json()
+        
+        if data.get("msg") == 1 and "reportTableData" in data:
+            # Use the new enhanced parsing function
+            ipo_list = parse_enhanced_ipo_data(data)
+            logger.info(f"Successfully fetched and parsed {len(ipo_list)} IPOs from enhanced API")
+            return ipo_list
+        else:
+            logger.warning(f"Enhanced API response not as expected: {data.get('msg')}")
+            return []
+            
+    except Exception as e:
+        logger.error(f"Error fetching IPO list from enhanced API: {e}")
+        return []
+
+
+
 def fetch_gmp_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
     """
     Fetches Grey Market Premium data for a specific IPO.
@@ -321,6 +365,169 @@ def fetch_subscription_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
     except Exception as e:
         logger.error(f"Error fetching subscription data for IPO {ipo_id}: {e}")
         return None
+
+# ===== ENHANCED API PARSING FUNCTIONS =====
+def extract_text(html_str: str) -> str:
+    """
+    Extracts clean text from HTML string.
+    """
+    if not html_str:
+        return ""
+    return BeautifulSoup(html_str, "html.parser").get_text(strip=True)
+
+def extract_status(name_html: str) -> tuple:
+    """
+    Extracts IPO status from HTML content.
+    Returns (status_code, status_formatted).
+    """
+    soup = BeautifulSoup(name_html or "", "html.parser")
+    badge = soup.find("span", class_="badge")
+
+    # Map status codes to human-readable format
+    status_map = {
+        "U": "Upcoming",
+        "O": "Open",
+        "C": "Closed",
+        "CT": "Close Today",
+        "L": "Listed",
+    }
+
+    if badge:
+        status_code = badge.text.strip()
+        return status_code, status_map.get(status_code, status_code)
+
+    # If there is no badge, detect Listed from the inline text like "L@65.90 (-0.15%)"
+    text = soup.get_text(" ", strip=True)
+    if re.search(r"\bL@", text):
+        return "L", status_map["L"]
+
+    return None, None
+
+def parse_name_field(name_html: str) -> tuple:
+    """
+    Parses the name field to extract company name, listed price, listing gain, exchange, and board.
+    Returns (name, listed_price, listing_gain, exchange, board).
+    """
+    soup = BeautifulSoup(name_html or "", "html.parser")
+    anchor = soup.find("a")
+    anchor_text = anchor.get_text(" ", strip=True) if anchor else extract_text(name_html)
+
+    # Extract listed price and listing gain from the full text
+    listed_price = listing_gain = None
+    full_text = soup.get_text(" ", strip=True)
+    m = re.search(r"L@([\d.]+)\s*\(([-+]?[\d.]+)%\)", full_text)
+    if m:
+        try:
+            listed_price = float(m.group(1))
+            listing_gain = float(m.group(2))
+        except ValueError:
+            pass
+
+    # Detect and strip trailing exchange and board from the anchor text
+    exchange = board = None
+    m2 = re.search(r"\s+(BSE|NSE)\s+(SME|Mainboard|Main)\s*$", anchor_text, flags=re.IGNORECASE)
+    if m2:
+        exchange = m2.group(1).upper()
+        board_raw = m2.group(2)
+        board = "Mainboard" if board_raw.lower().startswith("main") else "SME"
+        name_only = anchor_text[: m2.start()].strip()
+    else:
+        name_only = anchor_text.strip()
+
+    return name_only, listed_price, listing_gain, exchange, board
+
+def parse_gmp(html: str) -> tuple:
+    """
+    Parses GMP data from HTML content.
+    Returns (gmp_value, gmp_percent).
+    """
+    txt = extract_text(html)
+    m = re.search(r"₹?\b([-\d.]+)\b.*\(([-\d.]+)%\)", txt.replace(",", ""))
+    val = pct = None
+    if m:
+        try:
+            val, pct = float(m.group(1)), float(m.group(2))
+        except ValueError:
+            pass
+    return val, pct
+
+def parse_est_listing(html: str) -> tuple:
+    """
+    Parses estimated listing data from HTML content.
+    Returns (estimated_price, estimated_percent).
+    """
+    return parse_gmp(html)
+
+def parse_fire_rating(html: str) -> tuple:
+    """
+    Parses fire rating from HTML content.
+    Returns (fire_emoji, fire_count).
+    """
+    soup = BeautifulSoup(html or "", "html.parser")
+    # Count actual fire emojis in the text content
+    text = soup.get_text("", strip=True)
+    count = text.count("🔥")
+
+    # If none found, try to count HTML entities (e.g., &#128293;)
+    if count == 0:
+        raw = str(html) if html else ""
+        count = raw.count("&#128293;")
+
+    # Never assume a default; allow 0 if truly none
+    emoji = "🔥" * count if count > 0 else ""
+    return emoji, count
+
+def parse_enhanced_ipo_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """
+    Parses the enhanced API response to extract comprehensive IPO data.
+    Returns list of formatted IPO entries.
+    """
+    result = []
+    
+    try:
+        data = api_response.get("reportTableData", [])
+        
+        for item in data:
+            name_raw = item.get("Name", "")
+            name, listed_price, listing_gain, exchange, board = parse_name_field(name_raw)
+            status_code, status_formatted = extract_status(name_raw)
+            gmp_val, gmp_pct = parse_gmp(item.get("GMP", ""))
+            est_price, est_pct = parse_est_listing(item.get("Est Listing", ""))
+            fire_emoji, fire_count = parse_fire_rating(item.get("Fire Rating", ""))
+
+            ipo = {
+                "ipoId": item.get("~id"),
+                "apiCompanyName": name,
+                "apiExchange": exchange,
+                "apiBoard": board,
+                "apiIpoStatus": status_code,
+                "apiIpoStatusFormatted": status_formatted,
+                "apiListedPrice": listed_price,
+                "apiListingGain": listing_gain,
+                "apiGmpValue": gmp_val,
+                "apiGmpPercent": gmp_pct,
+                "apiFireRating": fire_emoji,
+                "apiFireRatingCount": fire_count,
+                "apiSubscription": extract_text(item.get("Sub", "")),
+                "apiPrice": convert_to_float(item.get("Price")) if item.get("Price") else None,
+                "apiEstimatedListingPrice": est_price,
+                "apiEstimatedListingPercent": est_pct,
+                "apiIssueSize": extract_text(item.get("IPO Size", "")),
+                "apiLot": extract_text(item.get("Lot", "")),
+                "apiPe": convert_to_float(item.get("~P/E")) if item.get("~P/E") else None,
+                "apiIssueOpenDate": extract_text(item.get("~Srt_Open", "")),
+                "apiIssueCloseDate": extract_text(item.get("~Srt_Close", "")),
+                "apiBoaDate": extract_text(item.get("~Srt_BoA_Dt", "")),
+                "apiListingAt": extract_text(item.get("~Str_Listing", "")),
+                "apiUrl": "https://www.investorgain.com" + item.get("~urlrewrite_folder_name", ""),
+                "apiIpoCategory": item.get("~IPO_Category"),
+            }
+            result.append(ipo)
+            
+    except Exception as e:
+        logger.error(f"Error parsing enhanced IPO data: {e}")
+        
+    return result
 
 # ===== DIRECTORY UTILITIES =====
 def ensure_directory_exists(directory_path: str) -> None:
