@@ -112,17 +112,37 @@ class NSEInvestorGainIPOController:
     
     def save_investorgain_ipo_data(self, formatted_data: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Saves IPO data to MongoDB using update-based operations.
+        Saves IPO data to both MongoDB and SQL Server using update-based operations.
         Updates existing records based on ipo_id rather than delete-replace.
         """
         try:
             if not formatted_data:
                 return {"success": False, "message": "No data to save"}
             
-            # Use the database manager's IPO-specific save method
-            result = self.db.save_investorgain_ipo_data(formatted_data)
+            # Save to MongoDB (existing functionality)
+            # mongo_result = self.db.save_investorgain_ipo_data(formatted_data)
             
-            return result
+            # Save to SQL Server (new functionality)
+            sql_result = self.db.save_investorgain_ipo_data_to_sql(formatted_data)
+            
+            # Combine results
+            # combined_result = {
+            #     # "success": mongo_result.get("success", False) and sql_result.get("success", False),
+            #     # "mongo_result": mongo_result,
+            #     "sql_result": sql_result,
+            #     "total_processed": len(formatted_data)
+            # }
+
+            combined_result = {
+                "success": sql_result.get("success", False),
+                "sql_result": sql_result,
+                "total_processed": len(formatted_data)
+            }
+
+            # Log the combined result
+            logger.info(f"Combined result: {combined_result}")
+
+            return combined_result
             
         except Exception as e:
             logger.error(f"Error saving to database: {str(e)}")

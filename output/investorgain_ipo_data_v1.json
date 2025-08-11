@@ -1,0 +1,5192 @@
+[
+  {
+    "ipoId": 1363,
+    "apiCompanyName": "JSW Cement",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "3600.00 Cr",
+    "apiIssueOpenDate": "2025-08-07T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-11T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "O",
+    "apiIpoStatusFormatted": "Open",
+    "scrapingDate": "2025-08-08 10:27:53",
+    "detailUrl": "https://www.investorgain.com/ipo/jsw-cement-ipo/1363/",
+    "scrapedCompanyName": "JSW Cement",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/jsw-cement-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1363_JSW_Cement_logo.png",
+    "companyFullNameScraped": "JSW Cement",
+    "aboutCompanyText": "JSW Cement, part of JSW Group, is one of the fastest growing cement companies in India. As per CRISIL report, it is among the top 10 cement companies in terms of sales volume and installed capacity as of March 31, 2025.\n\nProduct offerings:\n\nManufacturing facilities: 7 state-of-the-art manufacturing facilities in India, across states – Andhra Pradesh, Karnataka, Tamil Nadu, Maharashtra, Odisha, and West Bengal.\n\nCombined installed capacity: 20.60 million metric tonnes per annum (MMTPA)\n\nDistribution network: 4,653 dealers with 8,844 sub-dealers, and 158 strategically placed warehouses as on March 31, 2025.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "102",
+    "ipoSummaryText": "JSW Cement IPO, a IPO of ₹3600.00 Cr opens for subscription from August 7, 2025 to August 11, 2025. The IPO consists of ₹1600.00 Cr fresh issue and ₹2000.00 Cr offer for sale.\n\nThe face value of each share is 10, and the price band is set between 139.00-147.00 per share. Retail investors can apply to the JSW Cement IPO with a minimum application of 1 lot, each comprising 102 shares—amounting to a total investment of Rs14994.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 14, 2025.\n\nStay tuned with us to get more details about JSW Cement IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "7th Aug 2025",
+    "ipoCloseDate": "11th Aug 2025",
+    "basisOfAllotment": "12th Aug 2025",
+    "initiationOfRefunds": "13th Aug 2025",
+    "creditOfSharesToDemat": "13th Aug 2025",
+    "listingDate": "14th Aug 2025",
+    "ipoOpenDateStatus": "Past",
+    "ipoOpenDateParsed": "2025-08-07",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-11",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-14",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-12",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-13",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-13",
+    "lotIssuePrice": "₹139.00-147.00",
+    "lotMarketLot": "102Shares",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "1428 shares (14 lots)-₹2,09,916",
+    "lotMinBigHniLots10PlusLakh": "6834 shares (67 lots)-₹10,04,598",
+    "seq": "1",
+    "idGmpData": "21965",
+    "ipoIdGmpData": "1363",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "13",
+    "gmpComments": "JSW Cement IPO last GMP is 13, last updated Aug 8th 2025 09:53 AM. With the price band of 147.00, JSW Cement IPO's estimated listing price is 160 (cap price + today's GMP).The expected percentage gain/loss per share is 8.84%.>> JSW Cement IPO Retail Subject to Sauda: 1000 >> JSW Cement IPO Small HNI Subject to Sauda: 14000",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 7 sessions grey market activities, today IPO GMP trending upward and expects a strong listing. The lowest GMP is 0.00, while the highest GMP is 19.00. Stay with us to know the daily price trend of JSW Cement IPO GMP with expected listing price.",
+    "subjectToSauda": "1000",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "147.00",
+    "estimatedListingPrice": "160",
+    "gmpPercentCalc": "8.84",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "1000/14000",
+    "estProfit": "1326",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:53 AM",
+    "lastUpdated": "07-Aug-2025 10:41:30",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹139.00-147.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/aug-2024/jsw-cement-limited_85982.html",
+    "rhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/aug-2025/jsw-cement-limited-rhp_95804.html",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not less than 35% of the Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹3600.00 Cr",
+    "freshIssueTable": "₹1600.00 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "78.62",
+    "promoterHoldingPostIpoTable": "72.34",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/jsw-cement-ipo-anchor-allocation-report.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 10:41:30",
+    "metaTitle": "JSW Cement Mainline Live Subscription. Total: 0.30 times.",
+    "pageTitle": "JSW Cement Live Subscription",
+    "metaDesc": "JSW Cement Mainline Live Subscription. Total: 0.30 times as of 7th Aug 2025 17:06.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:56.018828",
+    "ipoShareAllocation": [
+      {
+        "category": "Qualified Institutional Buyers",
+        "shares_allocated": 48979594,
+        "allocation_pct": 28.57
+      },
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 36734694,
+        "allocation_pct": 21.43
+      },
+      {
+        "category": "Small NII (SNII- Bid below ₹10L)",
+        "shares_allocated": 12244898,
+        "allocation_pct": 7.14
+      },
+      {
+        "category": "Big NII (BNII- Bid above ₹10L)",
+        "shares_allocated": 24489796,
+        "allocation_pct": 14.29
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 85714286,
+        "allocation_pct": 50.0
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "7th Aug 2025 17:06",
+        "qib_ratio": 0.24,
+        "nii_ratio": 0.21,
+        "rii_ratio": 0.36,
+        "emp_ratio": 0.14,
+        "total_ratio": 0.38
+      },
+      {
+        "day_number": 2,
+        "date_time": "8th Aug 2025 10:21",
+        "qib_ratio": 0.24,
+        "nii_ratio": 0.26,
+        "rii_ratio": 0.44,
+        "emp_ratio": 0.16,
+        "total_ratio": 0.45
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "QIB",
+        "shares_offered": 48979594,
+        "shares_bid": 11710518,
+        "bid_amount_cr": 172.14
+      },
+      {
+        "category": "NII",
+        "shares_offered": 36734694,
+        "shares_bid": 9394608,
+        "bid_amount_cr": 138.1
+      },
+      {
+        "category": "Small NII",
+        "shares_offered": 12244898,
+        "shares_bid": 5429562,
+        "bid_amount_cr": 79.81
+      },
+      {
+        "category": "Big NII",
+        "shares_offered": 24489796,
+        "shares_bid": 3965046,
+        "bid_amount_cr": 58.29
+      },
+      {
+        "category": "RII",
+        "shares_offered": 85714286,
+        "shares_bid": 38967672,
+        "bid_amount_cr": 572.82
+      },
+      {
+        "category": "Total",
+        "shares_offered": 171428574,
+        "shares_bid": 60072798,
+        "bid_amount_cr": 883.07
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7838,
+        "tsb_ipo_id": 1363,
+        "cor_id": 2230,
+        "bid_date": "7th Aug 2025 17:06",
+        "qib_offered": 48979594,
+        "nii_offered": 36734694,
+        "nii_offered_big": 24489796,
+        "nii_offered_small": 12244898,
+        "rii_offered": 85714286,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 171428574,
+        "qib_shares_bid_for": 11710518,
+        "nii_shares_bid_for": 7761486,
+        "nii_shares_bid_for_big": 3362634,
+        "nii_shares_bid_for_small": 4398852,
+        "rii_shares_bid_for": 32653464,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 52125468,
+        "qib_bid_amt": 172.14,
+        "nii_bid_amt": 114.09,
+        "nii_bid_amt_big": 49.43,
+        "nii_bid_amt_small": 64.66,
+        "rii_bid_amt": 480.01,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 766.24,
+        "qib": 0.24,
+        "nii": 0.21,
+        "nii_big": 0.14,
+        "nii_small": 0.36,
+        "rii": 0.38,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 0.3,
+        "cor_date_added": "2025-08-07T17:10:05.000Z",
+        "create_date": "2025-08-07T17:15:01.000Z",
+        "ipo_category_desc": "IPO",
+        "listing_at": "N/A",
+        "company_short_name": "JSW Cement"
+      },
+      {
+        "Seq": 2,
+        "id (Subscription Data)": 7843,
+        "tsb_ipo_id": 1363,
+        "cor_id": 2230,
+        "bid_date": "8th Aug 2025 10:21",
+        "qib_offered": 48979594,
+        "nii_offered": 36734694,
+        "nii_offered_big": 24489796,
+        "nii_offered_small": 12244898,
+        "rii_offered": 85714286,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 171428574,
+        "qib_shares_bid_for": 11710518,
+        "nii_shares_bid_for": 9394608,
+        "nii_shares_bid_for_big": 3965046,
+        "nii_shares_bid_for_small": 5429562,
+        "rii_shares_bid_for": 38967672,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 60072798,
+        "qib_bid_amt": 172.14,
+        "nii_bid_amt": 138.1,
+        "nii_bid_amt_big": 58.29,
+        "nii_bid_amt_small": 79.81,
+        "rii_bid_amt": 572.82,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 883.07,
+        "qib": 0.24,
+        "nii": 0.26,
+        "nii_big": 0.16,
+        "nii_small": 0.44,
+        "rii": 0.45,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 0.35,
+        "cor_date_added": "2025-08-08T10:20:04.000Z",
+        "create_date": "2025-08-08T10:25:05.000Z",
+        "ipo_category_desc": "N/A",
+        "listing_at": "N/A",
+        "company_short_name": "N/A"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "147.00",
+        "GMP": "₹13",
+        "Sub2 Sauda Rate": "1000/14000",
+        "Estimated Listing Price": "₹160 ( 8.84% )",
+        "Estimated Profit": "₹1326",
+        "Last Updated": "8-Aug-2025 9:53"
+      },
+      {
+        "GMP Date": "07-08-2025 Open",
+        "IPO Price": "147.00",
+        "GMP": "₹13",
+        "Sub2 Sauda Rate": "1000/14000",
+        "Estimated Listing Price": "₹160 ( 8.84% )",
+        "Estimated Profit": "₹1326",
+        "Last Updated": "7-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "147.00",
+        "GMP": "₹6",
+        "Sub2 Sauda Rate": "500/7000",
+        "Estimated Listing Price": "₹153 ( 4.08% )",
+        "Estimated Profit": "₹612",
+        "Last Updated": "6-Aug-2025 23:34"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "147.00",
+        "GMP": "₹14",
+        "Sub2 Sauda Rate": "1100/15400",
+        "Estimated Listing Price": "₹161 ( 9.52% )",
+        "Estimated Profit": "₹1428",
+        "Last Updated": "5-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "147.00",
+        "GMP": "₹19",
+        "Sub2 Sauda Rate": "1500/21000",
+        "Estimated Listing Price": "₹166 ( 12.93% )",
+        "Estimated Profit": "₹1938",
+        "Last Updated": "4-Aug-2025 23:34"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "2-Aug-2025 11:34"
+      }
+    ],
+    "strengths": [
+      "India’s largest manufacturer of Ground Granualated Blast Furnance Slag (GGBFS)",
+      "Strategically located manufacturing facilities",
+      "Strong sales and distribution network in India"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Part financing the cost of establishing a new integrated cement unit at Nagaur, Rajasthan",
+        "amount": "800.00"
+      },
+      {
+        "s_no": "2",
+        "object": "Prepayment or repayment, in full or in part, of all or a portion of certain outstanding borrowings availed by the Company",
+        "amount": "520.00"
+      },
+      {
+        "s_no": "3",
+        "object": "General Corporate Purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "12003.94",
+        "31 Mar 2024": "11318.91",
+        "31 Mar 2023": "10218.61"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "5914.67",
+        "31 Mar 2024": "6114.60",
+        "31 Mar 2023": "5982.21"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "-163.77",
+        "31 Mar 2024": "62.01",
+        "31 Mar 2023": "104.04"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "815.32",
+        "31 Mar 2024": "1035.66",
+        "31 Mar 2023": "826.97"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "2352.55",
+        "31 Mar 2024": "2464.68",
+        "31 Mar 2023": "2292.10"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "1287.31",
+        "31 Mar 2024": "1399.06",
+        "31 Mar 2023": "1296.66"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "6166.55",
+        "31 Mar 2024": "5835.76",
+        "31 Mar 2023": "5421.54"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "JSW Cement Limited",
+        "EPS Basic": "-1.16",
+        "EPS Diluted": "-1.16",
+        "NAV": "23.85",
+        "P/E(x)": "",
+        "RoNW": "-4.85",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Ultratech Cement Limited",
+        "EPS Basic": "205.3",
+        "EPS Diluted": "205.13",
+        "NAV": "2403.71",
+        "P/E(x)": "59.56",
+        "RoNW": "8.54",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Ambuja Cements Limited",
+        "EPS Basic": "17",
+        "EPS Diluted": "16.96",
+        "NAV": "218",
+        "P/E(x)": "35.97",
+        "RoNW": "7.8",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Shree Cement Limited",
+        "EPS Basic": "311.18",
+        "EPS Diluted": "311.18",
+        "NAV": "5969.32",
+        "P/E(x)": "97.77",
+        "RoNW": "5.21",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Dalmia Bharat Limited",
+        "EPS Basic": "36.42",
+        "EPS Diluted": "36.42",
+        "NAV": "926.34",
+        "P/E(x)": "60.39",
+        "RoNW": "3.93",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Jk Cement Limited",
+        "EPS Basic": "111.44",
+        "EPS Diluted": "111.44",
+        "NAV": "788.03",
+        "P/E(x)": "58.39",
+        "RoNW": "14.14",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "The Ramco Cements Limited",
+        "EPS Basic": "11.53",
+        "EPS Diluted": "11.53",
+        "NAV": "314.82",
+        "P/E(x)": "103.5",
+        "RoNW": "3.66",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "The India Cements Limited",
+        "EPS Basic": "153.23",
+        "EPS Diluted": "153.23",
+        "NAV": "328.95",
+        "P/E(x)": "2.38",
+        "RoNW": "-1.41",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "JSW Cement Ltd.",
+      "address": "JSW Centre, Bandra Kurla Complex, Bandra (East), Mumbai, , Maharashtra, -, 400051",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Kotak Mahindra Capital Company Limited",
+      "Jm Financial Limited",
+      "SBI Capital Markets Limited",
+      "Citigroup Global Markets India Private Limited",
+      "Dam Capital Advisors Ltd (Formerly Idfc Securities Ltd)",
+      "Goldman Sachs (India) Securities Private Limited",
+      "Jefferies India Private Limited",
+      "Axis Capital Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1366,
+    "apiCompanyName": "All Time Plastics",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "400.60 Cr",
+    "apiIssueOpenDate": "2025-08-07T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-11T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "O",
+    "apiIpoStatusFormatted": "Open",
+    "scrapingDate": "2025-08-08 10:27:53",
+    "detailUrl": "https://www.investorgain.com/ipo/all-time-plastics-ipo/1366/",
+    "scrapedCompanyName": "All Time Plastics",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/all-time-plastics-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1366_All_Time_Plastics_logo.png",
+    "companyFullNameScraped": "All Time Plastics",
+    "aboutCompanyText": "All Time Plastics priduces plastic consumerware products for everyday needs. It manufactures products under the own brand name, \"All Time\" and also sells under the proprietary brand name, B2C basis.\n\nAs of March 31, 2025, it has 1,848 stock keeping units (SKUs) across eight categories; Prep Time, Containers, Hangers, Meal Time, Cleaning Time, Bath Time, and Junior products. In Fiscal 2025, the company launched 598 SKUs across various categories.\n\nIt exported products to 28 countries. The company sold products to 22 modern trade retailers, 5 super distributors and 38 distributors.\n\nIt has a manufacturing facility in Daman, Dadra and Nagar Haveli and Daman and Diu, Silvassa, Dadra and Nagar Haveli and Daman and Diu and Manekpur, Gujarat.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "54",
+    "ipoSummaryText": "All Time Plastics IPO, a IPO of ₹400.60 Cr opens for subscription from August 7, 2025 to August 11, 2025. The IPO consists of ₹280.00 Cr fresh issue and ₹120.60 Cr offer for sale.\n\nThe face value of each share is 2, and the price band is set between 260.00-275.00 per share. Retail investors can apply to the All Time Plastics IPO with a minimum application of 1 lot, each comprising 54 shares—amounting to a total investment of Rs14850.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 14, 2025.\n\nStay tuned with us to get more details about All Time Plastics IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "7th Aug 2025",
+    "ipoCloseDate": "11th Aug 2025",
+    "basisOfAllotment": "12th Aug 2025",
+    "initiationOfRefunds": "13th Aug 2025",
+    "creditOfSharesToDemat": "13th Aug 2025",
+    "listingDate": "14th Aug 2025",
+    "ipoOpenDateStatus": "Past",
+    "ipoOpenDateParsed": "2025-08-07",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-11",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-14",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-12",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-13",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-13",
+    "lotIssuePrice": "₹260.00-275.00",
+    "lotMarketLot": "54Shares",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "756 shares (14 lots)-₹2,07,900",
+    "lotMinBigHniLots10PlusLakh": "3672 shares (68 lots)-₹10,09,800",
+    "seq": "1",
+    "idGmpData": "21968",
+    "ipoIdGmpData": "1366",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "25",
+    "gmpComments": "All Time Plastics IPO last GMP is 25, last updated Aug 8th 2025 09:56 AM. With the price band of 275.00, All Time Plastics IPO's estimated listing price is 300 (cap price + today's GMP).The expected percentage gain/loss per share is 9.09%.>> All Time Plastics IPO Retail Subject to Sauda: 1000 >> All Time Plastics IPO Small HNI Subject to Sauda: 14000",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 6 sessions grey market activities, today IPO GMP points upward and expects a strong listing. The lowest GMP is 0.00, while the highest GMP is 25.00. Stay with us to know the daily price trend of All Time Plastics IPO GMP with expected listing price.",
+    "subjectToSauda": "1000",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "275.00",
+    "estimatedListingPrice": "300",
+    "gmpPercentCalc": "9.09",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "1000/14000",
+    "estProfit": "1350",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:56 AM",
+    "lastUpdated": "07-Aug-2025 10:39:43",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹260.00-275.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/oct-2024/all-time-plastics-limited_87321.html",
+    "rhpLinkTable": "https://nsearchives.nseindia.com/content/ipo/RHP_ALLTIME.zip",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not less than 35% of the Net Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹400.60 Cr",
+    "freshIssueTable": "₹280.00 Cr",
+    "faceValueTable": "₹2Per Equity Share",
+    "promoterHoldingPreIpoTable": "90.98",
+    "promoterHoldingPostIpoTable": "70.15",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/all-time-plastic-ipo-anchor-allocation-report.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 10:39:43",
+    "metaTitle": "All Time Plastics Mainline Live Subscription. Total: 0.37 times.",
+    "pageTitle": "All Time Plastics Live Subscription",
+    "metaDesc": "All Time Plastics Mainline Live Subscription. Total: 0.37 times as of 7th Aug 2025 17:06.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:56.116478",
+    "ipoShareAllocation": [
+      {
+        "category": "Qualified Institutional Buyers",
+        "shares_allocated": 2907003,
+        "allocation_pct": 28.47
+      },
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 2180252,
+        "allocation_pct": 21.35
+      },
+      {
+        "category": "Small NII (SNII- Bid below ₹10L)",
+        "shares_allocated": 1453501,
+        "allocation_pct": 14.24
+      },
+      {
+        "category": "Big NII (BNII- Bid above ₹10L)",
+        "shares_allocated": 726751,
+        "allocation_pct": 7.12
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 5087254,
+        "allocation_pct": 49.82
+      },
+      {
+        "category": "Employees Quota",
+        "shares_allocated": 35750,
+        "allocation_pct": 0.35
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "7th Aug 2025 17:06",
+        "qib_ratio": 0.0,
+        "nii_ratio": 0.34,
+        "rii_ratio": 0.23,
+        "emp_ratio": 0.56,
+        "total_ratio": 0.58
+      },
+      {
+        "day_number": 2,
+        "date_time": "8th Aug 2025 10:21",
+        "qib_ratio": 0.0,
+        "nii_ratio": 0.41,
+        "rii_ratio": 0.29,
+        "emp_ratio": 0.64,
+        "total_ratio": 0.72
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "QIB",
+        "shares_offered": 2907003,
+        "shares_bid": 2268,
+        "bid_amount_cr": 0.06
+      },
+      {
+        "category": "NII",
+        "shares_offered": 2180252,
+        "shares_bid": 884142,
+        "bid_amount_cr": 24.31
+      },
+      {
+        "category": "Small NII",
+        "shares_offered": 1453501,
+        "shares_bid": 421254,
+        "bid_amount_cr": 11.58
+      },
+      {
+        "category": "Big NII",
+        "shares_offered": 726751,
+        "shares_bid": 462888,
+        "bid_amount_cr": 12.73
+      },
+      {
+        "category": "RII",
+        "shares_offered": 5087254,
+        "shares_bid": 3650454,
+        "bid_amount_cr": 100.39
+      },
+      {
+        "category": "EMP",
+        "shares_offered": 35750,
+        "shares_bid": 74736,
+        "bid_amount_cr": 2.06
+      },
+      {
+        "category": "Total",
+        "shares_offered": 10210259,
+        "shares_bid": 4611600,
+        "bid_amount_cr": 126.82
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7837,
+        "tsb_ipo_id": 1366,
+        "cor_id": 2125,
+        "bid_date": "7th Aug 2025 17:06",
+        "qib_offered": 2907003,
+        "nii_offered": 2180252,
+        "nii_offered_big": 726751,
+        "nii_offered_small": 1453501,
+        "rii_offered": 5087254,
+        "emp_offered": 35750,
+        "other_offered": 0,
+        "total_offered": 10210259,
+        "qib_shares_bid_for": 2268,
+        "nii_shares_bid_for": 742230,
+        "nii_shares_bid_for_big": 407376,
+        "nii_shares_bid_for_small": 334854,
+        "rii_shares_bid_for": 2942190,
+        "emp_shares_bid_for": 66690,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 3753378,
+        "qib_bid_amt": 0.06,
+        "nii_bid_amt": 20.41,
+        "nii_bid_amt_big": 11.2,
+        "nii_bid_amt_small": 9.21,
+        "rii_bid_amt": 80.91,
+        "emp_bid_amt": 1.83,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 103.22,
+        "qib": 0.0,
+        "nii": 0.34,
+        "nii_big": 0.56,
+        "nii_small": 0.23,
+        "rii": 0.58,
+        "emp": 1.87,
+        "other": 0.0,
+        "total": 0.37,
+        "cor_date_added": "2025-08-07T17:10:05.000Z",
+        "create_date": "2025-08-07T17:15:01.000Z",
+        "ipo_category_desc": "IPO",
+        "listing_at": "N/A",
+        "company_short_name": "All Time Plastics"
+      },
+      {
+        "Seq": 2,
+        "id (Subscription Data)": 7844,
+        "tsb_ipo_id": 1366,
+        "cor_id": 2125,
+        "bid_date": "8th Aug 2025 10:21",
+        "qib_offered": 2907003,
+        "nii_offered": 2180252,
+        "nii_offered_big": 726751,
+        "nii_offered_small": 1453501,
+        "rii_offered": 5087254,
+        "emp_offered": 35750,
+        "other_offered": 0,
+        "total_offered": 10210259,
+        "qib_shares_bid_for": 2268,
+        "nii_shares_bid_for": 884142,
+        "nii_shares_bid_for_big": 462888,
+        "nii_shares_bid_for_small": 421254,
+        "rii_shares_bid_for": 3650454,
+        "emp_shares_bid_for": 74736,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 4611600,
+        "qib_bid_amt": 0.06,
+        "nii_bid_amt": 24.31,
+        "nii_bid_amt_big": 12.73,
+        "nii_bid_amt_small": 11.58,
+        "rii_bid_amt": 100.39,
+        "emp_bid_amt": 2.06,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 126.82,
+        "qib": 0.0,
+        "nii": 0.41,
+        "nii_big": 0.64,
+        "nii_small": 0.29,
+        "rii": 0.72,
+        "emp": 2.09,
+        "other": 0.0,
+        "total": 0.45,
+        "cor_date_added": "2025-08-08T10:20:05.000Z",
+        "create_date": "2025-08-08T10:25:05.000Z",
+        "ipo_category_desc": "N/A",
+        "listing_at": "N/A",
+        "company_short_name": "N/A"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "275.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "1000/14000",
+        "Estimated Listing Price": "₹300 ( 9.09% )",
+        "Estimated Profit": "₹1350",
+        "Last Updated": "8-Aug-2025 9:56"
+      },
+      {
+        "GMP Date": "07-08-2025 Open",
+        "IPO Price": "275.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "1000/14000",
+        "Estimated Listing Price": "₹300 ( 9.09% )",
+        "Estimated Profit": "₹1350",
+        "Last Updated": "7-Aug-2025 23:29"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "275.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "1000/14000",
+        "Estimated Listing Price": "₹300 ( 9.09% )",
+        "Estimated Profit": "₹1350",
+        "Last Updated": "6-Aug-2025 23:36"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "275.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹275 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "5-Aug-2025 23:29"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "275.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹275 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "4-Aug-2025 23:35"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 23:32"
+      }
+    ],
+    "strengths": [
+      "Strategically located and integrated manufacturing facilities.",
+      "Growing range of plastic consumerware products, with in-house product design",
+      "Long-standing relationship with global retailers, including IKEA, Asda, Michaels and Tesco.",
+      "Strong financial performance track record."
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Prepayment or repayment of all or a portion of certain outstanding borrowings availed by the Company.",
+        "amount": "143.00"
+      },
+      {
+        "s_no": "2",
+        "object": "Purchase of equipment and machinery for the Manekpur Facility.",
+        "amount": "113.71"
+      },
+      {
+        "s_no": "3",
+        "object": "General corporate purposes.",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "562.32",
+        "31 Mar 2024": "415.46",
+        "31 Mar 2023": "400.48"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "559.24",
+        "31 Mar 2024": "515.88",
+        "31 Mar 2023": "443.76"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "47.29",
+        "31 Mar 2024": "44.79",
+        "31 Mar 2023": "28.27"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "101.34",
+        "31 Mar 2024": "97.10",
+        "31 Mar 2023": "73.38"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "249.13",
+        "31 Mar 2024": "202.35",
+        "31 Mar 2023": "157.84"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "247.73",
+        "31 Mar 2024": "200.87",
+        "31 Mar 2023": "156.60"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "218.51",
+        "31 Mar 2024": "142.35",
+        "31 Mar 2023": "171.74"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "All Time Plastics Limited",
+        "EPS Basic": "9.01",
+        "EPS Diluted": "9.01",
+        "NAV": "47.39",
+        "P/E(x)": "",
+        "RoNW": "19.01",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Shaily Engineering Plastics Ltd.",
+        "EPS Basic": "20.29",
+        "EPS Diluted": "20.29",
+        "NAV": "119.18",
+        "P/E(x)": "80.69",
+        "RoNW": "17",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Cello World Limited",
+        "EPS Basic": "15.5",
+        "EPS Diluted": "15.5",
+        "NAV": "98.12",
+        "P/E(x)": "40.71",
+        "RoNW": "16.82",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "All Time Plastics Ltd.",
+      "address": "B-30, Royal Industrial Estate, Wadala, Mumbai, , Maharashtra, -, 400031",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Dam Capital Advisors Ltd (Formerly Idfc Securities Ltd)",
+      "Intensive Fiscal Services Private Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1375,
+    "apiCompanyName": "Shreeji Shipping Global",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "1.63 Cr Shares",
+    "apiIssueOpenDate": "2025-08-19T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-21T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:53",
+    "detailUrl": "https://www.investorgain.com/ipo/shreeji-shipping-global-ipo/1375/",
+    "scrapedCompanyName": "Shreeji Shipping Global",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/shreeji-logo.jpg",
+    "localLogoPath": "downloads/ipo/logos\\1375_Shreeji_Shipping_Global_logo.jpg",
+    "companyFullNameScraped": "Shreeji Shipping Global",
+    "aboutCompanyText": "Shreeji Shipping Global Ltd is a leading provider of integrated shipping and logistics solutions for dry bulk cargo across various ports and jetties in India and Sri Lanka. As of March 31, 2025, our operational fleet includes over 80 vessels—comprising barges, mini bulk carriers (MBCs), tug boats, and floating cranes—and more than 370 earthmoving equipment, such as material handling machines, excavators, pay loaders, tippers, trailers, tankers, and other vehicles.\n\nOur services span over 20 key ports and jetties, including major Indian ports like Kandla, non-major ports such as Navlakhi, Magdalla, Bhavnagar, Bedi, and Dharmatar, and the international port of Puttalam in Sri Lanka.\n\nThe company offers end-to-end logistics and shipping solutions for dry bulk cargo, covering both cargo handling and transportation services. Our cargo handling operations include STS (Ship-to-Ship) lighterage, stevedoring, and port-based cargo management services. As part of our logistics chain, we also offer transportation services from port to customer premises and vice versa.\n\nService Offerings:\n\nWe cater to clients across diverse industries, including Oil & Gas, Power & Energy, FMCG, Coal, and Metals.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "N/A",
+    "ipoSummaryText": "Shreeji Shipping Global IPO worth of 1.63 Cr Shares is coming soon. it is a IPO which will list on BSE, NSE.IPO opening and closing dates, IPO price band and lot size are yet to be announced. Stay connected with us to get the complete Shreeji Shipping Global IPO 2025 details including business overview, financial performance, IPO opening and closing dates, GMP, issue details and subscription details.\n\nIPO opening and closing dates, IPO price band and lot size are yet to be announced.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "19th Aug 2025",
+    "ipoCloseDate": "21st Aug 2025",
+    "basisOfAllotment": "22nd Aug 2025",
+    "initiationOfRefunds": "25th Aug 2025",
+    "creditOfSharesToDemat": "25th Aug 2025",
+    "listingDate": "26th Aug 2025",
+    "ipoOpenDateStatus": "Future",
+    "ipoOpenDateParsed": "2025-08-19",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-21",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-26",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-22",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-25",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-25",
+    "lotIssuePrice": "₹TBD",
+    "lotMarketLot": "N/A",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21976",
+    "ipoIdGmpData": "1375",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "GMP for Shreeji Shipping Global IPO has not started yet. We are updating the GMP information on a daily basis. Please visit us again soon for the latest GMP updates.",
+    "gmpCompareDesc": "The GMP for Shreeji Shipping Global IPO has started from 2 session. It is still very early to determine the direction of the GMP. We are updating the information every day, stay tuned with the latest GMP and more details. Stay tuned to learn more about Shreeji Shipping Global IPO daily GMP performance and expected expected listing price.",
+    "subjectToSauda": "-",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "",
+    "estimatedListingPrice": "",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdated": "07-Aug-2025 10:58:55",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹TBDPer Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/jan-2025/shreeji-shipping-global-limited_91371.html",
+    "rhpLinkTable": "https://www.chittorgarh.net/reports/ipo_notes/shreeji-shipping-rhp.pdf",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not less than 35.00% of the Net Issue",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "1.63 Cr Shares",
+    "freshIssueTable": "1.63 Cr Shares",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "100",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 10:58:55",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:56.216468",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "8-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "7-Aug-2025 10:34"
+      }
+    ],
+    "strengths": [
+      "Prominent player in integrated shipping and logistic service provider in India",
+      "Long-term institutional customer relationships in key sectors",
+      "Established cargo handling operations for Dry Bulk Cargo",
+      "Operational capabilities of our own fleet",
+      "Proven Track Record of Growth in Financial Performance",
+      "Experienced Promoters and committed Management Team"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Acquisition of Dry Bulk Carriers in Supramax category in the secondary market",
+        "amount": "251.18"
+      },
+      {
+        "s_no": "2",
+        "object": "Pre-payment/ re-payment, in part or full, of certain outstanding borrowings availed by the Company",
+        "amount": "23.00"
+      },
+      {
+        "s_no": "3",
+        "object": "General Corporate Purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "758.58",
+        "31 Mar 2024": "610.65",
+        "31 Mar 2023": "600.92"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "610.45",
+        "31 Mar 2024": "736.17",
+        "31 Mar 2023": "827.33"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "141.24",
+        "31 Mar 2024": "124.51",
+        "31 Mar 2023": "118.89"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "200.68",
+        "31 Mar 2024": "197.89",
+        "31 Mar 2023": "188.71"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "343.17",
+        "31 Mar 2024": "315.18",
+        "31 Mar 2023": "255.81"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "196.55",
+        "31 Mar 2024": "315.08",
+        "31 Mar 2023": "255.71"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "256.47",
+        "31 Mar 2024": "158.88",
+        "31 Mar 2023": "175.45"
+      }
+    ],
+    "peerComparison": [],
+    "companyAddress": {
+      "name": "Shreeji Shipping Global Ltd.",
+      "address": "Shreeji House, Town Hall Circle, Kalavad, Jamnagar, , Gujarat, -, 361001",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Bigshare Services Pvt Ltd",
+      "address": "1st Floor, Bharat Tin Works Building, Opp. Vasant Oasis,Makwana Road, Marol, Andheri(E), Mumbai - 400 059",
+      "website": "https://ipo.bigshareonline.com/IPO_Status.html",
+      "phone": "+91-22-6263 8200",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Elara Capital (India) Private Limited",
+      "Beeline Capital Advisors Pvt Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1370,
+    "apiCompanyName": "BlueStone Jewellery",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "1540.65 Cr",
+    "apiIssueOpenDate": "2025-08-11T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-13T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:53",
+    "detailUrl": "https://www.investorgain.com/ipo/bluestone-jewellery-ipo/1370/",
+    "scrapedCompanyName": "BlueStone Jewellery",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/bluestone-jewellery-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1370_BlueStone_Jewellery_logo.png",
+    "companyFullNameScraped": "BlueStone Jewellery",
+    "aboutCompanyText": "Bluestone Jewellery offers contemproary lifestyle diamond, gold, platinum and studded jewellery products under its own brand name, \"BlueStone\". It is the second-largest digital-first omni-channel jewellery brand in India. The company sells products through its website, mobile app (Android and iOS), and stores.\n\nProduct portolio: Rings, necklaces, earrings, pendants, solitaries, bangles, bracelets, and chains\n\nKey Facts (As on March 31, 2025)\n\nManufacturing facilities: 3 in Mumbai, Maharashtra, Jaipur, Rajasthan, and Surat, Gujarat. In Fiscal 2025, its capacity utilization for the three facilities reported at 98.57%, 81.72%, and 68.25% respectively.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "29",
+    "ipoSummaryText": "BlueStone Jewellery IPO, a IPO of ₹1540.65 Cr opens for subscription from August 11, 2025 to August 13, 2025. The IPO consists of ₹820.00 Cr fresh issue and ₹720.65 Cr offer for sale.\n\nThe face value of each share is 1, and the price band is set between 492.00-517.00 per share. Retail investors can apply to the BlueStone Jewellery IPO with a minimum application of 1 lot, each comprising 29 shares—amounting to a total investment of Rs14993.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 19, 2025.\n\nStay tuned with us to get more details about BlueStone Jewellery IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "11th Aug 2025",
+    "ipoCloseDate": "13th Aug 2025",
+    "basisOfAllotment": "14th Aug 2025",
+    "initiationOfRefunds": "18th Aug 2025",
+    "creditOfSharesToDemat": "18th Aug 2025",
+    "listingDate": "19th Aug 2025",
+    "ipoOpenDateStatus": "Future",
+    "ipoOpenDateParsed": "2025-08-11",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-13",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-19",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-14",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-18",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-18",
+    "lotIssuePrice": "₹492.00-517.00",
+    "lotMarketLot": "29Shares",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "406 shares (14 lots)-₹2,09,902",
+    "lotMinBigHniLots10PlusLakh": "1943 shares (67 lots)-₹10,04,531",
+    "seq": "1",
+    "idGmpData": "21972",
+    "ipoIdGmpData": "1370",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "16",
+    "gmpComments": "BlueStone Jewellery IPO last GMP is 16, last updated Aug 8th 2025 09:57 AM. With the price band of 517.00, BlueStone Jewellery IPO's estimated listing price is 533 (cap price + today's GMP).The expected percentage gain/loss per share is 3.09%.>> BlueStone Jewellery IPO Retail Subject to Sauda: 400 >> BlueStone Jewellery IPO Small HNI Subject to Sauda: 5600",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 4 sessions grey market activities, the current GMP (16) is showing signals towards the lower side. The lowest GMP is 0.00, while the highest GMP is 35.00. Stay with us to know the daily price trend of BlueStone Jewellery IPO GMP with expected listing price.",
+    "subjectToSauda": "400",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "517.00",
+    "estimatedListingPrice": "533",
+    "gmpPercentCalc": "3.09",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "400/5600",
+    "estProfit": "464",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:57 AM",
+    "lastUpdated": "06-Aug-2025 11:31:29",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹492.00-517.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/dec-2024/bluestone-jewellery-and-lifestyle-limited_89962.html",
+    "rhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/aug-2025/bluestone-jewellery-and-lifestyle-limited-rhp_95849.html",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not more than 10% of the Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹1540.65 Cr",
+    "freshIssueTable": "₹820.00 Cr",
+    "faceValueTable": "₹1Per Equity Share",
+    "promoterHoldingPreIpoTable": "18.28",
+    "promoterHoldingPostIpoTable": "16.07",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "06-Aug-2025 11:31:29",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:56.506812",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "517.00",
+        "GMP": "₹16",
+        "Sub2 Sauda Rate": "400/5600",
+        "Estimated Listing Price": "₹533 ( 3.09% )",
+        "Estimated Profit": "₹464",
+        "Last Updated": "8-Aug-2025 9:57"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "517.00",
+        "GMP": "₹16",
+        "Sub2 Sauda Rate": "400/5600",
+        "Estimated Listing Price": "₹533 ( 3.09% )",
+        "Estimated Profit": "₹464",
+        "Last Updated": "7-Aug-2025 23:28"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "517.00",
+        "GMP": "₹35",
+        "Sub2 Sauda Rate": "800/11200",
+        "Estimated Listing Price": "₹552 ( 6.77% )",
+        "Estimated Profit": "₹1015",
+        "Last Updated": "6-Aug-2025 23:36"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "5-Aug-2025 16:08"
+      }
+    ],
+    "strengths": [
+      "Second largest digital-first jewellery brands in India with omni-channel retail experience",
+      "In-house Technology Architecture",
+      "Differentiated product and design approach",
+      "Advanced Manufacturing Capabilities with vertically integrated operations",
+      "Pan-India Presence Across Tier-I, Tier-II and Tier-III Cities"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Funding our working capital requirements",
+        "amount": "750.00"
+      },
+      {
+        "s_no": "2",
+        "object": "General Corporate Purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "3532.28",
+        "31 Mar 2024": "2453.49",
+        "31 Mar 2023": "1255.49"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "1830.04",
+        "31 Mar 2024": "1303.49",
+        "31 Mar 2023": "787.89"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "-221.84",
+        "31 Mar 2024": "-142.24",
+        "31 Mar 2023": "-167.24"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "73.16",
+        "31 Mar 2024": "53.05",
+        "31 Mar 2023": "-56.03"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "877.12",
+        "31 Mar 2024": "346.28",
+        "31 Mar 2023": "-81.06"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "728.62",
+        "31 Mar 2024": "430.43",
+        "31 Mar 2023": "228.42"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Bluestone Jewellery and Lifestyle",
+        "EPS Basic": "-79.74",
+        "EPS Diluted": "-79.74",
+        "NAV": "66.94",
+        "P/E(x)": "",
+        "RoNW": "-24.45",
+        "Financial statements": ""
+      },
+      {
+        "Company": "Titan Company",
+        "EPS Basic": "37.62",
+        "EPS Diluted": "37.61",
+        "NAV": "130.93",
+        "P/E(x)": "88.14",
+        "RoNW": "28.71",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Kalyan Jewellers India",
+        "EPS Basic": "6.93",
+        "EPS Diluted": "6.93",
+        "NAV": "46.57",
+        "P/E(x)": "84.1",
+        "RoNW": "14.87",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Senco Gold",
+        "EPS Basic": "10.09",
+        "EPS Diluted": "10.08",
+        "NAV": "120.37",
+        "P/E(x)": "31.17",
+        "RoNW": "8.09",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Thangamayil Jewellery",
+        "EPS Basic": "42",
+        "EPS Diluted": "42",
+        "NAV": "354.66",
+        "P/E(x)": "45.47",
+        "RoNW": "11.07",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "PC Jeweller",
+        "EPS Basic": "1.13",
+        "EPS Diluted": "0.66",
+        "NAV": "9.46",
+        "P/E(x)": "22.7",
+        "RoNW": "9.33",
+        "Financial statements": "Standalone"
+      }
+    ],
+    "companyAddress": {
+      "name": "BlueStone Jewellery & Lifestyle Ltd.",
+      "address": "Site No. 89/2, Lava Kusha Arcade, Munnekolal Village, Outer Ring Road, Marathahalli, Bangalore Urban, , Karnataka, -, 560037",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Kotak Mahindra Capital Company Limited",
+      "IIFL Capital Services Limited",
+      "Axis Capital Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1374,
+    "apiCompanyName": "Regaal Resources",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "306.00 Cr",
+    "apiIssueOpenDate": "2025-08-12T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-14T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:53",
+    "detailUrl": "https://www.investorgain.com/ipo/regaal-resources-ipo/1374/",
+    "scrapedCompanyName": "Regaal Resources",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/reegal-resources-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1374_Regaal_Resources_logo.png",
+    "companyFullNameScraped": "Regaal Resources",
+    "aboutCompanyText": "Regaal Resources specializes in the production of a wide range of maize-derived products across three key categories:\n\nManufacturing plant: Kishanganj, Bihar across 54.03 acres\n\nThe company caters to the domestic and international customers across diverse industries, food products, paper, animal feed, and adhesives. Our business model caters to 3 broad segments of customers viz., (i) Manufacturers of end products; (ii) Manufacturers of intermediate products; and (iii) Distributors / Wholesale traders.\n\nKey Clients: Emami Paper Mills Limited, Manioca Food Products Private Limited, Century Pulp & Paper, Kush Proteins Private Limited, Shri Guru Oil Industries, Mayank Cattle Food Limited, Aarnav Sales Corporation, AMV Sales Corporation, and Eco Tech Papers.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "144",
+    "ipoSummaryText": "Regaal Resources IPO, a IPO of ₹306.00 Cr opens for subscription from August 12, 2025 to August 14, 2025. The IPO consists of ₹210.00 Cr fresh issue and ₹96.00 Cr offer for sale.\n\nThe face value of each share is 5, and the price band is set between 96.00-102.00 per share. Retail investors can apply to the Regaal Resources IPO with a minimum application of 1 lot, each comprising 144 shares—amounting to a total investment of Rs14688.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 20, 2025.\n\nStay tuned with us to get more details about Regaal Resources IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "12th Aug 2025",
+    "ipoCloseDate": "14th Aug 2025",
+    "basisOfAllotment": "18th Aug 2025",
+    "initiationOfRefunds": "19th Aug 2025",
+    "creditOfSharesToDemat": "19th Aug 2025",
+    "listingDate": "20th Aug 2025",
+    "ipoOpenDateStatus": "Future",
+    "ipoOpenDateParsed": "2025-08-12",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-14",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-20",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-18",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-19",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-19",
+    "lotIssuePrice": "₹96.00-102.00",
+    "lotMarketLot": "144Shares",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "2016 shares (14 lots)-₹2,05,632",
+    "lotMinBigHniLots10PlusLakh": "9936 shares (69 lots)-₹10,13,472",
+    "seq": "1",
+    "idGmpData": "21975",
+    "ipoIdGmpData": "1374",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "18",
+    "gmpComments": "Regaal Resources IPO last GMP is 18, last updated Aug 8th 2025 09:56 AM. With the price band of 102.00, Regaal Resources IPO's estimated listing price is 120 (cap price + today's GMP).The expected percentage gain/loss per share is 17.65%.>> Regaal Resources IPO Retail Subject to Sauda: 2000 >> Regaal Resources IPO Small HNI Subject to Sauda: 28000",
+    "gmpCompareDesc": "The GMP for Regaal Resources IPO has started from 2 session. It is still very early to determine the direction of the GMP. We are updating the information every day, stay tuned with the latest GMP and more details. Stay tuned to learn more about Regaal Resources IPO daily GMP performance and expected expected listing price.",
+    "subjectToSauda": "2000",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "102.00",
+    "estimatedListingPrice": "120",
+    "gmpPercentCalc": "17.65",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "2000/28000",
+    "estProfit": "2592",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:56 AM",
+    "lastUpdated": "07-Aug-2025 16:26:01",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹96.00-102.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/jan-2025/regaal-resources-limited_90544.html",
+    "rhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/aug-2025/regaal-resources-limited-rhp_95894.html",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not less than 35.00% of the Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹306.00 Cr",
+    "freshIssueTable": "₹210.00 Cr",
+    "faceValueTable": "₹5Per Equity Share",
+    "promoterHoldingPreIpoTable": "99.56",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 16:26:01",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:57.395862",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "102.00",
+        "GMP": "₹18",
+        "Sub2 Sauda Rate": "2000/28000",
+        "Estimated Listing Price": "₹120 ( 17.65% )",
+        "Estimated Profit": "₹2592",
+        "Last Updated": "8-Aug-2025 9:56"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "102.00",
+        "GMP": "₹18",
+        "Sub2 Sauda Rate": "2000/28000",
+        "Estimated Listing Price": "₹120 ( 17.65% )",
+        "Estimated Profit": "₹2592",
+        "Last Updated": "7-Aug-2025 23:36"
+      }
+    ],
+    "strengths": [
+      "Strategic locational advantage of our Manufacturing Facility",
+      "Efficient procurement strategy aided by multifaceted raw material sourcing avenues",
+      "Sustainability driven Manufacturing Facility",
+      "Diversified portfolio of products catering to wide range of industries",
+      "Established and widespread sales and distribution network",
+      "Experienced promoters and management"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Repayment and/ or pre-payment, in full or in part, of the certain outstanding borrowings availed by the Company",
+        "amount": "159.00"
+      },
+      {
+        "s_no": "2",
+        "object": "General Corporate Purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "860.27",
+        "31 Mar 2024": "585.97",
+        "31 Mar 2023": "371.52"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "917.58",
+        "31 Mar 2024": "601.08",
+        "31 Mar 2023": "488.67"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "47.67",
+        "31 Mar 2024": "22.14",
+        "31 Mar 2023": "16.76"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "112.79",
+        "31 Mar 2024": "56.37",
+        "31 Mar 2023": "40.67"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "235.41",
+        "31 Mar 2024": "126.61",
+        "31 Mar 2023": "104.41"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "202.44",
+        "31 Mar 2024": "125.12",
+        "31 Mar 2023": "102.92"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "507.05",
+        "31 Mar 2024": "357.21",
+        "31 Mar 2023": "188.93"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Regaal Resources Limited",
+        "EPS Basic": "6.05",
+        "EPS Diluted": "6.03",
+        "NAV": "28.66",
+        "P/E(x)": "",
+        "RoNW": "20.25",
+        "Financial statements": "Restated"
+      },
+      {
+        "Company": "Sanstar Limited",
+        "EPS Basic": "2.58",
+        "EPS Diluted": "2.58",
+        "NAV": "34.18",
+        "P/E(x)": "36.46",
+        "RoNW": "7.03",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Gujarat Ambuja Exports Limited",
+        "EPS Basic": "5.44",
+        "EPS Diluted": "5.44",
+        "NAV": "65.46",
+        "P/E(x)": "20.22",
+        "RoNW": "8.3",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Gulshan Polyols Limited",
+        "EPS Basic": "3.95",
+        "EPS Diluted": "3.95",
+        "NAV": "87.07",
+        "P/E(x)": "44.56",
+        "RoNW": "4.02",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Sukhjit Starch & Chemicals Limited",
+        "EPS Basic": "12.79",
+        "EPS Diluted": "12.79",
+        "NAV": "173.82",
+        "P/E(x)": "13.51",
+        "RoNW": "7.36",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "Regaal Resources Ltd.",
+      "address": "6th Floor, D2/2, Block-EP & GP, Sector-V, Kolkata, , West Bengal, -, 700091",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "MUFG Intime India Private Limited (Link Intime)",
+      "address": "Link Intime India Private Ltd, C 101, 247 Park, L.B.S.Marg, Vikhroli (West), Mumbai - 400083",
+      "website": "https://linkintime.co.in/Initial_Offer/public-issues.html",
+      "phone": "+91-22-4918 6270",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Pantomath Capital Advisors Pvt Ltd",
+      "Sumedha Fiscal Services Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1328,
+    "apiCompanyName": "PropShare Titania",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "473.00 Cr",
+    "apiIssueOpenDate": "2025-07-21T00:00:00.000Z",
+    "apiIssueEndDate": "2025-07-25T00:00:00.000Z",
+    "apiListingAt": "BSE",
+    "apiIpoStatus": "C",
+    "apiIpoStatusFormatted": "Closed",
+    "scrapingDate": "2025-08-08 10:27:56",
+    "detailUrl": "https://www.investorgain.com/ipo/propshare-titania-ipo/1328/",
+    "scrapedCompanyName": "N/A",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/propshare-titania-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1328_N_A_logo.png",
+    "companyFullNameScraped": "PropShare Titania",
+    "aboutCompanyText": "Property Share Investment Trust is a SEBI registered Real Estate Investment Trust (REIT) in India. TPropShare Tania is the second scheme launched by Property Share Investment Trust.\n\nThe scheme has a total leasable area of 437,973 sq ft of Grade A+ commercial property in Thane, Mumbai.\n\nIt is leased to tenants like Aditya Birla, a Fortune 500 healthcare company, Concentrix, etc. Axis Trustee Services Limited is the Trustee of the scheme.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "1",
+    "ipoSummaryText": "PropShare Titania IPO, a SM REIT of ₹473.00 Cr opens for subscription from July 21, 2025 to July 25, 2025. The IPO consists of ₹473.00 Cr fresh issue.\n\nThe face value of each share is 0, and the price band is set between 1000000.00-1060000.00 per share. Retail investors can apply to the PropShare Titania SM REIT with a minimum application of 1 lot, each comprising 1 shares—amounting to a total investment of Rs1060000.\n\nThe tentative listing date on the exchange (BSE) is August 4, 2025.\n\nStay tuned with us to get more details about PropShare Titania SM REIT including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "21st Jul 2025",
+    "ipoCloseDate": "25th Jul 2025",
+    "basisOfAllotment": "30th Jul 2025",
+    "initiationOfRefunds": "31st Jul 2025",
+    "creditOfSharesToDemat": "",
+    "listingDate": "4th Aug 2025",
+    "ipoOpenDateStatus": "Past",
+    "ipoOpenDateParsed": "2025-07-21",
+    "ipoCloseDateStatus": "Past",
+    "ipoCloseDateParsed": "2025-07-25",
+    "listingDateStatus": "Past",
+    "listingDateParsed": "2025-08-04",
+    "basisOfAllotmentStatus": "Past",
+    "basisOfAllotmentParsed": "2025-07-30",
+    "initiationOfRefundsStatus": "Past",
+    "initiationOfRefundsParsed": "2025-07-31",
+    "creditOfSharesToDematStatus": "Unknown",
+    "creditOfSharesToDematParsed": "N/A",
+    "lotIssuePrice": "N/A",
+    "lotMarketLot": "N/A",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21953",
+    "ipoIdGmpData": "1328",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 26 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of PropShare Titania SM REIT GMP with expected listing price.",
+    "subjectToSauda": "-",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "1060000.00",
+    "estimatedListingPrice": "",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdated": "21-Jul-2025 08:28:44",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹1000000.00-1060000.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/sm-reit-issues/may-2025/draft-kis-property-share-investment-trust-propshare-titania_93810.html",
+    "rhpLinkTable": "https://www.bseindia.com/downloads/ipo/PropShare%20Titania_Key_Information_of_the_Scheme_170720251125.pdf",
+    "listingAtTable": "BSE",
+    "retailQuotaTable": "",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹473.00 Cr",
+    "freshIssueTable": "₹473.00 Cr",
+    "faceValueTable": "₹0Per Equity Share",
+    "promoterHoldingPreIpoTable": "N/A",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "https://kosmic.kfintech.com/ipostatus/",
+    "lastUpdatedTimestamp": "21-Jul-2025 08:28:44",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:59.795853",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "8-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "7-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "6-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "5-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "04-08-2025 Listing",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "4-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "2-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "01-08-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "1-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "31-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "31-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "30-07-2025 Allotment",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "30-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "29-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "29-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "28-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "28-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "27-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "27-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "26-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "26-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "25-07-2025 Close",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "25-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "24-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "24-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "23-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "23-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "22-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "22-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "21-07-2025 Open",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "21-Jul-2025 8:26"
+      },
+      {
+        "GMP Date": "20-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "20-Jul-2025 11:42"
+      },
+      {
+        "GMP Date": "19-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "19-Jul-2025 6:56"
+      },
+      {
+        "GMP Date": "18-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "18-Jul-2025 11:33"
+      },
+      {
+        "GMP Date": "17-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "17-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "16-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "16-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "15-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "15-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "14-07-2025",
+        "IPO Price": "1060000.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "14-Jul-2025 13:05"
+      }
+    ],
+    "strengths": [],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Acquisition of the entire issued and paid-up equity share capital of the Titania SPV as per the Share Purchase Agreement",
+        "amount": "217.00"
+      },
+      {
+        "s_no": "2",
+        "object": "Providing loan to the Titania SPV for extinguishment and redemption of the debenture liability of the Titania SPV, by redeeming the OCDs* (including any accrued interest);",
+        "amount": "232.94"
+      },
+      {
+        "s_no": "3",
+        "object": "General purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [],
+    "peerComparison": [],
+    "companyAddress": {
+      "name": "Property Share Investment Trust REIT",
+      "address": "16th Floor, SKAV Seethalakshmi, 21/22, Kasturba Road, Bangalore Urban, , -, 560001",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Kotak Mahindra Capital Company Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "N/A",
+      "Sector": "IPO Issue Size",
+      "IPO Issue Size": "N/A",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1357,
+    "apiCompanyName": "Knowledge Realty Trust REIT",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "4800.00 Cr",
+    "apiIssueOpenDate": "2025-08-05T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-07T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "C",
+    "apiIpoStatusFormatted": "Closed",
+    "scrapingDate": "2025-08-08 10:27:56",
+    "detailUrl": "https://www.investorgain.com/ipo/knowledge-realty-trust-reit-ipo/1357/",
+    "scrapedCompanyName": "N/A",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/knowledge-realty-trust-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1357_N_A_logo.png",
+    "companyFullNameScraped": "Knowledge Realty Trust REIT",
+    "aboutCompanyText": "Knowledge Realty Trust is the largest office REIT in India with gross asset value (GAV) of Rs 594,450 million. Its portfolio includes 6 city center ofices and 24 parks/centres with all the amenities i.e., multi-cuisine food courts, indoor and outdoor sports, health & recreation facilities, etc. Its portfolio assets spans across Hyderabad, Mumbai, Bengaluru, Gurugram, Chennai, and other states.\n\nAs of Sep 30, 2024, it has 48.1 million sq ft of assets, with 37.1 msf completed area and rest under construction and future development. Its tenannt includes multinational clients, including leading domestic and fortune 500 companies.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "150",
+    "ipoSummaryText": "Knowledge Realty Trust REIT IPO, a REIT of ₹4800.00 Cr opens for subscription from August 5, 2025 to August 7, 2025. The IPO consists of ₹4800.00 Cr fresh issue.\n\nThe face value of each share is 0, and the price band is set between 95.00-100.00 per share. Retail investors can apply to the Knowledge Realty Trust REIT REIT with a minimum application of 1 lot, each comprising 150 shares—amounting to a total investment of Rs15000.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 18, 2025.\n\nStay tuned with us to get more details about Knowledge Realty Trust REIT REIT including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "5th Aug 2025",
+    "ipoCloseDate": "7th Aug 2025",
+    "basisOfAllotment": "12th Aug 2025",
+    "initiationOfRefunds": "13th Aug 2025",
+    "creditOfSharesToDemat": "13th Aug 2025",
+    "listingDate": "18th Aug 2025",
+    "ipoOpenDateStatus": "Past",
+    "ipoOpenDateParsed": "2025-08-05",
+    "ipoCloseDateStatus": "Past",
+    "ipoCloseDateParsed": "2025-08-07",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-18",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-12",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-13",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-13",
+    "lotIssuePrice": "N/A",
+    "lotMarketLot": "N/A",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21959",
+    "ipoIdGmpData": "1357",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "1.5",
+    "gmpComments": "Knowledge Realty Trust REIT REIT last GMP is 1.5, last updated Aug 8th 2025 09:59 AM. With the price band of 100.00, Knowledge Realty Trust REIT REIT's estimated listing price is 101.5 (cap price + today's GMP).The expected percentage gain/loss per share is 1.50%.>> Knowledge Realty Trust REIT REIT Retail Subject to Sauda: 200 >> Knowledge Realty Trust REIT REIT Small HNI Subject to Sauda: 2800",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 11 sessions grey market activities, today IPO GMP points upward and expects a strong listing. The lowest GMP is 0.00, while the highest GMP is 1.50. Stay with us to know the daily price trend of Knowledge Realty Trust REIT REIT GMP with expected listing price.",
+    "subjectToSauda": "200",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "100.00",
+    "estimatedListingPrice": "101.5",
+    "gmpPercentCalc": "1.50",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "200/2800",
+    "estProfit": "225",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:59 AM",
+    "lastUpdated": "05-Aug-2025 11:02:40",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹95.00-100.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/web/?file=https://www.sebi.gov.in/sebi_data/attachdocs/mar-2025/1741673615503.pdf#page=1&zoom=page-width,-15,850",
+    "rhpLinkTable": "https://www.bseindia.com/downloads/ipo/knowledge_realty_trust_offer_document_signed_010820251254.pdf",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹4800.00 Cr",
+    "freshIssueTable": "₹4800.00 Cr",
+    "faceValueTable": "₹0Per Equity Share",
+    "promoterHoldingPreIpoTable": "N/A",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/krt-anchorallocationreport.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "05-Aug-2025 11:02:40",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:27:59.905024",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹1.5",
+        "Sub2 Sauda Rate": "200/2800",
+        "Estimated Listing Price": "₹101.5 ( 1.50% )",
+        "Estimated Profit": "₹225",
+        "Last Updated": "8-Aug-2025 9:59"
+      },
+      {
+        "GMP Date": "07-08-2025 Close",
+        "IPO Price": "100.00",
+        "GMP": "₹1.5",
+        "Sub2 Sauda Rate": "200/2800",
+        "Estimated Listing Price": "₹101.5 ( 1.50% )",
+        "Estimated Profit": "₹225",
+        "Last Updated": "7-Aug-2025 23:37"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹1.5",
+        "Sub2 Sauda Rate": "200/2800",
+        "Estimated Listing Price": "₹101.5 ( 1.50% )",
+        "Estimated Profit": "₹225",
+        "Last Updated": "6-Aug-2025 23:28"
+      },
+      {
+        "GMP Date": "05-08-2025 Open",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹100 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "5-Aug-2025 23:37"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹100 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "4-Aug-2025 23:34"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹100 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "3-Aug-2025 23:30"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹100 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "2-Aug-2025 23:34"
+      },
+      {
+        "GMP Date": "01-08-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹100 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "1-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "31-07-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "31-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "30-07-2025",
+        "IPO Price": "100.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "30-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "29-07-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "29-Jul-2025 12:56"
+      }
+    ],
+    "strengths": [
+      "Largest office REIT in India in terms of GAV",
+      "Robust infrastructure with range of amenities",
+      "Diversified tenant base",
+      "Robust business model with stable cash flows",
+      "Strategically located in top-performing markets"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Partial or full repayment or prepayment of certain financial indebtedness of the Asset SPVs and theInvestment Entities",
+        "amount": "4,640.00"
+      },
+      {
+        "s_no": "2",
+        "object": "General purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "24768.08",
+        "31 Mar 2024": "24902.82",
+        "31 Mar 2023": "24544.42"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "4146.86",
+        "31 Mar 2024": "3588.48",
+        "31 Mar 2023": "3115.97"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "222.52",
+        "31 Mar 2024": "339.66",
+        "31 Mar 2023": "219.24"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "3293.03",
+        "31 Mar 2024": "2830.36",
+        "31 Mar 2023": "2494.02"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "19792.17",
+        "31 Mar 2024": "19757.58",
+        "31 Mar 2023": "20226.66"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Knowledge Realty Trust",
+        "NAV": ""
+      },
+      {
+        "Company": "Embassy Office Parks REIT",
+        "NAV": "423.22"
+      },
+      {
+        "Company": "Mindspace Business Parks REIT",
+        "NAV": "431.7"
+      },
+      {
+        "Company": "Brookfield India Real Estate Trust",
+        "NAV": "336.35"
+      }
+    ],
+    "companyAddress": {
+      "name": "Knowledge Realty Trust",
+      "address": "One International Center, 14th Floor, Tower 1, Plot No. 612-613, Senapati Bapat Marg, Elphinstone Road, Lower Parel West, Mumbai, , -, 400013",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Kotak Mahindra Capital Company Limited",
+      "ICICI Securities Limited",
+      "Jm Financial Limited",
+      "SBI Capital Markets Limited",
+      "Bofa Securities India Limited",
+      "Morgan Stanley India Company Pvt Ltd",
+      "IIFL Capital Services Limited",
+      "Axis Capital Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "N/A",
+      "Sector": "IPO Issue Size",
+      "IPO Issue Size": "N/A",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1358,
+    "apiCompanyName": "Infraprime Logistics",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "0.40 Cr Shares",
+    "apiIssueOpenDate": "",
+    "apiIssueEndDate": "",
+    "apiListingAt": "BSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:56",
+    "detailUrl": "https://www.investorgain.com/ipo/infraprime-logistics-technologies-ipo/1358/",
+    "scrapedCompanyName": "Infraprime Logistics SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/infralogisitics-logo.jpg",
+    "localLogoPath": "downloads/ipo/logos\\1358_Infraprime_Logistics_SME_logo.jpg",
+    "companyFullNameScraped": "Infraprime Logistics",
+    "aboutCompanyText": "Infraprime Logistics is a technology-driven logistics solution provider company, integrating electric vehicles and heavy duty vehicles.\n\nThe company offers logistics services to companies across industries, including infrastructure, construction, steel, cement and mining. It uses EV fleets for transporting steel coils and diesel trucks are used for long-term contracts.\n\nAs on March 31, 2024, it operates 12 fleets.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "N/A",
+    "ipoSummaryText": "Infraprime Logistics SME IPO worth of 0.40 Cr Shares is coming soon. it is a SME IPO which will list on BSE SME.IPO opening and closing dates, IPO price band and lot size are yet to be announced. Stay connected with us to get the complete Infraprime Logistics SME IPO 2025 details including business overview, financial performance, IPO opening and closing dates, GMP, issue details and subscription details.\n\nIPO opening and closing dates, IPO price band and lot size are yet to be announced.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "",
+    "ipoCloseDate": "",
+    "basisOfAllotment": "",
+    "initiationOfRefunds": "",
+    "creditOfSharesToDemat": "",
+    "listingDate": "",
+    "ipoOpenDateStatus": "Unknown",
+    "ipoOpenDateParsed": "N/A",
+    "ipoCloseDateStatus": "Unknown",
+    "ipoCloseDateParsed": "N/A",
+    "listingDateStatus": "Unknown",
+    "listingDateParsed": "N/A",
+    "basisOfAllotmentStatus": "Unknown",
+    "basisOfAllotmentParsed": "N/A",
+    "initiationOfRefundsStatus": "Unknown",
+    "initiationOfRefundsParsed": "N/A",
+    "creditOfSharesToDematStatus": "Unknown",
+    "creditOfSharesToDematParsed": "N/A",
+    "lotIssuePrice": "₹TBD",
+    "lotMarketLot": "N/A",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21960",
+    "ipoIdGmpData": "1358",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 11 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of Infraprime Logistics SME IPO GMP with expected listing price.",
+    "subjectToSauda": "-",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "",
+    "estimatedListingPrice": "",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdated": "04-Aug-2025 09:37:21",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹TBDPer Share",
+    "drhpLinkTable": "https://www.bseindia.com/corporates/download/344292/DRHP_IPLT_21.02.2025_20250221194413.pdf",
+    "rhpLinkTable": "N/A",
+    "listingAtTable": "BSE SME",
+    "retailQuotaTable": "Not less than 35.00% of the Net Issue",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "0.40 Cr Shares",
+    "freshIssueTable": "0.40 Cr Shares",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "63.09",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "04-Aug-2025 09:37:21",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:00.046817",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "8-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "7-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "6-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "5-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "4-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "2-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "01-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "1-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "31-07-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "31-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "30-07-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "30-Jul-2025 5:55"
+      },
+      {
+        "GMP Date": "29-07-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "29-Jul-2025 15:17"
+      }
+    ],
+    "strengths": [
+      "Tech-based logistics solution provider",
+      "Efficient utilization of trucks",
+      "Lower fuel cost via deployment of electric vehicles",
+      "Strong execution capabilities with industry experience"
+    ],
+    "objectives": [
+      {
+        "s_no": "Period Ended",
+        "object": "30 Sep 2024",
+        "amount": "31 Mar 2024"
+      },
+      {
+        "s_no": "Assets",
+        "object": "129.05",
+        "amount": "106.61"
+      },
+      {
+        "s_no": "Total Income",
+        "object": "61.87",
+        "amount": "109.83"
+      },
+      {
+        "s_no": "Profit After Tax",
+        "object": "7.7",
+        "amount": "15.26"
+      },
+      {
+        "s_no": "Net Worth",
+        "object": "50.83",
+        "amount": "43.24"
+      },
+      {
+        "s_no": "Reserves and Surplus",
+        "object": "39.82",
+        "amount": "42.39"
+      },
+      {
+        "s_no": "Total Borrowing",
+        "object": "27.23",
+        "amount": "37.34"
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "30 Sep 2024": "129.05",
+        "31 Mar 2024": "106.61",
+        "31 Mar 2023": "65.11",
+        "31 Mar 2022": "48.77"
+      },
+      {
+        "Metric": "Total Income",
+        "30 Sep 2024": "61.87",
+        "31 Mar 2024": "109.83",
+        "31 Mar 2023": "63.09",
+        "31 Mar 2022": "57.22"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "30 Sep 2024": "7.70",
+        "31 Mar 2024": "15.26",
+        "31 Mar 2023": "1.35",
+        "31 Mar 2022": "-5.55"
+      },
+      {
+        "Metric": "Net Worth",
+        "30 Sep 2024": "50.83",
+        "31 Mar 2024": "43.24",
+        "31 Mar 2023": "28.22",
+        "31 Mar 2022": "27.46"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "30 Sep 2024": "39.82",
+        "31 Mar 2024": "42.39",
+        "31 Mar 2023": "26.13",
+        "31 Mar 2022": "25.37"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "30 Sep 2024": "27.23",
+        "31 Mar 2024": "37.34",
+        "31 Mar 2023": "14.27",
+        "31 Mar 2022": "8.07"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Infraprime Logistics Technologies Limited",
+        "EPS Basic": "16.05",
+        "NAV": "39.3",
+        "P/E(x)": "",
+        "RoNW": "35.29",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "Premier Roadlines Limited",
+        "EPS Basic": "7.5",
+        "NAV": "23.6",
+        "P/E(x)": "8.93",
+        "RoNW": "31.77",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "AVG Logistics Limited",
+        "EPS Basic": "26.66",
+        "NAV": "166.99",
+        "P/E(x)": "21.76",
+        "RoNW": "15.97",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "Infraprime Logistics Technologies Ltd.",
+      "address": "418, 4th Floor, Tower B, Emaar Digital Green, Golf Course Extension, Sector 61, Bhondsi, Gurgaon, , Haryana, -, 122102",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Mas Services Limited",
+      "address": "T - 34, 2nd Floor, Okhla Industrial Area, Phase - II, New Delhi - 110 020",
+      "website": "https://www.masserv.com/opt.asp",
+      "phone": "(011) 2610 4142",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Beeline Capital Advisors Pvt Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1353,
+    "apiCompanyName": "Highway Infrastructure",
+    "apiIpoCategory": "Mainline",
+    "apiIssueSize": "130.00 Cr",
+    "apiIssueOpenDate": "2025-08-05T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-07T00:00:00.000Z",
+    "apiListingAt": "BSE, NSE",
+    "apiIpoStatus": "C",
+    "apiIpoStatusFormatted": "Closed",
+    "scrapingDate": "2025-08-08 10:27:56",
+    "detailUrl": "https://www.investorgain.com/ipo/highway-infrastructure-ipo/1353/",
+    "scrapedCompanyName": "Highway Infrastructure",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/highway-infrastructure-logo.png",
+    "localLogoPath": "downloads/ipo/logos\\1353_Highway_Infrastructure_logo.png",
+    "companyFullNameScraped": "Highway Infrastructure",
+    "aboutCompanyText": "Highway Infrastructure is an infrastructure development and management Company. Key Business Activities:",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "211",
+    "ipoSummaryText": "Highway Infrastructure IPO, a IPO of ₹130.00 Cr opens for subscription from August 5, 2025 to August 7, 2025. The IPO consists of ₹97.52 Cr fresh issue and ₹32.48 Cr offer for sale.\n\nThe face value of each share is 5, and the price band is set between 65.00-70.00 per share. Retail investors can apply to the Highway Infrastructure IPO with a minimum application of 1 lot, each comprising 211 shares—amounting to a total investment of Rs14770.\n\nThe tentative listing date on the exchange (BSE, NSE) is August 12, 2025.\n\nStay tuned with us to get more details about Highway Infrastructure IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "5th Aug 2025",
+    "ipoCloseDate": "7th Aug 2025",
+    "basisOfAllotment": "8th Aug 2025",
+    "initiationOfRefunds": "11th Aug 2025",
+    "creditOfSharesToDemat": "11th Aug 2025",
+    "listingDate": "12th Aug 2025",
+    "ipoOpenDateStatus": "Past",
+    "ipoOpenDateParsed": "2025-08-05",
+    "ipoCloseDateStatus": "Past",
+    "ipoCloseDateParsed": "2025-08-07",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-12",
+    "basisOfAllotmentStatus": "Today",
+    "basisOfAllotmentParsed": "2025-08-08",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-11",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-11",
+    "lotIssuePrice": "₹65.00-70.00",
+    "lotMarketLot": "211Shares",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "2954 shares (14 lots)-₹2,06,780",
+    "lotMinBigHniLots10PlusLakh": "14348 shares (68 lots)-₹10,04,360",
+    "seq": "1",
+    "idGmpData": "21955",
+    "ipoIdGmpData": "1353",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "36",
+    "gmpComments": "Highway Infrastructure IPO last GMP is 36, last updated Aug 8th 2025 09:54 AM. With the price band of 70.00, Highway Infrastructure IPO's estimated listing price is 106 (cap price + today's GMP).The expected percentage gain/loss per share is 51.43%.>> Highway Infrastructure IPO Retail Subject to Sauda: 5800 >> Highway Infrastructure IPO Small HNI Subject to Sauda: 81200",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 15 sessions grey market activities, today IPO GMP trending upward and expects a strong listing. The lowest GMP is 0.00, while the highest GMP is 40.00. Stay with us to know the daily price trend of Highway Infrastructure IPO GMP with expected listing price.",
+    "subjectToSauda": "5800",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "70.00",
+    "estimatedListingPrice": "106",
+    "gmpPercentCalc": "51.43",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "5800/81200",
+    "estProfit": "7596",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:54 AM",
+    "lastUpdated": "05-Aug-2025 10:17:18",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹65.00-70.00Per Share",
+    "drhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/sep-2024/highway-infrastructure-limited_87057.html",
+    "rhpLinkTable": "https://www.sebi.gov.in/filings/public-issues/jul-2025/highway-infrastructure-limited-rhp_95618.html",
+    "listingAtTable": "BSE, NSE",
+    "retailQuotaTable": "Not less than 40% of the Net Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹130.00 Cr",
+    "freshIssueTable": "₹97.52 Cr",
+    "faceValueTable": "₹5Per Equity Share",
+    "promoterHoldingPreIpoTable": "94.95",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/highway-infrastructure-ipo-anchor-allocation-report.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "05-Aug-2025 10:17:18",
+    "metaTitle": "Highway Infrastructure Mainline Live Subscription. Total: 28.51 times.",
+    "pageTitle": "Highway Infrastructure Live Subscription",
+    "metaDesc": "Highway Infrastructure Mainline Live Subscription. Total: 28.51 times as of 5th Aug 2025 17:06.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:00.435277",
+    "ipoShareAllocation": [
+      {
+        "category": "Qualified Institutional Buyers",
+        "shares_allocated": 2228571,
+        "allocation_pct": 14.63
+      },
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 5571429,
+        "allocation_pct": 36.59
+      },
+      {
+        "category": "Small NII (SNII- Bid below ₹10L)",
+        "shares_allocated": 1857143,
+        "allocation_pct": 12.2
+      },
+      {
+        "category": "Big NII (BNII- Bid above ₹10L)",
+        "shares_allocated": 3714286,
+        "allocation_pct": 24.39
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 7428572,
+        "allocation_pct": 48.78
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "5th Aug 2025 17:06",
+        "qib_ratio": 5.06,
+        "nii_ratio": 35.39,
+        "rii_ratio": 20.91,
+        "emp_ratio": 64.37,
+        "total_ratio": 30.38
+      },
+      {
+        "day_number": 2,
+        "date_time": "6th Aug 2025 17:06",
+        "qib_ratio": 7.3,
+        "nii_ratio": 103.35,
+        "rii_ratio": 125.28,
+        "emp_ratio": 92.38,
+        "total_ratio": 77.83
+      },
+      {
+        "day_number": 3,
+        "date_time": "7th Aug 2025 17:06",
+        "qib_ratio": 432.71,
+        "nii_ratio": 473.1,
+        "rii_ratio": 451.47,
+        "emp_ratio": 483.92,
+        "total_ratio": 164.48
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "QIB",
+        "shares_offered": 2228571,
+        "shares_bid": 964333511,
+        "bid_amount_cr": 6750.33
+      },
+      {
+        "category": "NII",
+        "shares_offered": 5571429,
+        "shares_bid": 2635861163,
+        "bid_amount_cr": 18451.03
+      },
+      {
+        "category": "Small NII",
+        "shares_offered": 1857143,
+        "shares_bid": 838439517,
+        "bid_amount_cr": 5869.08
+      },
+      {
+        "category": "Big NII",
+        "shares_offered": 3714286,
+        "shares_bid": 1797421646,
+        "bid_amount_cr": 12581.95
+      },
+      {
+        "category": "RII",
+        "shares_offered": 7428572,
+        "shares_bid": 1221822297,
+        "bid_amount_cr": 8552.76
+      },
+      {
+        "category": "Total",
+        "shares_offered": 15228572,
+        "shares_bid": 4822016971,
+        "bid_amount_cr": 33754.12
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7825,
+        "tsb_ipo_id": 1353,
+        "cor_id": 2180,
+        "bid_date": "5th Aug 2025 17:06",
+        "qib_offered": 2228571,
+        "nii_offered": 5571429,
+        "nii_offered_big": 1857143,
+        "nii_offered_small": 3714286,
+        "rii_offered": 7428572,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 15228572,
+        "qib_shares_bid_for": 11279216,
+        "nii_shares_bid_for": 197187518,
+        "nii_shares_bid_for_big": 119537830,
+        "nii_shares_bid_for_small": 77649688,
+        "rii_shares_bid_for": 225671463,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 434138197,
+        "qib_bid_amt": 78.95,
+        "nii_bid_amt": 1380.31,
+        "nii_bid_amt_big": 836.76,
+        "nii_bid_amt_small": 543.55,
+        "rii_bid_amt": 1579.7,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 3038.97,
+        "qib": 5.06,
+        "nii": 35.39,
+        "nii_big": 64.37,
+        "nii_small": 20.91,
+        "rii": 30.38,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 28.51,
+        "cor_date_added": "2025-08-05T17:10:04.000Z",
+        "create_date": "2025-08-05T17:15:02.000Z",
+        "ipo_category_desc": "IPO",
+        "listing_at": "N/A",
+        "company_short_name": "Highway Infrastructure"
+      },
+      {
+        "Seq": 2,
+        "id (Subscription Data)": 7833,
+        "tsb_ipo_id": 1353,
+        "cor_id": 2180,
+        "bid_date": "6th Aug 2025 17:06",
+        "qib_offered": 2228571,
+        "nii_offered": 5571429,
+        "nii_offered_big": 3714286,
+        "nii_offered_small": 1857143,
+        "rii_offered": 7428572,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 15228572,
+        "qib_shares_bid_for": 16272742,
+        "nii_shares_bid_for": 575789460,
+        "nii_shares_bid_for_big": 343120815,
+        "nii_shares_bid_for_small": 232668645,
+        "rii_shares_bid_for": 578189796,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 1170251998,
+        "qib_bid_amt": 113.91,
+        "nii_bid_amt": 4030.53,
+        "nii_bid_amt_big": 2401.85,
+        "nii_bid_amt_small": 1628.68,
+        "rii_bid_amt": 4047.33,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 8191.76,
+        "qib": 7.3,
+        "nii": 103.35,
+        "nii_big": 92.38,
+        "nii_small": 125.28,
+        "rii": 77.83,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 76.85,
+        "cor_date_added": "2025-08-06T17:10:05.000Z",
+        "create_date": "2025-08-06T17:15:02.000Z",
+        "ipo_category_desc": "N/A",
+        "listing_at": "N/A",
+        "company_short_name": "N/A"
+      },
+      {
+        "Seq": 3,
+        "id (Subscription Data)": 7835,
+        "tsb_ipo_id": 1353,
+        "cor_id": 2180,
+        "bid_date": "7th Aug 2025 17:06",
+        "qib_offered": 2228571,
+        "nii_offered": 5571429,
+        "nii_offered_big": 3714286,
+        "nii_offered_small": 1857143,
+        "rii_offered": 7428572,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 15228572,
+        "qib_shares_bid_for": 964333511,
+        "nii_shares_bid_for": 2635861163,
+        "nii_shares_bid_for_big": 1797421646,
+        "nii_shares_bid_for_small": 838439517,
+        "rii_shares_bid_for": 1221822297,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 4822016971,
+        "qib_bid_amt": 6750.33,
+        "nii_bid_amt": 18451.03,
+        "nii_bid_amt_big": 12581.95,
+        "nii_bid_amt_small": 5869.08,
+        "rii_bid_amt": 8552.76,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 33754.12,
+        "qib": 432.71,
+        "nii": 473.1,
+        "nii_big": 483.92,
+        "nii_small": 451.47,
+        "rii": 164.48,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 316.64,
+        "cor_date_added": "2025-08-07T17:10:05.000Z",
+        "create_date": "2025-08-07T17:15:01.000Z",
+        "ipo_category_desc": "N/A",
+        "listing_at": "N/A",
+        "company_short_name": "N/A"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025 Allotment",
+        "IPO Price": "70.00",
+        "GMP": "₹36",
+        "Sub2 Sauda Rate": "5800/81200",
+        "Estimated Listing Price": "₹106 ( 51.43% )",
+        "Estimated Profit": "₹7596",
+        "Last Updated": "8-Aug-2025 9:54"
+      },
+      {
+        "GMP Date": "07-08-2025 Close",
+        "IPO Price": "70.00",
+        "GMP": "₹36",
+        "Sub2 Sauda Rate": "5800/81200",
+        "Estimated Listing Price": "₹106 ( 51.43% )",
+        "Estimated Profit": "₹7596",
+        "Last Updated": "7-Aug-2025 23:29"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹40",
+        "Sub2 Sauda Rate": "6400/89600",
+        "Estimated Listing Price": "₹110 ( 57.14% )",
+        "Estimated Profit": "₹8440",
+        "Last Updated": "6-Aug-2025 23:30"
+      },
+      {
+        "GMP Date": "05-08-2025 Open",
+        "IPO Price": "70.00",
+        "GMP": "₹38",
+        "Sub2 Sauda Rate": "6100/85400",
+        "Estimated Listing Price": "₹108 ( 54.29% )",
+        "Estimated Profit": "₹8018",
+        "Last Updated": "5-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹40",
+        "Sub2 Sauda Rate": "6400/89600",
+        "Estimated Listing Price": "₹110 ( 57.14% )",
+        "Estimated Profit": "₹8440",
+        "Last Updated": "4-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹40",
+        "Sub2 Sauda Rate": "6400/89600",
+        "Estimated Listing Price": "₹110 ( 57.14% )",
+        "Estimated Profit": "₹8440",
+        "Last Updated": "3-Aug-2025 23:31"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹40",
+        "Sub2 Sauda Rate": "6400/89600",
+        "Estimated Listing Price": "₹110 ( 57.14% )",
+        "Estimated Profit": "₹8440",
+        "Last Updated": "2-Aug-2025 23:37"
+      },
+      {
+        "GMP Date": "01-08-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹34",
+        "Sub2 Sauda Rate": "5500/77000",
+        "Estimated Listing Price": "₹104 ( 48.57% )",
+        "Estimated Profit": "₹7174",
+        "Last Updated": "1-Aug-2025 23:36"
+      },
+      {
+        "GMP Date": "31-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹31",
+        "Sub2 Sauda Rate": "5000/70000",
+        "Estimated Listing Price": "₹101 ( 44.29% )",
+        "Estimated Profit": "₹6541",
+        "Last Updated": "31-Jul-2025 23:33"
+      },
+      {
+        "GMP Date": "30-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "4000/56000",
+        "Estimated Listing Price": "₹95 ( 35.71% )",
+        "Estimated Profit": "₹5275",
+        "Last Updated": "30-Jul-2025 23:32"
+      },
+      {
+        "GMP Date": "29-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "4000/56000",
+        "Estimated Listing Price": "₹95 ( 35.71% )",
+        "Estimated Profit": "₹5275",
+        "Last Updated": "29-Jul-2025 23:28"
+      },
+      {
+        "GMP Date": "28-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "4000/56000",
+        "Estimated Listing Price": "₹95 ( 35.71% )",
+        "Estimated Profit": "₹5275",
+        "Last Updated": "28-Jul-2025 23:28"
+      },
+      {
+        "GMP Date": "27-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "4000/56000",
+        "Estimated Listing Price": "₹95 ( 35.71% )",
+        "Estimated Profit": "₹5275",
+        "Last Updated": "27-Jul-2025 23:34"
+      },
+      {
+        "GMP Date": "26-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹25",
+        "Sub2 Sauda Rate": "4000/56000",
+        "Estimated Listing Price": "₹95 ( 35.71% )",
+        "Estimated Profit": "₹5275",
+        "Last Updated": "26-Jul-2025 23:32"
+      },
+      {
+        "GMP Date": "25-07-2025",
+        "IPO Price": "70.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹70 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "25-Jul-2025 23:37"
+      }
+    ],
+    "strengths": [
+      "Strong execution capabilities with industry experience",
+      "Robust order book & financial performance",
+      "Diversified revenue base and portfolio",
+      "Experienced management team"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Funding Working Capital Requirements of the Company.",
+        "amount": "65.00"
+      },
+      {
+        "s_no": "2",
+        "object": "General Corporate Purposes.",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "231.56",
+        "31 Mar 2024": "202.63",
+        "31 Mar 2023": "156.59"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "504.48",
+        "31 Mar 2024": "576.58",
+        "31 Mar 2023": "456.83"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "22.40",
+        "31 Mar 2024": "21.41",
+        "31 Mar 2023": "13.80"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "31.32",
+        "31 Mar 2024": "38.44",
+        "31 Mar 2023": "27.69"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "117.72",
+        "31 Mar 2024": "100.19",
+        "31 Mar 2023": "74.81"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "83.90",
+        "31 Mar 2024": "83.49",
+        "31 Mar 2023": "64.44"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "71.82",
+        "31 Mar 2024": "69.62",
+        "31 Mar 2023": "63.36"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Highway Infrastructure",
+        "EPS Basic": "3.4",
+        "EPS Diluted": "3.4",
+        "NAV": "20.37",
+        "P/E(x)": "",
+        "RoNW": "19.03"
+      },
+      {
+        "Company": "Udayshivakumar Infra",
+        "EPS Basic": "-1.18",
+        "EPS Diluted": "-1.18",
+        "NAV": "30.43",
+        "P/E(x)": "",
+        "RoNW": "-4.28"
+      },
+      {
+        "Company": "IRB Infrastructure Developers",
+        "EPS Basic": "1.12",
+        "EPS Diluted": "1.12",
+        "NAV": "32.83",
+        "P/E(x)": "44.38",
+        "RoNW": "32.69"
+      },
+      {
+        "Company": "H.G. Infra Engineering",
+        "EPS Basic": "75.04",
+        "EPS Diluted": "75.04",
+        "NAV": "452.62",
+        "P/E(x)": "14",
+        "RoNW": "17.13"
+      }
+    ],
+    "companyAddress": {
+      "name": "Highway Infrastructure Ltd.",
+      "address": "57-FA, Scheme No. 94, Pipliyahana Junction, Ring Road, Indore, , Madhya Pradesh, -, 452016",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Bigshare Services Pvt Ltd",
+      "address": "1st Floor, Bharat Tin Works Building, Opp. Vasant Oasis,Makwana Road, Marol, Andheri(E), Mumbai - 400 059",
+      "website": "https://ipo.bigshareonline.com/IPO_Status.html",
+      "phone": "+91-22-6263 8200",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Pantomath Capital Advisors Pvt Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1364,
+    "apiCompanyName": "Current Infraprojects",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "0.53 Cr Shares",
+    "apiIssueOpenDate": "",
+    "apiIssueEndDate": "",
+    "apiListingAt": "NSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:57",
+    "detailUrl": "https://www.investorgain.com/ipo/current-infraprojects-ipo/1364/",
+    "scrapedCompanyName": "Current Infraprojects SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/capl-logo.jpeg",
+    "localLogoPath": "downloads/ipo/logos\\1364_Current_Infraprojects_SME_logo.jpeg",
+    "companyFullNameScraped": "Current Infraprojects",
+    "aboutCompanyText": "Current infraprojects is an infrastructure construction, development, operations, and maintenance company. The company offers comprehensive Engineering, Procurment, and Construction (EPC) services along with Engineering consulting and Project Management Consulting services. Its EPC services includes Solar EPC, Electrical EPC, Water EPC, and Civil EPC contracts. It undertakes projects on a fixed sum turnkey basis.\n\nIt has executed projects across sectors, hospitals, commercial buildings, malls and hotels. As of Sep 30, 2024, it has completed projects worth Rs 23,744 lakhs. It derives revenue from government tender contracts and private contracts.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "N/A",
+    "ipoSummaryText": "Current Infraprojects SME IPO worth of 0.53 Cr Shares is coming soon. it is a SME IPO which will list on NSE SME.IPO opening and closing dates, IPO price band and lot size are yet to be announced. Stay connected with us to get the complete Current Infraprojects SME IPO 2025 details including business overview, financial performance, IPO opening and closing dates, GMP, issue details and subscription details.\n\nIPO opening and closing dates, IPO price band and lot size are yet to be announced.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "",
+    "ipoCloseDate": "",
+    "basisOfAllotment": "",
+    "initiationOfRefunds": "",
+    "creditOfSharesToDemat": "",
+    "listingDate": "",
+    "ipoOpenDateStatus": "Unknown",
+    "ipoOpenDateParsed": "N/A",
+    "ipoCloseDateStatus": "Unknown",
+    "ipoCloseDateParsed": "N/A",
+    "listingDateStatus": "Unknown",
+    "listingDateParsed": "N/A",
+    "basisOfAllotmentStatus": "Unknown",
+    "basisOfAllotmentParsed": "N/A",
+    "initiationOfRefundsStatus": "Unknown",
+    "initiationOfRefundsParsed": "N/A",
+    "creditOfSharesToDematStatus": "Unknown",
+    "creditOfSharesToDematParsed": "N/A",
+    "lotIssuePrice": "₹TBD",
+    "lotMarketLot": "N/A",
+    "lotIndividualInvestor": "N/A",
+    "lotMinHniLots": "N/A",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21966",
+    "ipoIdGmpData": "1364",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 7 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of Current Infraprojects SME IPO GMP with expected listing price.",
+    "subjectToSauda": "-",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "",
+    "estimatedListingPrice": "",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdated": "02-Aug-2025 13:01:39",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹TBDPer Share",
+    "drhpLinkTable": "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_31032025193330_DRHP.pdf",
+    "rhpLinkTable": "N/A",
+    "listingAtTable": "NSE SME",
+    "retailQuotaTable": "Not less than 35.00% of the Net Issue",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "0.53 Cr Shares",
+    "freshIssueTable": "0.53 Cr Shares",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "99.99",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "02-Aug-2025 13:01:39",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:01.526159",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "8-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "7-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "6-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "5-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "4-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "2-Aug-2025 12:50"
+      }
+    ],
+    "strengths": [
+      "Focused EPC player with comprehensive services",
+      "NABL Accredition Quality Assurance Lab",
+      "Strong order book with repeat orders, As on March 28, 2025, its order book stood at Rs 24,579.20 lakhs.",
+      "End-to-end project management and execution capabilities",
+      "Experienced promoters and management"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Investment in Equity of our wholly owned subsidiary, Current Infra Dhanbad Solar Private Limited for setting up 1800 KW solar plant under RESCO Model at Indian Institute of Technology (Indian School of Mines) IIT(ISM), Dhanbad, Jharkhand",
+        "amount": "58.5"
+      },
+      {
+        "s_no": "2",
+        "object": "Funding the working capital requirement of the company",
+        "amount": "300"
+      },
+      {
+        "s_no": "3",
+        "object": "General corporate purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2024": "42.16",
+        "31 Mar 2023": "35.65",
+        "31 Mar 2022": "31.86"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2024": "77.73",
+        "31 Mar 2023": "61.06",
+        "31 Mar 2022": "60.79"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2024": "5.09",
+        "31 Mar 2023": "1.49",
+        "31 Mar 2022": "1.51"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2024": "14.27",
+        "31 Mar 2023": "9.19",
+        "31 Mar 2022": "7.69"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2024": "5.27",
+        "31 Mar 2023": "6.19",
+        "31 Mar 2022": "4.69"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2024": "11.74",
+        "31 Mar 2023": "7.83",
+        "31 Mar 2022": "6.09"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Current Infraprojects Limited",
+        "EPS Basic": "5.65",
+        "EPS Diluted": "5.65",
+        "NAV": "15.86",
+        "P/E(x)": "",
+        "RoNW": "35.65",
+        "Financial statements": "Restated"
+      },
+      {
+        "Company": "K2 Infragen Limited",
+        "EPS Basic": "0.99",
+        "EPS Diluted": "0.99",
+        "NAV": "3.57",
+        "P/E(x)": "73.94",
+        "RoNW": "27.79",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Oriana Power Limited",
+        "EPS Basic": "27.13",
+        "EPS Diluted": "27.13",
+        "NAV": "74.4",
+        "P/E(x)": "48.28",
+        "RoNW": "36.47",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Kay Cee Enony A Infra Limited",
+        "EPS Basic": "5.97",
+        "EPS Diluted": "5.97",
+        "NAV": "40.72",
+        "P/E(x)": "27.14",
+        "RoNW": "14.67",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Rulka Electricals Limited",
+        "EPS Basic": "14.35",
+        "EPS Diluted": "14.35",
+        "NAV": "32.27",
+        "P/E(x)": "40.05",
+        "RoNW": "45.92",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "H.M Electro Mech Limited",
+        "EPS Basic": "8.01",
+        "EPS Diluted": "8.01",
+        "NAV": "8.19",
+        "P/E(x)": "7.75",
+        "RoNW": "25.37",
+        "Financial statements": "Standalone"
+      }
+    ],
+    "companyAddress": {
+      "name": "Current Infraprojects Ltd.",
+      "address": "A-27, Basant Vihar, Vaishali Marg, (West), Panchyawala, Jaipur, , Rajasthan, -, 302034",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Bigshare Services Pvt Ltd",
+      "address": "1st Floor, Bharat Tin Works Building, Opp. Vasant Oasis,Makwana Road, Marol, Andheri(E), Mumbai - 400 059",
+      "website": "https://ipo.bigshareonline.com/IPO_Status.html",
+      "phone": "+91-22-6263 8200",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Holani Consultants Private Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1372,
+    "apiCompanyName": "Mahendra Realtors",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "46.97 Cr",
+    "apiIssueOpenDate": "2025-08-12T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-14T00:00:00.000Z",
+    "apiListingAt": "NSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:59",
+    "detailUrl": "https://www.investorgain.com/ipo/mahendra-realtors-ipo/1372/",
+    "scrapedCompanyName": "Mahendra Realtors SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/mripl-logo.jpg",
+    "localLogoPath": "downloads/ipo/logos\\1372_Mahendra_Realtors_SME_logo.jpg",
+    "companyFullNameScraped": "Mahendra Realtors",
+    "aboutCompanyText": "Mahendra Realtors is engaged in onstruction and infrastructure-related services. It includes Structural Repairs, Rehabilitation, Retrofitting, Waterproofing, Corporate Interiors, Build-Operate-Transfer (BOT) Projects, Maintenance, Construction, and Infrastructure Restoration.\n\nKey Services:\n\nCompleted projects: Airport Authority of India - Interior Work, BPCA - structural work, New India Assurance Structural Work, SMC Ambedkar Bridge, JBIMPS Mumbai University\n\nAs of Dec 31, 2024, it has 126 completed projects and 67 ongoing projects.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "1600",
+    "ipoSummaryText": "Mahendra Realtors IPO, a SME IPO of ₹46.97 Cr opens for subscription from August 12, 2025 to August 14, 2025. The IPO consists of ₹37.70 Cr fresh issue and ₹9.28 Cr offer for sale.\n\nThe face value of each share is 10, and the price band is set between 75.00-85.00 per share. Retail investors can apply to the Mahendra Realtors SME IPO with a minimum application of 2 lots, each comprising 1600 shares—amounting to a total investment of Rs272000.\n\nThe tentative listing date on the exchange (NSE SME) is August 20, 2025.\n\nStay tuned with us to get more details about Mahendra Realtors SME IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "12th Aug 2025",
+    "ipoCloseDate": "14th Aug 2025",
+    "basisOfAllotment": "18th Aug 2025",
+    "initiationOfRefunds": "19th Aug 2025",
+    "creditOfSharesToDemat": "19th Aug 2025",
+    "listingDate": "20th Aug 2025",
+    "ipoOpenDateStatus": "Future",
+    "ipoOpenDateParsed": "2025-08-12",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-14",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-20",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-18",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-19",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-19",
+    "lotIssuePrice": "₹75.00-85.00",
+    "lotMarketLot": "1,600Shares",
+    "lotIndividualInvestor": "₹2,72,000",
+    "lotMinHniLots": "4800 shares (3 lots)",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21974",
+    "ipoIdGmpData": "1372",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "Mahendra Realtors SME IPO last GMP is 0, last updated Aug 8th 2025 09:56 AM. With the price band of 85.00, Mahendra Realtors SME IPO's estimated listing price is 85 (cap price + today's GMP).The expected percentage gain/loss per share is 0.00%.",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 3 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of Mahendra Realtors SME IPO GMP with expected listing price.",
+    "subjectToSauda": "0",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "85.00",
+    "estimatedListingPrice": "85",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "0",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:56 AM",
+    "lastUpdated": "06-Aug-2025 18:46:57",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹75.00-85.00Per Share",
+    "drhpLinkTable": "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_20022025193950_DRHPFINALMRIL.pdf",
+    "rhpLinkTable": "https://www.mripl.net/wp-content/uploads/2025/08/MRIL_RedHerringProspectus.pdf",
+    "listingAtTable": "NSE SME",
+    "retailQuotaTable": "Not less than 35.00% of the Net Issue",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹46.97 Cr",
+    "freshIssueTable": "₹37.70 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "100",
+    "promoterHoldingPostIpoTable": "73.68",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "06-Aug-2025 18:46:57",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:03.438524",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "85.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹85 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "8-Aug-2025 9:56"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "85.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹85 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "7-Aug-2025 23:35"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "85.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹85 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "6-Aug-2025 23:36"
+      }
+    ],
+    "strengths": [
+      "Established Reputation",
+      "Specialized Skills",
+      "Strong connections within government agencies",
+      "Financial stability"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Working Capital Requirement",
+        "amount": "30.40"
+      },
+      {
+        "s_no": "2",
+        "object": "General Corporate Purposes",
+        "amount": ""
+      },
+      {
+        "s_no": "3",
+        "object": "Issue Expenses",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "137.54",
+        "31 Mar 2024": "93.01",
+        "31 Mar 2023": "98.21"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "128.69",
+        "31 Mar 2024": "105.11",
+        "31 Mar 2023": "66.07"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "14.87",
+        "31 Mar 2024": "11.58",
+        "31 Mar 2023": "4.04"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "21.90",
+        "31 Mar 2024": "17.00",
+        "31 Mar 2023": "9.04"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "70.89",
+        "31 Mar 2024": "56.02",
+        "31 Mar 2023": "44.44"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "53.51",
+        "31 Mar 2024": "38.65",
+        "31 Mar 2023": "43.20"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "27.81",
+        "31 Mar 2024": "16.13",
+        "31 Mar 2023": "43.64"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Mahendra Realtors and Infrastructure Limited",
+        "EPS Basic": "8.55",
+        "NAV": "40.79",
+        "P/E(x)": "",
+        "RoNW": "23.43"
+      },
+      {
+        "Company": "A B Infrabuild Limited",
+        "EPS Basic": "3.36",
+        "NAV": "20.74",
+        "P/E(x)": "53.54",
+        "RoNW": "0.17"
+      },
+      {
+        "Company": "Maruti Infrastructure Ltd.",
+        "EPS Basic": "0.21",
+        "NAV": "14.77",
+        "P/E(x)": "66.29",
+        "RoNW": "0.07"
+      }
+    ],
+    "companyAddress": {
+      "name": "Mahendra Realtors & Infrastructure Ltd.",
+      "address": "603, Quantum Tower, Ram Baug, Opp Dal Mill, Off S.V. Road, Malad (West), Mumbai, , Maharashtra, -, 400064",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "MUFG Intime India Private Limited (Link Intime)",
+      "address": "Link Intime India Private Ltd, C 101, 247 Park, L.B.S.Marg, Vikhroli (West), Mumbai - 400083",
+      "website": "https://linkintime.co.in/Initial_Offer/public-issues.html",
+      "phone": "+91-22-4918 6270",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Fast Track Finsec Pvt Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1371,
+    "apiCompanyName": "Icodex Publishing Solutions",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "39.93 Cr",
+    "apiIssueOpenDate": "2025-08-11T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-13T00:00:00.000Z",
+    "apiListingAt": "BSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:27:59",
+    "detailUrl": "https://www.investorgain.com/ipo/icodex-publishing-ipo/1371/",
+    "scrapedCompanyName": "Icodex Publishing Solutions SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/icodex-publishing-ipo-logo.jpg",
+    "localLogoPath": "downloads/ipo/logos\\1371_Icodex_Publishing_Solutions_SME_logo.jpg",
+    "companyFullNameScraped": "Icodex Publishing Solutions",
+    "aboutCompanyText": "Icodex Publishing Solutions is into the business of software development for scholarly publishing. The company specializes in deveoloping and providing publishing products and software from manuscrip preparation to print and digital content distribution.\n\nKey Business verticals:",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "1200",
+    "ipoSummaryText": "Icodex Publishing Solutions IPO, a SME IPO of ₹39.93 Cr opens for subscription from August 11, 2025 to August 13, 2025. The IPO consists of ₹32.53 Cr fresh issue and ₹7.39 Cr offer for sale.\n\nThe face value of each share is 10, and the price band is set between 98.00-102.00 per share. Retail investors can apply to the Icodex Publishing Solutions SME IPO with a minimum application of 2 lots, each comprising 1200 shares—amounting to a total investment of Rs244800.\n\nThe tentative listing date on the exchange (BSE SME) is August 19, 2025.\n\nStay tuned with us to get more details about Icodex Publishing Solutions SME IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "11th Aug 2025",
+    "ipoCloseDate": "13th Aug 2025",
+    "basisOfAllotment": "14th Aug 2025",
+    "initiationOfRefunds": "18th Aug 2025",
+    "creditOfSharesToDemat": "18th Aug 2025",
+    "listingDate": "19th Aug 2025",
+    "ipoOpenDateStatus": "Future",
+    "ipoOpenDateParsed": "2025-08-11",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-13",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-19",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-14",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-18",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-18",
+    "lotIssuePrice": "₹98.00-102.00",
+    "lotMarketLot": "1,200Shares",
+    "lotIndividualInvestor": "₹2,44,800",
+    "lotMinHniLots": "3600 shares (3 lots)",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21973",
+    "ipoIdGmpData": "1371",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "Icodex Publishing Solutions SME IPO last GMP is 0, last updated Aug 8th 2025 09:54 AM. With the price band of 102.00, Icodex Publishing Solutions SME IPO's estimated listing price is 102 (cap price + today's GMP).The expected percentage gain/loss per share is 0.00%.",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 3 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of Icodex Publishing Solutions SME IPO GMP with expected listing price.",
+    "subjectToSauda": "0",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "102.00",
+    "estimatedListingPrice": "102",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "0",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:54 AM",
+    "lastUpdated": "06-Aug-2025 12:19:41",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹98.00-102.00Per Share",
+    "drhpLinkTable": "https://www.bseindia.com/corporates/download/377541/Icodex%20Publishing%20Solutions%20Ltd_DRHP_Final_20250212153530.pdf",
+    "rhpLinkTable": "https://icodexsolutions.com/wp-content/uploads/2025/08/Icodex-Publishing-Solutions-Ltd_Red-Herring-Prospectus.pdf",
+    "listingAtTable": "BSE SME",
+    "retailQuotaTable": "Not less than 35% of the Net Issue",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹39.93 Cr",
+    "freshIssueTable": "₹32.53 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "88.24",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "06-Aug-2025 12:19:41",
+    "metaTitle": "",
+    "pageTitle": "",
+    "metaDesc": "",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:03.474319",
+    "ipoShareAllocation": [],
+    "ipoDaywiseSubscriptionTable": [],
+    "ipoSharesBidAmountTable": [],
+    "ipoBiddingHistoryJson": [],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025",
+        "IPO Price": "102.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹102 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "8-Aug-2025 9:54"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "102.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹102 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "7-Aug-2025 23:37"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "102.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹102 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "6-Aug-2025 23:36"
+      }
+    ],
+    "strengths": [
+      "Domain Expertise",
+      "Experienced promoters and leaders",
+      "Strong relationship with existing customers",
+      "End to end publishing solution provider",
+      "Technology focussed business model"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Purchase of new office premises",
+        "amount": "16.70"
+      },
+      {
+        "s_no": "2",
+        "object": "Purchase of hardware for new office",
+        "amount": "1.12"
+      },
+      {
+        "s_no": "3",
+        "object": "Working capital requirement",
+        "amount": "5.20"
+      },
+      {
+        "s_no": "4",
+        "object": "General Corporate Purpose",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "24.75",
+        "31 Mar 2024": "10.67",
+        "31 Mar 2023": "5.85"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "22.08",
+        "31 Mar 2024": "10.99",
+        "31 Mar 2023": "9.72"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "8.96",
+        "31 Mar 2024": "4.40",
+        "31 Mar 2023": "1.81"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "13.43",
+        "31 Mar 2024": "4.26",
+        "31 Mar 2023": "1.95"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "19.05",
+        "31 Mar 2024": "8.59",
+        "31 Mar 2023": "4.19"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "6.81",
+        "31 Mar 2024": "8.59",
+        "31 Mar 2023": "4.19"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "2.99",
+        "31 Mar 2024": "0.88",
+        "31 Mar 2023": "0.02"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Icodex Publishing Solutions Limited",
+        "P/E(x)": "",
+        "Financial statements": "Consolidated"
+      },
+      {
+        "Company": "MPS Limited",
+        "P/E(x)": "38.02",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "Icodex Publishing Solutions Ltd.",
+      "address": "102, First Floor, Suman Business Park, Kalyani Nagar, Viman Nagar, Pune, , Maharashtra, -, 411014",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Cameo Corporate Services Limited",
+      "address": "Cameo Corporate Services Ltd., Subramanian Building # 1, Club House Road, Chennai 600 002 - India",
+      "website": "https://ipo.cameoindia.com/",
+      "phone": "+91-44-28460390",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Indcap Advisors Pvt. Ltd."
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1365,
+    "apiCompanyName": "ANB Metal Cast",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "46.80 Cr",
+    "apiIssueOpenDate": "2025-08-08T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-12T00:00:00.000Z",
+    "apiListingAt": "NSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:28:01",
+    "detailUrl": "https://www.investorgain.com/ipo/anb-metal-cast-ipo/1365/",
+    "scrapedCompanyName": "ANB Metal Cast SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/anb-cast-logo.jpeg",
+    "localLogoPath": "downloads/ipo/logos\\1365_ANB_Metal_Cast_SME_logo.jpeg",
+    "companyFullNameScraped": "ANB Metal Cast",
+    "aboutCompanyText": "ANB Metal manufactures aluminium extrusion products.\n\nProduct portfolio: Its product portfolio includes motor bodies, various profiles, round bars, solar profiles, railings, sliding windows, kitchen profiles, hardware items, channels, sections, flat bars and tubes, etc.\n\nIndustries served: The products are used across industries like electronics, automotive, mechanical, solar, and architectural sectors. Majority of the products are sold in Gujarat state.\n\nManufacturing units: Rajkot, Gujarat across 50,000 sq. ft. for manufacturing aluminium extrusion and non-ferrous metal alloys. It has an installed capacity of 7,800 MT.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "800",
+    "ipoSummaryText": "ANB Metal Cast IPO, a SME IPO of ₹46.80 Cr opens for subscription from August 8, 2025 to August 12, 2025. The IPO consists of ₹46.80 Cr fresh issue.\n\nThe face value of each share is 10, and the price band is set between 148.00-156.00 per share. Retail investors can apply to the ANB Metal Cast SME IPO with a minimum application of 2 lots, each comprising 800 shares—amounting to a total investment of Rs249600.\n\nThe tentative listing date on the exchange (NSE SME) is August 18, 2025.\n\nStay tuned with us to get more details about ANB Metal Cast SME IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "8th Aug 2025",
+    "ipoCloseDate": "12th Aug 2025",
+    "basisOfAllotment": "13th Aug 2025",
+    "initiationOfRefunds": "14th Aug 2025",
+    "creditOfSharesToDemat": "14th Aug 2025",
+    "listingDate": "18th Aug 2025",
+    "ipoOpenDateStatus": "Today",
+    "ipoOpenDateParsed": "2025-08-08",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-12",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-18",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-13",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-14",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-14",
+    "lotIssuePrice": "₹148.00-156.00",
+    "lotMarketLot": "800Shares",
+    "lotIndividualInvestor": "₹2,49,600",
+    "lotMinHniLots": "2400 shares (3 lots)",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21967",
+    "ipoIdGmpData": "1365",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "ANB Metal Cast SME IPO last GMP is 0, last updated Aug 8th 2025 09:56 AM. With the price band of 156.00, ANB Metal Cast SME IPO's estimated listing price is 156 (cap price + today's GMP).The expected percentage gain/loss per share is 0.00%.",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 7 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of ANB Metal Cast SME IPO GMP with expected listing price.",
+    "subjectToSauda": "0",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "156.00",
+    "estimatedListingPrice": "156",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "0",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:56 AM",
+    "lastUpdated": "07-Aug-2025 18:22:45",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹148.00-156.00Per Share",
+    "drhpLinkTable": "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_06012025215320_ANB_DRHP_Final.pdf",
+    "rhpLinkTable": "https://nsearchives.nseindia.com/content/ipo/RHP_AMCL.zip",
+    "listingAtTable": "NSE SME",
+    "retailQuotaTable": "Not less than 35% of the Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹46.80 Cr",
+    "freshIssueTable": "₹46.80 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "91.49",
+    "promoterHoldingPostIpoTable": "N/A",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/anb-metal-ipo-anchor-allocation-report.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 18:22:45",
+    "metaTitle": "ANB Metal Cast SME Live Subscription. Total: 0.02 times.",
+    "pageTitle": "ANB Metal Cast Live Subscription",
+    "metaDesc": "ANB Metal Cast SME Live Subscription. Total: 0.02 times as of 8th Aug 2025 10:21.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:04.086882",
+    "ipoShareAllocation": [
+      {
+        "category": "Qualified Institutional Buyers",
+        "shares_allocated": 599200,
+        "allocation_pct": 31.51
+      },
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 251200,
+        "allocation_pct": 13.21
+      },
+      {
+        "category": "Small NII (SNII- Bid below ₹10L)",
+        "shares_allocated": 150400,
+        "allocation_pct": 7.91
+      },
+      {
+        "category": "Big NII (BNII- Bid above ₹10L)",
+        "shares_allocated": 100800,
+        "allocation_pct": 5.3
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 1051200,
+        "allocation_pct": 55.28
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "8th Aug 2025 10:21",
+        "qib_ratio": 0.0,
+        "nii_ratio": 0.1,
+        "rii_ratio": 0.0,
+        "emp_ratio": 0.25,
+        "total_ratio": 0.02
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "QIB",
+        "shares_offered": 599200,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "NII",
+        "shares_offered": 251200,
+        "shares_bid": 25600,
+        "bid_amount_cr": 0.4
+      },
+      {
+        "category": "Small NII",
+        "shares_offered": 150400,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "Big NII",
+        "shares_offered": 100800,
+        "shares_bid": 25600,
+        "bid_amount_cr": 0.4
+      },
+      {
+        "category": "RII",
+        "shares_offered": 1051200,
+        "shares_bid": 17600,
+        "bid_amount_cr": 0.27
+      },
+      {
+        "category": "Total",
+        "shares_offered": 1901600,
+        "shares_bid": 43200,
+        "bid_amount_cr": 0.67
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7846,
+        "tsb_ipo_id": 1365,
+        "cor_id": 2129,
+        "bid_date": "8th Aug 2025 10:21",
+        "qib_offered": 599200,
+        "nii_offered": 251200,
+        "nii_offered_big": 100800,
+        "nii_offered_small": 150400,
+        "rii_offered": 1051200,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 1901600,
+        "qib_shares_bid_for": 0,
+        "nii_shares_bid_for": 25600,
+        "nii_shares_bid_for_big": 25600,
+        "nii_shares_bid_for_small": 0,
+        "rii_shares_bid_for": 17600,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 43200,
+        "qib_bid_amt": 0.0,
+        "nii_bid_amt": 0.4,
+        "nii_bid_amt_big": 0.4,
+        "nii_bid_amt_small": 0.0,
+        "rii_bid_amt": 0.27,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 0.67,
+        "qib": 0.0,
+        "nii": 0.1,
+        "nii_big": 0.25,
+        "nii_small": 0.0,
+        "rii": 0.02,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 0.02,
+        "cor_date_added": "2025-08-08T10:20:05.000Z",
+        "create_date": "2025-08-08T10:25:05.000Z",
+        "ipo_category_desc": "SME IPO",
+        "listing_at": "N/A",
+        "company_short_name": "ANB Metal Cast"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025 Open",
+        "IPO Price": "156.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹156 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "8-Aug-2025 9:56"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "156.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹156 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "7-Aug-2025 23:33"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "156.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹156 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "6-Aug-2025 23:31"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "156.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹156 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "5-Aug-2025 23:37"
+      },
+      {
+        "GMP Date": "04-08-2025",
+        "IPO Price": "156.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹156 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "4-Aug-2025 23:31"
+      },
+      {
+        "GMP Date": "03-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( 0.00% )",
+        "Estimated Profit": "",
+        "Last Updated": "3-Aug-2025 5:55"
+      },
+      {
+        "GMP Date": "02-08-2025",
+        "IPO Price": "",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹ ( % )",
+        "Estimated Profit": "",
+        "Last Updated": "2-Aug-2025 13:55"
+      }
+    ],
+    "strengths": [
+      "Diversified product portfolio for all non-ferrous metal products.",
+      "customized solutions catering to client specification.",
+      "Strong relationship with suppliers.",
+      "Optimum utilization of resources.",
+      "Stringent quality control mechanism."
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Funding capital expenditure requirements for the proposed expansion in existing manufacturing facilities of our Company by constructing additional floor and installation of additional plant and machineries",
+        "amount": "13.70"
+      },
+      {
+        "s_no": "2",
+        "object": "Part funding long-term working capital requirements",
+        "amount": "21.50"
+      },
+      {
+        "s_no": "3",
+        "object": "General Corporate Purposes.",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "98.05",
+        "31 Mar 2024": "63.58",
+        "31 Mar 2023": "44.02"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "162.64",
+        "31 Mar 2024": "112.15",
+        "31 Mar 2023": "84.28"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "10.25",
+        "31 Mar 2024": "5.34",
+        "31 Mar 2023": "1.85"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "17.47",
+        "31 Mar 2024": "10.71",
+        "31 Mar 2023": "3.15"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "33.97",
+        "31 Mar 2024": "10.67",
+        "31 Mar 2023": "5.37"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "25.33",
+        "31 Mar 2024": "7.67",
+        "31 Mar 2023": "2.37"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "34.33",
+        "31 Mar 2024": "34.13",
+        "31 Mar 2023": "15.92"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "ANB Metal Cast Limited",
+        "EPS Diluted": "12.66",
+        "NAV": "41.97",
+        "P/E(x)": "",
+        "RoNW": "45.91",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Maan Aluminium Ltd.",
+        "EPS Diluted": "2.87",
+        "NAV": "32.99",
+        "P/E(x)": "42.51",
+        "RoNW": "8.7",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Banco Products (india) Ltd.",
+        "EPS Diluted": "27.39",
+        "NAV": "91.08",
+        "P/E(x)": "23.97",
+        "RoNW": "30.01",
+        "Financial statements": "Consolidated"
+      }
+    ],
+    "companyAddress": {
+      "name": "ANB Metal Cast Ltd.",
+      "address": "Riverwave Off. No 9, 8th Floor, Near Lords Pradhyuman, Kalawad Road, Rajkot, , Gujarat, -, 360005",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Sun Capital Advisory Services (P) Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1368,
+    "apiCompanyName": "Star Imaging",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "62.65 Cr",
+    "apiIssueOpenDate": "2025-08-08T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-12T00:00:00.000Z",
+    "apiListingAt": "BSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:28:00",
+    "detailUrl": "https://www.investorgain.com/ipo/star-imaging-ipo/1368/",
+    "scrapedCompanyName": "Star Imaging SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/star-imaging-path-ipo-logo.jpg",
+    "localLogoPath": "downloads/ipo/logos\\1368_Star_Imaging_SME_logo.jpg",
+    "companyFullNameScraped": "Star Imaging",
+    "aboutCompanyText": "Star Imaging offers a diagnostic imaging services and clinical laboratory tests, both routine and specialized tests. The company offer diagnostic services across Radiology, pathology, cardio-diagnostics, neruo-diagnostics, and urology & other.\n\nServices offered:m X-ray, CT Scan, Mammography, 4D ultrasound, Bone Mineral Density, Haematology, Microbiology, PCR, Histopathology, Immunology & Bio Chemistry, etc.\n\nBusiness model and Revenue: It serves both B2G (Public-private parternship model), B2C, basis, and B2B basis i.e., private hospitals. In Fiscal 2024, 58.46% revenue derived from B2G segment, followed by 34.67% from B2C and 6.87% from B2B segment.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "1000",
+    "ipoSummaryText": "Star Imaging IPO, a SME IPO of ₹62.65 Cr opens for subscription from August 8, 2025 to August 12, 2025. The IPO consists of ₹48.85 Cr fresh issue and ₹13.80 Cr offer for sale.\n\nThe face value of each share is 10, and the price band is set between 135.00-142.00 per share. Retail investors can apply to the Star Imaging SME IPO with a minimum application of 2 lots, each comprising 1000 shares—amounting to a total investment of Rs284000.\n\nThe tentative listing date on the exchange (BSE SME) is August 18, 2025.\n\nStay tuned with us to get more details about Star Imaging SME IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "8th Aug 2025",
+    "ipoCloseDate": "12th Aug 2025",
+    "basisOfAllotment": "13th Aug 2025",
+    "initiationOfRefunds": "14th Aug 2025",
+    "creditOfSharesToDemat": "14th Aug 2025",
+    "listingDate": "18th Aug 2025",
+    "ipoOpenDateStatus": "Today",
+    "ipoOpenDateParsed": "2025-08-08",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-12",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-18",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-13",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-14",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-14",
+    "lotIssuePrice": "₹135.00-142.00",
+    "lotMarketLot": "1,000Shares",
+    "lotIndividualInvestor": "₹2,84,000",
+    "lotMinHniLots": "3000 shares (3 lots)",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21970",
+    "ipoIdGmpData": "1368",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "0",
+    "gmpComments": "Star Imaging SME IPO last GMP is 0, last updated Aug 8th 2025 10:00 AM. With the price band of 142.00, Star Imaging SME IPO's estimated listing price is 142 (cap price + today's GMP).The expected percentage gain/loss per share is 0.00%.",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 4 sessions grey market activities, today IPO GMP trend, no major movement is observed in GMP, expect same trend till listing day. Stay with us to know the daily price trend of Star Imaging SME IPO GMP with expected listing price.",
+    "subjectToSauda": "0",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "142.00",
+    "estimatedListingPrice": "142",
+    "gmpPercentCalc": "0.00",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "--",
+    "estProfit": "0",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 10:00 AM",
+    "lastUpdated": "07-Aug-2025 18:24:52",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹135.00-142.00Per Share",
+    "drhpLinkTable": "https://www.bseindia.com/corporates/download/393830/DRHP_Star_Imaging_20250326202011.pdf",
+    "rhpLinkTable": "https://www.starimaging.in/assets/img/financials/RHP-Star%20Imaging-and-Path-Lab-Limited.pdf",
+    "listingAtTable": "BSE SME",
+    "retailQuotaTable": "Not less than 35% of the Net Offer",
+    "ipoIssueTypeTable": "Book Build Issue",
+    "ipoIssueSizeTable": "₹62.65 Cr",
+    "freshIssueTable": "₹48.85 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "100",
+    "promoterHoldingPostIpoTable": "71.92",
+    "anchorListLinkTable": "https://www.chittorgarh.net/reports/anchor-investor/star-imaging-ipo-anchor-allocation-report.pdf",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 18:24:52",
+    "metaTitle": "Star Imaging SME Live Subscription. Total: 0.00 times.",
+    "pageTitle": "Star Imaging Live Subscription",
+    "metaDesc": "Star Imaging SME Live Subscription. Total: 0.00 times as of 8th Aug 2025 10:21.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:04.255759",
+    "ipoShareAllocation": [
+      {
+        "category": "Qualified Institutional Buyers",
+        "shares_allocated": 871000,
+        "allocation_pct": 28.02
+      },
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 657000,
+        "allocation_pct": 21.14
+      },
+      {
+        "category": "Small NII (SNII- Bid below ₹10L)",
+        "shares_allocated": 219000,
+        "allocation_pct": 7.05
+      },
+      {
+        "category": "Big NII (BNII- Bid above ₹10L)",
+        "shares_allocated": 438000,
+        "allocation_pct": 14.09
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 1528000,
+        "allocation_pct": 49.16
+      },
+      {
+        "category": "Employees Quota",
+        "shares_allocated": 52000,
+        "allocation_pct": 1.67
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "8th Aug 2025 10:21",
+        "qib_ratio": 0.0,
+        "nii_ratio": 0.0,
+        "rii_ratio": 0.0,
+        "emp_ratio": 0.0,
+        "total_ratio": 0.0
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "QIB",
+        "shares_offered": 871000,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "NII",
+        "shares_offered": 657000,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "Small NII",
+        "shares_offered": 219000,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "Big NII",
+        "shares_offered": 438000,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "RII",
+        "shares_offered": 1528000,
+        "shares_bid": 4000,
+        "bid_amount_cr": 0.06
+      },
+      {
+        "category": "EMP",
+        "shares_offered": 52000,
+        "shares_bid": 0,
+        "bid_amount_cr": 0.0
+      },
+      {
+        "category": "Total",
+        "shares_offered": 3108000,
+        "shares_bid": 4000,
+        "bid_amount_cr": 0.06
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7845,
+        "tsb_ipo_id": 1368,
+        "cor_id": 2249,
+        "bid_date": "8th Aug 2025 10:21",
+        "qib_offered": 871000,
+        "nii_offered": 657000,
+        "nii_offered_big": 438000,
+        "nii_offered_small": 219000,
+        "rii_offered": 1528000,
+        "emp_offered": 52000,
+        "other_offered": 0,
+        "total_offered": 3108000,
+        "qib_shares_bid_for": 0,
+        "nii_shares_bid_for": 0,
+        "nii_shares_bid_for_big": 0,
+        "nii_shares_bid_for_small": 0,
+        "rii_shares_bid_for": 4000,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 4000,
+        "qib_bid_amt": 0.0,
+        "nii_bid_amt": 0.0,
+        "nii_bid_amt_big": 0.0,
+        "nii_bid_amt_small": 0.0,
+        "rii_bid_amt": 0.06,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 0.06,
+        "qib": 0.0,
+        "nii": 0.0,
+        "nii_big": 0.0,
+        "nii_small": 0.0,
+        "rii": 0.0,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 0.0,
+        "cor_date_added": "2025-08-08T10:20:04.000Z",
+        "create_date": "2025-08-08T10:25:05.000Z",
+        "ipo_category_desc": "SME IPO",
+        "listing_at": "N/A",
+        "company_short_name": "Star Imaging"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025 Open",
+        "IPO Price": "142.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹142 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "8-Aug-2025 10:00"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "142.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹142 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "7-Aug-2025 23:34"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "142.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹142 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "6-Aug-2025 23:36"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "142.00",
+        "GMP": "₹0",
+        "Sub2 Sauda Rate": "--",
+        "Estimated Listing Price": "₹142 ( 0.00% )",
+        "Estimated Profit": "₹0",
+        "Last Updated": "5-Aug-2025 23:31"
+      }
+    ],
+    "strengths": [
+      "Comprehensive range of diagnostic services",
+      "Specialized expertise",
+      "Proper sample collection and processing procedures"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "To Meet Working Capital Requirement",
+        "amount": "25.00"
+      },
+      {
+        "s_no": "2",
+        "object": "Repayment/prepayment of certain borrowings availed of by the Company",
+        "amount": "12.00"
+      },
+      {
+        "s_no": "3",
+        "object": "Funding the Capital Expenditure towards purchase of Refurbished Medical Equipment in running facilities",
+        "amount": "5.14"
+      },
+      {
+        "s_no": "4",
+        "object": "General corporate purposes",
+        "amount": ""
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "98.16",
+        "31 Mar 2024": "81.64",
+        "31 Mar 2023": "61.23"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "83.79",
+        "31 Mar 2024": "79.97",
+        "31 Mar 2023": "58.68"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "15.96",
+        "31 Mar 2024": "12.45",
+        "31 Mar 2023": "0.58"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "28.60",
+        "31 Mar 2024": "22.34",
+        "31 Mar 2023": "5.81"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "47.15",
+        "31 Mar 2024": "31.35",
+        "31 Mar 2023": "18.93"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "33.65",
+        "31 Mar 2024": "29.85",
+        "31 Mar 2023": "17.43"
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "32.73",
+        "31 Mar 2024": "30.64",
+        "31 Mar 2023": "26.56"
+      }
+    ],
+    "peerComparison": [],
+    "companyAddress": {
+      "name": "Star Imaging & Path Lab Ltd.",
+      "address": "4B/4, Tilak Nagar, Near Sant Pura, Tilak Nagar West Delhi, New Delhi, , New Delhi, -, 110018",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Kfin Technologies Limited",
+      "address": "KFintech, Tower-B, Plot No 31 & 32, Financial District, Nanakramguda, Gachibowli, Hyderabad, Telangana India - 500 032.",
+      "website": "https://kosmic.kfintech.com/ipostatus/",
+      "phone": "04067162222, 04079611000",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Share India Capital Services Private Limited"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  },
+  {
+    "ipoId": 1369,
+    "apiCompanyName": "Medistep Healthcare",
+    "apiIpoCategory": "SME",
+    "apiIssueSize": "15.29 Cr",
+    "apiIssueOpenDate": "2025-08-08T00:00:00.000Z",
+    "apiIssueEndDate": "2025-08-12T00:00:00.000Z",
+    "apiListingAt": "NSE SME",
+    "apiIpoStatus": "U",
+    "apiIpoStatusFormatted": "Upcoming",
+    "scrapingDate": "2025-08-08 10:28:00",
+    "detailUrl": "https://www.investorgain.com/ipo/medistep-healthcare-ipo/1369/",
+    "scrapedCompanyName": "Medistep Healthcare SME",
+    "companyLogoUrl": "https://www.chittorgarh.net/images/ipo/medistep-logo.jpeg",
+    "localLogoPath": "downloads/ipo/logos\\1369_Medistep_Healthcare_SME_logo.jpeg",
+    "companyFullNameScraped": "Medistep Healthcare",
+    "aboutCompanyText": "Medistep Healthcare is a pharmaceutical company, manufcturing sanitary pads, energy powder, and a diverse range of nutraceutical products, intimate products, and surgical products.\n\nKey Business Activities:\n\nIt primarily caters to the Western region in Gujarat. It also acts as a distributors or stockiest for manufacturers/distributors, or wholesalers/retailers\n\nIt has a manufacturing facility in Kheda, Gujarat across 371.61 sq. mt.",
+    "minOrderQuantityScraped": "1 lot",
+    "sharesPerLotScraped": "3000",
+    "ipoSummaryText": "Medistep Healthcare IPO, a SME IPO of ₹15.29 Cr opens for subscription from August 8, 2025 to August 12, 2025. The IPO consists of ₹15.29 Cr fresh issue.\n\nThe face value of each share is 10, and the price band is set between 43.00 per share. Retail investors can apply to the Medistep Healthcare SME IPO with a minimum application of 2 lots, each comprising 3000 shares—amounting to a total investment of Rs258000.\n\nThe tentative listing date on the exchange (NSE SME) is August 18, 2025.\n\nStay tuned with us to get more details about Medistep Healthcare SME IPO including business overview, financial performance, live subscription status, allotment details, daily grey market premium (GMP), listing date, and listing price.",
+    "ipoIssueOpeningDateStatus": "Unknown",
+    "ipoIssueOpeningDateParsed": "N/A",
+    "ipoIssueClosingDateStatus": "Unknown",
+    "ipoIssueClosingDateParsed": "N/A",
+    "ipoOpenDate": "8th Aug 2025",
+    "ipoCloseDate": "12th Aug 2025",
+    "basisOfAllotment": "13th Aug 2025",
+    "initiationOfRefunds": "14th Aug 2025",
+    "creditOfSharesToDemat": "14th Aug 2025",
+    "listingDate": "18th Aug 2025",
+    "ipoOpenDateStatus": "Today",
+    "ipoOpenDateParsed": "2025-08-08",
+    "ipoCloseDateStatus": "Future",
+    "ipoCloseDateParsed": "2025-08-12",
+    "listingDateStatus": "Future",
+    "listingDateParsed": "2025-08-18",
+    "basisOfAllotmentStatus": "Future",
+    "basisOfAllotmentParsed": "2025-08-13",
+    "initiationOfRefundsStatus": "Future",
+    "initiationOfRefundsParsed": "2025-08-14",
+    "creditOfSharesToDematStatus": "Future",
+    "creditOfSharesToDematParsed": "2025-08-14",
+    "lotIssuePrice": "₹43.00",
+    "lotMarketLot": "3,000Shares",
+    "lotIndividualInvestor": "₹2,58,000",
+    "lotMinHniLots": "9000 shares (3 lots)",
+    "lotMinSmallHniLots210Lakh": "N/A",
+    "lotMinBigHniLots10PlusLakh": "N/A",
+    "seq": "1",
+    "idGmpData": "21971",
+    "ipoIdGmpData": "1369",
+    "gmpDate": "08-08-2025",
+    "currentGmp": "17",
+    "gmpComments": "Medistep Healthcare SME IPO last GMP is 17, last updated Aug 8th 2025 09:56 AM. With the price band of 43.00, Medistep Healthcare SME IPO's estimated listing price is 60 (cap price + today's GMP).The expected percentage gain/loss per share is 39.53%.>> Medistep Healthcare SME IPO Retail Subject to Sauda: 38800",
+    "gmpCompareDesc": "We update GMP on a daily basis and based on last 4 sessions grey market activities, today IPO GMP points upward and expects a strong listing. The lowest GMP is 12.00, while the highest GMP is 17.00. Stay with us to know the daily price trend of Medistep Healthcare SME IPO GMP with expected listing price.",
+    "subjectToSauda": "38800",
+    "gmpCity": "",
+    "gmpVariation": "",
+    "maxIpoPrice": "43.00",
+    "estimatedListingPrice": "60",
+    "gmpPercentCalc": "39.53",
+    "gmpDescOther": "-",
+    "upDownStatus": "N",
+    "gmpActiveRecordFlag": "1",
+    "sub2SaudaRate": "38800",
+    "estProfit": "51000",
+    "createDate": "2025-08-08T00:25:00.000Z",
+    "createDateGmp": "Aug 8th 2025 05:55 AM",
+    "lastUpdatedGmp": "Aug 8th 2025 09:56 AM",
+    "lastUpdated": "07-Aug-2025 09:45:32",
+    "ipoIssueOpeningDateTable": "Open Dt",
+    "ipoIssueClosingDateTable": "Close Dt",
+    "ipoIssuePriceTable": "₹43.00Per Share",
+    "drhpLinkTable": "https://nsearchives.nseindia.com/emerge/corporates/content/Registration_30122024180610_DraftProspectusmedistep.pdf",
+    "rhpLinkTable": "N/A",
+    "listingAtTable": "NSE SME",
+    "retailQuotaTable": "50% of the Net Issue",
+    "ipoIssueTypeTable": "Fixed Price Issue",
+    "ipoIssueSizeTable": "₹15.29 Cr",
+    "freshIssueTable": "₹15.29 Cr",
+    "faceValueTable": "₹10Per Equity Share",
+    "promoterHoldingPreIpoTable": "93.62",
+    "promoterHoldingPostIpoTable": "68.96",
+    "anchorListLinkTable": "N/A",
+    "minOrderQuantityTable": "N/A",
+    "lotSizeTable": "N/A",
+    "allotmentStatusTable": "N/A",
+    "lastUpdatedTimestamp": "07-Aug-2025 09:45:32",
+    "metaTitle": "Medistep Healthcare SME Live Subscription. Total: 0.51 times.",
+    "pageTitle": "Medistep Healthcare Live Subscription",
+    "metaDesc": "Medistep Healthcare SME Live Subscription. Total: 0.51 times as of 8th Aug 2025 10:21.",
+    "cacheKey": "N/A",
+    "currentTime": "N/A",
+    "scrapedAt": "2025-08-08T10:28:04.302648",
+    "ipoShareAllocation": [
+      {
+        "category": "Non-Institutional Investors",
+        "shares_allocated": 1776000,
+        "allocation_pct": 49.96
+      },
+      {
+        "category": "Retail Individual Investor",
+        "shares_allocated": 1779000,
+        "allocation_pct": 50.04
+      }
+    ],
+    "ipoDaywiseSubscriptionTable": [
+      {
+        "day_number": 1,
+        "date_time": "8th Aug 2025 10:21"
+      }
+    ],
+    "ipoSharesBidAmountTable": [
+      {
+        "category": "NII",
+        "shares_offered": 1776000,
+        "shares_bid": 207000,
+        "bid_amount_cr": 0.89
+      },
+      {
+        "category": "RII",
+        "shares_offered": 1779000,
+        "shares_bid": 1602000,
+        "bid_amount_cr": 6.89
+      },
+      {
+        "category": "Total",
+        "shares_offered": 3555000,
+        "shares_bid": 1809000,
+        "bid_amount_cr": 7.78
+      }
+    ],
+    "ipoBiddingHistoryJson": [
+      {
+        "Seq": 1,
+        "id (Subscription Data)": 7847,
+        "tsb_ipo_id": 1369,
+        "cor_id": 2178,
+        "bid_date": "8th Aug 2025 10:21",
+        "qib_offered": 0,
+        "nii_offered": 1776000,
+        "nii_offered_big": 0,
+        "nii_offered_small": 0,
+        "rii_offered": 1779000,
+        "emp_offered": 0,
+        "other_offered": 0,
+        "total_offered": 3555000,
+        "qib_shares_bid_for": 0,
+        "nii_shares_bid_for": 207000,
+        "nii_shares_bid_for_big": 0,
+        "nii_shares_bid_for_small": 0,
+        "rii_shares_bid_for": 1602000,
+        "emp_shares_bid_for": 0,
+        "other_shares_bid_for": 0,
+        "total_shares_bid_for": 1809000,
+        "qib_bid_amt": 0.0,
+        "nii_bid_amt": 0.89,
+        "nii_bid_amt_big": 0.0,
+        "nii_bid_amt_small": 0.0,
+        "rii_bid_amt": 6.89,
+        "emp_bid_amt": 0.0,
+        "other_bid_amt": 0.0,
+        "total_bid_amt": 7.78,
+        "qib": 0.0,
+        "nii": 0.12,
+        "nii_big": 0.0,
+        "nii_small": 0.0,
+        "rii": 0.9,
+        "emp": 0.0,
+        "other": 0.0,
+        "total": 0.51,
+        "cor_date_added": "2025-08-08T10:20:04.000Z",
+        "create_date": "2025-08-08T10:25:05.000Z",
+        "ipo_category_desc": "SME IPO",
+        "listing_at": "N/A",
+        "company_short_name": "Medistep Healthcare"
+      }
+    ],
+    "gmpTrendHistoryTable": [
+      {
+        "GMP Date": "08-08-2025 Open",
+        "IPO Price": "43.00",
+        "GMP": "₹17",
+        "Sub2 Sauda Rate": "38800",
+        "Estimated Listing Price": "₹60 ( 39.53% )",
+        "Estimated Profit": "₹51000",
+        "Last Updated": "8-Aug-2025 9:56"
+      },
+      {
+        "GMP Date": "07-08-2025",
+        "IPO Price": "43.00",
+        "GMP": "₹17",
+        "Sub2 Sauda Rate": "38800",
+        "Estimated Listing Price": "₹60 ( 39.53% )",
+        "Estimated Profit": "₹51000",
+        "Last Updated": "7-Aug-2025 23:31"
+      },
+      {
+        "GMP Date": "06-08-2025",
+        "IPO Price": "43.00",
+        "GMP": "₹12",
+        "Sub2 Sauda Rate": "27400",
+        "Estimated Listing Price": "₹55 ( 27.91% )",
+        "Estimated Profit": "₹36000",
+        "Last Updated": "6-Aug-2025 23:28"
+      },
+      {
+        "GMP Date": "05-08-2025",
+        "IPO Price": "43.00",
+        "GMP": "₹12",
+        "Sub2 Sauda Rate": "13700",
+        "Estimated Listing Price": "₹55 ( 27.91% )",
+        "Estimated Profit": "₹18000",
+        "Last Updated": "5-Aug-2025 23:37"
+      }
+    ],
+    "strengths": [
+      "Wide range of Products",
+      "Experienced Promoters and Management Team",
+      "Scalable Business Model",
+      "Strong distribution networks",
+      "Direct contact with Retail as well as distributors"
+    ],
+    "objectives": [
+      {
+        "s_no": "1",
+        "object": "Funding of capital expenditure towards purchase of plant and machineries for expansion at the existing manufacturing facility",
+        "amount": "0.51"
+      },
+      {
+        "s_no": "2",
+        "object": "Working Capital requirements",
+        "amount": "12.34"
+      },
+      {
+        "s_no": "3",
+        "object": "General Corporate Purpose",
+        "amount": "1.64"
+      }
+    ],
+    "companyFinancialInformationRestatedConsolidated": [
+      {
+        "Metric": "Assets",
+        "31 Mar 2025": "22.99",
+        "31 Mar 2024": "14.96",
+        "31 Mar 2023": "14.66"
+      },
+      {
+        "Metric": "Total Income",
+        "31 Mar 2025": "49.66",
+        "31 Mar 2024": "39.08",
+        "31 Mar 2023": "27.74"
+      },
+      {
+        "Metric": "Profit After Tax",
+        "31 Mar 2025": "4.14",
+        "31 Mar 2024": "3.33",
+        "31 Mar 2023": "0.92"
+      },
+      {
+        "Metric": "EBITDA",
+        "31 Mar 2025": "5.60",
+        "31 Mar 2024": "4.54",
+        "31 Mar 2023": "1.34"
+      },
+      {
+        "Metric": "Net Worth",
+        "31 Mar 2025": "16.83",
+        "31 Mar 2024": "11.69",
+        "31 Mar 2023": "1.07"
+      },
+      {
+        "Metric": "Reserves and Surplus",
+        "31 Mar 2025": "6.37",
+        "31 Mar 2024": "6.79",
+        "31 Mar 2023": null
+      },
+      {
+        "Metric": "Total Borrowing",
+        "31 Mar 2025": "0.64",
+        "31 Mar 2024": "0.33",
+        "31 Mar 2023": "0.53"
+      }
+    ],
+    "peerComparison": [
+      {
+        "Company": "Medistep Healthcare Limited",
+        "EPS Basic": "4.01",
+        "EPS Diluted": "4.01",
+        "NAV": "16.28",
+        "P/E(x)": "10.72",
+        "RoNW": "24.62",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Fabino Enterprises Limited",
+        "EPS Basic": "0.63",
+        "EPS Diluted": "0.63",
+        "NAV": "20.42",
+        "P/E(x)": "41.27",
+        "RoNW": "3.12",
+        "Financial statements": "Standalone"
+      },
+      {
+        "Company": "Achyut Healthcare Ltd",
+        "EPS Basic": "0.02",
+        "EPS Diluted": "0.02",
+        "NAV": "1.33",
+        "P/E(x)": "209",
+        "RoNW": "1.77",
+        "Financial statements": "Standalone"
+      }
+    ],
+    "companyAddress": {
+      "name": "Medistep Healthcare Ltd.",
+      "address": "05, S. No-245/B, Plot-19, T.P.S. 56, Free Way Trade Center, Nr.A-One Hotel N.H.-8, Narol Gam, Narol Daskroi, Ahmedabad, , Gujarat, -, 382405",
+      "website": ":",
+      "phone": ":",
+      "email": ":"
+    },
+    "ipoRegistrar": {
+      "name": "Cameo Corporate Services Limited",
+      "address": "Cameo Corporate Services Ltd., Subramanian Building # 1, Club House Road, Chennai 600 002 - India",
+      "website": "https://ipo.cameoindia.com/",
+      "phone": "+91-44-28460390",
+      "email": "[email protected]"
+    },
+    "ipoLeadManager": [
+      "Fast Track Finsec Pvt Ltd"
+    ],
+    "companySectorInfo": {
+      "Incorporation": "Sector",
+      "Sector": "N/A",
+      "IPO Issue Size": "Website",
+      "Website": "N/A"
+    },
+    "timestamp": "2025-08-08T10:28:04.311244"
+  }
+]

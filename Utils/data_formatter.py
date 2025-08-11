@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional, Any
 
 from yaml import safe_load
-from Utils.general_master import get_masterdata_info, get_all_nsecm_bsecm_data
+from Utils.general_master import get_masterdata_info, get_all_nsecm_bsecm_data, get_all_derivatives_masterdata
 from Utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -209,7 +209,6 @@ class NSEDataFormatter:
         except Exception as e:
             logger.error(f"Error formatting advance/decline/unchanged data: {str(e)}")
             return []
-
     
     @staticmethod
     def format_forthcoming_listings(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -373,14 +372,40 @@ class NSEDataFormatter:
     @staticmethod
     def format_most_active_contracts(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Formats most active contracts, handling nested structures, numeric cleaning and masterdata enrichment.
+        Formats the most active contracts data from raw API responses with masterdata enrichment.
+        
+        Args:
+            raw_data: Raw API response data
+            
+        Returns:
+            List of formatted records with masterdata fields added for derivatives
         """
+        from datetime import datetime
         formatted_data = []
         timestamp = NSEDataFormatter.parse_timestamp(None)
 
-        # Fetch masterdata for enrichment keyed by identifier
-        db_data = get_all_nsecm_bsecm_data()
-        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
+        # Fetch masterdata for derivatives enrichment
+        derivatives_masterdata = get_all_derivatives_masterdata()
+        
+        # Create lookup dictionary for fast masterdata matching
+        masterdata_lookup = {}
+        for doc in derivatives_masterdata:
+            # Create composite key for matching: Name + StrikePrice + expiryDate + OptionTypeDesc
+            name = str(doc.get("Name") or "").strip().upper()
+            strike_price = doc.get("StrikePrice")
+            expiry_date = str(doc.get("expiryDate") or "").strip()
+            option_type = str(doc.get("OptionTypeDesc") or "").strip()
+            
+            if name and strike_price is not None and expiry_date and option_type:
+                # Convert strike price to float for comparison
+                try:
+                    strike_float = float(strike_price)
+                    lookup_key = f"{name}_{strike_float}_{expiry_date}_{option_type}"
+                    masterdata_lookup[lookup_key] = doc
+                except (ValueError, TypeError):
+                    continue
+
+        logger.info(f"Created masterdata lookup with {len(masterdata_lookup)} derivatives records")
 
         for data_type, sort_dict in raw_data.items():
             if not isinstance(sort_dict, dict):
@@ -391,37 +416,81 @@ class NSEDataFormatter:
                 if not isinstance(data_items, list) or not data_items:
                     continue
 
-                for record in data_items:
-                    identifier = record.get("identifier", "").strip().upper()
-                    masterdata_info = masterdata_identifier_map.get(identifier, {})
+                logger.info(f"Processing {data_type} | sort_by={sort_by} | Records={len(data_items)}")
 
+                for record in data_items:
                     formatted_record = {
                         "types_of_data": data_type,
                         "sort_by": sort_by,
                         "timestamp": timestamp,
-                        "identifier": identifier,
+                        "identifier": record.get("identifier"),
                         "instrumentType": record.get("instrumentType"),
                         "instrument": record.get("instrument"),
                         "underlying": record.get("underlying"),
                         "expiryDate": record.get("expiryDate"),
                         "optionType": record.get("optionType", "-"),
-                        "strikePrice": NSEDataFormatter._safe_float(record.get("strikePrice", 0)),
-                        "lastPrice": NSEDataFormatter._safe_float(record.get("lastPrice")),
-                        "numberOfContractsTraded": NSEDataFormatter._safe_int(record.get("numberOfContractsTraded")),
-                        "totalTurnover": NSEDataFormatter._safe_float(record.get("totalTurnover")),
-                        "premiumTurnover": NSEDataFormatter._safe_float(record.get("premiumTurnover")),
-                        "openInterest": NSEDataFormatter._safe_int(record.get("openInterest")),
-                        "underlyingValue": NSEDataFormatter._safe_float(record.get("underlyingValue")),
-                        "pChange": NSEDataFormatter._safe_float(record.get("pChange")),
-
-                        # Masterdata enrichment
-                        "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
-                        "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
-                        "MasterdataSeries": masterdata_info.get("Series")
+                        "strikePrice": record.get("strikePrice", 0),
+                        "lastPrice": record.get("lastPrice"),
+                        "numberOfContractsTraded": record.get("numberOfContractsTraded"),
+                        "totalTurnover": record.get("totalTurnover"),
+                        "premiumTurnover": record.get("premiumTurnover"),
+                        "openInterest": record.get("openInterest"),
+                        "underlyingValue": record.get("underlyingValue"),
+                        "pChange": record.get("pChange")
                     }
+
+                    # Add masterdata enrichment for derivatives/options
+                    if record.get("instrumentType") in ["OPTIDX", "OPTSTK"]:
+                        
+                        # Extract fields for masterdata matching
+                        underlying = str(record.get("underlying", "")).strip().upper()
+                        strike_price = record.get("strikePrice")
+                        expiry_date = str(record.get("expiryDate", "")).strip()
+                        option_type = str(record.get("optionType", "")).strip()
+                        
+                        # Create lookup key for masterdata matching
+                        if underlying and strike_price is not None and expiry_date and option_type:
+                            try:
+                                strike_float = float(strike_price)
+                                lookup_key = f"{underlying}_{strike_float}_{expiry_date}_{option_type}"
+                                
+                                # Find matching masterdata
+                                masterdata_match = masterdata_lookup.get(lookup_key)
+                                
+                                if masterdata_match:
+                                    # Add masterdata fields to formatted record
+                                    formatted_record["ExchangeInstrumentID"] = masterdata_match.get("ExchangeInstrumentID")
+                                    formatted_record["ExchangeSegment"] = masterdata_match.get("ExchangeSegment")
+                                    formatted_record["MasterdataSeries"] = masterdata_match.get("Series")
+                                    logger.info(f"Masterdata match found for {lookup_key} -> ID: {masterdata_match.get('ExchangeInstrumentID')}")
+                                else:
+                                    # Set default values if no match found
+                                    formatted_record["ExchangeInstrumentID"] = None
+                                    formatted_record["ExchangeSegment"] = None
+                                    formatted_record["MasterdataSeries"] = None
+                                    logger.debug(f"No masterdata match for {lookup_key}")
+                                    
+                            except (ValueError, TypeError) as e:
+                                logger.warning(f"Error processing masterdata lookup for record: {e}")
+                                formatted_record["ExchangeInstrumentID"] = None
+                                formatted_record["ExchangeSegment"] = None
+                                formatted_record["MasterdataSeries"] = None
+                        else:
+                            # Set default values if required fields are missing
+                            formatted_record["ExchangeInstrumentID"] = None
+                            formatted_record["ExchangeSegment"] = None
+                            formatted_record["MasterdataSeries"] = None
+                            logger.debug(f"Missing required fields for masterdata lookup: underlying={underlying}, strike_price={strike_price}, expiry_date={expiry_date}, option_type={option_type}")
+                    else:
+                        # For non-derivatives, set masterdata fields to None
+                        formatted_record["ExchangeInstrumentID"] = None
+                        formatted_record["ExchangeSegment"] = None
+                        formatted_record["MasterdataSeries"] = None
+
                     formatted_data.append(formatted_record)
 
         logger.info(f"Formatted {len(formatted_data)} most active contracts records")
+        print(f"Formatted most active contracts records: {formatted_data[:3]}")
         return formatted_data
 
     @staticmethod
@@ -541,13 +610,14 @@ class NSEDataFormatter:
     def format_most_active_underlying(raw_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
         Formats raw data into a list of MongoDB-ready documents with masterdata enrichment.
+        Enhanced with derivatives matching for options and futures data.
         """
         
         formatted_data = []
         current_time = NSEDataFormatter.parse_timestamp(None)
 
-        # Fetch masterdata for enrichment
-        db_data = get_all_nsecm_bsecm_data()
+        # Fetch masterdata for enrichment (including derivatives)
+        db_data = get_all_derivatives_masterdata()
         
         # Index DB data for fast lookup
         masterdata_map = defaultdict(list)
@@ -556,16 +626,10 @@ class NSEDataFormatter:
             if name:
                 masterdata_map[name].append(doc)
 
-        masterdata_identifier_map = {doc.get("identifier", "").upper(): doc for doc in db_data}
-
         for item in raw_data.get("data", []):
             symbol = item.get("symbol", "").strip().upper()
-            identifier = item.get("identifier", "").strip().upper()
 
             matched_docs = masterdata_map.get(symbol, [])
-            masterdata_info = {}
-
-            # Inline selection logic
             if matched_docs:
                 # Prefer NSECM + EQ
                 for doc in matched_docs:
@@ -584,15 +648,10 @@ class NSEDataFormatter:
                             if doc.get("ExchangeSegment") == "BSECM" and doc.get("Series") == "A":
                                 masterdata_info = doc
                                 break
-                        else:
-                            # Then any BSECM
-                            for doc in matched_docs:
-                                if doc.get("ExchangeSegment") == "BSECM":
-                                    masterdata_info = doc
-                                    break
-            else:
-                # Fallback: match by identifier if symbol not found
-                masterdata_info = masterdata_identifier_map.get(identifier, {})
+                            else:
+                                # If no match found, use the last document
+                                masterdata_info = doc
+                                
 
             formatted_record = {
                 "symbol": symbol,
@@ -606,7 +665,7 @@ class NSEDataFormatter:
                 "latestOI": NSEDataFormatter._safe_int(item.get("latestOI")),
                 "underlying": NSEDataFormatter._safe_float(item.get("underlying")),
 
-                # Masterdata enrichment
+                # Masterdata enrichment (enhanced for derivatives)
                 "ExchangeInstrumentID": masterdata_info.get("ExchangeInstrumentID"),
                 "ExchangeSegment": masterdata_info.get("ExchangeSegment"),
                 "MasterdataSeries": masterdata_info.get("Series"),
@@ -615,6 +674,7 @@ class NSEDataFormatter:
             }
             formatted_data.append(formatted_record)
         logger.info(f"Formatted {len(formatted_data)} most active underlying records")
+        print(f"Formatted ", formatted_data[:3])
         # Return the formatted data
         return formatted_data
 
@@ -1373,154 +1433,154 @@ class NSEDataFormatter:
                     # Format the IPO data according to the required output structure
                     formatted_ipo = {
                         # Basic IPO Information
-                        "ipo_id": ipo_item.get("ipo_id"),
-                        "api_company_name": ipo_item.get("api_company_name"),
-                        "api_ipo_category": ipo_item.get("api_ipo_category"),
-                        "api_issue_size": ipo_item.get("api_issue_size"),
-                        "api_issue_open_date": ipo_item.get("api_issue_open_date"),
-                        "api_issue_end_date": ipo_item.get("api_issue_end_date"),
-                        "api_listing_at": ipo_item.get("api_listing_at"),
-                        "api_ipo_status": ipo_item.get("api_ipo_status"),
-                        "api_ipo_status_formatted": ipo_item.get("api_ipo_status_formatted"),
+                        "ipoId": ipo_item.get("ipo_id"),
+                        "apiCompanyName": ipo_item.get("api_company_name"),
+                        "apiIpoCategory": ipo_item.get("api_ipo_category"),
+                        "apiIssueSize": ipo_item.get("api_issue_size"),
+                        "apiIssueOpenDate": ipo_item.get("api_issue_open_date"),
+                        "apiIssueEndDate": ipo_item.get("api_issue_end_date"),
+                        "apiListingAt": ipo_item.get("api_listing_at"),
+                        "apiIpoStatus": ipo_item.get("api_ipo_status"),
+                        "apiIpoStatusFormatted": ipo_item.get("api_ipo_status_formatted"),
                         
                         # Scraping Information
-                        "scraping_date": ipo_item.get("scraping_date"),
-                        "detail_url": ipo_item.get("detail_url"),
-                        "scraped_company_name": ipo_item.get("scraped_company_name"),
-                        "company_logo_url": ipo_item.get("company_logo_url"),
-                        "local_logo_path": ipo_item.get("local_logo_path"),
-                        "company_full_name_scraped": ipo_item.get("company_full_name_scraped"),
-                        "about_company_text": ipo_item.get("about_company_text"),
+                        "scrapingDate": ipo_item.get("scraping_date"),
+                        "detailUrl": ipo_item.get("detail_url"),
+                        "scrapedCompanyName": ipo_item.get("scraped_company_name"),
+                        "companyLogoUrl": ipo_item.get("company_logo_url"),
+                        "localLogoPath": ipo_item.get("local_logo_path"),
+                        "companyFullNameScraped": ipo_item.get("company_full_name_scraped"),
+                        "aboutCompanyText": ipo_item.get("about_company_text"),
                         
                         # IPO Details
-                        "ipo_issue_price": ipo_item.get("ipo_issue_price"),
-                        "drhp_url": ipo_item.get("drhp_url"),
-                        "rhp_url": ipo_item.get("rhp_url"),
-                        "anchor_list_url": ipo_item.get("anchor_list_url"),
-                        "retail_quota": ipo_item.get("retail_quota"),
-                        "ipo_issue_type": ipo_item.get("ipo_issue_type"),
-                        "ipo_issue_size_scraped": ipo_item.get("ipo_issue_size_scraped"),
-                        "fresh_issue": ipo_item.get("fresh_issue"),
-                        "face_value": ipo_item.get("face_value"),
-                        "promoter_holding_pre_ipo": ipo_item.get("promoter_holding_pre_ipo"),
-                        "promoter_holding_post_ipo": ipo_item.get("promoter_holding_post_ipo"),
+                        # "ipoIssuePrice": ipo_item.get("ipo_issue_price"),
+                        # "drhpUrl": ipo_item.get("drhp_url"),
+                        # "rhpUrl": ipo_item.get("rhp_url"),
+                        # "anchorListUrl": ipo_item.get("anchor_list_url"),
+                        # "retailQuota": ipo_item.get("retail_quota"),
+                        # "ipoIssueType": ipo_item.get("ipo_issue_type"),
+                        # "ipoIssueSizeScraped": ipo_item.get("ipo_issue_size_scraped"),
+                        # "freshIssue": ipo_item.get("fresh_issue"),
+                        # "faceValue": ipo_item.get("face_value"),
+                        # "promoterHoldingPreIpo": ipo_item.get("promoter_holding_pre_ipo"),
+                        # "promoterHoldingPostIpo": ipo_item.get("promoter_holding_post_ipo"),
                         
-                        # Date Information
-                        "ipo_issue_opening_date": ipo_item.get("ipo_issue_opening_date"),
-                        "ipo_issue_closing_date": ipo_item.get("ipo_issue_closing_date"),
-                        "min_order_quantity_scraped": ipo_item.get("min_order_quantity_scraped"),
-                        "shares_per_lot_scraped": ipo_item.get("shares_per_lot_scraped"),
-                        "ipo_summary_text": ipo_item.get("ipo_summary_text"),
+                        # # Date Information
+                        # "ipoIssueOpeningDate": ipo_item.get("ipo_issue_opening_date"),
+                        # "ipoIssueClosingDate": ipo_item.get("ipo_issue_closing_date"),
+                        "minOrderQuantityScraped": ipo_item.get("min_order_quantity_scraped"),
+                        "sharesPerLotScraped": ipo_item.get("shares_per_lot_scraped"),
+                        "ipoSummaryText": ipo_item.get("ipo_summary_text"),
                         
                         # Date Status and Parsing
-                        "ipo_issue_opening_date_status": ipo_item.get("ipo_issue_opening_date_status"),
-                        "ipo_issue_opening_date_parsed": ipo_item.get("ipo_issue_opening_date_parsed"),
-                        "ipo_issue_closing_date_status": ipo_item.get("ipo_issue_closing_date_status"),
-                        "ipo_issue_closing_date_parsed": ipo_item.get("ipo_issue_closing_date_parsed"),
-                        "ipo_open_date": ipo_item.get("ipo_open_date"),
-                        "ipo_close_date": ipo_item.get("ipo_close_date"),
+                        "ipoIssueOpeningDateStatus": ipo_item.get("ipo_issue_opening_date_status"),
+                        "ipoIssueOpeningDateParsed": ipo_item.get("ipo_issue_opening_date_parsed"),
+                        "ipoIssueClosingDateStatus": ipo_item.get("ipo_issue_closing_date_status"),
+                        "ipoIssueClosingDateParsed": ipo_item.get("ipo_issue_closing_date_parsed"),
+                        "ipoOpenDate": ipo_item.get("ipo_open_date"),
+                        "ipoCloseDate": ipo_item.get("ipo_close_date"),
                         
                         # Timeline Information
-                        "basis_of_allotment": ipo_item.get("basis_of_allotment"),
-                        "initiation_of_refunds": ipo_item.get("initiation_of_refunds"),
-                        "credit_of_shares_to_demat": ipo_item.get("credit_of_shares_to_demat"),
-                        "listing_date": ipo_item.get("listing_date"),
+                        "basisOfAllotment": ipo_item.get("basis_of_allotment"),
+                        "initiationOfRefunds": ipo_item.get("initiation_of_refunds"),
+                        "creditOfSharesToDemat": ipo_item.get("credit_of_shares_to_demat"),
+                        "listingDate": ipo_item.get("listing_date"),
                         
                         # Additional Date Status Fields
-                        "ipo_open_date_status": ipo_item.get("ipo_open_date_status"),
-                        "ipo_open_date_parsed": ipo_item.get("ipo_open_date_parsed"),
-                        "ipo_close_date_status": ipo_item.get("ipo_close_date_status"),
-                        "ipo_close_date_parsed": ipo_item.get("ipo_close_date_parsed"),
-                        "listing_date_status": ipo_item.get("listing_date_status"),
-                        "listing_date_parsed": ipo_item.get("listing_date_parsed"),
-                        "basis_of_allotment_status": ipo_item.get("basis_of_allotment_status"),
-                        "basis_of_allotment_parsed": ipo_item.get("basis_of_allotment_parsed"),
-                        "initiation_of_refunds_status": ipo_item.get("initiation_of_refunds_status"),
-                        "initiation_of_refunds_parsed": ipo_item.get("initiation_of_refunds_parsed"),
-                        "credit_of_shares_to_demat_status": ipo_item.get("credit_of_shares_to_demat_status"),
-                        "credit_of_shares_to_demat_parsed": ipo_item.get("credit_of_shares_to_demat_parsed"),
+                        "ipoOpenDateStatus": ipo_item.get("ipo_open_date_status"),
+                        "ipoOpenDateParsed": ipo_item.get("ipo_open_date_parsed"),
+                        "ipoCloseDateStatus": ipo_item.get("ipo_close_date_status"),
+                        "ipoCloseDateParsed": ipo_item.get("ipo_close_date_parsed"),
+                        "listingDateStatus": ipo_item.get("listing_date_status"),
+                        "listingDateParsed": ipo_item.get("listing_date_parsed"),
+                        "basisOfAllotmentStatus": ipo_item.get("basis_of_allotment_status"),
+                        "basisOfAllotmentParsed": ipo_item.get("basis_of_allotment_parsed"),
+                        "initiationOfRefundsStatus": ipo_item.get("initiation_of_refunds_status"),
+                        "initiationOfRefundsParsed": ipo_item.get("initiation_of_refunds_parsed"),
+                        "creditOfSharesToDematStatus": ipo_item.get("credit_of_shares_to_demat_status"),
+                        "creditOfSharesToDematParsed": ipo_item.get("credit_of_shares_to_demat_parsed"),
                         
                         # Lot Information
-                        "lot_issue_price": ipo_item.get("lot_issue_price"),
-                        "lot_market_lot": ipo_item.get("lot_market_lot"),
-                        "lot_individual_investor": ipo_item.get("lot_individual_investor"),
-                        "lot_min_hni_lots": ipo_item.get("lot_min_hni_lots"),
-                        "lot_min_small_hni_lots_2_10_lakh": ipo_item.get("lot_min_small_hni_lots_2_10_lakh"),
-                        "lot_min_big_hni_lots_10_plus_lakh": ipo_item.get("lot_min_big_hni_lots_10_plus_lakh"),
+                        "lotIssuePrice": ipo_item.get("lot_issue_price"),
+                        "lotMarketLot": ipo_item.get("lot_market_lot"),
+                        "lotIndividualInvestor": ipo_item.get("lot_individual_investor"),
+                        "lotMinHniLots": ipo_item.get("lot_min_hni_lots"),
+                        "lotMinSmallHniLots210Lakh": ipo_item.get("lot_min_small_hni_lots_2_10_lakh"),
+                        "lotMinBigHniLots10PlusLakh": ipo_item.get("lot_min_big_hni_lots_10_plus_lakh"),
                         
                         # GMP (Grey Market Premium) Data - Mapped from input fields
-                        "Seq": ipo_item.get("Seq"),
-                        "id_gmp_data": ipo_item.get("id (GMP Data)"),  # Mapped from "id (GMP Data)"
-                        "ipo_id_gmp_data": ipo_item.get("ipo_id (GMP Data)"),  # Mapped from "ipo_id (GMP Data)"
-                        "gmp_date": ipo_item.get("gmp_date"),
-                        "current_gmp": ipo_item.get("gmp"),  # Mapped from "gmp" to "current_gmp"
-                        "gmp_comments": ipo_item.get("gmp_comments"),
-                        "gmp_compare_desc": ipo_item.get("gmp_compare_desc"),
-                        "subject_to_sauda": ipo_item.get("subject_to_sauda"),
-                        "gmp_city": ipo_item.get("gmp_city"),
-                        "gmp_variation": ipo_item.get("gmp_variation"),
-                        "max_ipo_price": ipo_item.get("max_ipo_price"),
-                        "estimated_listing_price": ipo_item.get("estimated_listing_price"),
-                        "gmp_percent_calc": ipo_item.get("gmp_percent_calc"),
-                        "gmp_desc_other": ipo_item.get("gmp_desc_other"),
-                        "up_down_status": ipo_item.get("up_down_status"),
-                        "gmp_active_record_flag": ipo_item.get("gmp_active_record_flag"),
-                        "sub2 Sauda Rate": ipo_item.get("sub2 Sauda Rate"),
-                        "est_profit": ipo_item.get("est_profit"),
-                        "create_date": ipo_item.get("create_date"),
-                        "create_date_gmp": ipo_item.get("create_date_gmp"),
-                        "last_updated_gmp": ipo_item.get("last_updated_gmp"),
-                        "last_updated": ipo_item.get("last_updated"),
+                        "seq": ipo_item.get("Seq"),
+                        "idGmpData": ipo_item.get("id (GMP Data)"),  # Mapped from "id (GMP Data)"
+                        "ipoIdGmpData": ipo_item.get("ipo_id (GMP Data)"),  # Mapped from "ipo_id (GMP Data)"
+                        "gmpDate": ipo_item.get("gmp_date"),
+                        "currentGmp": ipo_item.get("gmp"),  # Mapped from "gmp" to "current_gmp"
+                        "gmpComments": ipo_item.get("gmp_comments"),
+                        "gmpCompareDesc": ipo_item.get("gmp_compare_desc"),
+                        "subjectToSauda": ipo_item.get("subject_to_sauda"),
+                        "gmpCity": ipo_item.get("gmp_city"),
+                        "gmpVariation": ipo_item.get("gmp_variation"),
+                        "maxIpoPrice": ipo_item.get("max_ipo_price"),
+                        "estimatedListingPrice": ipo_item.get("estimated_listing_price"),
+                        "gmpPercentCalc": ipo_item.get("gmp_percent_calc"),
+                        "gmpDescOther": ipo_item.get("gmp_desc_other"),
+                        "upDownStatus": ipo_item.get("up_down_status"),
+                        "gmpActiveRecordFlag": ipo_item.get("gmp_active_record_flag"),
+                        "sub2SaudaRate": ipo_item.get("sub2 Sauda Rate"),
+                        "estProfit": ipo_item.get("est_profit"),
+                        "createDate": ipo_item.get("create_date"),
+                        "createDateGmp": ipo_item.get("create_date_gmp"),
+                        "lastUpdatedGmp": ipo_item.get("last_updated_gmp"),
+                        "lastUpdated": ipo_item.get("last_updated"),
                         
                         # Table Data Fields - Mapped from input fields
-                        "ipo_issue_opening_date_table": ipo_item.get("IPO Issue Opening Date"),
-                        "ipo_issue_closing_date_table": ipo_item.get("IPO Issue Closing Date"),
-                        "ipo_issue_price_table": ipo_item.get("IPO Issue Price"),
-                        "drhp_link_table": ipo_item.get("DRHP Link"),
-                        "rhp_link_table": ipo_item.get("RHP Link"),
-                        "listing_at_table": ipo_item.get("Listing At"),
-                        "retail_quota_table": ipo_item.get("Retail Quota"),
-                        "ipo_issue_type_table": ipo_item.get("IPO Issue Type"),
-                        "ipo_issue_size_table": ipo_item.get("IPO Issue Size (Cr)"),
-                        "fresh_issue_table": ipo_item.get("Fresh Issue (Cr)"),
-                        "face_value_table": ipo_item.get("Face Value"),
-                        "promoter_holding_pre_ipo_table": ipo_item.get("Promoter Holding Pre IPO (%)"),
-                        "promoter_holding_post_ipo_table": ipo_item.get("Promoter Holding Post IPO (%)"),
-                        "anchor_list_link_table": ipo_item.get("Anchor List Link"),
-                        "min_order_quantity_table": ipo_item.get("Min Order Quantity (Table)"),
-                        "lot_size_table": ipo_item.get("Lot Size (Table)"),
-                        "allotment_status_table": ipo_item.get("Allotment Status"),
+                        "ipoIssueOpeningDateTable": ipo_item.get("IPO Issue Opening Date"),
+                        "ipoIssueClosingDateTable": ipo_item.get("IPO Issue Closing Date"),
+                        "ipoIssuePriceTable": ipo_item.get("IPO Issue Price"),
+                        "drhpLinkTable": ipo_item.get("DRHP Link"),
+                        "rhpLinkTable": ipo_item.get("RHP Link"),
+                        "listingAtTable": ipo_item.get("Listing At"),
+                        "retailQuotaTable": ipo_item.get("Retail Quota"),
+                        "ipoIssueTypeTable": ipo_item.get("IPO Issue Type"),
+                        "ipoIssueSizeTable": ipo_item.get("IPO Issue Size (Cr)"),
+                        "freshIssueTable": ipo_item.get("Fresh Issue (Cr)"),
+                        "faceValueTable": ipo_item.get("Face Value"),
+                        "promoterHoldingPreIpoTable": ipo_item.get("Promoter Holding Pre IPO (%)"),
+                        "promoterHoldingPostIpoTable": ipo_item.get("Promoter Holding Post IPO (%)"),
+                        "anchorListLinkTable": ipo_item.get("Anchor List Link"),
+                        "minOrderQuantityTable": ipo_item.get("Min Order Quantity (Table)"),
+                        "lotSizeTable": ipo_item.get("Lot Size (Table)"),
+                        "allotmentStatusTable": ipo_item.get("Allotment Status"),
                         
                         # Metadata
-                        "last_updated_timestamp": ipo_item.get("last_updated_timestamp"),
+                        "lastUpdatedTimestamp": ipo_item.get("last_updated_timestamp"),
                         "metaTitle": ipo_item.get("metaTitle"),
                         "pageTitle": ipo_item.get("pageTitle"),
                         "metaDesc": ipo_item.get("metaDesc"),
                         "cacheKey": ipo_item.get("cacheKey"),
                         "currentTime": ipo_item.get("currentTime"),
-                        "scraped_at": ipo_item.get("scraped_at"),
+                        "scrapedAt": ipo_item.get("scraped_at"),
                         
                         # Array Fields - Direct mapping
-                        "ipo_share_allocation": ipo_item.get("IPO Share Allocation", []),
-                        "ipo_daywise_subscription_table": ipo_item.get("IPO Daywise Subscription (Table)", []),
-                        "ipo_shares_bid_amount_table": ipo_item.get("IPO Shares Bid Amount (Table)", []),
-                        "ipo_bidding_history_json": ipo_item.get("IPO Bidding History (JSON)", []),
-                        "gmp_trend_history_table": ipo_item.get("GMP Trend History (Table)", []),
+                        "ipoShareAllocation": ipo_item.get("IPO Share Allocation", []),
+                        "ipoDaywiseSubscriptionTable": ipo_item.get("IPO Daywise Subscription (Table)", []),
+                        "ipoSharesBidAmountTable": ipo_item.get("IPO Shares Bid Amount (Table)", []),
+                        "ipoBiddingHistoryJson": ipo_item.get("IPO Bidding History (JSON)", []),
+                        "gmpTrendHistoryTable": ipo_item.get("GMP Trend History (Table)", []),
                         "strengths": ipo_item.get("strengths", []),
                         "objectives": ipo_item.get("objectives", []),
-                        "company_financial_information_restated_consolidated": ipo_item.get("Company Financial Information (Restated Consolidated)", []),
-                        "peer_comparison": ipo_item.get("peer_comparison", []),
+                        "companyFinancialInformationRestatedConsolidated": ipo_item.get("Company Financial Information (Restated Consolidated)", []),
+                        "peerComparison": ipo_item.get("peer_comparison", []),
                         
                         # Object Fields - Direct mapping
-                        "company_address": ipo_item.get("company_address", {}),
-                        "ipo_registrar": ipo_item.get("ipo_registrar", {}),
-                        "ipo_lead_manager": ipo_item.get("ipo_lead_manager", []),
-                        "company_sector_info": ipo_item.get("company_sector_info", {}),
+                        "companyAddress": ipo_item.get("company_address", {}),
+                        "ipoRegistrar": ipo_item.get("ipo_registrar", {}),
+                        "ipoLeadManager": ipo_item.get("ipo_lead_manager", []),
+                        "companySectorInfo": ipo_item.get("company_sector_info", {}),
                         
                         # System timestamp for tracking
                         "timestamp": current_time_ist.isoformat()
                     }
-                    
+
                     formatted_data.append(formatted_ipo)
                     
                 except Exception as item_error:

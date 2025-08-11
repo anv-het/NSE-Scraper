@@ -97,3 +97,32 @@ def get_all_nsecm_bsecm_data():
     except Exception as e:
         logger.error(f"Error in get_all_nsecm_bsecm_data: {str(e)}", extra=logger_extra_dict("-"))
         return []
+
+
+def get_all_derivatives_masterdata():
+    """
+    Retrieve all documents from MASTERDATA where ExchangeSegment includes derivatives (NSEFO).
+    Returns a list of dictionaries containing derivatives masterdata.
+    """
+    try:
+        db = get_masterdata_db()
+
+        if db is None:
+            logger.warning("No DB connection returned by get_masterdata_db()", extra=logger_extra_dict("-"))
+            return []
+
+        collection = db["MASTERDATA"]
+
+        # Query for derivatives segments including NSEFO
+        query = {
+            "ExchangeSegment": {"$in": ["NSECM", "BSECM", "NSEFO"]}
+        }
+
+        results = list(collection.find(query))
+
+        logger.info(f"Retrieved {len(results)} documents from MASTERDATA where ExchangeSegment includes derivatives", extra=logger_extra_dict("-"))
+        return results
+
+    except Exception as e:
+        logger.error(f"Error in get_all_derivatives_masterdata: {str(e)}", extra=logger_extra_dict("-"))
+        return []

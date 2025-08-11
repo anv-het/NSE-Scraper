@@ -134,12 +134,16 @@ def extract_percentage_value(gmp_percent_calc: str) -> str:
 def format_ipo_status(status_code: str) -> str:
     """
     Converts IPO status code to human-readable format.
-    U = Upcoming, C = Closed, CT = Closed Today
+    U = Upcoming, C = Closed, CT = Closed Today, LT = List Today, L = Listed, O = Currently Open, P = Pending
     """
     status_mapping = {
         'U': 'Upcoming',
         'C': 'Closed', 
-        'CT': 'Closed Today'
+        'CT': 'Closed Today',
+        'LT': 'List Today',
+        'L': 'Listed',
+        'O': 'Open',
+        'P': 'Pending'
     }
     
     return status_mapping.get(status_code, status_code)

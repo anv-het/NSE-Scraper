@@ -20,26 +20,87 @@ class NSECookieService:
         self.cookies_file = configure.get('NSE', 'COOKIES_FILE')
         self.session = requests.Session()
 
+    # def get_driver(self):
+    #     logger.info("Launching undetected Chrome...")
+    #     options = uc.ChromeOptions()
+    #     options.add_argument("--no-sandbox")
+    #     options.add_argument("--disable-blink-features=AutomationControlled")
+    #     options.add_argument("--disable-dev-shm-usage")
+    #     options.add_argument("--start-maximized")
+    #     options.add_argument("--headless=new")
+    #     options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+    #     return uc.Chrome(options=options, use_subprocess=True)
+
+    # def get_nse_cookies(self) -> Optional[Dict[str, str]]:
+    #     try:
+    #         # ✅ Pick random URL
+    #         target_url = random.choice(NSE_COOKIE_ROTATION_URLS)
+    #         logger.info(f"Getting fresh NSE cookies using: {target_url}")
+            
+    #         driver = self.get_driver()
+    #         driver.get(target_url)
+    #         time.sleep(10)  # Allow cookies to be set
+    #         cookies = driver.get_cookies()
+    #         driver.quit()
+
+    #         if not cookies:
+    #             logger.warning("No cookies received")
+    #             return None
+
+    #         filtered = {c['name']: c['value'] for c in cookies if c['name'] in REQUIRED_NSE_COOKIES}
+    #         missing = [name for name in REQUIRED_NSE_COOKIES if name not in filtered]
+    #         if missing:
+    #             logger.warning(f"Missing cookies: {missing}")
+    #         else:
+    #             logger.info("All required cookies collected")
+
+    #         self._save_cookies_to_file(filtered)
+    #         return filtered
+    #     except Exception as e:
+    #         logger.error(f"Error in get_nse_cookies: {e}")
+    #         return None
+
     def get_driver(self):
         logger.info("Launching undetected Chrome...")
+
         options = uc.ChromeOptions()
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-infobars")
         options.add_argument("--start-maximized")
-        options.add_argument("--headless=new")
-        options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
-        return uc.Chrome(options=options, use_subprocess=True)
+        options.add_argument("--headless=new")  # Chrome 109+ style headless
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) "
+                            "Chrome/139.0.0.0 Safari/537.36")
+
+        # ✅ Force matching ChromeDriver version for Chrome 139
+        return uc.Chrome(options=options, version_main=139, use_subprocess=True)
 
     def get_nse_cookies(self) -> Optional[Dict[str, str]]:
         try:
-            # ✅ Pick random URL
             target_url = random.choice(NSE_COOKIE_ROTATION_URLS)
             logger.info(f"Getting fresh NSE cookies using: {target_url}")
-            
+
             driver = self.get_driver()
             driver.get(target_url)
-            time.sleep(10)  # Allow cookies to be set
+
+            # ✅ Wait until a key element exists instead of fixed sleep
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+
+            try:
+                WebDriverWait(driver, 15).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )
+            except Exception as e:
+                logger.warning(f"Page load wait failed: {e}")
+
+            time.sleep(3)  # small buffer after load
+
             cookies = driver.get_cookies()
             driver.quit()
 
@@ -56,9 +117,11 @@ class NSECookieService:
 
             self._save_cookies_to_file(filtered)
             return filtered
+
         except Exception as e:
             logger.error(f"Error in get_nse_cookies: {e}")
             return None
+
 
     def _save_cookies_to_file(self, cookies: Dict[str, str]):
         try:

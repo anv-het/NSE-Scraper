@@ -22,7 +22,7 @@ logs/
 .idea
 
 # Ignore configuration files
-config.ini
+# config.ini
 
 # all the downloads directories
 downloads/
