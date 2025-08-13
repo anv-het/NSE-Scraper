@@ -541,6 +541,7 @@ def parse_enhanced_ipo_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]
                 "apiListingAt": extract_text(item.get("~Str_Listing", "")),
                 "apiUrl": "https://www.investorgain.com" + item.get("~urlrewrite_folder_name", ""),
                 "apiIpoCategory": item.get("~IPO_Category"),
+                "apiIpoYear": datetime.now().year,
             }
             result.append(ipo)
             
@@ -609,3 +610,30 @@ def parse_html_table_to_list(html_table_string: str, expected_columns: List[str]
                 table_data.append(row_data)
 
     return table_data
+
+
+
+# ===== Fached Ipo list from file =====
+def fetch_ipo_list_from_json(file_path):
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            # If it's a list, return it directly
+            if isinstance(data, list):
+                return data
+            # If it's a dict with "ipo_data" key, return that
+            elif isinstance(data, dict) and "ipo_data" in data:
+                return data["ipo_data"]
+            else:
+                logger.error("Unexpected JSON format: Not a list or expected dict")
+                return []
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+        return []
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON format: {e}")
+        return []
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        return []
+

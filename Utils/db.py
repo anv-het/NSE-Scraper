@@ -203,7 +203,8 @@ class DatabaseManager:
                     apiListingAt DATE,
                     apiUrl NVARCHAR(500),
                     apiIpoCategory NVARCHAR(100),
-                    
+                    apiIpoYear INT,
+
                     -- Scraping Information
                     scrapingDate DATETIME2,
                     detailUrl NVARCHAR(500),
@@ -791,6 +792,7 @@ class DatabaseManager:
                         safe_sql_value(record.get('apiListingAt'), 'date'),
                         safe_sql_value(record.get('apiUrl')),
                         safe_sql_value(record.get('apiIpoCategory')),
+                        safe_sql_value(record.get('apiIpoYear')),
                         
                         # Scraping Information
                         safe_sql_value(record.get('scrapingDate'), 'datetime'),
@@ -916,7 +918,7 @@ class DatabaseManager:
                             apiGmpValue=?, apiGmpPercent=?, apiFireRating=?, apiFireRatingCount=?, apiSubscription=?,
                             apiPrice=?, apiEstimatedListingPrice=?, apiEstimatedListingPercent=?, apiIssueSize=?, apiLot=?,
                             apiPe=?, apiIssueOpenDate=?, apiIssueCloseDate=?, apiBoaDate=?, apiListingAt=?,
-                            apiUrl=?, apiIpoCategory=?, scrapingDate=?, detailUrl=?, scrapedCompanyName=?,
+                            apiUrl=?, apiIpoCategory=?, apiIpoYear=?, scrapingDate=?, detailUrl=?, scrapedCompanyName=?,
                             companyLogoUrl=?, localLogoPath=?, companyFullNameScraped=?, aboutCompanyText=?, minOrderQuantityScraped=?,
                             sharesPerLotScraped=?, ipoSummaryText=?, ipoIssueOpeningDateStatus=?, ipoIssueOpeningDateParsed=?, ipoIssueClosingDateStatus=?,
                             ipoIssueClosingDateParsed=?, ipoOpenDate=?, ipoCloseDate=?, basisOfAllotment=?, initiationOfRefunds=?,
@@ -949,7 +951,7 @@ class DatabaseManager:
                             apiGmpValue, apiGmpPercent, apiFireRating, apiFireRatingCount, apiSubscription,
                             apiPrice, apiEstimatedListingPrice, apiEstimatedListingPercent, apiIssueSize, apiLot,
                             apiPe, apiIssueOpenDate, apiIssueCloseDate, apiBoaDate, apiListingAt,
-                            apiUrl, apiIpoCategory, scrapingDate, detailUrl, scrapedCompanyName,
+                            apiUrl, apiIpoCategory, apiIpoYear, scrapingDate, detailUrl, scrapedCompanyName,
                             companyLogoUrl, localLogoPath, companyFullNameScraped, aboutCompanyText, minOrderQuantityScraped,
                             sharesPerLotScraped, ipoSummaryText, ipoIssueOpeningDateStatus, ipoIssueOpeningDateParsed, ipoIssueClosingDateStatus,
                             ipoIssueClosingDateParsed, ipoOpenDate, ipoCloseDate, basisOfAllotment, initiationOfRefunds,

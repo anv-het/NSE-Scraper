@@ -45,7 +45,7 @@ from Utils.ipo_utils import (
     clean_text, convert_to_float, convert_to_int, clean_html_entities,
     format_ipo_status, parse_date_status, ensure_directory_exists,
     make_robust_request, fetch_ipo_list_from_api, fetch_gmp_data_for_ipo,
-    fetch_subscription_data_for_ipo, fetch_ipo_list_v2,
+    fetch_subscription_data_for_ipo, fetch_ipo_list_v2, fetch_ipo_list_from_json,
 )
 
 logger = get_logger(__name__)
@@ -1676,6 +1676,7 @@ def scrape_single_ipo_comprehensive(ipo_entry):
         'apiListingAt': ipo_entry.get('apiListingAt'),
         'apiUrl': ipo_entry.get('apiUrl'),
         'apiIpoCategory': ipo_category,
+        'apiIpoYear': ipo_entry.get('apiIpoYear'),
         'scrapingDate': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
     
@@ -1865,9 +1866,30 @@ def scrape_all_ipo_data_comprehensive(max_workers=5, month=None, year=None, fin_
         year: Year for API call, defaults to current year
         fin_year: Financial year string (e.g., "2025-26"), defaults to current financial year
     """
-    
-    # Fetch IPO List from enhanced API with month/year parameters
-    ipo_list = fetch_ipo_list_v2(month, year, fin_year)
+
+    # WHEN TO USE:
+    #   - True  => Use when you want the most recent IPOs (e.g., current month/year)
+    #   - False => Use when working with historical IPO data from 2019 to 2025
+    is_current_ipo = True  
+    # Fetch IPO list based on the selected source
+    if is_current_ipo:
+        # Fetch current IPO list from API (typically returns 35–40 IPOs)
+        ipo_list = fetch_ipo_list_v2(month, year, fin_year)
+    else:
+        #Fetch past IPO list from a combined JSON file (years 2019–2025)
+        # Dynamically construct the path to the JSON file
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # Go 3 levels up
+        file_path = os.path.join(
+            base_dir,
+            "ipo_data",
+            "ipo_data_combined_2019_2020_2021_2022_2023_2024_2025.json"
+        )
+        
+        # Load IPOs from the historical JSON file
+        ipo_list = fetch_ipo_list_from_json(file_path)
+
+
+
     if not ipo_list:
         logger.error("No IPO data found in the enhanced API response.")
         return []

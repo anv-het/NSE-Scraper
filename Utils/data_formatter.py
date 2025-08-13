@@ -1456,7 +1456,8 @@ class NSEDataFormatter:
                         'apiListingAt': ipo_item.get('apiListingAt'),
                         'apiUrl': ipo_item.get('apiUrl'),
                         'apiIpoCategory': ipo_item.get('apiIpoCategory'),
-                        
+                        'apiIpoYear': ipo_item.get('apiIpoYear'),
+
                         # Scraping Information
                         "scrapingDate": ipo_item.get("scrapingDate"),
                         "detailUrl": ipo_item.get("detailUrl"),
