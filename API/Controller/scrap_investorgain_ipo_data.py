@@ -34,7 +34,7 @@ from bs4 import BeautifulSoup
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 
 from Utils.logger import get_logger
-# from Utils.db import DatabaseManager
+from Utils.db import DatabaseManager
 from Utils.data_formatter import NSEDataFormatter  # Commented out as no longer needed
 from Utils.config_reader import ConfigReader
 from Utils.ipo_utils import (
@@ -58,7 +58,7 @@ class NSEInvestorGainIPOController:
     """
     
     def __init__(self):
-        # self.db = DatabaseManager()  # Commented out as per user request
+        self.db = DatabaseManager()  # Commented out as per user request
         self.config = ConfigReader()
         self.investorgain_ipo_api_url = IPO_LIST_API_V2
         self.collection_name = "investorgain_ipo_data_v1"
@@ -142,10 +142,10 @@ class NSEInvestorGainIPOController:
                 return {"success": False, "message": "No data to save"}
             
             # Save to MongoDB (existing functionality) - Commented out as per user request
-            # mongo_result = self.db.save_investorgain_ipo_data(formatted_data)
+            mongo_result = self.db.save_investorgain_ipo_data(formatted_data)
             
             # Save to SQL Server (new functionality) - Commented out as per user request
-            # sql_result = self.db.save_investorgain_ipo_data_to_sql(formatted_data)
+            sql_result = self.db.save_investorgain_ipo_data_to_sql(formatted_data)
             
             # Combine results - All database operations commented out as per user request
             combined_result = {
@@ -1653,6 +1653,7 @@ def scrape_single_ipo_comprehensive(ipo_entry):
     # Initialize comprehensive data with enhanced API information
     comprehensive_data = {
         'ipoId': ipo_id,
+        "apiIpoStatus": ipo_entry.get('apiIpoStatus'),
         'apiCompanyName': company_short_name,
         'apiExchange': ipo_entry.get('apiExchange'),
         'apiIpoStatusFormatted': ipo_entry.get('apiIpoStatusFormatted'),

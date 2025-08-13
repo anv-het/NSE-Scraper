@@ -1411,9 +1411,10 @@ class NSEDataFormatter:
     def format_investorgain_ipo_data(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Format InvestorGain IPO data into MongoDB-ready documents
+        Handles the new IPO data format with nested objects and arrays
         
         Args:
-            data: List of raw IPO data dictionaries from InvestorGain API
+            data: List of raw IPO data dictionaries from InvestorGain API (new format)
             
         Returns:
             List[Dict[str, Any]]: Formatted IPO data documents
@@ -1424,11 +1425,12 @@ class NSEDataFormatter:
             # Get current IST timestamp
             current_time_ist = NSEDataFormatter.parse_timestamp(None)
             
-            logger.info(f"Starting to format {len(data)} IPO records")
-
+            logger.info(f"Starting to format {len(data)} IPO records with new format")
+        
             for ipo_item in data:
                 try:
-                    # Format the IPO data according to the required output structure
+                    # The new format already comes in the correct structure,
+                    # so we just need to add timestamps and validate the data
                     formatted_ipo = {
                         # Basic IPO Information From API
                         'ipoId': ipo_item.get("ipoId"),
@@ -1456,11 +1458,11 @@ class NSEDataFormatter:
                         'apiIpoCategory': ipo_item.get('apiIpoCategory'),
                         
                         # Scraping Information
-                        "scrapingDate": ipo_item.get("scraping_date"),
-                        "detailUrl": ipo_item.get("detail_url"),
+                        "scrapingDate": ipo_item.get("scrapingDate"),
+                        "detailUrl": ipo_item.get("detailUrl"),
                         "scrapedCompanyName": ipo_item.get("scraped_company_name"),
                         "companyLogoUrl": ipo_item.get("company_logo_url"),
-                        "localLogoPath": ipo_item.get("local_logo_path"),
+                        "localLogoPath": ipo_item.get("localLogoPath"),
                         "companyFullNameScraped": ipo_item.get("company_full_name_scraped"),
                         "aboutCompanyText": ipo_item.get("about_company_text"),
                         
@@ -1485,10 +1487,10 @@ class NSEDataFormatter:
                         "ipoSummaryText": ipo_item.get("ipo_summary_text"),
                         
                         # Date Status and Parsing
-                        "ipoIssueOpeningDateStatus": ipo_item.get("ipo_issue_opening_date_status"),
-                        "ipoIssueOpeningDateParsed": ipo_item.get("ipo_issue_opening_date_parsed"),
-                        "ipoIssueClosingDateStatus": ipo_item.get("ipo_issue_closing_date_status"),
-                        "ipoIssueClosingDateParsed": ipo_item.get("ipo_issue_closing_date_parsed"),
+                        "ipoIssueOpeningDateStatus": ipo_item.get("ipo_open_date_status"),
+                        "ipoIssueOpeningDateParsed": ipo_item.get("ipo_open_date_parsed"),
+                        "ipoIssueClosingDateStatus": ipo_item.get("ipo_close_date_status"),
+                        "ipoIssueClosingDateParsed": ipo_item.get("ipo_close_date_parsed"),
                         "ipoOpenDate": ipo_item.get("ipo_open_date"),
                         "ipoCloseDate": ipo_item.get("ipo_close_date"),
                         
@@ -1600,7 +1602,7 @@ class NSEDataFormatter:
                     formatted_data.append(formatted_ipo)
                     
                 except Exception as item_error:
-                    logger.error(f"Error formatting individual IPO record {ipo_item.get('ipo_id', 'unknown')}: {str(item_error)}")
+                    logger.error(f"Error formatting individual IPO record {ipo_item.get('ipoId', 'unknown')}: {str(item_error)}")
                     continue
             
             logger.info(f"Successfully formatted {len(formatted_data)} IPO records")

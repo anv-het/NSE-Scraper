@@ -86,6 +86,21 @@ def parse_gmp(html):
 def parse_est_listing(html):
     return parse_gmp(html)
 
+def calculate_estimated_listing(ipo_price, gmp_val):
+    """
+    Calculate estimated listing price and estimated percent gain.
+    Returns (est_price, est_pct) or (None, None) if invalid.
+    """
+    if ipo_price is None or gmp_val is None:
+        return None, None
+
+    try:
+        est_price = ipo_price + gmp_val
+        est_pct = ((est_price - ipo_price) / ipo_price) * 100
+        return est_price, est_pct
+    except ZeroDivisionError:
+        return est_price, None
+
 
 def parse_fire_rating(html):
     soup = BeautifulSoup(html or "", "html.parser")
@@ -117,12 +132,17 @@ def fetch_and_save():
         name, listed_price, listing_gain, exchange, board = parse_name_field(name_raw)
         status_code, status_formatted = extract_status(name_raw)
         gmp_val, gmp_pct = parse_gmp(item.get("GMP", ""))
-        est_price, est_pct = parse_est_listing(item.get("Est Listing", ""))
+
+        price_raw = item.get("Price", "").replace(",", "")
+        ipo_price = float(price_raw) if price_raw.replace(".", "").isdigit() else None
+
+        est_price, est_pct = calculate_estimated_listing(ipo_price, gmp_val)
+        
         fire_emoji, fire_count = parse_fire_rating(item.get("Fire Rating", ""))
 
         ipo = {
-            "ipoId": item.get("~id"),
-            "apiCompanyName": name,
+            "apiId": item.get("~id"),
+            "apiName": name,
             "apiExchange": exchange,
             "apiBoard": board,
             "apiIpoStatus": status_code,
@@ -137,13 +157,13 @@ def fetch_and_save():
             "apiPrice": float(item.get("Price")) if item.get("Price", "").replace(".", "").isdigit() else None,
             "apiEstimatedListingPrice": est_price,
             "apiEstimatedListingPercent": est_pct,
-            "apiIssueSize": extract_text(item.get("IPO Size", "")),
+            "apiIpoSize": extract_text(item.get("IPO Size", "")),
             "apiLot": extract_text(item.get("Lot", "")),
             "apiPe": float(item.get("~P/E")) if item.get("~P/E", "").replace(".", "").replace("-", "").isdigit() else None,
-            "apiIssueOpenDate": extract_text(item.get("~Srt_Open", "")),
-            "apiIssueCloseDate": extract_text(item.get("~Srt_Close", "")),
+            "apiOpen": extract_text(item.get("~Srt_Open", "")),
+            "apiClose": extract_text(item.get("~Srt_Close", "")),
             "apiBoaDate": extract_text(item.get("~Srt_BoA_Dt", "")),
-            "apiListingAt": extract_text(item.get("~Str_Listing", "")),
+            "apiListingDate": extract_text(item.get("~Str_Listing", "")),
             "apiUrl": "https://www.investorgain.com" + item.get("~urlrewrite_folder_name", ""),
             "apiIpoCategory": item.get("~IPO_Category"),
         }
@@ -155,8 +175,6 @@ def fetch_and_save():
 
     print(f"Saved {len(result)} records to '{filename}'")
 
-    # Return the result for further processing
-    return result
 
 if __name__ == "__main__":
     fetch_and_save()

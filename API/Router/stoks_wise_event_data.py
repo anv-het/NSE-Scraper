@@ -9,6 +9,8 @@ from API.Controller.stockwise_event_data import StockwiseEventDataController
 
 router = APIRouter()
 
+logger = get_logger(__name__)
+
 from bson import ObjectId
 
 def convert_object_ids(doc: dict) -> dict:
@@ -30,7 +32,7 @@ def get_stoks_wise_event_data(request: Request, symbol: str) -> Dict[str, Any]:
     Endpoint to get stockwise event data for a given symbol.
     """
     symbol = symbol.upper()
-    print(f"Fetching stockwise event data for symbol: {symbol}")
+    logger.info(f"Fetching stockwise event data for symbol: {symbol}")
     controller = StockwiseEventDataController()
     result = asyncio.run(controller.scrape_stockwise_event_data(symbol))
 

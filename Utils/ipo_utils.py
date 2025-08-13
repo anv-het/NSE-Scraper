@@ -458,6 +458,21 @@ def parse_est_listing(html: str) -> tuple:
     """
     return parse_gmp(html)
 
+def calculate_estimated_listing(ipo_price, gmp_val):
+    """
+    Calculate estimated listing price and estimated percent gain.
+    Returns (est_price, est_pct) or (None, None) if invalid.
+    """
+    if ipo_price is None or gmp_val is None:
+        return None, None
+
+    try:
+        est_price = ipo_price + gmp_val
+        est_pct = ((est_price - ipo_price) / ipo_price) * 100
+        return est_price, est_pct
+    except ZeroDivisionError:
+        return est_price, None
+
 def parse_fire_rating(html: str) -> tuple:
     """
     Parses fire rating from HTML content.
@@ -486,13 +501,18 @@ def parse_enhanced_ipo_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]
     
     try:
         data = api_response.get("reportTableData", [])
-        
+
         for item in data:
             name_raw = item.get("Name", "")
             name, listed_price, listing_gain, exchange, board = parse_name_field(name_raw)
             status_code, status_formatted = extract_status(name_raw)
             gmp_val, gmp_pct = parse_gmp(item.get("GMP", ""))
-            est_price, est_pct = parse_est_listing(item.get("Est Listing", ""))
+
+            price_raw = item.get("Price", "").replace(",", "")
+            ipo_price = float(price_raw) if price_raw.replace(".", "").isdigit() else None
+
+            est_price, est_pct = calculate_estimated_listing(ipo_price, gmp_val)
+            
             fire_emoji, fire_count = parse_fire_rating(item.get("Fire Rating", ""))
 
             ipo = {
@@ -526,7 +546,6 @@ def parse_enhanced_ipo_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]
             
     except Exception as e:
         logger.error(f"Error parsing enhanced IPO data: {e}")
-        
     return result
 
 # ===== DIRECTORY UTILITIES =====
