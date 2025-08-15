@@ -58,7 +58,7 @@ class NSEInvestorGainIPOController:
     """
     
     def __init__(self):
-        self.db = DatabaseManager()  # Commented out as per user request
+        # self.db = DatabaseManager()  # Commented out as per user request
         self.config = ConfigReader()
         self.investorgain_ipo_api_url = IPO_LIST_API_V2
         self.collection_name = "investorgain_ipo_data_v1"
@@ -103,7 +103,7 @@ class NSEInvestorGainIPOController:
             formatted_data = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
             
             # Save to database with update logic
-            save_result = self.save_investorgain_ipo_data(formatted_data)
+            # save_result = self.save_investorgain_ipo_data(formatted_data)
             
             # Save to JSON file
             json_result = self.save_to_json_file(formatted_data)
@@ -117,7 +117,7 @@ class NSEInvestorGainIPOController:
                 "month": month,
                 "year": year,
                 "fin_year": fin_year,
-                "database_result": save_result,
+                # "database_result": save_result,
                 "json_file_result": json_result
             }
             
@@ -1548,20 +1548,25 @@ def extract_ipo_table_details(soup):
         "IPO Issue Opening Date": re.compile(r'Issue Opening Date', re.IGNORECASE),
         "IPO Issue Closing Date": re.compile(r'Issue Closing Date', re.IGNORECASE),
         "IPO Issue Price": re.compile(r'Issue Price', re.IGNORECASE),
-        "DRHP Link": re.compile(r'DRHP', re.IGNORECASE),
-        "RHP Link": re.compile(r'RHP', re.IGNORECASE),
+        "DRHP Link": re.compile(r'\bDRHP\b', re.IGNORECASE),
+        "RHP Link": re.compile(r'\bRHP\b', re.IGNORECASE),
         "Anchor List Link": re.compile(r'Anchor List', re.IGNORECASE),
-        "Listing At": re.compile(r'Listing At|Listing On', re.IGNORECASE),
+        "Listing At": re.compile(r'IPO Listing At', re.IGNORECASE),
         "Retail Quota": re.compile(r'Retail Quota|Retail Allotment %', re.IGNORECASE),
         "IPO Issue Type": re.compile(r'Issue Type', re.IGNORECASE),
-        "IPO Issue Size (Cr)": re.compile(r'Issue Size', re.IGNORECASE),
-        "Fresh Issue (Cr)": re.compile(r'Fresh Issue', re.IGNORECASE),
+        "IPO Issue Size (Cr)": re.compile(r'^SME IPO Issue Size|^IPO Issue Size', re.IGNORECASE),
+        "Fresh Issue (Cr)": re.compile(r'^Fresh Issue', re.IGNORECASE),
+        "Offer for Sale (Cr)": re.compile(r'Offer for Sale', re.IGNORECASE),
         "Face Value": re.compile(r'Face Value', re.IGNORECASE),
+        "IPO Discount": re.compile(r'IPO Discount', re.IGNORECASE),
         "Promoter Holding Pre IPO (%)": re.compile(r'Promoter Holding Pre IPO', re.IGNORECASE),
         "Promoter Holding Post IPO (%)": re.compile(r'Promoter Holding Post IPO', re.IGNORECASE),
+        "Allotment Status": re.compile(r'Allotment Status', re.IGNORECASE),
+        "BSE Code": re.compile(r'BSE Code', re.IGNORECASE),
+        "NSE Code": re.compile(r'NSE Code', re.IGNORECASE),
+        "Promoter Holding Pre IPO (%)": re.compile(r'Promoter Holding Pre IPO', re.IGNORECASE),
         "Min Order Quantity (Table)": re.compile(r'Min Order Quantity|Min Application', re.IGNORECASE),
         "Lot Size (Table)": re.compile(r'Market Lot|Lot Size', re.IGNORECASE),
-        "Allotment Status": re.compile(r'Allotment Status', re.IGNORECASE),
     }
     
     issue_details_data = {}
