@@ -279,21 +279,44 @@ MAX_VOLUME = 999999999999
 # NOTE: Set to 1 minute for testing - change to production values after testing
 
 CRON_INTERVALS = {
-    "ADVANCES_DECLINES_UNCHANGED": 5,  # 1 minute for testing, DEFAULT: 5
-    "FORTHCOMING_LISTINGS": 5,         # 1 minute for testing, DEFAULT: 5
-    "LARGE_DEALS": 5,                  # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_CONTRACTS": 5,        # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_EQUITIES": 5,         # 1 minute for testing, DEFAULT: 5
-    "MOST_ACTIVE_UNDERLYING": 5,       # 1 minute for testing, DEFAULT: 5
-    "NEW_LISTINGS": 5,                 # 1 minute for testing, DEFAULT: 5
-    "NSE_52_WEEK_HIGH_LOW": 5,         # 1 minute for testing, DEFAULT: 5
-    "NSE_ALL_INDEXES": 5,              # 1 minute for testing, DEFAULT: 5
-    "PRICE_BAND_HITTERS": 5,           # 1 minute for testing, DEFAULT: 5
-    "RECENT_LISTINGS": 5,              # 1 minute for testing, DEFAULT: 5
-    "SPECIAL_PREOPEN_LISTINGS": 5,     # 1 minute for testing, DEFAULT: 5
-    "TOP_GAINERS_LOOSERS": 5,          # 1 minute for testing, DEFAULT: 5
+    "ADVANCES_DECLINES_UNCHANGED": 8,  # 1 minute for testing, DEFAULT: 5
+    "FORTHCOMING_LISTINGS": 8,         # 1 minute for testing, DEFAULT: 5
+    "LARGE_DEALS": 7,                  # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_CONTRACTS": 8,        # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_EQUITIES": 8,         # 1 minute for testing, DEFAULT: 5
+    "MOST_ACTIVE_UNDERLYING": 7,       # 1 minute for testing, DEFAULT: 5
+    "NEW_LISTINGS": 7,                 # 1 minute for testing, DEFAULT: 5
+    "NSE_52_WEEK_HIGH_LOW": 8,         # 1 minute for testing, DEFAULT: 5
+    "NSE_ALL_INDEXES": 7,              # 1 minute for testing, DEFAULT: 5
+    "PRICE_BAND_HITTERS": 7,           # 1 minute for testing, DEFAULT: 5
+    "RECENT_LISTINGS": 8,              # 1 minute for testing, DEFAULT: 5
+    "SPECIAL_PREOPEN_LISTINGS": 8,     # 1 minute for testing, DEFAULT: 5
+    "TOP_GAINERS_LOOSERS": 7,          # 1 minute for testing, DEFAULT: 5
     "INVESTORGAIN_IPO_DATA": 60,       # 60 minutes for IPO data (less frequent than market data)
     "COOKIE_REFRESH": 4,               # 1 minute for testing, DEFAULT: 60
 }
+
+
+
+# NSE/BSE Holidays (2025)
+# 📌 Note: This list is based on official NSE circulars. 
+# Update this every year as exchanges publish the holiday calendar.
+
+MARKET_HOLIDAYS = [
+    "2025-01-26",  # Republic Day
+    "2025-02-26",  # Mahashivratri
+    "2025-03-14",  # Holi
+    "2025-04-10",  # Ram Navami
+    "2025-04-14",  # Dr. Babasaheb Ambedkar Jayanti
+    "2025-04-18",  # Good Friday
+    "2025-05-01",  # Maharashtra Day
+    "2025-08-15",  # Independence Day
+    "2025-08-27",  # Ganesh Chaturthi
+    "2025-10-02",  # Gandhi Jayanti
+    "2025-10-20",  # Diwali (Laxmi Pujan) *Muhurat Trading may be allowed
+    "2025-10-21",  # Diwali Balipratipada
+    "2025-11-05",  # Gurunanak Jayanti
+    "2025-12-25",  # Christmas
+]
 
 

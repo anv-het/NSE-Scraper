@@ -35,7 +35,7 @@ from tenacity import retry, wait_random_exponential, stop_after_attempt
 
 from Utils.logger import get_logger
 from Utils.db import DatabaseManager
-from Utils.data_formatter import NSEDataFormatter  # Commented out as no longer needed
+from Utils.data_formatter import NSEDataFormatter 
 from Utils.config_reader import ConfigReader
 from Utils.ipo_utils import (
     # Constants
@@ -48,6 +48,9 @@ from Utils.ipo_utils import (
     fetch_subscription_data_for_ipo, fetch_ipo_list_v2, fetch_ipo_list_from_json,
 )
 
+# Import the fixed version
+from Utils.ipo_symbol_matcher import fetch_nse_bse_codes
+
 logger = get_logger(__name__)
 
 
@@ -58,7 +61,7 @@ class NSEInvestorGainIPOController:
     """
     
     def __init__(self):
-        # self.db = DatabaseManager()  # Commented out as per user request
+        self.db = DatabaseManager()  # Commented out as per user request
         self.config = ConfigReader()
         self.investorgain_ipo_api_url = IPO_LIST_API_V2
         self.collection_name = "investorgain_ipo_data_v1"
@@ -100,10 +103,12 @@ class NSEInvestorGainIPOController:
                 }
             
             # Format data using NSEDataFormatter
-            formatted_data = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
+            formatted_data_ = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
             
+            # Add NSE/BSE/Symbol from master
+            formatted_data = fetch_nse_bse_codes(formatted_data_)
             # Save to database with update logic
-            # save_result = self.save_investorgain_ipo_data(formatted_data)
+            save_result = self.save_investorgain_ipo_data(formatted_data)
             
             # Save to JSON file
             json_result = self.save_to_json_file(formatted_data)
@@ -117,7 +122,7 @@ class NSEInvestorGainIPOController:
                 "month": month,
                 "year": year,
                 "fin_year": fin_year,
-                # "database_result": save_result,
+                "database_result": save_result,
                 "json_file_result": json_result
             }
             

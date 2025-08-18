@@ -2,9 +2,14 @@ import time
 import random
 import hashlib
 import json
+import pytz 
+import traceback
+from datetime import datetime
+
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 from Utils.logger import get_logger
+from Constant.general import MARKET_HOLIDAYS
 
 logger = get_logger(__name__)
 
@@ -300,26 +305,31 @@ def calculate_market_cap(shares: float, price: float) -> Optional[float]:
 
 def is_market_open() -> bool:
     """
-    Check if Indian stock market is open
-    
-    Returns:
-        True if market is open, False otherwise
+    Check if Indian stock market (NSE/BSE) is open.
+    Considers weekdays, trading hours, and holidays.
     """
     try:
-        now = datetime.now()
-        weekday = now.weekday()  # 0 = Monday, 6 = Sunday
-        
-        # Market is closed on weekends
-        if weekday >= 5:  # Saturday = 5, Sunday = 6
+        ist = pytz.timezone("Asia/Kolkata")
+        now = datetime.now(ist)
+        weekday = now.weekday()  # Monday=0, Sunday=6
+
+        # Market closed on weekends
+        if weekday >= 5:
             return False
-        
-        # Market hours: 9:15 AM to 3:30 PM IST
-        market_open = now.replace(hour=9, minute=15, second=0, microsecond=0)
-        market_close = now.replace(hour=15, minute=30, second=0, microsecond=0)
-        
+
+        # Market closed on holidays
+        today_str = now.strftime("%Y-%m-%d")
+        if today_str in MARKET_HOLIDAYS:
+            return False
+
+        # Market timings: 9:15 AM – 3:30 PM IST
+        market_open = datetime(now.year, now.month, now.day, 9, 15, tzinfo=ist)
+        market_close = datetime(now.year, now.month, now.day, 15, 30, tzinfo=ist)
+
         return market_open <= now <= market_close
-        # return True  # For testing purposes, assume market is always open
-    except Exception:
+
+    except Exception as e:
+        logger.error(f"Error checking market status: {e}")
         return False
 
 def retry_on_failure(func, max_retries: int = 3, delay: float = 1.0):

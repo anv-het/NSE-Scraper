@@ -179,7 +179,9 @@ class DatabaseManager:
                 CREATE TABLE {table_name} (
                     -- Primary identifiers
                     ipoId VARCHAR(50) PRIMARY KEY,
-                    
+                    ipoSymbol VARCHAR(50),
+                    ipoExchange VARCHAR(50),
+
                     -- API Company Information
                     apiCompanyName NVARCHAR(255),
                     apiIpoStatus NVARCHAR(100),
@@ -291,7 +293,9 @@ class DatabaseManager:
                     minOrderQuantityTable NVARCHAR(100),
                     lotSizeTable NVARCHAR(100),
                     allotmentStatusTable NVARCHAR(500),
-                    
+                    ipoBseCodeTable NVARCHAR(100),
+                    ipoNseCodeTable NVARCHAR(100),
+
                     -- Metadata
                     lastUpdatedTimestamp NVARCHAR(100),
                     metaTitle NVARCHAR(500),
@@ -768,7 +772,9 @@ class DatabaseManager:
                     # Prepare values for SQL insertion based on new IPO data format
                     sql_values = (
                         safe_sql_value(record.get('ipoId')),  # ipoId
-                        
+                        safe_sql_value(record.get('ipoSymbol')),
+                        safe_sql_value(record.get('ipoExchange')),
+
                         # API Company Information
                         safe_sql_value(record.get('apiCompanyName')),
                         safe_sql_value(record.get('apiIpoStatus')),
@@ -880,7 +886,9 @@ class DatabaseManager:
                         safe_sql_value(record.get('minOrderQuantityTable')),
                         safe_sql_value(record.get('lotSizeTable')),
                         safe_sql_value(record.get('allotmentStatusTable')),
-                        
+                        safe_sql_value(record.get('ipoBseCodeTable')),
+                        safe_sql_value(record.get('ipoNseCodeTable')),
+
                         # Metadata
                         safe_sql_value(record.get('lastUpdatedTimestamp')),
                         safe_sql_value(record.get('metaTitle')),
@@ -914,7 +922,7 @@ class DatabaseManager:
                         # Update existing record
                         update_query = f"""
                         UPDATE {self.sql_server_config['table']} SET
-                            apiCompanyName=?, apiIpoStatus=?, apiIpoStatusFormatted=?, apiListedPrice=?, apiListingGain=?,
+                        ipoSymbol=?, ipoExchange=?, apiCompanyName=?, apiIpoStatus=?, apiIpoStatusFormatted=?, apiListedPrice=?, apiListingGain=?,
                             apiGmpValue=?, apiGmpPercent=?, apiFireRating=?, apiFireRatingCount=?, apiSubscription=?,
                             apiPrice=?, apiEstimatedListingPrice=?, apiEstimatedListingPercent=?, apiIssueSize=?, apiLot=?,
                             apiPe=?, apiIssueOpenDate=?, apiIssueCloseDate=?, apiBoaDate=?, apiListingAt=?,
@@ -933,7 +941,8 @@ class DatabaseManager:
                             lastUpdatedGmp=?, lastUpdated=?, ipoIssueOpeningDateTable=?, ipoIssueClosingDateTable=?, ipoIssuePriceTable=?,
                             drhpLinkTable=?, rhpLinkTable=?, listingAtTable=?, retailQuotaTable=?, ipoIssueTypeTable=?,
                             ipoIssueSizeTable=?, freshIssueTable=?, faceValueTable=?, promoterHoldingPreIpoTable=?, promoterHoldingPostIpoTable=?,
-                            anchorListLinkTable=?, minOrderQuantityTable=?, lotSizeTable=?, allotmentStatusTable=?, lastUpdatedTimestamp=?,
+                            anchorListLinkTable=?, minOrderQuantityTable=?, lotSizeTable=?, allotmentStatusTable=?, ipoBseCodeTable=?,
+                            ipoNseCodeTable=?, lastUpdatedTimestamp=?,
                             metaTitle=?, pageTitle=?, metaDesc=?, cacheKey=?, currentTime=?,
                             scrapedAt=?, companyFullName=?, companyFullNameNew=?, ipoShareAllocation=?, ipoDaywiseSubscriptionTable=?,
                             ipoSharesBidAmountTable=?, ipoBiddingHistoryJson=?, gmpTrendHistoryTable=?, strengths=?, objectives=?,
@@ -947,7 +956,7 @@ class DatabaseManager:
                         # Insert new record
                         insert_query = f"""
                         INSERT INTO {self.sql_server_config['table']} (
-                            ipoId, apiCompanyName, apiIpoStatus, apiIpoStatusFormatted, apiListedPrice, apiListingGain,
+                            ipoSymbol, ipoExchange, ipoId, apiCompanyName, apiIpoStatus, apiIpoStatusFormatted, apiListedPrice, apiListingGain,
                             apiGmpValue, apiGmpPercent, apiFireRating, apiFireRatingCount, apiSubscription,
                             apiPrice, apiEstimatedListingPrice, apiEstimatedListingPercent, apiIssueSize, apiLot,
                             apiPe, apiIssueOpenDate, apiIssueCloseDate, apiBoaDate, apiListingAt,
@@ -966,7 +975,8 @@ class DatabaseManager:
                             lastUpdatedGmp, lastUpdated, ipoIssueOpeningDateTable, ipoIssueClosingDateTable, ipoIssuePriceTable,
                             drhpLinkTable, rhpLinkTable, listingAtTable, retailQuotaTable, ipoIssueTypeTable,
                             ipoIssueSizeTable, freshIssueTable, faceValueTable, promoterHoldingPreIpoTable, promoterHoldingPostIpoTable,
-                            anchorListLinkTable, minOrderQuantityTable, lotSizeTable, allotmentStatusTable, lastUpdatedTimestamp,
+                            anchorListLinkTable, minOrderQuantityTable, lotSizeTable, allotmentStatusTable, ipoBseCodeTable,
+                            ipoNseCodeTable, lastUpdatedTimestamp,
                             metaTitle, pageTitle, metaDesc, cacheKey, currentTime,
                             scrapedAt, companyFullName, companyFullNameNew, ipoShareAllocation, ipoDaywiseSubscriptionTable,
                             ipoSharesBidAmountTable, ipoBiddingHistoryJson, gmpTrendHistoryTable, strengths, objectives,

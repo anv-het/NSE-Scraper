@@ -12,13 +12,23 @@ import requests
 import json
 import zlib
 import brotli
-from datetime import datetime
+import pytz 
+import traceback
+import os
+import re
+import logging
+
+from contextlib import closing
+from thefuzz import fuzz
+from fastapi.encoders import jsonable_encoder
+from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Union
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 from Utils.logger import get_logger
 
+# Configure logging
 logger = get_logger(__name__)
 
 # ===== CONFIGURATION CONSTANTS =====
@@ -47,6 +57,13 @@ BASE_URL = "https://www.investorgain.com"
 # Directory configurations
 LOGO_DOWNLOAD_DIR = "downloads/ipo/logos"
 OUTPUT_DIR = "output"
+
+# Constants for matching logic Symbol
+MATCH_THRESHOLD = 65  # Increased for better accuracy
+DATE_TOLERANCE_DAYS = 2  # More flexible date matching
+PRICE_TOLERANCE = 5  # More flexible price matching
+MIN_VALIDATION_MATCHES = 2  # Reduced for better matching while maintaining quality
+
 
 # ===== TEXT CLEANING UTILITIES =====
 def clean_text(text: str) -> str:
@@ -261,7 +278,6 @@ def fetch_ipo_list_from_api() -> List[Dict[str, Any]]:
         return []
 
 # ===== NEW API FETCH UTILITIES =====
-
 def get_api_url():
     now = datetime.now()
     month, year = now.month, now.year
@@ -299,8 +315,6 @@ def fetch_ipo_list_v2(month: int = None, year: int = None, fin_year: str = None)
     except Exception as e:
         logger.error(f"Error fetching IPO list from enhanced API: {e}")
         return []
-
-
 
 def fetch_gmp_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
     """
@@ -611,9 +625,7 @@ def parse_html_table_to_list(html_table_string: str, expected_columns: List[str]
 
     return table_data
 
-
-
-# ===== Fached Ipo list from file =====
+# ===== Fetched IPO list from file =====
 def fetch_ipo_list_from_json(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as f:
@@ -636,4 +648,260 @@ def fetch_ipo_list_from_json(file_path):
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         return []
+
+# ===== DATE AND PRICE MATCHING UTILITIES GET SYMBOL =====
+def parse_flexible_date(date_str):
+    """Parse various date formats flexibly."""
+    if not date_str:
+        return None
+    
+    try:
+        date_str = str(date_str).strip()
+        
+        # Handle formats like "19th Aug 2025"
+        if any(suffix in date_str.lower() for suffix in ['st', 'nd', 'rd', 'th']):
+            cleaned = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_str, flags=re.IGNORECASE)
+            try:
+                return datetime.strptime(cleaned.strip(), "%d %b %Y")
+            except:
+                pass
+        
+        # Try standard formats
+        formats = ["%Y-%m-%d", "%d-%m-%Y", "%m/%d/%Y", "%d/%m/%Y", "%Y/%m/%d"]
+        for fmt in formats:
+            try:
+                return datetime.strptime(date_str.split()[0], fmt)
+            except:
+                continue
+        
+        return None
+    except Exception:
+        return None
+
+def date_match(date1, date2):
+    """Enhanced date matching with flexible parsing."""
+    try:
+        if not date1 or not date2:
+            return False
+        
+        parsed_date1 = parse_flexible_date(date1) if isinstance(date1, str) else date1
+        parsed_date2 = parse_flexible_date(date2) if isinstance(date2, str) else date2
+        
+        if not parsed_date1 or not parsed_date2:
+            return False
+            
+        return abs((parsed_date1 - parsed_date2).days) <= DATE_TOLERANCE_DAYS
+    except Exception:
+        return False
+
+def extract_price_value(price_str):
+    """Extract numeric price from various formats."""
+    if not price_str:
+        return None
+    
+    try:
+        price_str = str(price_str).strip()
+        
+        # Handle ranges like "₹237.00-255.00" - take the higher value (upper bound)
+        if '-' in price_str:
+            parts = price_str.split('-')
+            if len(parts) == 2:
+                price_str = parts[-1].strip()
+        
+        # Remove currency symbols, commas, and other non-numeric characters except decimals
+        cleaned = re.sub(r'[₹,\s]', '', price_str)
+        cleaned = re.sub(r'[^\d.]', '', cleaned)
+        
+        return float(cleaned) if cleaned else None
+    except (ValueError, TypeError):
+        return None
+
+def price_match(price1, price2):
+    """Enhanced price matching."""
+    try:
+        price1_val = extract_price_value(price1)
+        price2_val = extract_price_value(price2)
+        
+        if price1_val is None or price2_val is None:
+            return False
+            
+        return abs(price1_val - price2_val) <= PRICE_TOLERANCE
+    except Exception:
+        return False
+
+def to_int_safe(value):
+    """Convert various formats to integer safely."""
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return int(value)
+    
+    try:
+        # Remove all non-digit characters
+        cleaned = re.sub(r"[^\d]", "", str(value))
+        return int(cleaned) if cleaned else None
+    except:
+        return None
+
+def calculate_company_name_similarity(formatted_record, master_record):
+    """Calculate the best name similarity score between records."""
+    master_name = (master_record.get("name") or "").lower().strip()
+    if not master_name:
+        return 0
+    
+    # All possible company names from formatted record
+    formatted_names = [
+        formatted_record.get("companyFullName") or "",
+        formatted_record.get("companyFullNameNew") or "",
+        formatted_record.get("scrapedCompanyName") or "",
+        formatted_record.get("apiCompanyName") or ""
+    ]
+    
+    # Calculate similarity scores
+    scores = []
+    for name in formatted_names:
+        if name:
+            name_clean = name.lower().strip()
+            # Use multiple fuzzy matching methods for better accuracy
+            token_sort_score = fuzz.token_sort_ratio(master_name, name_clean)
+            token_set_score = fuzz.token_set_ratio(master_name, name_clean)
+            ratio_score = fuzz.ratio(master_name, name_clean)
+            
+            # Take the best score from different methods
+            best_name_score = max(token_sort_score, token_set_score, ratio_score)
+            scores.append(best_name_score)
+    
+    return max(scores) if scores else 0
+
+def map_ipo_categories(formatted_record, master_record):
+    """Map IPO categories from formatted to master record."""
+    formatted_ipo = formatted_record.get("apiIpoCategory", "").strip().lower()
+    master_ipo = master_record.get("IPO_type", "").strip().lower()
+    
+    if formatted_ipo == "ipo" and master_ipo == "mainline":
+        return "MAINLINE"
+    elif formatted_ipo == "sme" and master_ipo == "sme":
+        return "SME"
+    return None
+
+def validate_ipo_match(formatted_record, master_record):
+    """Validate IPO match using multiple criteria."""
+    validations_passed = 0
+    validation_details = []
+    
+    try:
+        # 1. Opening date validation
+        if date_match(master_record.get("biddingStartDate"), formatted_record.get("apiIssueOpenDate")):
+            validations_passed += 1
+            validation_details.append("opening_date")
+        
+        # 2. Closing date validation
+        if date_match(master_record.get("biddingEndDate"), formatted_record.get("apiIssueCloseDate")):
+            validations_passed += 1
+            validation_details.append("closing_date")
+        
+        # 3. Lot size validation
+        master_lot = to_int_safe(master_record.get("lotSize"))
+        formatted_lot = to_int_safe(formatted_record.get("apiLot") or formatted_record.get("sharesPerLotScraped"))
+        
+        if master_lot and formatted_lot and master_lot == formatted_lot:
+            validations_passed += 1
+            validation_details.append("lot_size")
+        
+        # 4. Price validation - check multiple price fields
+        master_price = master_record.get("cutOffPrice")
+        formatted_prices = [
+            formatted_record.get("apiPrice"),
+            formatted_record.get("cutOffPrice")
+        ]
+        
+        for fp in formatted_prices:
+            if price_match(master_price, fp):
+                validations_passed += 1
+                validation_details.append("price")
+                break
+        
+        # 5. Exchange validation
+        listing_at = (formatted_record.get("listingAtTable") or "").upper()
+        
+        if master_record.get("BSE") and "BSE" in listing_at:
+            validations_passed += 1
+            validation_details.append("bse_listing")
+        
+        if master_record.get("NSE") and "NSE" in listing_at:
+            validations_passed += 1
+            validation_details.append("nse_listing")
+        
+        # 6. ISIN validation
+        master_isin = master_record.get("isin")
+        if master_isin:
+            # Convert record to string and search for ISIN
+            record_str = str(formatted_record).upper()
+            if master_isin.upper() in record_str:
+                validations_passed += 1
+                validation_details.append("isin")
+        
+        # 7. Company IPO types
+        if formatted_record.get("apiIpoCategory") and master_record.get("IPO_type"):
+            mapped_category = map_ipo_categories(formatted_record, master_record)
+            if mapped_category:
+                validations_passed += 1
+                validation_details.append("ipo_type")
+
+        return validations_passed, validation_details
+        
+    except Exception as e:
+        logger.error(f"Validation error: {e}")
+        return 0, []
+
+def get_ipo_symbol_with_fallback(master_record, formatted_record):
+    """
+    Get IPO symbol with proper fallback logic.
+    Priority: 1. Master symbol 2. ipoNseCodeTable 3. ipoBseCodeTable 4. null
+    """
+    # First priority: Get symbol from master table
+    master_symbol = master_record.get("symbol")
+    if master_symbol and master_symbol.strip() and master_symbol.strip().upper() not in ['Y', 'N', 'NULL', 'NONE']:
+        return master_symbol.strip(), "MASTER"
+    
+    # Second priority: Get from formatted record's NSE code
+    nse_code = formatted_record.get("ipoNseCodeTable")
+    if nse_code and nse_code.strip() and nse_code.strip().upper() not in ['N/A', 'NULL', 'NONE', '']:
+        return nse_code.strip(), "NSE_SCRAPED"
+    
+    # Third priority: Get from formatted record's BSE code  
+    bse_code = formatted_record.get("ipoBseCodeTable")
+    if bse_code and bse_code.strip() and bse_code.strip().upper() not in ['N/A', 'NULL', 'NONE', '']:
+        return bse_code.strip(), "BSE_SCRAPED"
+    
+    # No valid symbol found
+    return None, None
+
+def determine_exchange(master_record, formatted_record, symbol_source):
+    """Determine the appropriate exchange based on symbol source and listing info."""
+    listing_at = (formatted_record.get("listingAtTable") or "").upper()
+    
+    if symbol_source == "MASTER":
+        # Check which exchanges are available in master and listed
+        has_nse = master_record.get("NSE") 
+        has_bse = master_record.get("BSE")
+        
+        if "NSE" in listing_at and has_nse:
+            return "NSE"
+        elif "BSE" in listing_at and has_bse:
+            return "BSE"
+        elif "NSE" in listing_at:
+            return "NSE"
+        elif "BSE" in listing_at:
+            return "BSE"
+        else:
+            return "NSE" if has_nse else ("BSE" if has_bse else None)
+    
+    elif symbol_source == "NSE_SCRAPED":
+        return "NSE"
+    elif symbol_source == "BSE_SCRAPED":
+        return "BSE"
+    
+    return None
+
 
