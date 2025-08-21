@@ -30,7 +30,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional, Any
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 
 from Utils.logger import get_logger
@@ -156,6 +156,8 @@ class NSEInvestorGainIPOController:
             combined_result = {
                 "success": True,  # Set to True since we're not doing database operations
                 "message": "Database operations commented out as requested",
+                "mongo_result": mongo_result,
+                "sql_result": sql_result,
                 "total_processed": len(formatted_data)
             }
 
@@ -571,6 +573,7 @@ def extract_ipo_lots_data(soup):
     # Define patterns for mapping scraped labels to desired output keys
     lot_field_patterns_map = {
         "lot_issue_price": re.compile(r'Issue Price', re.IGNORECASE),
+        "lot_retail_min": re.compile(r'Retail Min', re.IGNORECASE),
         "lot_market_lot": re.compile(r'Market Lot', re.IGNORECASE),
         "lot_individual_investor": re.compile(r'Individual Investor', re.IGNORECASE),
         "lot_min_hni_lots": re.compile(r'Min HNI Lots', re.IGNORECASE),
@@ -1021,55 +1024,135 @@ def parse_ipo_share_allocation(html_string):
 
     return allocation_data
 
+# def parse_ipo_daywise_subscription_table(html_table_string):
+#     """
+#     Parses the HTML table string for IPO Day-wise Subscription.
+#     """
+#     daywise_data = []
+#     if not html_table_string:
+#         return daywise_data
+
+#     soup = BeautifulSoup(html_table_string, 'html.parser')
+#     table = soup.find('table')
+    
+#     if not table:
+#         return daywise_data
+    
+#     tbody = table.find('tbody')
+#     if not tbody:
+#         return daywise_data
+    
+#     rows = tbody.find_all('tr')
+    
+#     for row in rows:
+#         cells = row.find_all('td')
+#         if len(cells) < 2:
+#             continue
+            
+#         # Check if this is a day row
+#         day_cell = cells[0]
+#         date_cell = cells[1]
+        
+#         day_text = clean_text(day_cell.get_text())
+#         if not day_text or not day_text.isdigit():
+#             continue
+            
+#         row_data = {
+#             "day_number": convert_to_int(day_text),
+#             "date_time": clean_text(date_cell.get_text()),
+#         }
+        
+#         # Parse subscription ratios from remaining cells
+#         if len(cells) >= 7:  # Day, Date, QIB, NII, RII, EMP, Total
+#             row_data["qib_ratio"] = convert_to_float(clean_text(cells[2].get_text()))
+#             row_data["nii_ratio"] = convert_to_float(clean_text(cells[3].get_text()))
+#             row_data["rii_ratio"] = convert_to_float(clean_text(cells[4].get_text()))
+#             row_data["emp_ratio"] = convert_to_float(clean_text(cells[5].get_text()))
+#             row_data["total_ratio"] = convert_to_float(clean_text(cells[6].get_text()))
+        
+#         daywise_data.append(row_data)
+    
+#     return daywise_data
 def parse_ipo_daywise_subscription_table(html_table_string):
     """
-    Parses the HTML table string for IPO Day-wise Subscription.
+    Parses the HTML table string for IPO subscription including offered shares/lots and day-wise data.
     """
-    daywise_data = []
+    data = {
+        "offered_shares": {},
+        "offered_lots": {},
+        "daywise_data": []
+    }
+
     if not html_table_string:
-        return daywise_data
+        return data
 
     soup = BeautifulSoup(html_table_string, 'html.parser')
     table = soup.find('table')
-    
     if not table:
-        return daywise_data
-    
+        return data
+
     tbody = table.find('tbody')
     if not tbody:
-        return daywise_data
-    
+        return data
+
     rows = tbody.find_all('tr')
-    
-    for row in rows:
+    if not rows or len(rows) < 3:
+        return data
+
+    # --- Parse Row 1: Offered Shares
+    offered_row = rows[0].find_all('td')
+    if len(offered_row) >= 8:
+        data["offered_shares"] = {
+            "qib_offered": convert_to_int(clean_text(offered_row[2].text)),
+            "nii_offered": convert_to_int(clean_text(offered_row[3].text)),
+            "snii_offered": convert_to_int(clean_text(offered_row[4].text)),
+            "bnii_offered": convert_to_int(clean_text(offered_row[5].text)),
+            "rii_offered": convert_to_int(clean_text(offered_row[6].text)),
+            "total_offered": convert_to_int(clean_text(offered_row[7].text))
+        }
+
+    # --- Parse Row 2: Offered Lots
+    lot_row = rows[1].find_all('td')
+    if len(lot_row) >= 8:
+        data["offered_lots"] = {
+            "qib_lots": convert_to_int(clean_text(lot_row[2].text)),
+            "nii_lots": convert_to_int(clean_text(lot_row[3].text)),
+            "snii_lots": convert_to_int(clean_text(lot_row[4].text)),
+            "bnii_lots": convert_to_int(clean_text(lot_row[5].text)),
+            "rii_lots": convert_to_int(clean_text(lot_row[6].text)),
+            "total_lots": convert_to_int(clean_text(lot_row[7].text))
+        }
+
+    # --- Parse Day-wise Data (remaining rows)
+    for row in rows[2:]:
         cells = row.find_all('td')
         if len(cells) < 2:
             continue
-            
-        # Check if this is a day row
-        day_cell = cells[0]
-        date_cell = cells[1]
-        
-        day_text = clean_text(day_cell.get_text())
-        if not day_text or not day_text.isdigit():
+
+        day_text = clean_text(cells[0].get_text())
+        date_text = clean_text(cells[1].get_text())
+
+        if not day_text.isdigit():
             continue
-            
+
         row_data = {
             "day_number": convert_to_int(day_text),
-            "date_time": clean_text(date_cell.get_text()),
+            "date_time": date_text,
         }
-        
-        # Parse subscription ratios from remaining cells
-        if len(cells) >= 7:  # Day, Date, QIB, NII, RII, EMP, Total
-            row_data["qib_ratio"] = convert_to_float(clean_text(cells[2].get_text()))
-            row_data["nii_ratio"] = convert_to_float(clean_text(cells[3].get_text()))
-            row_data["rii_ratio"] = convert_to_float(clean_text(cells[4].get_text()))
-            row_data["emp_ratio"] = convert_to_float(clean_text(cells[5].get_text()))
-            row_data["total_ratio"] = convert_to_float(clean_text(cells[6].get_text()))
-        
-        daywise_data.append(row_data)
-    
-    return daywise_data
+
+        if len(cells) >= 8:
+            row_data.update({
+                "qib_ratio": convert_to_float(clean_text(cells[2].get_text())),
+                "nii_ratio": convert_to_float(clean_text(cells[3].get_text())),
+                "snii_ratio": convert_to_float(clean_text(cells[4].get_text())),
+                "bnii_ratio": convert_to_float(clean_text(cells[5].get_text())),
+                "rii_ratio": convert_to_float(clean_text(cells[6].get_text())),
+                "total_ratio": convert_to_float(clean_text(cells[7].get_text())),
+            })
+
+        data["daywise_data"].append(row_data)
+
+    return data
 
 def parse_ipo_shares_bid_amount_table(html_table_string):
     """

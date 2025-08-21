@@ -1518,6 +1518,7 @@ class NSEDataFormatter:
                         # Lot Information
                         "lotIssuePrice": ipo_item.get("lot_issue_price"),
                         "lotMarketLot": ipo_item.get("lot_market_lot"),
+                        "lotRetailMin": ipo_item.get("lot_retail_min"),
                         "lotIndividualInvestor": ipo_item.get("lot_individual_investor"),
                         "lotMinHniLots": ipo_item.get("lot_min_hni_lots"),
                         "lotMinSmallHniLots210Lakh": ipo_item.get("lot_min_small_hni_lots_2_10_lakh"),

@@ -245,6 +245,7 @@ class DatabaseManager:
                     
                     -- Lot Information
                     lotIssuePrice NVARCHAR(100),
+                    lotRetailMin NVARCHAR(100),
                     lotMarketLot NVARCHAR(100),
                     lotIndividualInvestor NVARCHAR(100),
                     lotMinHniLots NVARCHAR(100),
@@ -838,6 +839,7 @@ class DatabaseManager:
                         
                         # Lot Information
                         safe_sql_value(record.get('lotIssuePrice')),
+                        safe_sql_value(record.get('lotRetailMin')),
                         safe_sql_value(record.get('lotMarketLot')),
                         safe_sql_value(record.get('lotIndividualInvestor')),
                         safe_sql_value(record.get('lotMinHniLots')),
@@ -933,7 +935,7 @@ class DatabaseManager:
                             creditOfSharesToDemat=?, listingDate=?, ipoOpenDateStatus=?, ipoOpenDateParsed=?, ipoCloseDateStatus=?,
                             ipoCloseDateParsed=?, listingDateStatus=?, listingDateParsed=?, basisOfAllotmentStatus=?, basisOfAllotmentParsed=?,
                             initiationOfRefundsStatus=?, initiationOfRefundsParsed=?, creditOfSharesToDematStatus=?, creditOfSharesToDematParsed=?, lotIssuePrice=?,
-                            lotMarketLot=?, lotIndividualInvestor=?, lotMinHniLots=?, lotMinSmallHniLots210Lakh=?, lotMinBigHniLots10PlusLakh=?,
+                            lotRetailMin=?, lotMarketLot=?, lotIndividualInvestor=?, lotMinHniLots=?, lotMinSmallHniLots210Lakh=?, lotMinBigHniLots10PlusLakh=?,
                             seq=?, idGmpData=?, ipoIdGmpData=?, gmpDate=?, currentGmp=?,
                             gmpComments=?, gmpCompareDesc=?, subjectToSauda=?, gmpCity=?, gmpVariation=?,
                             maxIpoPrice=?, estimatedListingPrice=?, gmpPercentCalc=?, gmpDescOther=?, upDownStatus=?,
@@ -967,7 +969,7 @@ class DatabaseManager:
                             creditOfSharesToDemat, listingDate, ipoOpenDateStatus, ipoOpenDateParsed, ipoCloseDateStatus,
                             ipoCloseDateParsed, listingDateStatus, listingDateParsed, basisOfAllotmentStatus, basisOfAllotmentParsed,
                             initiationOfRefundsStatus, initiationOfRefundsParsed, creditOfSharesToDematStatus, creditOfSharesToDematParsed, lotIssuePrice,
-                            lotMarketLot, lotIndividualInvestor, lotMinHniLots, lotMinSmallHniLots210Lakh, lotMinBigHniLots10PlusLakh,
+                            lotRetailMin, lotMarketLot, lotIndividualInvestor, lotMinHniLots, lotMinSmallHniLots210Lakh, lotMinBigHniLots10PlusLakh,
                             seq, idGmpData, ipoIdGmpData, gmpDate, currentGmp,
                             gmpComments, gmpCompareDesc, subjectToSauda, gmpCity, gmpVariation,
                             maxIpoPrice, estimatedListingPrice, gmpPercentCalc, gmpDescOther, upDownStatus,
