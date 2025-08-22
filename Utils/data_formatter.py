@@ -1585,6 +1585,9 @@ class NSEDataFormatter:
                         "companyFullName": ipo_item.get("company_full_name"),
                         "companyFullNameNew": ipo_item.get("company_full_name_new"),
 
+                        # Anchor
+                        "ipoAnchorText": ipo_item.get("anchor_general_info_text", ""),
+
                         # Array Fields - Direct mapping
                         "ipoShareAllocation": ipo_item.get("IPO Share Allocation", []),
                         "ipoDaywiseSubscriptionTable": ipo_item.get("IPO Daywise Subscription (Table)", []),
@@ -1595,12 +1598,14 @@ class NSEDataFormatter:
                         "objectives": ipo_item.get("objectives", []),
                         "companyFinancialInformationRestatedConsolidated": ipo_item.get("Company Financial Information (Restated Consolidated)", []),
                         "peerComparison": ipo_item.get("peer_comparison", []),
+                        "ipoAnchorGeneralInfo": ipo_item.get("anchor_general_info", []),
                         
                         # Object Fields - Direct mapping
                         "companyAddress": ipo_item.get("company_address", {}),
                         "ipoRegistrar": ipo_item.get("ipo_registrar", {}),
                         "ipoLeadManager": ipo_item.get("ipo_lead_manager", []),
                         "companySectorInfo": ipo_item.get("company_sector_info", {}),
+                        "ipoAnchorInvestorAllocation": ipo_item.get("anchor_investor_allocation", {}),
                         
                         # System timestamp for tracking
                         "timestamp": current_time_ist.isoformat()

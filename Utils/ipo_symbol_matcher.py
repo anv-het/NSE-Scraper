@@ -184,9 +184,9 @@ def fetch_nse_bse_codes(formatted_data):
         # Return original data with None symbols if error occurs
         for record in formatted_data:
             if 'ipoSymbol' not in record:
-                record['ipoSymbol'] = None
+                record['ipoSymbol'] = "N/A"
             if 'ipoExchange' not in record:
-                record['ipoExchange'] = None
+                record['ipoExchange'] = "N/A"
         return formatted_data
     
     finally:

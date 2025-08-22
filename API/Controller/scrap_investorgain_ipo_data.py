@@ -42,7 +42,7 @@ from Utils.ipo_utils import (
     COMMON_HEADERS, IPO_LIST_API, IPO_GMP_API, IPO_SUBSCRIPTION_API, 
     BASE_URL, LOGO_DOWNLOAD_DIR, OUTPUT_DIR, IPO_LIST_API_V2,
     # Utility functions
-    clean_text, convert_to_float, convert_to_int, clean_html_entities,
+    clean_text, convert_to_float, convert_to_int, clean_html_entities, fetch_api_response_anchor,
     format_ipo_status, parse_date_status, ensure_directory_exists,
     make_robust_request, fetch_ipo_list_from_api, fetch_gmp_data_for_ipo,
     fetch_subscription_data_for_ipo, fetch_ipo_list_v2, fetch_ipo_list_from_json,
@@ -1203,6 +1203,218 @@ def parse_ipo_shares_bid_amount_table(html_table_string):
     
     return bid_amount_data
 
+def parse_ipo_share_anchor_investor(html_string):
+    if not html_string:
+        return allocation_anchor_data
+    allocation_anchor_data = {
+        'general_info_text': '',
+        'general_info': {},
+        'anchor_investor_allocation': []
+    }
+
+    if not html_string:
+        return allocation_anchor_data
+
+    soup = BeautifulSoup(html_string, 'html.parser')
+
+    # --- 1. Extract General Info Text (IPO Status) ---
+    # Find the first <p> tag that contains the phrase "A total of" or similar
+    general_info_paragraph = None
+    paragraphs = soup.find_all('p')
+
+    for p in paragraphs:
+        if "a total of" in p.get_text().lower():
+            general_info_paragraph = p
+            break  # Stop as soon as we find the correct paragraph
+    
+    if general_info_paragraph:
+        allocation_anchor_data['general_info_text'] = clean_text(general_info_paragraph.get_text())
+
+    # --- 2. Extract General Info Table (Enhanced) ---
+    # Find all tables and identify the general info table by content
+    all_tables = soup.find_all('table')
+    
+    for table in all_tables:
+        # Check if this table has the general info structure
+        rows = table.find_all('tr')
+        is_general_info_table = False
+        
+        # Look for specific keywords that indicate this is the general info table
+        for row in rows:
+            cols = row.find_all('td')
+            if len(cols) == 2:
+                first_col_text = clean_text(cols[0].get_text()).lower()
+                # Check for keywords that identify the general info table
+                general_info_keywords = [
+                    'anchor investors bid opening date',
+                    'anchor investor price',
+                    'anchor investors as % of qibs',
+                    'no. of shares locked-in',
+                    'bid opening date',
+                    'investor price'
+                ]
+                
+                if any(keyword in first_col_text for keyword in general_info_keywords):
+                    is_general_info_table = True
+                    break
+        
+        # If this is the general info table, extract all its data
+        if is_general_info_table:
+            for row in rows:
+                cols = row.find_all('td')
+                if len(cols) == 2:
+                    category = clean_text(cols[0].get_text())
+                    value = clean_text(cols[1].get_text())
+                    allocation_anchor_data['general_info'][category] = value
+            break  # Stop after finding the first general info table
+    
+    # Fallback method: Try to find by table-responsive class
+    if len(allocation_anchor_data['general_info']) <= 1:  # Only has the general text
+        table_responsive_divs = soup.find_all('div', {'class': 'table-responsive'})
+        
+        for div in table_responsive_divs:
+            table = div.find('table')
+            if table:
+                rows = table.find_all('tr')
+                # Check if this looks like a general info table (2 columns, no header)
+                has_thead = table.find('thead') is not None
+                if not has_thead and len(rows) > 0:
+                    # Check first row to see if it has 2 columns
+                    first_row = rows[0]
+                    cols = first_row.find_all('td')
+                    if len(cols) == 2:
+                        # Extract data from this table
+                        for row in rows:
+                            cols = row.find_all('td')
+                            if len(cols) == 2:
+                                category = clean_text(cols[0].get_text())
+                                value = clean_text(cols[1].get_text())
+                                allocation_anchor_data['general_info'][category] = value
+                        break  # Stop after finding the first suitable table
+
+    # --- 3. Extract Anchor Investor Allocation Table (Enhanced) ---
+    # Try multiple methods to find the anchor investor table
+    anchor_investor_table = None
+    
+    # Method 1: Try to find by ID
+    anchor_investor_table = soup.find('table', {'id': 'AnchorTable'})
+    
+    # Method 2: Look for table with specific header structure
+    if not anchor_investor_table:
+        tables = soup.find_all('table')
+        for table in tables:
+            thead = table.find('thead')
+            if thead:
+                header_row = thead.find('tr')
+                if header_row:
+                    headers = header_row.find_all('th')
+                    if len(headers) >= 6:
+                        header_text = ' '.join([h.get_text().strip().lower() for h in headers])
+                        if 'anchor investor' in header_text and 'shares allotted' in header_text:
+                            anchor_investor_table = table
+                            break
+    
+    # Method 3: Look for table that comes after general info and has 6+ columns
+    if not anchor_investor_table:
+        tables = soup.find_all('table')
+        for table in tables:
+            # Skip if this is the general info table
+            rows = table.find_all('tr')
+            if len(rows) > 0:
+                # Check if any row has 6 columns (typical for anchor investor data)
+                for row in rows:
+                    cols = row.find_all(['td', 'th'])
+                    if len(cols) >= 6:
+                        # Additional check: see if it contains investor-like data
+                        row_text = row.get_text().lower()
+                        if any(keyword in row_text for keyword in ['fund', 'investment', 'capital', 'mutual', '%', 'allot']):
+                            anchor_investor_table = table
+                            break
+                if anchor_investor_table:
+                    break
+    
+    # Method 4: Find the table that's in a table-responsive div and has more complex structure
+    if not anchor_investor_table:
+        table_responsive_divs = soup.find_all('div', {'class': 'table-responsive'})
+        for div in table_responsive_divs:
+            table = div.find('table')
+            if table:
+                # Check if this table has a header or complex structure
+                thead = table.find('thead')
+                tbody = table.find('tbody')
+                if thead or tbody:
+                    anchor_investor_table = table
+                    break
+
+    if anchor_investor_table:
+        # Find tbody or use the table directly
+        tbody = anchor_investor_table.find('tbody')
+        if tbody:
+            anchor_rows = tbody.find_all('tr')
+        else:
+            anchor_rows = anchor_investor_table.find_all('tr')[1:]  # Skip header row
+
+        for row in anchor_rows:
+            # Skip any non-table rows or malformed rows
+            if isinstance(row, str) or row.name != 'tr':
+                continue
+            
+            # Skip empty spacing rows (they usually have height styling or empty content)
+            if row.get('style') and 'height:15px' in row.get('style'):
+                continue
+            
+            # Process ALL rows including collapsed/sub-rows - DON'T SKIP THEM
+            cols = row.find_all('td')
+            if len(cols) >= 6:
+                # Extracting individual data points
+                s_no = clean_text(cols[0].get_text())
+                investor_name_raw = cols[1].get_text()
+                
+                # Clean investor name but preserve structure
+                investor_name = clean_text(investor_name_raw)
+                # Remove extra spaces but keep the name clean
+                investor_name = ' '.join(investor_name.split())
+                
+                shares_allotted = clean_text(cols[2].get_text())
+                amount = clean_text(cols[3].get_text())
+                pct_allotment_in_anchor = clean_text(cols[4].get_text())
+                pct_allotment_of_issue = clean_text(cols[5].get_text())
+
+                # Skip rows that are just totals or footers (no meaningful S.No.)
+                if not s_no or s_no.lower() in ['total', '']:
+                    # Check if this might be a footer row with totals
+                    if shares_allotted and convert_to_int(shares_allotted):
+                        # This looks like a total row, include it but mark it clearly
+                        s_no = "TOTAL"
+                    else:
+                        continue
+
+                # Convert the share count and amount to appropriate types
+                shares_allotted_int = convert_to_int(shares_allotted)
+                amount_float = convert_to_float(amount)
+                pct_allotment_in_anchor_float = convert_to_float(pct_allotment_in_anchor)
+                pct_allotment_of_issue_float = convert_to_float(pct_allotment_of_issue)
+
+                # Determine if this is a sub-entry
+                is_sub_entry = (s_no.endswith('.') and any(char.isalpha() for char in s_no)) or \
+                              ('&nbsp;&nbsp;&nbsp;&nbsp;' in investor_name_raw) or \
+                              (row.get('class') and 'collapse' in row.get('class'))
+
+                # Storing the data in the allocation_anchor_data
+                entry_data = {
+                    'S.No.': s_no,
+                    'Anchor Investor': investor_name,
+                    'No. of Shares Allotted': shares_allotted_int,
+                    'Amount (Rs.cr.)': amount_float,
+                    '% Allotment within Anchor Investor Portion': pct_allotment_in_anchor_float,
+                    '% Allotment of Issue': pct_allotment_of_issue_float,
+                    'Is_Sub_Entry': is_sub_entry  # Flag to identify sub-entries
+                }
+                
+                allocation_anchor_data['anchor_investor_allocation'].append(entry_data)
+    
+    return allocation_anchor_data
+
 # ===== MODULE 12: COMPANY FINANCIAL DATA =====
 def find_financial_table_alternative(soup):
     """
@@ -1892,6 +2104,15 @@ def scrape_single_ipo_comprehensive(ipo_entry):
             comprehensive_data["IPO Share Allocation"] = []
             comprehensive_data["IPO Daywise Subscription (Table)"] = []
             comprehensive_data["IPO Shares Bid Amount (Table)"] = []
+        
+        # Parse anchor investor allocation
+        # MODULE 11: Extract anchor investor allocation
+        html_string = fetch_api_response_anchor(ipo_id)
+
+        anchor_investor_allocation = parse_ipo_share_anchor_investor(html_string)
+        comprehensive_data["anchor_general_info_text"] = anchor_investor_allocation.get('general_info_text', '')
+        comprehensive_data["anchor_general_info"] = anchor_investor_allocation.get('general_info', {})
+        comprehensive_data["anchor_investor_allocation"] = anchor_investor_allocation.get('anchor_investor_allocation', [])
         
         # Add scraped_at timestamp
         comprehensive_data["scraped_at"] = datetime.now().isoformat()

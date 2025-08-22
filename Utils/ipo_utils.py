@@ -380,6 +380,17 @@ def fetch_subscription_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
         logger.error(f"Error fetching subscription data for IPO {ipo_id}: {e}")
         return None
 
+def fetch_api_response_anchor(ipo_id: str) -> Optional[Dict[str, Any]]:
+    """
+    Fetches anchor data for a specific IPO.
+    """
+    url = f"https://www.investorgain.com/subscription/regaal-resources-ipo/{ipo_id}/"
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for bad status codes
+    html_string = response.text
+
+    return html_string
+
 # ===== ENHANCED API PARSING FUNCTIONS =====
 def extract_text(html_str: str) -> str:
     """

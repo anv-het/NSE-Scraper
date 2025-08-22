@@ -308,6 +308,9 @@ class DatabaseManager:
                     companyFullName NVARCHAR(255),
                     companyFullNameNew NVARCHAR(255),
                     
+                    -- Anchor text
+                    ipoAnchorText NVARCHAR(MAX),
+                    
                     -- Array Fields (stored as JSON)
                     ipoShareAllocation NVARCHAR(MAX),
                     ipoDaywiseSubscriptionTable NVARCHAR(MAX),
@@ -318,12 +321,14 @@ class DatabaseManager:
                     objectives NVARCHAR(MAX),
                     companyFinancialInformationRestatedConsolidated NVARCHAR(MAX),
                     peerComparison NVARCHAR(MAX),
+                    ipoAnchorInvestorAllocation NVARCHAR(MAX),
                     
                     -- Object Fields (stored as JSON)
                     companyAddress NVARCHAR(MAX),
                     ipoRegistrar NVARCHAR(MAX),
                     ipoLeadManager NVARCHAR(MAX),
                     companySectorInfo NVARCHAR(MAX),
+                    ipoAnchorGeneralInfo NVARCHAR(MAX),
 
                     -- Database management fields
                     createdAtDb DATETIME2 DEFAULT GETDATE(),
@@ -902,6 +907,8 @@ class DatabaseManager:
                         safe_sql_value(record.get('companyFullName')),
                         safe_sql_value(record.get('companyFullNameNew')),
                         
+                        safe_sql_value(record.get('ipoAnchorText')),
+                        
                         # Array Fields (stored as JSON)
                         safe_sql_value(record.get('ipoShareAllocation'), 'json'),
                         safe_sql_value(record.get('ipoDaywiseSubscriptionTable'), 'json'),
@@ -912,12 +919,14 @@ class DatabaseManager:
                         safe_sql_value(record.get('objectives'), 'json'),
                         safe_sql_value(record.get('companyFinancialInformationRestatedConsolidated'), 'json'),
                         safe_sql_value(record.get('peerComparison'), 'json'),
+                        safe_sql_value(record.get('ipoAnchorInvestorAllocation'), 'json'),
                         
                         # Object Fields (stored as JSON)
                         safe_sql_value(record.get('companyAddress'), 'json'),
                         safe_sql_value(record.get('ipoRegistrar'), 'json'),
                         safe_sql_value(record.get('ipoLeadManager'), 'json'),
                         safe_sql_value(record.get('companySectorInfo'), 'json'),
+                        safe_sql_value(record.get('ipoAnchorGeneralInfo'), 'json'),
                     )
                     
                     if exists:
@@ -946,10 +955,10 @@ class DatabaseManager:
                             anchorListLinkTable=?, minOrderQuantityTable=?, lotSizeTable=?, allotmentStatusTable=?, ipoBseCodeTable=?,
                             ipoNseCodeTable=?, lastUpdatedTimestamp=?,
                             metaTitle=?, pageTitle=?, metaDesc=?, cacheKey=?, currentTime=?,
-                            scrapedAt=?, companyFullName=?, companyFullNameNew=?, ipoShareAllocation=?, ipoDaywiseSubscriptionTable=?,
+                            scrapedAt=?, companyFullName=?, companyFullNameNew=?, ipoAnchorText=?, ipoShareAllocation=?, ipoDaywiseSubscriptionTable=?,
                             ipoSharesBidAmountTable=?, ipoBiddingHistoryJson=?, gmpTrendHistoryTable=?, strengths=?, objectives=?,
-                            companyFinancialInformationRestatedConsolidated=?, peerComparison=?, companyAddress=?, ipoRegistrar=?, ipoLeadManager=?,
-                            companySectorInfo=?, lastUpdatedDb=GETDATE()
+                            companyFinancialInformationRestatedConsolidated=?, peerComparison=?, ipoAnchorInvestorAllocation=?, companyAddress=?, ipoRegistrar=?, ipoLeadManager=?,
+                            companySectorInfo=?, ipoAnchorGeneralInfo=?, lastUpdatedDb=GETDATE()
                         WHERE ipoId=?
                         """
                         cursor.execute(update_query, sql_values[1:] + (ipo_id,))
@@ -980,10 +989,10 @@ class DatabaseManager:
                             anchorListLinkTable, minOrderQuantityTable, lotSizeTable, allotmentStatusTable, ipoBseCodeTable,
                             ipoNseCodeTable, lastUpdatedTimestamp,
                             metaTitle, pageTitle, metaDesc, cacheKey, currentTime,
-                            scrapedAt, companyFullName, companyFullNameNew, ipoShareAllocation, ipoDaywiseSubscriptionTable,
+                            scrapedAt, companyFullName, companyFullNameNew, ipoAnchorText, ipoShareAllocation, ipoDaywiseSubscriptionTable,
                             ipoSharesBidAmountTable, ipoBiddingHistoryJson, gmpTrendHistoryTable, strengths, objectives,
-                            companyFinancialInformationRestatedConsolidated, peerComparison, companyAddress, ipoRegistrar, ipoLeadManager,
-                            companySectorInfo
+                            companyFinancialInformationRestatedConsolidated, peerComparison, ipoAnchorInvestorAllocation, companyAddress, ipoRegistrar, ipoLeadManager,
+                            companySectorInfo, ipoAnchorGeneralInfo
                         ) VALUES ({','.join(['?' for _ in sql_values])})
                         """
                         cursor.execute(insert_query, sql_values)
