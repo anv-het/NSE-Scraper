@@ -31,10 +31,11 @@ downloads/*
 
 /myenv/
 
-# we have to ignore the output dir also with json "investorgain_ipo_data.json" , and "zerodha_investorgain_matched_ipos.json" files
-/output/investorgain_ipo_data.json
-/output/investorgain_ipo_data_v1.json
-/output/zerodha_investorgain_matched_ipos.json
-/test/output/zerodha_investorgain_matched_ipos.json
-/test/output/investorgain_ipo_data.json
-/test/output/investorgain_ipo_data_v1.json
+
+# Ignore specific JSON files used in IPO scraping
+output/investorgain_ipo_data.json
+output/investorgain_ipo_data_v1.json
+output/zerodha_investorgain_matched_ipos.json
+test/output/investorgain_ipo_data.json
+test/output/investorgain_ipo_data_v1.json
+test/output/zerodha_investorgain_matched_ipos.json
