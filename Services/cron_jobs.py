@@ -19,6 +19,7 @@ from Utils.db import DatabaseManager
 from Services.get_nse_cookies import get_nse_cookies
 from Constant.general import CRON_INTERVALS
 from Utils.utilities_functions import is_market_open
+from Utils.ipo_zerodha_and_investorgain_matcher import UltimateIPOMatcher
 
 
 # Import controllers
@@ -99,6 +100,9 @@ class CronJobManager:
         schedule.every(CRON_INTERVALS['COOKIE_REFRESH']).minutes.do(
             self.refresh_cookies
         )
+        # schedule.every(CRON_INTERVALS['ZERODHA_INVESTORGAIN_MATCHING']).minutes.do(
+        #     self.run_zerodha_and_investorgain_matching
+        # )
 
     def run_cron_jobs(self):
         """Run cron jobs dynamically. IPO job runs always, others only if market is open."""
@@ -112,6 +116,11 @@ class CronJobManager:
                     schedule.every(CRON_INTERVALS['INVESTORGAIN_IPO_DATA']).minutes.do(
                         self.run_investorgain_ipo_data
                     )
+                    logger.info("Scheduling Zerodha-InvestorGain matching job (runs regardless of market status)...")
+                    schedule.every(CRON_INTERVALS['ZERODHA_INVESTORGAIN_MATCHING']).minutes.do(
+                        self.run_zerodha_and_investorgain_matching
+                    )
+                    
                     ipo_job_scheduled = True
 
                 if is_market_open():
@@ -135,28 +144,32 @@ class CronJobManager:
             raise
 
 
-    def run_ipo_job_always(self):
-        """
-        Schedule and run only the INVESTORGAIN_IPO_DATA job, ignoring market status.
-        This runs the job repeatedly based on its configured interval.
-        """
-        try:
-            logger.info("Running IPO cron job without market status check...")
+    # def run_ipo_job_always(self):
+    #     """
+    #     Schedule and run only the INVESTORGAIN_IPO_DATA job, ignoring market status.
+    #     This runs the job repeatedly based on its configured interval.
+    #     """
+    #     try:
+    #         logger.info("Running IPO cron job without market status check...")
 
-            # Avoid scheduling multiple times
-            if not self.jobs_scheduled:
-                schedule.every(CRON_INTERVALS['INVESTORGAIN_IPO_DATA']).minutes.do(
-                    self.run_investorgain_ipo_data
-                )
-                self.jobs_scheduled = True
+    #         # Avoid scheduling multiple times
+    #         if not self.jobs_scheduled:
+    #             schedule.every(CRON_INTERVALS['INVESTORGAIN_IPO_DATA']).minutes.do(
+    #                 self.run_investorgain_ipo_data
+    #             )
+    #             schedule.every(CRON_INTERVALS['ZERODHA_INVESTORGAIN_MATCHING']).minutes.do(
+    #                 self.run_zerodha_and_investorgain_matching
+    #             )
+                
+    #             self.jobs_scheduled = True
 
-            while True:
-                schedule.run_pending()
-                time.sleep(1)
+    #         while True:
+    #             schedule.run_pending()
+    #             time.sleep(1)
 
-        except Exception as e:
-            logger.error(f"Error in run_ipo_job_always: {e}")
-            raise
+    #     except Exception as e:
+    #         logger.error(f"Error in run_ipo_job_always: {e}")
+    #         raise
 
 
     def refresh_cookies(self):
@@ -333,6 +346,8 @@ class CronJobManager:
         try:
             controller = NSEInvestorGainIPOController()
             result = controller.scrape_investorgain_ipo_data()
+            matcher = UltimateIPOMatcher()
+            matcher.run_ultimate_matching()
             
             if result["success"]:
                 logger.info(f"Cron-jobs:InvestorGain IPO data saved successfully. {result['message']} at {datetime.now().isoformat()}")
@@ -343,5 +358,14 @@ class CronJobManager:
             logger.error(f"Cron-jobs:Error in run_investorgain_ipo_data: {e} at {datetime.now().isoformat()}")
             raise
 
-
-
+    def run_zerodha_and_investorgain_matching(self):
+        """
+        Run the Zerodha and InvestorGain IPO Data matching job
+        """
+        try:
+            matcher = UltimateIPOMatcher()
+            matcher.run_ultimate_matching()
+            logger.info("Cron-jobs:Zerodha and InvestorGain IPO data matching completed successfully at " + datetime.now().isoformat())
+        except Exception as e:
+            logger.error(f"Cron-jobs:Error in run_zerodha_and_investorgain_matching: {e} at " + datetime.now().isoformat())
+            raise

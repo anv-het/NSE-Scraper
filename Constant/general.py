@@ -293,7 +293,8 @@ CRON_INTERVALS = {
     "SPECIAL_PREOPEN_LISTINGS": 8,     # 1 minute for testing, DEFAULT: 5
     "TOP_GAINERS_LOOSERS": 7,          # 1 minute for testing, DEFAULT: 5
     "INVESTORGAIN_IPO_DATA": 60,       # 60 minutes for IPO data (less frequent than market data)
-    "COOKIE_REFRESH": 4,               # 1 minute for testing, DEFAULT: 60
+    "ZERODHA_INVESTORGAIN_MATCHING": 360, # 360 minutes for Zerodha-InvestorGain matching hours=6
+    "COOKIE_REFRESH": 4,               # 4 minutes for cookie refresh
 }
 
 
