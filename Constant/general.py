@@ -294,6 +294,7 @@ CRON_INTERVALS = {
     "TOP_GAINERS_LOOSERS": 7,          # 1 minute for testing, DEFAULT: 5
     "INVESTORGAIN_IPO_DATA": 60,       # 60 minutes for IPO data (less frequent than market data)
     "ZERODHA_INVESTORGAIN_MATCHING": 360, # 360 minutes for Zerodha-InvestorGain matching hours=6
+    "SCANX_TIME_SENSITIVE_UPDATE": 60, # 60 minutes for ScanX time-sensitive data updates
     "COOKIE_REFRESH": 4,               # 4 minutes for cookie refresh
 }
 

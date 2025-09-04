@@ -37,6 +37,7 @@ from API.Controller.recent_listing import NSERecentListingsController
 from API.Controller.special_preopen_listing import NSESpecialPreopenListingsController
 from API.Controller.top_gainers_loosers import NSETopGainersloosersController
 from API.Controller.scrap_investorgain_ipo_data import NSEInvestorGainIPOController
+from API.Controller.scanx_scrap_stocks_data_by_symbol import ScanXStockDataController
 
 
 logger = get_logger(__name__)
@@ -368,4 +369,26 @@ class CronJobManager:
             logger.info("Cron-jobs:Zerodha and InvestorGain IPO data matching completed successfully at " + datetime.now().isoformat())
         except Exception as e:
             logger.error(f"Cron-jobs:Error in run_zerodha_and_investorgain_matching: {e} at " + datetime.now().isoformat())
+            raise
+
+    def run_scanx_time_sensitive_update(self):
+        """
+        Update time-sensitive data for all ScanX stock symbols every 60 minutes.
+        Updates: announcements, latest_announcements, live_news_data
+        """
+        try:
+            logger.info("Cron-jobs:Starting ScanX time-sensitive data update")
+            
+            controller = ScanXStockDataController()
+            results = controller.update_all_time_sensitive_data()
+            
+            success_msg = (f"ScanX time-sensitive data update completed. "
+                          f"Total: {results['total']}, "
+                          f"Successful: {results['successful']}, "
+                          f"Failed: {results['failed']}")
+            
+            logger.info(f"Cron-jobs:{success_msg} at {datetime.now().isoformat()}")
+            
+        except Exception as e:
+            logger.error(f"Cron-jobs:Error in run_scanx_time_sensitive_update: {e} at {datetime.now().isoformat()}")
             raise

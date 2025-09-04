@@ -462,7 +462,7 @@ class NSEDataFormatter:
                                     formatted_record["ExchangeInstrumentID"] = masterdata_match.get("ExchangeInstrumentID")
                                     formatted_record["ExchangeSegment"] = masterdata_match.get("ExchangeSegment")
                                     formatted_record["MasterdataSeries"] = masterdata_match.get("Series")
-                                    logger.info(f"Masterdata match found for {lookup_key} -> ID: {masterdata_match.get('ExchangeInstrumentID')}")
+                                    # logger.info(f"Masterdata match found for {lookup_key} -> ID: {masterdata_match.get('ExchangeInstrumentID')}")
                                 else:
                                     # Set default values if no match found
                                     formatted_record["ExchangeInstrumentID"] = None

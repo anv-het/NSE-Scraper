@@ -6,6 +6,7 @@ import threading
 
 
 from API.Router import stoks_wise_event_data
+from API.Router import scanx_scrap_stocks_data_by_symbol_router
 from Utils.logger import get_logger
 from Constant.general import APP_NAME, APP_VERSION, APP_DESCRIPTION
 from Utils.monitor import get_all_services_health
@@ -46,6 +47,7 @@ def apiserver() -> FastAPI:
     # app.include_router(nse_all_indexes.router, prefix='/indexes', tags=['NSE Indexes'])
     # app.include_router(nse_52week_high_low.router, prefix='/52week-high-low', tags=['52 Week High/Low'])
     app.include_router(stoks_wise_event_data.router, prefix='/stoks-wise-event-data', tags=['Stockwise Event Data'])
+    app.include_router(scanx_scrap_stocks_data_by_symbol_router.router, prefix='/scanx', tags=['ScanX Stock Data'])
 
     # Home route
     @app.get("/")

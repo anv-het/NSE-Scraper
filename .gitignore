@@ -39,3 +39,5 @@ output/zerodha_investorgain_matched_ipos.json
 test/output/investorgain_ipo_data.json
 test/output/investorgain_ipo_data_v1.json
 test/output/zerodha_investorgain_matched_ipos.json
+/nse_cookies.json
+*nse_cookies.json
