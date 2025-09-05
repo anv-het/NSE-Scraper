@@ -401,6 +401,77 @@ python Services/get_nse_cookies.py
 curl -H "User-Agent: Mozilla/5.0" https://www.nseindia.com/api/allIndices
 ```
 
+## 📘 ScanX Getter API Documentation
+
+The project includes a DB-first ScanX Getter API under the router prefix `/scanx/getter`.
+
+Behavior summary:
+- Reads from MongoDB collection `scanx_stocks_data`.
+- If a requested section for a symbol is missing, triggers `scrape_single_symbol(symbol)` once and waits for completion (per-process lock).
+- Multiple concurrent requests for the same symbol will wait for the in-flight scrape to finish and then read from DB.
+
+Base path: http://localhost:1020/scanx/getter
+
+Key endpoints (GET):
+- `/company/about_company?symbol=SYMBOL&include_outer=true|false`
+- `/company/analyst_ratings?symbol=SYMBOL`
+- `/company/financials?symbol=SYMBOL`
+- `/company/balance_sheet_consolidated?symbol=SYMBOL`
+- `/company/balance_sheet_standalone?symbol=SYMBOL`
+- `/company/cash_flow_consolidated?symbol=SYMBOL`
+- `/company/cash_flow_standalone?symbol=SYMBOL`
+- `/company/financial_results_quarterly_consolidated?symbol=SYMBOL`
+- `/company/financial_results_annual_consolidated?symbol=SYMBOL`
+- `/company/financial_results_quarterly_standalone?symbol=SYMBOL`
+- `/company/financial_results_annual_standalone?symbol=SYMBOL`
+- `/company/net_profit_standalone?symbol=SYMBOL`
+- `/company/share_holders_equity?symbol=SYMBOL`
+- `/mf/holdings?symbol=SYMBOL`
+- `/mf/transactions?symbol=SYMBOL`
+- `/company/peer_comparison?symbol=SYMBOL`
+- `/company/forecast_Q?symbol=SYMBOL`
+- `/company/forecast_A?symbol=SYMBOL`
+- `/company/corporate_action_data?symbol=SYMBOL`
+- `/company/dividend_data?symbol=SYMBOL`
+- `/company/fundamental_data?symbol=SYMBOL`
+- `/company/latest_news?symbol=SYMBOL`
+- `/company/announcements?symbol=SYMBOL`
+- `/company/company_filings_data?symbol=SYMBOL`
+- `/company/live_news_data?symbol=SYMBOL`
+- `/charts/formatted_last_five_years_chart?symbol=SYMBOL`
+
+Response format is standardized using the project's response helpers (success: `create_success_response_n`).
+
+Running locally (Windows) - recommended steps:
+1. Activate virtualenv (example user environment):
+
+```bat
+"D:/scraping/scrap_venv/Scripts/activate.bat"
+```
+
+2. Start server:
+
+```bat
+python main.py
+```
+
+3. Open docs:
+
+```
+http://localhost:1020/docs
+```
+
+Testing the getter (quick):
+
+```python
+import requests
+resp = requests.get('http://localhost:1020/scanx/getter/company/about_company?symbol=RELIANCE')
+print(resp.json())
+```
+
+Automated test runner (see `test/test_scanx_getter_api.py`) will pick a symbol from `company_symbol_list.json` and run through all getter endpoints.
+
+
 **Application Won't Start**
 ```bash
 # Check configuration
