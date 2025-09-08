@@ -1,0 +1,133 @@
+# ScanX Getter curl commands
+# Host: http://192.168.119.183:1020
+# Generated using first symbol from company_symbol_list.json: HDFCBANK
+
+# About company (include_outer optional)
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/about_company?symbol=HDFCBANK&include_outer=false' \
+  -H 'accept: application/json'
+
+# Analyst ratings
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/analyst_ratings?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Financials bundle
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/financials?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Balance sheet consolidated
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/balance_sheet_consolidated?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Balance sheet standalone
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/balance_sheet_standalone?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Cash flow consolidated
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/cash_flow_consolidated?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Cash flow standalone
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/cash_flow_standalone?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Financial results quarterly consolidated
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/financial_results_quarterly_consolidated?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Financial results annual consolidated
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/financial_results_annual_consolidated?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Financial results quarterly standalone
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/financial_results_quarterly_standalone?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Financial results annual standalone
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/financial_results_annual_standalone?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Net profit standalone
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/net_profit_standalone?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Share holders equity
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/share_holders_equity?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Mutual fund holdings
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/mf/holdings?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Mutual fund transactions
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/mf/transactions?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Peer comparison
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/peer_comparison?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Forecast quarterly (Q)
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/forecast_Q?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Forecast annual (A)
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/forecast_A?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Corporate action data
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/corporate_action_data?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Dividend data
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/dividend_data?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Fundamental data
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/fundamental_data?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Latest news bundle
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/latest_news?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Charts: formatted last five years
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/charts/formatted_last_five_years_chart?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Announcements
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/announcements?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Company filings data
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/company_filings_data?symbol=HDFCBANK' \
+  -H 'accept: application/json'
+
+# Live news data
+curl -X 'GET' \
+  'http://192.168.119.183:1020/scanx/getter/company/live_news_data?symbol=HDFCBANK' \
+  -H 'accept: application/json'

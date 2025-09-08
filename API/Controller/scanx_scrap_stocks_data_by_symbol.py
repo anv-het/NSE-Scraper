@@ -58,17 +58,17 @@ class ScanXStockDataController:
         
         # API endpoints
         self.company_api_url = 'https://scanx-analytics.dhan.co/customscan/fetchdt'
-        self.analyst_rating_api_url = 'https://static-scanx.dhan.co/staticscanx/analyst_rating'
-        self.announcements_api_url = 'https://static-scanx.dhan.co/staticscanx/lodr'
-        self.latest_new_announcement_api_url = 'https://static-scanx.dhan.co/staticscanx/announcements'
+        self.analyst_rating_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/analyst_rating'
+        self.announcements_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/lodr'
+        self.latest_new_announcement_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/announcements'
         self.live_news_api_url = 'https://news-live.dhan.co/v3/news/getLiveNews'
-        self.dividend_data_api_url = 'https://static-scanx.dhan.co/staticscanx/dividenddata'
-        self.fundamental_data_api_url = 'https://scanx.dhan.co/scanx/fundamental'
-        self.forecast_data_api_url = 'https://static-scanx.dhan.co/staticscanx/forecast'
-        self.corporate_action_api_url = 'https://static-scanx.dhan.co/staticscanx/corporate_action'
-        self.company_filings_api_url = 'https://static-scanx.dhan.co/staticscanx/company_filings'
-        self.mutual_fund_holdings_api_url = 'https://static-scanx.dhan.co/staticscanx/mfpastholdingsbyisin'
-        self.last_five_years_chart_data_api_url = 'https://openweb-ticks.dhan.co/getDataH'
+        self.dividend_data_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/dividenddata'
+        self.fundamental_data_api_url = 'https://open-web-scanx.dhan.co/scanx/fundamental'
+        self.forecast_data_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/forecast'
+        self.corporate_action_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/corporate_action'
+        self.company_filings_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/company_filings'
+        self.mutual_fund_holdings_api_url = 'https://ow-static-scanx.dhan.co/staticscanx/mfpastholdingsbyisin'
+        self.last_five_years_chart_data_api_url = 'https://openweb-ticks.dhan.co/getDataH' 
         self.multi_timeframe_chart_data_api_url = 'https://open-web-scanx.dhan.co/scanx/multirtscrdt'
         self.mutual_fund_transaction_api_url = 'https://static-scanx.dhan.co/staticscanx/mftransaction'
         
@@ -124,17 +124,17 @@ class ScanXStockDataController:
                 if symbol_lower in symbol_field or symbol_field in symbol_lower:
                     return stock
 
-            # Match against DispSym field
-            if 'DispSym' in stock:
-                dispsym = stock['DispSym'].lower()
-                if symbol_lower in dispsym:
-                    return stock
+            # # Match against DispSym field
+            # if 'DispSym' in stock:
+            #     dispsym = stock['DispSym'].lower()
+            #     if symbol_lower in dispsym:
+            #         return stock
 
-            # Match against Seosym field
-            if 'Seosym' in stock:
-                seosym = stock['Seosym'].lower()
-                if symbol_lower in seosym:
-                    return stock
+            # # Match against Seosym field
+            # if 'Seosym' in stock:
+            #     seosym = stock['Seosym'].lower()
+            #     if symbol_lower in seosym:
+            #         return stock
 
         return None
 
@@ -514,8 +514,14 @@ class ScanXStockDataController:
                 logger.error(f"Failed to fetch company data for {symbol}")
                 return None
             
+            # Check if data array is empty
+            data_list = company_data.get('data', [])
+            if not data_list:
+                logger.error(f"Empty data list returned for {symbol}")
+                return None
+            
             # Extract additional data from company_data API response
-            company_info = company_data.get('data', [{}])[0]
+            company_info = data_list[0]
             subsector = company_info.get('SubSector', '')
             sector = company_info.get('Sector', '')
             sym = company_info.get('Sym', '')
@@ -668,7 +674,9 @@ class ScanXStockDataController:
             # }
             if company_data and peer_comparison_data and analyst_ratings_data:
                     stock_info = stock.copy()
-                    stock_info['about_company'] = company_data.get('data', [{}])[0]
+                    # Safe access to company data
+                    company_data_list = company_data.get('data', [])
+                    stock_info['about_company'] = company_data_list[0] if company_data_list else {}
                     stock_info['peer_comparison'] = peer_comparison_data.get('data', [])
                     stock_info['analyst_ratings'] = analyst_ratings_data.get('data', [])
                     stock_info['announcements'] = announcements_data.get('data', [])
@@ -683,16 +691,20 @@ class ScanXStockDataController:
                     # stock_info['mutual_fund_transaction_data'] = mutual_fund_transaction_data.get('data', []) if mutual_fund_transaction_data else []
                     stock_info['live_news_data'] = live_news_data.get('data', []) if live_news_data else []
 
-                    balance_sheet_consolidated = stock_info.get('fundamental_data', [{}])[0].get('bs_c', {})
-                    balance_sheet_standalone = stock_info.get('fundamental_data', [{}])[0].get('bs_s', {})
-                    cash_flow_consolidated = stock_info.get('fundamental_data', [{}])[0].get('cF_c', {})
-                    cash_flow_standalone = stock_info.get('fundamental_data', [{}])[0].get('cF_s', {})
-                    financial_results_quarterly_consolidated = stock_info.get('fundamental_data', [{}])[0].get('incomeStat_cq', {})
-                    financial_results_annual_consolidated = stock_info.get('fundamental_data', [{}])[0].get('incomeStat_cy', {})
-                    financial_results_quarterly_standalone = stock_info.get('fundamental_data', [{}])[0].get('incomeStat_sq', {})
-                    financial_results_annual_standalone = stock_info.get('fundamental_data', [{}])[0].get('incomeStat_sy', {})
-                    net_profit_standalone = stock_info.get('fundamental_data', [{}])[0].get('rNp_s', {})
-                    share_holders_equity = stock_info.get('fundamental_data', [{}])[0].get('sHp', {})
+                    # Safe access to fundamental_data with proper empty list handling
+                    fundamental_data_list = stock_info.get('fundamental_data', [])
+                    fundamental_data_item = fundamental_data_list[0] if fundamental_data_list else {}
+                    
+                    balance_sheet_consolidated = fundamental_data_item.get('bs_c', {})
+                    balance_sheet_standalone = fundamental_data_item.get('bs_s', {})
+                    cash_flow_consolidated = fundamental_data_item.get('cF_c', {})
+                    cash_flow_standalone = fundamental_data_item.get('cF_s', {})
+                    financial_results_quarterly_consolidated = fundamental_data_item.get('incomeStat_cq', {})
+                    financial_results_annual_consolidated = fundamental_data_item.get('incomeStat_cy', {})
+                    financial_results_quarterly_standalone = fundamental_data_item.get('incomeStat_sq', {})
+                    financial_results_annual_standalone = fundamental_data_item.get('incomeStat_sy', {})
+                    net_profit_standalone = fundamental_data_item.get('rNp_s', {})
+                    share_holders_equity = fundamental_data_item.get('sHp', {})
 
                     stock_info['balance_sheet_consolidated'] = parallel_format_financial_data(balance_sheet_consolidated, report_type="bs_c")
                     stock_info['balance_sheet_standalone'] = parallel_format_financial_data(balance_sheet_standalone, report_type="bs_s")
