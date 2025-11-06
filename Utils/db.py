@@ -778,7 +778,7 @@ class DatabaseManager:
                     # Prepare values for SQL insertion based on new IPO data format
                     sql_values = (
                         safe_sql_value(record.get('ipoId')),  # ipoId
-                        safe_sql_value(record.get('ipoSymbol')),
+                        # safe_sql_value(record.get('ipoSymbol')),
                         safe_sql_value(record.get('ipoExchange')),
 
                         # API Company Information
@@ -933,7 +933,7 @@ class DatabaseManager:
                         # Update existing record
                         update_query = f"""
                         UPDATE {self.sql_server_config['table']} SET
-                        ipoSymbol=?, ipoExchange=?, apiCompanyName=?, apiIpoStatus=?, apiIpoStatusFormatted=?, apiListedPrice=?, apiListingGain=?,
+                        ipoExchange=?, apiCompanyName=?, apiIpoStatus=?, apiIpoStatusFormatted=?, apiListedPrice=?, apiListingGain=?,
                             apiGmpValue=?, apiGmpPercent=?, apiFireRating=?, apiFireRatingCount=?, apiSubscription=?,
                             apiPrice=?, apiEstimatedListingPrice=?, apiEstimatedListingPercent=?, apiIssueSize=?, apiLot=?,
                             apiPe=?, apiIssueOpenDate=?, apiIssueCloseDate=?, apiBoaDate=?, apiListingAt=?,
@@ -967,7 +967,7 @@ class DatabaseManager:
                         # Insert new record
                         insert_query = f"""
                         INSERT INTO {self.sql_server_config['table']} (
-                            ipoSymbol, ipoExchange, ipoId, apiCompanyName, apiIpoStatus, apiIpoStatusFormatted, apiListedPrice, apiListingGain,
+                            ipoId, ipoExchange, apiCompanyName, apiIpoStatus, apiIpoStatusFormatted, apiListedPrice, apiListingGain,
                             apiGmpValue, apiGmpPercent, apiFireRating, apiFireRatingCount, apiSubscription,
                             apiPrice, apiEstimatedListingPrice, apiEstimatedListingPercent, apiIssueSize, apiLot,
                             apiPe, apiIssueOpenDate, apiIssueCloseDate, apiBoaDate, apiListingAt,
@@ -997,7 +997,7 @@ class DatabaseManager:
                         """
                         cursor.execute(insert_query, sql_values)
                         inserted_count += 1
-                    
+                                            
                 except Exception as record_error:
                     logger.error(f"Error processing IPO record {ipo_id}: {str(record_error)}")
                     continue

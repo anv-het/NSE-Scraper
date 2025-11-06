@@ -103,10 +103,10 @@ class NSEInvestorGainIPOController:
                 }
             
             # Format data using NSEDataFormatter
-            formatted_data_ = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
+            formatted_data = NSEDataFormatter.format_investorgain_ipo_data(ipo_data)
             
             # Add NSE/BSE/Symbol from master
-            formatted_data = fetch_nse_bse_codes(formatted_data_)
+            # formatted_data = fetch_nse_bse_codes(formatted_data_)
             # Save to database with update logic
             save_result = self.save_investorgain_ipo_data(formatted_data)
             

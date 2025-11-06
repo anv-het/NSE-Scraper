@@ -765,9 +765,9 @@ class ScanXStockDataController:
                         result = future.result()
                         results[symbol] = result
                         if result:
-                            logger.info(f"✅ Successfully scraped: {symbol}")
+                            logger.info(f"Successfully scraped: {symbol}")
                         else:
-                            logger.error(f"❌ Failed to scrape: {symbol}")
+                            logger.error(f"Failed to scrape: {symbol}")
                     except Exception as e:
                         logger.error(f"Exception scraping {symbol}: {str(e)}")
                         results[symbol] = None

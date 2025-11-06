@@ -11,7 +11,12 @@ import random
 import requests
 import json
 import zlib
-import brotli
+try:
+    import brotli
+    BROTLI_AVAILABLE = True
+except ImportError:
+    BROTLI_AVAILABLE = False
+    brotli = None
 import pytz 
 import traceback
 import os
@@ -33,19 +38,54 @@ logger = get_logger(__name__)
 
 # ===== CONFIGURATION CONSTANTS =====
 COMMON_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     "Accept-Encoding": "gzip, deflate, br",
     "Accept-Language": "en-US,en;q=0.9",
     "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1"
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0"
 }
 
 COMMON_PARAMS = {
-    "timeout": 15,
-    "max_retries": 3,
-    "delay_range": (0.5, 1.5)
+    "timeout": 60,  # Increased from 30 to 60 seconds for slow connections
+    "max_retries": 5,  # Increased from 3 to 5 retries
+    "delay_range": (5.0, 12.0)  # Increased delay range significantly to avoid rate limiting
 }
+
+# Global session for persistent connections
+SESSION = None
+
+def get_session():
+    """Get or create a persistent session for requests"""
+    global SESSION
+    if SESSION is None:
+        SESSION = requests.Session()
+        # Set default headers for the session
+        SESSION.headers.update(COMMON_HEADERS)
+        # Set default timeout
+        SESSION.timeout = COMMON_PARAMS["timeout"]
+        # Add additional browser-like headers
+        SESSION.headers.update({
+            "DNT": "1",
+            "Sec-CH-UA": '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+            "Sec-CH-UA-Mobile": "?0",
+            "Sec-CH-UA-Platform": '"Windows"'
+        })
+        
+        # Try to establish session by visiting main site first
+        try:
+            logger.info("Establishing session by visiting main site...")
+            SESSION.get("https://www.investorgain.com/", timeout=30)
+            time.sleep(1)  # Brief pause after initial connection
+        except Exception as e:
+            logger.warning(f"Failed to establish initial session: {e}")
+            
+    return SESSION
 
 # Updated API endpoints
 IPO_LIST_API = "https://webnodejs.investorgain.com/cloud/ipo/list-read"
@@ -202,20 +242,25 @@ def parse_date_status(date_string: str) -> tuple:
 
 # ===== HTTP REQUEST UTILITIES =====
 @retry(wait=wait_random_exponential(multiplier=0.5, min=1, max=4), 
-       stop=stop_after_attempt(3), reraise=True)
+       stop=stop_after_attempt(COMMON_PARAMS["max_retries"]), reraise=True)
 def make_robust_request(url: str, custom_headers: Optional[Dict] = None) -> requests.Response:
     """
-    Makes a robust HTTP request with retry logic and error handling.
+    Makes a robust HTTP request with retry logic and error handling using persistent session.
     """
-    request_headers = COMMON_HEADERS.copy()
+    session = get_session()
+    
+    # Update headers for this request if custom headers provided
     if custom_headers:
+        request_headers = session.headers.copy()
         request_headers.update(custom_headers)
+    else:
+        request_headers = session.headers
 
     # Random delay to avoid overwhelming the server
     time.sleep(random.uniform(*COMMON_PARAMS["delay_range"]))
 
     try:
-        response = requests.get(url, headers=request_headers, timeout=COMMON_PARAMS["timeout"])
+        response = session.get(url, headers=request_headers, timeout=COMMON_PARAMS["timeout"])
         response.raise_for_status()
         return response
     except requests.exceptions.RequestException as e:
@@ -240,8 +285,12 @@ def handle_compressed_response(response: requests.Response) -> Dict[str, Any]:
                 return None
         elif content_encoding == 'br':
             try:
-                decompressed_content = brotli.decompress(response.content).decode('utf-8')
-                return json.loads(decompressed_content)
+                if BROTLI_AVAILABLE:
+                    decompressed_content = brotli.decompress(response.content).decode('utf-8')
+                    return json.loads(decompressed_content)
+                else:
+                    logger.warning("Brotli compression not supported - install brotli package")
+                    return None
             except Exception:
                 return None
         elif content_encoding == 'deflate':
@@ -323,7 +372,7 @@ def fetch_gmp_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
     gmp_api_url = f"https://webnodejs.investorgain.com/cloud/ipo/ipo-gmp-read/{ipo_id}/true"
     
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "*/*",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "en-US,en;q=0.9",
@@ -355,7 +404,7 @@ def fetch_subscription_data_for_ipo(ipo_id: str) -> Optional[Dict[str, Any]]:
     subscription_api_url = f"https://webnodejs.investorgain.com/cloud/ipo/ipo-subscription-read/{ipo_id}"
     
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "*/*",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "en-US,en;q=0.9",
@@ -538,7 +587,7 @@ def parse_enhanced_ipo_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]
 
             est_price, est_pct = calculate_estimated_listing(ipo_price, gmp_val)
             
-            fire_emoji, fire_count = parse_fire_rating(item.get("Fire Rating", ""))
+            fire_emoji, fire_count = parse_fire_rating(item.get("Rating", ""))
 
             ipo = {
                 "ipoId": item.get("~id"),
